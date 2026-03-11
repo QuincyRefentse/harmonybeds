@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harmony Rest - Our Bed Collection</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo">harmony <span>rest</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">home</a></li>
+        <li><a href="products.html" class="active">beds</a></li>
+        <li><a href="about.html">craft</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1>the <span class="text-gold">sanctuary</span> collection</h1>
+        <p>Handcrafted beds designed for your deepest rest</p>
+      </div>
+    </section>
+
+    <!-- Filter Bar -->
+    <section class="filter-bar">
+      <div class="container">
+        <div class="filter-options">
+          <button class="filter-btn active" data-filter="all">all beds</button>
+          <button class="filter-btn" data-filter="classic">classic</button>
+          <button class="filter-btn" data-filter="ergonomic">ergonomic</button>
+          <button class="filter-btn" data-filter="smart">smart</button>
+          <button class="filter-btn" data-filter="luxury">luxury</button>
+        </div>
+        <div class="sort-options">
+          <select id="sortSelect">
+            <option value="default">sort by</option>
+            <option value="price-low">price: low to high</option>
+            <option value="price-high">price: high to low</option>
+            <option value="name">name</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products-section">
+      <div class="container">
+        <div class="products-grid" id="productsGrid">
+          <!-- Products will be dynamically loaded via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Banner -->
+    <section class="features-banner">
+      <div class="container">
+        <div class="features-grid">
+          <div class="feature-item">
+            <i class="fas fa-truck"></i>
+            <h4>white glove delivery</h4>
+            <p>complimentary setup & removal</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-shield-alt"></i>
+            <h4>15 year warranty</h4>
+            <p>confidence in craftsmanship</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-feather-alt"></i>
+            <h4>100 night trial</h4>
+            <p>rest assured or return</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-leaf"></i>
+            <h4>sustainable materials</h4>
+            <p>certified organic</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">harmony <span>rest</span></div>
+          <p>crafting beds that restore balance — where gold‑standard comfort meets timeless elegance.</p>
+          <div class="social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>explore</h4>
+          <ul>
+            <li><a href="products.html">beds</a></li>
+            <li><a href="about.html">our story</a></li>
+            <li><a href="#">showroom</a></li>
+            <li><a href="#">gallery</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>support</h4>
+          <ul>
+            <li><a href="#">warranty</a></li>
+            <li><a href="#">delivery</a></li>
+            <li><a href="#">returns</a></li>
+            <li><a href="contact.html">contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>flagship atelier</h4>
+          <p>18 rue de la Paix<br>Paris 75002<br><i class="fas fa-phone-alt" style="color: var(--gold);"></i> +33 1 42 60 11 45</p>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 Harmony Rest & Comfort Beds. All rights reserved. | gold edition</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/products.js"></script>
+</body>
+</html>
