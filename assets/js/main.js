@@ -1,5 +1,5 @@
 // ========== assets/js/products.js ==========
-// Products page dynamic functionality with image placeholders
+// Products page dynamic functionality with images
 
 // Product database with image filenames
 const products = [
@@ -11,7 +11,7 @@ const products = [
     desc: 'Timeless design with premium pocket springs and natural fillings for balanced support.',
     icon: 'fa-bed',
     size: 'queen',
-    image: 'beds1.jfif' // Place your image here
+    image: 'beds1.jfif'
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const products = [
     desc: 'Zoned memory foam and latex adapt to your body, relieving pressure points.',
     icon: 'fa-hand-sparkles',
     size: 'king',
-    image: 'bed-ergonomic.jpg'
+    image: 'beds2.jfif'  // Updated to use beds2.jfif
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const products = [
     desc: 'Adjustable firmness, sleep tracking, and zero-gravity position. Innovation meets luxury.',
     icon: 'fa-moon',
     size: 'split king',
-    image: 'bed-smart.jpg'
+    image: 'beds3.jfif'  // Updated to use beds3.jfif
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ const products = [
     desc: 'Hand-tufted organic cotton, cashmere blend, and sustainable latex. Pure indulgence.',
     icon: 'fa-leaf',
     size: 'cal king',
-    image: 'bed-luxury.jpg'
+    image: 'beds4.jfif'  // Updated to use beds4.jfif
   },
   {
     id: 5,
@@ -51,7 +51,7 @@ const products = [
     desc: 'Traditional craftsmanship with modern pocket spring technology and European linen cover.',
     icon: 'fa-crown',
     size: 'queen',
-    image: 'bed-classic-2.jpg'
+    image: 'beds5.jfif'  // Updated to use beds5.jfif
   },
   {
     id: 6,
@@ -61,7 +61,7 @@ const products = [
     desc: 'Seven-zone support system with cooling gel infusion for temperature regulation.',
     icon: 'fa-temperature-low',
     size: 'king',
-    image: 'bed-ergonomic-2.jpg'
+    image: 'beds6.jfif'  // Updated to use beds6.jfif
   },
   {
     id: 7,
@@ -71,7 +71,7 @@ const products = [
     desc: 'Bio-motion sensors and ambient lighting that syncs with your circadian rhythm.',
     icon: 'fa-lightbulb',
     size: 'eastern king',
-    image: 'bed-smart-2.jpg'
+    image: 'beds7.jfif'  // Updated to use beds7.jfif
   },
   {
     id: 8,
@@ -81,7 +81,7 @@ const products = [
     desc: 'Limited edition with gold-thread upholstery, silk panel, and hand-stitched details.',
     icon: 'fa-gem',
     size: 'super king',
-    image: 'bed-luxury-2.jpg'
+    image: 'beds8.jfif'  // Updated to use beds8.jfif
   }
 ];
 
@@ -95,19 +95,8 @@ let currentFilter = 'all';
 let currentSort = 'default';
 let filteredProducts = [...products];
 
-// Check if image exists, otherwise use placeholder
+// Function to get image HTML with fallback
 function getImageHTML(imageName, productName, icon) {
-  // For demo purposes, we'll use placeholders with icons
-  // In production, you can replace this with actual image tags
-  return `
-    <div class="product-image placeholder">
-      <i class="fas ${icon}"></i>
-      <span style="display: none;">${imageName}</span>
-    </div>
-  `;
-  
-  // UNCOMMENT THIS WHEN YOU HAVE ACTUAL IMAGES:
-  /*
   return `
     <div class="product-image">
       <img src="assets/images/${imageName}" 
@@ -115,7 +104,6 @@ function getImageHTML(imageName, productName, icon) {
            onerror="this.onerror=null; this.parentElement.classList.add('placeholder'); this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas ${icon}\'></i>';">
     </div>
   `;
-  */
 }
 
 // Render products to grid
@@ -138,7 +126,7 @@ function renderProducts() {
     filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
   }
   
-  // Generate HTML with image placeholders
+  // Generate HTML with actual images
   productsGrid.innerHTML = filteredProducts.map(product => `
     <div class="product-card" data-category="${product.category}" data-price="${product.price}">
       ${getImageHTML(product.image, product.name, product.icon)}
@@ -157,6 +145,64 @@ function renderProducts() {
     card.style.animation = 'none';
     card.offsetHeight; // reflow
     card.style.animation = `fadeIn 0.5s ease forwards ${index * 0.05}s`;
+  });
+}
+// Mobile menu functionality
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navLinks = document.getElementById('navLinks');
+const body = document.body;
+
+if (mobileMenuBtn) {
+  mobileMenuBtn.addEventListener('click', function() {
+    navLinks.classList.toggle('active');
+    body.classList.toggle('menu-open');
+    
+    // Change icon based on menu state
+    const icon = this.querySelector('i');
+    if (navLinks.classList.contains('active')) {
+      icon.classList.remove('fa-bars');
+      icon.classList.add('fa-times');
+    } else {
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
+    }
+  });
+
+  // Close menu when clicking on a link
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      body.classList.remove('menu-open');
+      const icon = mobileMenuBtn.querySelector('i');
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
+    });
+  });
+
+  // Close menu when clicking outside (optional - handled by overlay)
+  document.addEventListener('click', function(e) {
+    if (body.classList.contains('menu-open') && 
+        !navLinks.contains(e.target) && 
+        !mobileMenuBtn.contains(e.target)) {
+      navLinks.classList.remove('active');
+      body.classList.remove('menu-open');
+      const icon = mobileMenuBtn.querySelector('i');
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
+    }
+  });
+
+  // Handle window resize
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+      navLinks.classList.remove('active');
+      body.classList.remove('menu-open');
+      const icon = mobileMenuBtn.querySelector('i');
+      if (icon) {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    }
   });
 }
 
