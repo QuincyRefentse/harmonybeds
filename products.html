@@ -3,95 +3,177 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Harmony Rest - Our Bed Collection</title>
-  <!-- Font Awesome -->
+  <title>The Sanctuary Collection | Harmony Rest</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .products-hero {
+      background: linear-gradient(135deg, #2e2a24 0%, #1a1815 100%);
+      color: white;
+      padding: 6rem 0;
+      text-align: center;
+    }
+    .products-hero h1 { color: white; margin-bottom: 1rem; }
+    .products-hero h1:after { background: var(--gold); left: 50%; transform: translateX(-50%); width: 80px; }
+    .filter-section {
+      background: white;
+      padding: 2rem 0;
+      position: sticky;
+      top: 80px;
+      z-index: 90;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+    }
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .product-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    .product-image {
+      height: 320px;
+      overflow: hidden;
+      position: relative;
+    }
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .product-card:hover .product-image img {
+      transform: scale(1.08);
+    }
+    .product-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--gold);
+      color: white;
+      padding: 0.3rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      border-radius: 20px;
+    }
+    .product-info {
+      padding: 2rem;
+    }
+    .product-category {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .product-title {
+      font-size: 1.5rem;
+      margin: 0.5rem 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+    }
+    .product-price {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin: 1rem 0;
+    }
+    .product-price small {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #999;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid #ddd;
+      padding: 0.7rem 1.8rem;
+      margin: 0 0.3rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: white;
+    }
+  </style>
 </head>
 <body>
-  <header>
-  <div class="container navbar">
-    <a href="index.html" class="logo">
-      <img src="assets/image.png" alt="Harmony Rest" class="logo-img">
-    </a>
-    
-    <!-- Mobile menu button (hamburger) -->
-    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
-      <i class="fas fa-bars"></i>
-    </button>
-    
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html" class="active">home</a></li>
-      <li><a href="products.html">beds</a></li>
-      <li><a href="about.html">craft</a></li>
-      <li><a href="contact.html">contact</a></li>
-    </ul>
+  <div class="announcement-bar">
+    <span>✨ complimentary white glove delivery + 100-night trial ✨</span>
   </div>
-</header>
+
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <img src="assets/image.png" alt="Harmony Rest" class="logo-img">
+          <span class="logo-text">harmony<span>rest</span></span>
+        </a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">home</a></li>
+          <li><a href="products.html">collection</a></li>
+          <li><a href="about.html">heritage</a></li>
+          <li><a href="contact.html">atelier</a></li>
+        </ul>
+        <div class="nav-icons">
+          <a href="#"><i class="fas fa-search"></i></a>
+          <a href="#"><i class="fas fa-user"></i></a>
+          <a href="#"><i class="fas fa-shopping-bag"></i></a>
+        </div>
+      </nav>
+    </div>
+  </header>
 
   <main>
-    <!-- Page Header -->
-    <section class="page-header">
+    <section class="products-hero">
       <div class="container">
-        <h1>the <span class="text-gold">sanctuary</span> collection</h1>
-        <p>Handcrafted beds designed for your deepest rest</p>
+        <h1>the sanctuary collection</h1>
+        <p>Handcrafted beds designed for your deepest restoration</p>
       </div>
     </section>
 
-    <!-- Filter Bar -->
-    <section class="filter-bar">
+    <section class="filter-section">
       <div class="container">
-        <div class="filter-options">
-          <button class="filter-btn active" data-filter="all">all beds</button>
-          <button class="filter-btn" data-filter="classic">classic</button>
-          <button class="filter-btn" data-filter="ergonomic">ergonomic</button>
-          <button class="filter-btn" data-filter="smart">smart</button>
-          <button class="filter-btn" data-filter="luxury">luxury</button>
-        </div>
-        <div class="sort-options">
-          <select id="sortSelect">
+        <div class="filter-wrapper" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">all beds</button>
+            <button class="filter-btn" data-filter="classic">classic</button>
+            <button class="filter-btn" data-filter="ergonomic">ergonomic</button>
+            <button class="filter-btn" data-filter="smart">smart</button>
+            <button class="filter-btn" data-filter="luxury">luxury</button>
+          </div>
+          <select id="sortSelect" style="padding: 0.7rem 1.5rem; border: 1px solid #ddd; font-family: inherit;">
             <option value="default">sort by</option>
             <option value="price-low">price: low to high</option>
             <option value="price-high">price: high to low</option>
-            <option value="name">name</option>
           </select>
         </div>
       </div>
     </section>
 
-    <!-- Products Grid -->
-    <section class="products-section">
+    <section style="padding: 4rem 0;">
       <div class="container">
-        <div class="products-grid" id="productsGrid">
-          <!-- Products will be dynamically loaded via JS -->
+        <div class="products-grid" id="productsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem;">
+          <!-- Products will be populated by JS -->
         </div>
       </div>
     </section>
 
-    <!-- Features Banner -->
-    <section class="features-banner">
+    <section style="background: #f8f5f0; padding: 4rem 0;">
       <div class="container">
-        <div class="features-grid">
-          <div class="feature-item">
-            <i class="fas fa-truck"></i>
-            <h4>white glove delivery</h4>
-            <p>complimentary setup & removal</p>
-          </div>
-          <div class="feature-item">
-            <i class="fas fa-shield-alt"></i>
-            <h4>15 year warranty</h4>
-            <p>confidence in craftsmanship</p>
-          </div>
-          <div class="feature-item">
-            <i class="fas fa-feather-alt"></i>
-            <h4>100 night trial</h4>
-            <p>rest assured or return</p>
-          </div>
-          <div class="feature-item">
-            <i class="fas fa-leaf"></i>
-            <h4>sustainable materials</h4>
-            <p>certified organic</p>
-          </div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center;">
+          <div><i class="fas fa-truck" style="font-size: 2rem; color: var(--gold);"></i><h4 style="margin: 0.5rem 0;">white glove delivery</h4><p style="color: #666;">complimentary setup</p></div>
+          <div><i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--gold);"></i><h4 style="margin: 0.5rem 0;">15 year warranty</h4><p style="color: #666;">confidence assured</p></div>
+          <div><i class="fas fa-feather-alt" style="font-size: 2rem; color: var(--gold);"></i><h4 style="margin: 0.5rem 0;">100 night trial</h4><p style="color: #666;">rest assured</p></div>
+          <div><i class="fas fa-leaf" style="font-size: 2rem; color: var(--gold);"></i><h4 style="margin: 0.5rem 0;">sustainable</h4><p style="color: #666;">organic materials</p></div>
         </div>
       </div>
     </section>
@@ -101,44 +183,90 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
-          <div class="footer-logo">harmony <span>rest</span></div>
-          <p>crafting beds that restore balance — where gold‑standard comfort meets timeless elegance.</p>
-          <div class="social">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-pinterest"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-          </div>
+          <div class="footer-logo"><img src="assets/image.png" alt="Harmony Rest" class="footer-logo-img">harmony<span>rest</span></div>
+          <p>Artisan luxury beds handcrafted in South Africa.</p>
+          <div class="social-links"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-pinterest"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a></div>
         </div>
-        <div class="footer-col">
-          <h4>explore</h4>
-          <ul>
-            <li><a href="products.html">beds</a></li>
-            <li><a href="about.html">our story</a></li>
-            <li><a href="#">showroom</a></li>
-            <li><a href="#">gallery</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>support</h4>
-          <ul>
-            <li><a href="#">warranty</a></li>
-            <li><a href="#">delivery</a></li>
-            <li><a href="#">returns</a></li>
-            <li><a href="contact.html">contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>flagship atelier</h4>
-          <p>18 rue de la Paix<br>Paris 75002<br><i class="fas fa-phone-alt" style="color: var(--gold);"></i> +33 1 42 60 11 45</p>
-        </div>
+        <div class="footer-col"><h4>collection</h4><ul><li><a href="#">classic</a></li><li><a href="#">ergonomic</a></li><li><a href="#">smart</a></li><li><a href="#">luxury</a></li></ul></div>
+        <div class="footer-col"><h4>support</h4><ul><li><a href="#">warranty</a></li><li><a href="#">delivery</a></li><li><a href="#">returns</a></li><li><a href="contact.html">contact</a></li></ul></div>
+        <div class="footer-col"><h4>flagship atelier</h4><p>18 rue de la Paix, Paris<br>+33 1 42 60 11 45</p></div>
       </div>
-      <div class="copyright">
-        <p>&copy; 2025 Harmony Rest & Comfort Beds. All rights reserved. | gold edition</p>
-      </div>
+      <div class="footer-bottom"><p>&copy; 2025 Harmony Rest & Comfort Beds.</p></div>
     </div>
   </footer>
 
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/products.js"></script>
+  <script>
+    // Product database with your actual images
+    const products = [
+      { id: 1, name: "Classic Harmony", category: "classic", price: 2490, size: "queen", desc: "Timeless design with premium pocket springs and natural fillings.", image: "beds1.jfif", badge: "best seller" },
+      { id: 2, name: "Ergo Rest", category: "ergonomic", price: 3290, size: "king", desc: "Zoned memory foam and latex adapts to your body.", image: "beds2.jfif", badge: "new" },
+      { id: 3, name: "Smart Serene", category: "smart", price: 4990, size: "split king", desc: "Adjustable firmness and sleep tracking technology.", image: "beds3.jfif", badge: "smart" },
+      { id: 4, name: "Organic Gold", category: "luxury", price: 5890, size: "cal king", desc: "Hand-tufted organic cotton and cashmere blend.", image: "beds4.jfif", badge: "luxury" },
+      { id: 5, name: "Heritage Plus", category: "classic", price: 2890, size: "queen", desc: "Traditional craftsmanship meets modern technology.", image: "beds5.jfif", badge: "heritage" },
+      { id: 6, name: "PostureSense", category: "ergonomic", price: 3590, size: "king", desc: "Seven-zone support with cooling gel infusion.", image: "beds6.jfif", badge: "cooling" },
+      { id: 7, name: "Aura Smart", category: "smart", price: 5290, size: "eastern king", desc: "Bio-motion sensors and circadian lighting.", image: "beds7.jfif", badge: "smart" },
+      { id: 8, name: "Imperial Gold", category: "luxury", price: 6990, size: "super king", desc: "Limited edition with gold-thread upholstery.", image: "beds8.jfif", badge: "limited" },
+      { id: 9, name: "Serenity Cloud", category: "classic", price: 2490, size: "twin", desc: "Plush comfort for restorative sleep.", image: "beds9.jfif", badge: "plush" },
+      { id: 11, name: "Royal Majestic", category: "luxury", price: 7990, size: "super king", desc: "The pinnacle of luxury sleeping.", image: "beds11.jfif", badge: "new" },
+      { id: 12, name: "Eco Restore", category: "ergonomic", price: 3190, size: "queen", desc: "Sustainable materials, premium comfort.", image: "beds12.jfif", badge: "eco" },
+      { id: 13, name: "Tranquil Nights", category: "classic", price: 2690, size: "queen", desc: "Gentle support for peaceful sleep.", image: "beds13.jfif", badge: "best seller" }
+    ];
+
+    let currentFilter = 'all';
+    let currentSort = 'default';
+
+    function renderProducts() {
+      let filtered = [...products];
+      if (currentFilter !== 'all') filtered = filtered.filter(p => p.category === currentFilter);
+      if (currentSort === 'price-low') filtered.sort((a,b) => a.price - b.price);
+      if (currentSort === 'price-high') filtered.sort((a,b) => b.price - a.price);
+      
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = filtered.map(product => `
+        <div class="product-card" data-category="${product.category}" data-price="${product.price}">
+          <div class="product-image">
+            <img src="assets/images/${product.image}" alt="${product.name}" onerror="this.src='assets/image.png'">
+            <div class="product-badge">${product.badge}</div>
+          </div>
+          <div class="product-info">
+            <div class="product-category">${product.category}</div>
+            <h3 class="product-title">${product.name}</h3>
+            <p style="color: #666; margin: 0.5rem 0;">${product.desc}</p>
+            <div class="product-price">$${product.price.toLocaleString()} <small>${product.size}</small></div>
+            <button class="btn-card" onclick="alert('✨ ${product.name} — our sleep consultant will contact you.')" style="width: 100%;">inquire →</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Filter and sort handlers
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentFilter = this.dataset.filter;
+        renderProducts();
+      });
+    });
+
+    document.getElementById('sortSelect').addEventListener('change', function() {
+      currentSort = this.value;
+      renderProducts();
+    });
+
+    renderProducts();
+
+    // Mobile menu
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = mobileMenuBtn.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+      });
+    }
+  </script>
 </body>
 </html>
