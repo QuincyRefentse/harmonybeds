@@ -6,103 +6,7 @@
   <title>The Sanctuary Collection | Harmony Rest</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <style>
-    .products-hero {
-      background: linear-gradient(135deg, #2e2a24 0%, #1a1815 100%);
-      color: white;
-      padding: 6rem 0;
-      text-align: center;
-    }
-    .products-hero h1 { color: white; margin-bottom: 1rem; }
-    .products-hero h1:after { background: var(--gold); left: 50%; transform: translateX(-50%); width: 80px; }
-    .filter-section {
-      background: white;
-      padding: 2rem 0;
-      position: sticky;
-      top: 80px;
-      z-index: 90;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.05);
-    }
-    .product-card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    }
-    .product-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    }
-    .product-image {
-      height: 320px;
-      overflow: hidden;
-      position: relative;
-    }
-    .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-    }
-    .product-card:hover .product-image img {
-      transform: scale(1.08);
-    }
-    .product-badge {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: var(--gold);
-      color: white;
-      padding: 0.3rem 1rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      border-radius: 20px;
-    }
-    .product-info {
-      padding: 2rem;
-    }
-    .product-category {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--gold);
-      font-weight: 600;
-    }
-    .product-title {
-      font-size: 1.5rem;
-      margin: 0.5rem 0;
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
-    }
-    .product-price {
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: var(--charcoal);
-      margin: 1rem 0;
-    }
-    .product-price small {
-      font-size: 0.9rem;
-      font-weight: 400;
-      color: #999;
-    }
-    .filter-btn {
-      background: transparent;
-      border: 1px solid #ddd;
-      padding: 0.7rem 1.8rem;
-      margin: 0 0.3rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-weight: 500;
-    }
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: white;
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
   <div class="announcement-bar">
@@ -112,15 +16,11 @@
   <header>
     <div class="container">
       <nav class="navbar">
-        <a href="index.html" class="logo">
-          <img src="assets/image.png" alt="Harmony Rest" class="logo-img">
-          <span class="logo-text">harmony<span>rest</span></span>
-        </a>
+        <a href="index.html" class="logo"><span class="logo-text">harmony<span>rest</span></span></a>
         <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
         <ul class="nav-links" id="navLinks">
           <li><a href="index.html">home</a></li>
-          <li><a href="products.html">collection</a></li>
-          <li><a href="about.html">heritage</a></li>
+          <li><a href="products.html" class="active">collection</a></li>
           <li><a href="contact.html">atelier</a></li>
         </ul>
         <div class="nav-icons">
@@ -133,24 +33,26 @@
   </header>
 
   <main>
+
     <section class="products-hero">
       <div class="container">
-        <h1>the sanctuary collection</h1>
-        <p>Handcrafted beds designed for your deepest restoration</p>
+        <span class="section-subtitle">the sanctuary awaits</span>
+        <h1>the complete sanctuary collection</h1>
+        <p>Handcrafted beds, headboards, couches & furniture — designed for your deepest restoration</p>
       </div>
-    </section>
+</section>
 
     <section class="filter-section">
       <div class="container">
-        <div class="filter-wrapper" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div class="filter-wrapper">
           <div class="filter-buttons">
-            <button class="filter-btn active" data-filter="all">all beds</button>
-            <button class="filter-btn" data-filter="classic">classic</button>
-            <button class="filter-btn" data-filter="ergonomic">ergonomic</button>
-            <button class="filter-btn" data-filter="smart">smart</button>
-            <button class="filter-btn" data-filter="luxury">luxury</button>
+            <button class="filter-btn active" data-filter="all">all items</button>
+            <button class="filter-btn" data-filter="bed">beds</button>
+            <button class="filter-btn" data-filter="headboard">headboards</button>
+            <button class="filter-btn" data-filter="couch">couches</button>
+            <button class="filter-btn" data-filter="furniture">furniture</button>
           </div>
-          <select id="sortSelect" style="padding: 0.7rem 1.5rem; border: 1px solid #ddd; font-family: inherit;">
+          <select id="sortSelect">
             <option value="default">sort by</option>
             <option value="price-low">price: low to high</option>
             <option value="price-high">price: high to low</option>
@@ -159,35 +61,50 @@
       </div>
     </section>
 
-    <section style="padding: 4rem 0;">
+    <section>
       <div class="container">
-        <div class="products-grid" id="productsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem;">
-          <!-- Products will be populated by JS -->
-        </div>
-      </div>
-    </section>
-
-    <section style="background: #f8f5f0; padding: 4rem 0;">
-      <div class="container">
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center;">
-          <div><i class="fas fa-truck" style="font-size: 2rem; color: var(--gold);"></i><h4 style="margin: 0.5rem 0;">white glove delivery</h4><p style="color: #666;">complimentary setup</p></div>
-          <div><i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--gold);"></i><h4 style="margin: 0.5rem 0;">15 year warranty</h4><p style="color: #666;">confidence assured</p></div>
-          <div><i class="fas fa-feather-alt" style="font-size: 2rem; color: var(--gold);"></i><h4 style="margin: 0.5rem 0;">100 night trial</h4><p style="color: #666;">rest assured</p></div>
-          <div><i class="fas fa-leaf" style="font-size: 2rem; color: var(--gold);"></i><h4 style="margin: 0.5rem 0;">sustainable</h4><p style="color: #666;">organic materials</p></div>
-        </div>
+        <div class="products-grid" id="productsGrid"></div>
       </div>
     </section>
   </main>
+
+  <!-- Product Detail Modal -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-body">
+        <div class="modal-image" id="modalImage">
+          <i class="fas fa-bed"></i>
+        </div>
+        <div class="modal-details">
+          <div class="modal-category" id="modalCategory"></div>
+          <h2 class="modal-title" id="modalTitle"></h2>
+          <span class="modal-badge" id="modalBadge"></span>
+          <div class="modal-price-large" id="modalPrice"></div>
+          <p class="modal-description" id="modalDescription"></p>
+          <div class="modal-specs" id="modalSpecs"></div>
+          <div class="modal-actions">
+            <button class="btn-card" id="modalInquire">inquire →</button>
+            <a href="#" class="btn-whatsapp" id="modalWhatsApp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
-          <div class="footer-logo"><img src="assets/image.png" alt="Harmony Rest" class="footer-logo-img">harmony<span>rest</span></div>
+          <div class="footer-logo"><span>harmony<span>rest</span></span></div>
           <p>Artisan luxury beds handcrafted in South Africa.</p>
-          <div class="social-links"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-pinterest"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a></div>
+          <div class="social-links">
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://tiktok.com" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
         </div>
-        <div class="footer-col"><h4>collection</h4><ul><li><a href="#">classic</a></li><li><a href="#">ergonomic</a></li><li><a href="#">smart</a></li><li><a href="#">luxury</a></li></ul></div>
+        <div class="footer-col"><h4>collection</h4><ul><li><a href="#">beds</a></li><li><a href="#">headboards</a></li><li><a href="#">couches</a></li><li><a href="#">furniture</a></li></ul></div>
         <div class="footer-col"><h4>support</h4><ul><li><a href="#">warranty</a></li><li><a href="#">delivery</a></li><li><a href="#">returns</a></li><li><a href="contact.html">contact</a></li></ul></div>
         <div class="footer-col"><h4>flagship atelier</h4><p>18 rue de la Paix, Paris<br>+33 1 42 60 11 45</p></div>
       </div>
@@ -195,21 +112,366 @@
     </div>
   </footer>
 
+  <a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20would%20like%20to%20inquire%20about%20your%20products." class="floating-whatsapp" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
   <script>
-    // Product database with your actual images
+    // Full product database with dimensions AND image paths
     const products = [
-      { id: 1, name: "Classic Harmony", category: "classic", price: 2490, size: "queen", desc: "Timeless design with premium pocket springs and natural fillings.", image: "beds1.jfif", badge: "best seller" },
-      { id: 2, name: "Ergo Rest", category: "ergonomic", price: 3290, size: "king", desc: "Zoned memory foam and latex adapts to your body.", image: "beds2.jfif", badge: "new" },
-      { id: 3, name: "Smart Serene", category: "smart", price: 4990, size: "split king", desc: "Adjustable firmness and sleep tracking technology.", image: "beds3.jfif", badge: "smart" },
-      { id: 4, name: "Organic Gold", category: "luxury", price: 5890, size: "cal king", desc: "Hand-tufted organic cotton and cashmere blend.", image: "beds4.jfif", badge: "luxury" },
-      { id: 5, name: "Heritage Plus", category: "classic", price: 2890, size: "queen", desc: "Traditional craftsmanship meets modern technology.", image: "beds5.jfif", badge: "heritage" },
-      { id: 6, name: "PostureSense", category: "ergonomic", price: 3590, size: "king", desc: "Seven-zone support with cooling gel infusion.", image: "beds6.jfif", badge: "cooling" },
-      { id: 7, name: "Aura Smart", category: "smart", price: 5290, size: "eastern king", desc: "Bio-motion sensors and circadian lighting.", image: "beds7.jfif", badge: "smart" },
-      { id: 8, name: "Imperial Gold", category: "luxury", price: 6990, size: "super king", desc: "Limited edition with gold-thread upholstery.", image: "beds8.jfif", badge: "limited" },
-      { id: 9, name: "Serenity Cloud", category: "classic", price: 2490, size: "twin", desc: "Plush comfort for restorative sleep.", image: "beds9.jfif", badge: "plush" },
-      { id: 11, name: "Royal Majestic", category: "luxury", price: 7990, size: "super king", desc: "The pinnacle of luxury sleeping.", image: "beds11.jfif", badge: "new" },
-      { id: 12, name: "Eco Restore", category: "ergonomic", price: 3190, size: "queen", desc: "Sustainable materials, premium comfort.", image: "beds12.jfif", badge: "eco" },
-      { id: 13, name: "Tranquil Nights", category: "classic", price: 2690, size: "queen", desc: "Gentle support for peaceful sleep.", image: "beds13.jfif", badge: "best seller" }
+      // BEDS
+      { 
+        id: 1, name: "King Weight Master", category: "bed", price: 4999, size: "King", 
+        image: "assets/images/beds/king-weight-master.jpg",
+        desc: "Our flagship orthopedic bed engineered with reinforced lumbar support and high-density foam layers. Designed for superior weight distribution and spinal alignment, ensuring deep restorative sleep night after night.", 
+        badge: "best seller",
+        specs: [
+          ["Mattress Length", "200 cm"], ["Mattress Width", "183 cm"], ["Mattress Height", "30 cm"],
+          ["Base Length", "202 cm"], ["Base Width", "185 cm"], ["Base Height", "35 cm"],
+          ["Total Height", "65 cm"], ["Weight Capacity", "250 kg per side"],
+          ["Spring Count", "3,000 pocket springs"], ["Comfort Layer", "High-density foam + gel infusion"],
+          ["Fabric", "Premium damask"], ["Warranty", "15 years"]
+        ]
+      },
+      { 
+        id: 2, name: "Hospitality Form", category: "bed", price: 4299, size: "Queen", 
+        image: "assets/images/beds/hospitality-form.jpg",
+        desc: "Hotel-grade bed featuring durable pocket springs and a medium-firm comfort layer. Built to withstand daily use while delivering consistent five-star luxury and breathability.", 
+        badge: "hotel quality",
+        specs: [
+          ["Mattress Length", "200 cm"], ["Mattress Width", "152 cm"], ["Mattress Height", "28 cm"],
+          ["Base Length", "202 cm"], ["Base Width", "154 cm"], ["Base Height", "33 cm"],
+          ["Total Height", "61 cm"], ["Weight Capacity", "200 kg per side"],
+          ["Spring Count", "2,000 pocket springs"], ["Comfort Layer", "Medium-firm foam"],
+          ["Fabric", "Hotel-grade woven fabric"], ["Warranty", "12 years"]
+        ]
+      },
+      { 
+        id: 3, name: "Orthopedic Form", category: "bed", price: 5499, size: "King", 
+        image: "assets/images/beds/orthopedic-form.jpg",
+        desc: "Therapeutic support bed with zoned coil system and memory foam infusion. Clinically designed to relieve pressure points, reduce motion transfer, and promote healthy posture during sleep.", 
+        badge: "therapeutic",
+        specs: [
+          ["Mattress Length", "200 cm"], ["Mattress Width", "183 cm"], ["Mattress Height", "32 cm"],
+          ["Base Length", "202 cm"], ["Base Width", "185 cm"], ["Base Height", "35 cm"],
+          ["Total Height", "67 cm"], ["Weight Capacity", "280 kg per side"],
+          ["Spring Count", "4,000 zoned pocket springs"], ["Comfort Layer", "Memory foam + copper infusion"],
+          ["Fabric", "Antimicrobial bamboo blend"], ["Warranty", "15 years"]
+        ]
+      },
+      { 
+        id: 4, name: "Pocket Spring", category: "bed", price: 3799, size: "Double", 
+        image: "assets/images/beds/pocket-spring.jpg",
+        desc: "Individually wrapped pocket springs that move independently for tailored support. Encased in breathable fabric with a plush pillow top for that floating-on-air sensation.", 
+        badge: "popular",
+        specs: [
+          ["Mattress Length", "188 cm"], ["Mattress Width", "137 cm"], ["Mattress Height", "26 cm"],
+          ["Base Length", "190 cm"], ["Base Width", "139 cm"], ["Base Height", "30 cm"],
+          ["Total Height", "56 cm"], ["Weight Capacity", "180 kg per side"],
+          ["Spring Count", "1,500 pocket springs"], ["Comfort Layer", "Pillow-top foam layer"],
+          ["Fabric", "Breathable knit"], ["Warranty", "10 years"]
+        ]
+      },
+      { 
+        id: 5, name: "PillowTop", category: "bed", price: 5499, size: "Queen", 
+        image: "assets/images/beds/pillowtop.jpg",
+        desc: "Luxurious euro-top bed with an extra layer of plush cushioning sewn into the surface. Sink into cloud-like softness while maintaining excellent underlying support for all sleep positions.", 
+        badge: "plush",
+        specs: [
+          ["Mattress Length", "200 cm"], ["Mattress Width", "152 cm"], ["Mattress Height", "34 cm"],
+          ["Base Length", "202 cm"], ["Base Width", "154 cm"], ["Base Height", "33 cm"],
+          ["Total Height", "67 cm"], ["Weight Capacity", "220 kg per side"],
+          ["Spring Count", "2,500 pocket springs"], ["Comfort Layer", "Euro-top with gel memory foam"],
+          ["Fabric", "Organic cotton cover"], ["Warranty", "12 years"]
+        ]
+      },
+      { 
+        id: 6, name: "Comfort Non-Turn", category: "bed", price: 3299, size: "Single", 
+        image: "assets/images/beds/comfort-non-turn.jpg",
+        desc: "Convenient no-flip design with durable foam core and soft knit cover. Perfect for guest rooms or children's bedrooms — easy maintenance without compromising on comfort.", 
+        badge: "low maintenance",
+        specs: [
+          ["Mattress Length", "188 cm"], ["Mattress Width", "91 cm"], ["Mattress Height", "22 cm"],
+          ["Base Length", "190 cm"], ["Base Width", "93 cm"], ["Base Height", "28 cm"],
+          ["Total Height", "50 cm"], ["Weight Capacity", "120 kg"],
+          ["Spring Count", "Non-turn foam core"], ["Comfort Layer", "High-resilience foam"],
+          ["Fabric", "Soft knit cover"], ["Warranty", "8 years"]
+        ]
+      },
+      { 
+        id: 7, name: "Dream Star", category: "bed", price: 3799, size: "Double", 
+        image: "assets/images/beds/dream-star.jpg",
+        desc: "A dream come true for quality sleepers. Features a hybrid coil-and-foam construction with a quilted damask cover, offering medium-firm support ideal for couples with different preferences.", 
+        badge: "hybrid",
+        specs: [
+          ["Mattress Length", "188 cm"], ["Mattress Width", "137 cm"], ["Mattress Height", "27 cm"],
+          ["Base Length", "190 cm"], ["Base Width", "139 cm"], ["Base Height", "32 cm"],
+          ["Total Height", "59 cm"], ["Weight Capacity", "190 kg per side"],
+          ["Spring Count", "1,800 hybrid coils"], ["Comfort Layer", "Quilted foam + latex"],
+          ["Fabric", "Quilted damask"], ["Warranty", "10 years"]
+        ]
+      },
+      { 
+        id: 8, name: "Student Bed Set Form", category: "bed", price: 2499, size: "Single", 
+        image: "assets/images/beds/student-bed-set.jpg",
+        desc: "Affordable yet durable bed set designed for student accommodation. Includes a sturdy base and medium-firm mattress that withstands daily use while providing restful sleep.", 
+        badge: "value",
+        specs: [
+          ["Mattress Length", "188 cm"], ["Mattress Width", "91 cm"], ["Mattress Height", "20 cm"],
+          ["Base Length", "190 cm"], ["Base Width", "93 cm"], ["Base Height", "26 cm"],
+          ["Total Height", "46 cm"], ["Weight Capacity", "110 kg"],
+          ["Spring Count", "Bonnel spring system"], ["Comfort Layer", "Medium-firm foam"],
+          ["Fabric", "Durable polyester cover"], ["Warranty", "5 years"]
+        ]
+      },
+      { 
+        id: 9, name: "3 Star Quarter", category: "bed", price: 1999, size: "Three Quarter", 
+        image: "assets/images/beds/3-star-quarter.jpg",
+        desc: "Compact three-quarter bed delivering three-star comfort at an accessible price. High-resilience foam with a soft-touch fabric cover — perfect for smaller spaces.", 
+        badge: "compact",
+        specs: [
+          ["Mattress Length", "188 cm"], ["Mattress Width", "107 cm"], ["Mattress Height", "20 cm"],
+          ["Base Length", "190 cm"], ["Base Width", "109 cm"], ["Base Height", "26 cm"],
+          ["Total Height", "46 cm"], ["Weight Capacity", "130 kg"],
+          ["Spring Count", "High-resilience foam core"], ["Comfort Layer", "Soft-touch foam"],
+          ["Fabric", "Soft-touch polyester"], ["Warranty", "5 years"]
+        ]
+      },
+      { 
+        id: 10, name: "Storage Base", category: "bed", price: 6299, size: "Queen", 
+        image: "assets/images/beds/storage-base.jpg",
+        desc: "Elegant bed with integrated storage drawers beneath. Combines our premium mattress support system with practical storage solutions — style meets functionality in perfect harmony.", 
+        badge: "storage",
+        specs: [
+          ["Mattress Length", "200 cm"], ["Mattress Width", "152 cm"], ["Mattress Height", "28 cm"],
+          ["Base Length", "205 cm"], ["Base Width", "157 cm"], ["Base Height", "38 cm"],
+          ["Total Height", "66 cm"], ["Drawer Count", "4 spacious drawers"],
+          ["Drawer Dimensions", "45cm x 60cm x 20cm each"], ["Weight Capacity", "200 kg per side"],
+          ["Spring Count", "2,000 pocket springs"], ["Fabric", "Premium upholstered finish"], ["Warranty", "12 years"]
+        ]
+      },
+      { 
+        id: 11, name: "Aftercare Waterproof Sponge", category: "bed", price: 899, size: "Protector", 
+        image: "assets/images/beds/aftercare-sponge.jpg",
+        desc: "Premium waterproof mattress protector with breathable sponge layer. Shields your investment from spills and stains while maintaining airflow for temperature regulation.", 
+        badge: "essential",
+        specs: [
+          ["Available Sizes", "Single, Double, Queen, King"], ["Thickness", "5 mm sponge layer"],
+          ["Waterproof Layer", "Polyurethane backing"], ["Top Fabric", "Soft terry cotton"],
+          ["Care", "Machine washable at 40°C"], ["Breathability", "High airflow rating"],
+          ["Fits Depth", "Up to 35 cm mattress"], ["Warranty", "2 years"]
+        ]
+      },
+
+      // HEADBOARDS
+      { 
+        id: 12, name: "Headboard King Boxed", category: "headboard", price: 2899, size: "King", 
+        image: "assets/images/headboards/king-boxed.jpg",
+        desc: "Statement king headboard with deep button tufting and plush upholstery. Boxed frame construction ensures lasting structure while adding refined elegance to your bedroom sanctuary.", 
+        badge: "luxury",
+        specs: [
+          ["Width", "190 cm"], ["Height", "140 cm"], ["Depth", "12 cm"],
+          ["Frame Material", "Solid timber with plywood backing"], ["Upholstery", "Premium linen-blend fabric"],
+          ["Padding", "High-density foam with tufting"], ["Mounting", "Wall-mounted with brackets included"],
+          ["Weight", "18 kg"], ["Compatibility", "Fits all king beds 183-190cm wide"], ["Warranty", "10 years"]
+        ]
+      },
+      { 
+        id: 13, name: "Headboard King Extra Lined", category: "headboard", price: 3299, size: "King", 
+        image: "assets/images/headboards/king-extra-lined.jpg",
+        desc: "Sumptuous king headboard featuring extra-thick lining for superior padding. Upholstered in premium linen-blend fabric with elegant stitch detailing for a sophisticated head-of-bed focal point.", 
+        badge: "premium",
+        specs: [
+          ["Width", "190 cm"], ["Height", "145 cm"], ["Depth", "15 cm"],
+          ["Frame Material", "Solid timber with extra padding"], ["Upholstery", "Premium linen-blend with stitch detail"],
+          ["Padding", "Extra-thick 8cm foam layer"], ["Mounting", "Wall-mounted with brackets included"],
+          ["Weight", "22 kg"], ["Compatibility", "Fits all king beds 183-190cm wide"], ["Warranty", "10 years"]
+        ]
+      },
+      { 
+        id: 14, name: "Headboard King Diamond", category: "headboard", price: 3999, size: "King", 
+        image: "assets/images/headboards/king-diamond.jpg",
+        desc: "Our crown jewel headboard. Handcrafted with diamond-pattern quilting and brushed gold accent trim. A breathtaking centerpiece that transforms your bedroom into a royal retreat.", 
+        badge: "signature",
+        specs: [
+          ["Width", "190 cm"], ["Height", "150 cm"], ["Depth", "14 cm"],
+          ["Frame Material", "Solid timber with gold trim"], ["Upholstery", "Velvet with diamond quilting"],
+          ["Padding", "7cm premium foam with hand-tufting"], ["Mounting", "Wall-mounted with brackets included"],
+          ["Weight", "25 kg"], ["Compatibility", "Fits all king beds 183-190cm wide"], ["Warranty", "15 years"]
+        ]
+      },
+      { 
+        id: 15, name: "Headboard King Lined", category: "headboard", price: 2699, size: "King", 
+        image: "assets/images/headboards/king-lined.jpg",
+        desc: "Classic king headboard with smooth, tailored lining and subtle piping detail. Timeless design that complements any bedroom aesthetic while providing cushioned back support for reading in bed.", 
+        badge: "classic",
+        specs: [
+          ["Width", "190 cm"], ["Height", "135 cm"], ["Depth", "10 cm"],
+          ["Frame Material", "Solid timber frame"], ["Upholstery", "Smooth linen with piping detail"],
+          ["Padding", "5cm standard foam layer"], ["Mounting", "Wall-mounted with brackets included"],
+          ["Weight", "16 kg"], ["Compatibility", "Fits all king beds 183-190cm wide"], ["Warranty", "8 years"]
+        ]
+      },
+      { 
+        id: 16, name: "Headboard Queen Boxed", category: "headboard", price: 2499, size: "Queen", 
+        image: "assets/images/headboards/queen-boxed.jpg",
+        desc: "Beautifully proportioned queen headboard with structured boxed silhouette. Upholstered in durable, stain-resistant fabric — elegant design that fits perfectly in master or guest bedrooms.", 
+        badge: "bestseller",
+        specs: [
+          ["Width", "160 cm"], ["Height", "130 cm"], ["Depth", "12 cm"],
+          ["Frame Material", "Solid timber with plywood backing"], ["Upholstery", "Stain-resistant fabric"],
+          ["Padding", "High-density foam with tufting"], ["Mounting", "Wall-mounted with brackets included"],
+          ["Weight", "15 kg"], ["Compatibility", "Fits all queen beds 152-160cm wide"], ["Warranty", "10 years"]
+        ]
+      },
+      { 
+        id: 17, name: "Headboard Queen Extra Lined", category: "headboard", price: 2899, size: "Queen", 
+        image: "assets/images/headboards/queen-extra-lined.jpg",
+        desc: "Plush queen headboard with generous extra lining for cloud-like comfort when sitting up. Wrapped in soft-touch velvet fabric with vertical channel stitching for modern sophistication.", 
+        badge: "velvet",
+        specs: [
+          ["Width", "160 cm"], ["Height", "140 cm"], ["Depth", "15 cm"],
+          ["Frame Material", "Solid timber with extra padding"], ["Upholstery", "Soft-touch velvet with channel stitching"],
+          ["Padding", "Extra-thick 8cm foam layer"], ["Mounting", "Wall-mounted with brackets included"],
+          ["Weight", "19 kg"], ["Compatibility", "Fits all queen beds 152-160cm wide"], ["Warranty", "10 years"]
+        ]
+      },
+      { 
+        id: 18, name: "Headboard Queen Diamond", category: "headboard", price: 3499, size: "Queen", 
+        image: "assets/images/headboards/queen-diamond.jpg",
+        desc: "Exquisite queen headboard showcasing diamond-tufted artistry. Each fold is hand-arranged by our artisans, creating a three-dimensional pattern that catches light beautifully.", 
+        badge: "artisan",
+        specs: [
+          ["Width", "160 cm"], ["Height", "145 cm"], ["Depth", "14 cm"],
+          ["Frame Material", "Solid timber frame"], ["Upholstery", "Premium velvet with diamond tufting"],
+          ["Padding", "7cm premium foam, hand-tufted"], ["Mounting", "Wall-mounted with brackets included"],
+          ["Weight", "21 kg"], ["Compatibility", "Fits all queen beds 152-160cm wide"], ["Warranty", "12 years"]
+        ]
+      },
+      { 
+        id: 19, name: "Headboard Queen Lined", category: "headboard", price: 2299, size: "Queen", 
+        image: "assets/images/headboards/queen-lined.jpg",
+        desc: "Understated elegance with clean lines and quality lining. A versatile headboard that anchors your bed with quiet sophistication, available in multiple fabric options.", 
+        badge: "versatile",
+        specs: [
+          ["Width", "160 cm"], ["Height", "130 cm"], ["Depth", "10 cm"],
+          ["Frame Material", "Solid timber frame"], ["Upholstery", "Smooth fabric (multiple colours available)"],
+          ["Padding", "5cm standard foam layer"], ["Mounting", "Wall-mounted with brackets included"],
+          ["Weight", "13 kg"], ["Compatibility", "Fits all queen beds 152-160cm wide"], ["Warranty", "8 years"]
+        ]
+      },
+      { 
+        id: 20, name: "Headboard Double Line-up", category: "headboard", price: 1999, size: "Double", 
+        image: "assets/images/headboards/double-lineup.jpg",
+        desc: "Sleek double headboard with horizontal line-up detailing. Contemporary design that adds visual width to your bedroom while providing comfortable backrest support.", 
+        badge: "modern",
+        specs: [
+          ["Width", "145 cm"], ["Height", "120 cm"], ["Depth", "10 cm"],
+          ["Frame Material", "Solid timber frame"], ["Upholstery", "Contemporary fabric with line detailing"],
+          ["Padding", "5cm foam layer"], ["Mounting", "Wall-mounted with brackets included"],
+          ["Weight", "11 kg"], ["Compatibility", "Fits all double beds 137-145cm wide"], ["Warranty", "8 years"]
+        ]
+      },
+      { 
+        id: 21, name: "Headboard Three Quarter", category: "headboard", price: 1799, size: "Three Quarter", 
+        image: "assets/images/headboards/three-quarter.jpg",
+        desc: "Perfectly scaled headboard for three-quarter beds. Compact yet stylish, featuring simple panel design and quality upholstery that brings cohesion to smaller bedroom spaces.", 
+        badge: "compact",
+        specs: [
+          ["Width", "115 cm"], ["Height", "115 cm"], ["Depth", "8 cm"],
+          ["Frame Material", "Solid timber frame"], ["Upholstery", "Durable fabric"],
+          ["Padding", "4cm foam layer"], ["Mounting", "Wall-mounted with brackets included"],
+          ["Weight", "9 kg"], ["Compatibility", "Fits all three-quarter beds 107-115cm wide"], ["Warranty", "8 years"]
+        ]
+      },
+      { 
+        id: 22, name: "Headboard Single", category: "headboard", price: 1499, size: "Single", 
+        image: "assets/images/headboards/single.jpg",
+        desc: "Charming single headboard designed for children's rooms or guest spaces. Soft rounded edges, durable fabric, and easy wall-mounting make it both safe and practical.", 
+        badge: "kids",
+        specs: [
+          ["Width", "98 cm"], ["Height", "110 cm"], ["Depth", "8 cm"],
+          ["Frame Material", "Solid timber with rounded edges"], ["Upholstery", "Durable, easy-clean fabric"],
+          ["Padding", "4cm foam layer"], ["Mounting", "Wall-mounted with brackets included"],
+          ["Weight", "7 kg"], ["Compatibility", "Fits all single beds 91-98cm wide"], ["Warranty", "8 years"]
+        ]
+      },
+
+      // COUCHES
+      { 
+        id: 23, name: "L Shape Seater Couch", category: "couch", price: 8999, size: "L-Shape", 
+        image: "assets/images/couches/l-shape.jpg",
+        desc: "Sprawling L-shaped couch that defines comfort in your living space. Deep seats, feather-blend cushions, and premium upholstery invite you to lounge, entertain, and unwind in grand style.", 
+        badge: "grand",
+        specs: [
+          ["Overall Length", "280 cm (long side)"], ["Overall Width", "200 cm (short side)"],
+          ["Seat Depth", "90 cm"], ["Seat Height", "45 cm"], ["Backrest Height", "85 cm"],
+          ["Frame Material", "Solid timber with reinforced corners"], ["Cushion Fill", "Feather-blend with foam core"],
+          ["Upholstery", "Premium fabric (multiple colours available)"], ["Seating Capacity", "5-6 persons"], ["Warranty", "10 years"]
+        ]
+      },
+      { 
+        id: 24, name: "Double Seater Couch", category: "couch", price: 5999, size: "2-Seater", 
+        image: "assets/images/couches/double-seater.jpg",
+        desc: "Intimate double seater crafted with the same attention to detail as our beds. High-density foam cushions on a solid timber frame, wrapped in luxurious fabric for cozy elegance.", 
+        badge: "cozy",
+        specs: [
+          ["Overall Length", "180 cm"], ["Overall Width", "90 cm"], ["Seat Depth", "60 cm"],
+          ["Seat Height", "45 cm"], ["Backrest Height", "80 cm"], ["Frame Material", "Solid timber frame"],
+          ["Cushion Fill", "High-density foam"], ["Upholstery", "Premium fabric"],
+          ["Seating Capacity", "2 persons"], ["Warranty", "8 years"]
+        ]
+      },
+      { 
+        id: 25, name: "Single Seater Couch", category: "couch", price: 3999, size: "1-Seater", 
+        image: "assets/images/couches/single-seater.jpg",
+        desc: "The perfect accent chair. This single seater combines ergonomic support with sculptural beauty — ideal for reading nooks, bedroom corners, or as a statement piece in any room.", 
+        badge: "accent",
+        specs: [
+          ["Overall Length", "100 cm"], ["Overall Width", "90 cm"], ["Seat Depth", "58 cm"],
+          ["Seat Height", "45 cm"], ["Backrest Height", "80 cm"], ["Frame Material", "Solid timber frame"],
+          ["Cushion Fill", "High-density foam"], ["Upholstery", "Premium fabric"],
+          ["Seating Capacity", "1 person"], ["Warranty", "8 years"]
+        ]
+      },
+
+      // FURNITURE
+      { 
+        id: 26, name: "Blanket Storage", category: "furniture", price: 2499, size: "Standard", 
+        image: "assets/images/furniture/blanket-storage.jpg",
+        desc: "Beautifully crafted blanket storage chest with cedar lining. Keeps your linens fresh and organized while serving as an elegant bedroom furnishing with a padded top for extra seating.", 
+        badge: "cedar lined",
+        specs: [
+          ["Length", "100 cm"], ["Width", "50 cm"], ["Height", "50 cm"],
+          ["Internal Depth", "40 cm"], ["Material", "Solid wood with cedar lining"],
+          ["Top", "Padded upholstered seat"], ["Capacity", "Approx. 150 litres"],
+          ["Weight", "18 kg"], ["Warranty", "5 years"]
+        ]
+      },
+      { 
+        id: 27, name: "Chest of Drawer", category: "furniture", price: 4499, size: "6-Drawer", 
+        image: "assets/images/furniture/chest-of-drawer.jpg",
+        desc: "Spacious six-drawer chest combining classic design with modern functionality. Soft-close drawers, brushed gold handles, and a rich wood finish bring organized luxury to your dressing area.", 
+        badge: "premium",
+        specs: [
+          ["Length", "120 cm"], ["Width", "50 cm"], ["Height", "80 cm"],
+          ["Drawer Count", "6 drawers (3 small, 3 large)"], ["Small Drawer", "35cm x 40cm x 15cm each"],
+          ["Large Drawer", "35cm x 40cm x 25cm each"], ["Material", "Solid wood with veneer finish"],
+          ["Hardware", "Soft-close, brushed gold handles"], ["Weight", "45 kg"], ["Warranty", "8 years"]
+        ]
+      },
+      { 
+        id: 28, name: "Pedestal", category: "furniture", price: 1999, size: "3-Drawer", 
+        image: "assets/images/furniture/pedestal.jpg",
+        desc: "Compact three-drawer pedestal that fits neatly beside any bed. Perfect as a nightstand with ample storage for bedtime essentials, finished to match our headboard collection.", 
+        badge: "matching",
+        specs: [
+          ["Length", "50 cm"], ["Width", "45 cm"], ["Height", "60 cm"],
+          ["Drawer Count", "3 drawers"], ["Drawer Dimensions", "40cm x 38cm x 15cm each"],
+          ["Material", "Solid wood with matching finish"], ["Hardware", "Brushed gold handles"],
+          ["Weight", "15 kg"], ["Warranty", "5 years"]
+        ]
+      }
     ];
 
     let currentFilter = 'all';
@@ -220,24 +482,84 @@
       if (currentFilter !== 'all') filtered = filtered.filter(p => p.category === currentFilter);
       if (currentSort === 'price-low') filtered.sort((a,b) => a.price - b.price);
       if (currentSort === 'price-high') filtered.sort((a,b) => b.price - a.price);
-      
+
       const grid = document.getElementById('productsGrid');
       grid.innerHTML = filtered.map(product => `
-        <div class="product-card" data-category="${product.category}" data-price="${product.price}">
+        <div class="product-card" onclick="openProductModal(${product.id})">
           <div class="product-image">
-            <img src="assets/images/${product.image}" alt="${product.name}" onerror="this.src='assets/image.png'">
+            <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.style.display='none'; this.parentElement.querySelector('.image-fallback').style.display='flex';">
+            <div class="image-fallback" style="display:none; width:100%; height:100%; background: linear-gradient(135deg, #f0ebe3, #f5efe6); align-items:center; justify-content:center; font-size:3rem; color:#C6A45C; flex-direction:column; gap:0.5rem;">
+              <i class="fas fa-${product.category === 'bed' ? 'bed' : product.category === 'headboard' ? 'grip-lines' : product.category === 'couch' ? 'couch' : 'box'}"></i>
+              <span style="font-size:0.7rem; font-family:'Inter',sans-serif; color:#999;">image coming soon</span>
+            </div>
             <div class="product-badge">${product.badge}</div>
           </div>
           <div class="product-info">
             <div class="product-category">${product.category}</div>
             <h3 class="product-title">${product.name}</h3>
-            <p style="color: #666; margin: 0.5rem 0;">${product.desc}</p>
-            <div class="product-price">$${product.price.toLocaleString()} <small>${product.size}</small></div>
-            <button class="btn-card" onclick="alert('✨ ${product.name} — our sleep consultant will contact you.')" style="width: 100%;">inquire →</button>
+            <p class="product-desc">${product.desc}</p>
+            <div class="product-price">R${product.price.toLocaleString()} <small>${product.size}</small></div>
+            <div class="product-actions" onclick="event.stopPropagation();">
+              <button class="btn-card" onclick="openProductModal(${product.id})">view details →</button>
+              <a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(product.name)}%20(R${product.price}%20-%20${product.size})." target="_blank" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat</a>
+            </div>
           </div>
         </div>
       `).join('');
     }
+
+    // Modal functions
+    function openProductModal(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      document.getElementById('modalCategory').textContent = product.category;
+      document.getElementById('modalTitle').textContent = product.name;
+      document.getElementById('modalBadge').textContent = product.badge;
+      document.getElementById('modalPrice').innerHTML = `R${product.price.toLocaleString()} <small>${product.size}</small>`;
+      document.getElementById('modalDescription').textContent = product.desc;
+      
+      // Build specs table
+      let specsHTML = '<h4>Specifications</h4><table>';
+      product.specs.forEach(spec => {
+        specsHTML += `<tr><td>${spec[0]}</td><td>${spec[1]}</td></tr>`;
+      });
+      specsHTML += '</table>';
+      document.getElementById('modalSpecs').innerHTML = specsHTML;
+
+      // Set modal image with fallback
+      const iconMap = { bed: 'bed', headboard: 'grip-lines', couch: 'couch', furniture: 'box' };
+      document.getElementById('modalImage').innerHTML = `
+        <img src="${product.image}" alt="${product.name}" style="width:100%; height:100%; object-fit:cover; border-radius:16px 0 0 0;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display:none; flex-direction:column; align-items:center; justify-content:center; gap:0.5rem;">
+          <i class="fas fa-${iconMap[product.category] || 'box'}" style="font-size:8rem; color:#C6A45C;"></i>
+          <span style="font-family:'Inter',sans-serif; color:#999;">image coming soon</span>
+        </div>
+      `;
+
+      // Update buttons
+      document.getElementById('modalInquire').onclick = function() {
+        alert(`✨ Thank you for your interest in the ${product.name}. A sleep consultant will contact you shortly.`);
+      };
+      document.getElementById('modalWhatsApp').href = `https://wa.me/27123456789?text=Hello%20Harmony%20Rest%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(product.name)}%20(R${product.price}%20-%20${product.size}).`;
+
+      document.getElementById('productModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProductModal() {
+      document.getElementById('productModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('modalClose').addEventListener('click', closeProductModal);
+    document.getElementById('productModal').addEventListener('click', function(e) {
+      if (e.target === this) closeProductModal();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeProductModal();
+    });
 
     // Filter and sort handlers
     document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -259,14 +581,12 @@
     // Mobile menu
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
-    if (mobileMenuBtn) {
-      mobileMenuBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        const icon = mobileMenuBtn.querySelector('i');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-times');
-      });
-    }
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      const icon = mobileMenuBtn.querySelector('i');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    });
   </script>
 </body>
 </html>
