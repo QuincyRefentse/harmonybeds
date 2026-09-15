@@ -1,4 +1,11 @@
-/* ========== VARIABLES (LIGHTER PALETTE) ========== */
+/* ============================================================
+   HARMONY REST & COMFORT BEDS — MASTER STYLESHEET
+   Version 2.0 — Cleaned, consolidated, fully responsive
+   ============================================================ */
+
+/* ============================================================
+   1. VARIABLES
+   ============================================================ */
 :root {
   --gold: #C6A45C;
   --gold-light: #E8D9B5;
@@ -9,19 +16,30 @@
   --soft-white: #FDFCFB;
   --white: #FFFFFF;
   --black: #2C2B29;
+
   --shadow-sm: 0 8px 25px rgba(0,0,0,0.04);
   --shadow-md: 0 12px 35px rgba(0,0,0,0.06);
   --shadow-lg: 0 25px 50px rgba(0,0,0,0.08);
+
   --transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --header-height: 72px;
+
   --font-heading: 'Cormorant Garamond', serif;
   --font-body: 'Inter', sans-serif;
 }
 
-/* ========== RESET ========== */
+/* ============================================================
+   2. RESET + BASE
+   ============================================================ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -30,6 +48,7 @@ body {
   background: var(--soft-white);
   line-height: 1.6;
   overflow-x: hidden;
+  font-size: 16px;
 }
 
 h1, h2, h3, h4, .logo-text, .footer-logo {
@@ -37,7 +56,25 @@ h1, h2, h3, h4, .logo-text, .footer-logo {
   font-weight: 500;
 }
 
+img {
+  max-width: 100%;
+  display: block;
+}
 
+button, .btn-primary, .btn-outline, .btn-card, .btn-whatsapp, .filter-btn {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
 
 .container {
   max-width: 1300px;
@@ -45,7 +82,9 @@ h1, h2, h3, h4, .logo-text, .footer-logo {
   padding: 0 2rem;
 }
 
-/* ========== ANNOUNCEMENT BAR ========== */
+/* ============================================================
+   3. ANNOUNCEMENT BAR
+   ============================================================ */
 .announcement-bar {
   background: linear-gradient(90deg, #F5EFE6, #E8D9B5);
   color: var(--black);
@@ -56,7 +95,17 @@ h1, h2, h3, h4, .logo-text, .footer-logo {
   font-weight: 500;
 }
 
-/* ========== HEADER ========== */
+@media (max-width: 600px) {
+  .announcement-bar {
+    font-size: 0.72rem;
+    padding: 0.6rem 1rem;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* ============================================================
+   4. HEADER + NAV
+   ============================================================ */
 header {
   background: rgba(255,255,255,0.94);
   backdrop-filter: blur(14px);
@@ -70,7 +119,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.1rem 0;
+  padding: 0.9rem 0;
 }
 
 .logo {
@@ -81,8 +130,13 @@ header {
 }
 
 .logo-img {
-  height: 100px;
+  height: 55px;
   width: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover .logo-img {
+  transform: scale(1.05);
 }
 
 .logo-text {
@@ -151,8 +205,31 @@ header {
   color: var(--charcoal);
 }
 
-/* ========== HERO SECTION ========== */
-/* ========== HERO SECTION ========== */
+@media (max-width: 968px) {
+  .logo-img { height: 42px; }
+  .nav-links, .nav-icons { display: none; }
+  .mobile-menu-btn { display: block; }
+
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70%;
+    max-width: 320px;
+    height: 100vh;
+    background: white;
+    padding: 6rem 2rem;
+    box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+    z-index: 999;
+    gap: 1.8rem;
+  }
+}
+
+/* ============================================================
+   5. HERO (ORIGINAL — cream/gold variant)
+   ============================================================ */
 .hero {
   height: 90vh;
   min-height: 650px;
@@ -191,31 +268,24 @@ header {
 
 @keyframes floatBubble {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -30px) scale(1.05); }
-  66% { transform: translate(-20px, 20px) scale(0.95); }
+  33%      { transform: translate(30px, -30px) scale(1.05); }
+  66%      { transform: translate(-20px, 20px) scale(0.95); }
 }
 
 .hero-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
+  inset: 0;
+  background:
     radial-gradient(ellipse at 30% 50%, rgba(198, 164, 92, 0.08) 0%, transparent 60%),
     radial-gradient(ellipse at 70% 20%, rgba(232, 217, 181, 0.12) 0%, transparent 50%),
     radial-gradient(ellipse at 50% 80%, rgba(198, 164, 92, 0.06) 0%, transparent 50%);
   z-index: 1;
 }
 
-/* Subtle pattern overlay */
 .hero-pattern {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
+  inset: 0;
+  background-image:
     radial-gradient(circle at 25% 25%, rgba(198, 164, 92, 0.03) 1px, transparent 1px),
     radial-gradient(circle at 75% 75%, rgba(198, 164, 92, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
@@ -249,11 +319,10 @@ header {
   font-weight: 400;
   margin-bottom: 1.5rem;
   line-height: 1.1;
-  color: var(--charcoal);
   background: linear-gradient(180deg, #4B4A47 0%, #2C2B29 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero p {
@@ -269,32 +338,6 @@ header {
   justify-content: center;
   margin-bottom: 3rem;
   flex-wrap: wrap;
-}
-
-.btn-primary {
-  background: var(--gold);
-  color: white;
-  border: none;
-  box-shadow: 0 8px 25px rgba(198, 164, 92, 0.3);
-}
-
-.btn-primary:hover {
-  background: var(--gold-dark);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(198, 164, 92, 0.4);
-}
-
-.btn-outline {
-  border: 2px solid var(--gold);
-  color: var(--gold-dark);
-  background: transparent;
-  font-weight: 500;
-}
-
-.btn-outline:hover {
-  background: var(--gold);
-  color: white;
-  border-color: var(--gold);
 }
 
 .hero-stats {
@@ -326,7 +369,104 @@ header {
   color: var(--charcoal-light);
 }
 
-/* ========== SECTION STYLES ========== */
+@media (max-width: 768px) {
+  .hero { height: auto; min-height: 80vh; padding: 4rem 0; }
+  .hero p { font-size: 1rem; }
+  .hero-stats {
+    gap: 1.4rem;
+    padding: 1rem 1.2rem;
+    border-radius: 40px;
+  }
+  .stat span { font-size: 1.5rem; }
+  .stat p { font-size: 0.65rem; letter-spacing: 0.5px; }
+}
+
+/* ============================================================
+   6. BUTTONS (SHARED)
+   ============================================================ */
+.btn-primary,
+.btn-outline,
+.btn-card,
+.btn-whatsapp,
+.btn-mini,
+.btn-small {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: inherit;
+  font-weight: 500;
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: white;
+  padding: 0.9rem 2rem;
+  box-shadow: 0 8px 25px rgba(198, 164, 92, 0.3);
+}
+.btn-primary:hover {
+  background: var(--gold-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(198, 164, 92, 0.4);
+}
+
+.btn-outline {
+  border: 2px solid var(--gold);
+  color: var(--gold-dark);
+  background: transparent;
+  padding: 0.9rem 2rem;
+}
+.btn-outline:hover {
+  background: var(--gold);
+  color: white;
+  border-color: var(--gold);
+}
+
+.btn-card {
+  background: var(--charcoal);
+  color: white;
+  padding: 0.65rem 1.2rem;
+  font-size: 0.85rem;
+}
+.btn-card:hover {
+  background: var(--gold);
+  transform: translateY(-2px);
+}
+
+.btn-whatsapp {
+  background: #25D366;
+  color: white;
+  padding: 0.65rem 1.2rem;
+  font-size: 0.85rem;
+}
+.btn-whatsapp:hover {
+  background: #1da851;
+  transform: translateY(-2px);
+}
+
+.btn-mini {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #f5efe6;
+  padding: 0.55rem 1rem;
+  border: 1px solid rgba(198,164,92,0.4);
+  border-radius: 999px;
+}
+.btn-mini:hover {
+  background: #C6A45C;
+  color: #0e0c0a;
+  border-color: #C6A45C;
+}
+
+/* ============================================================
+   7. SECTION STYLES
+   ============================================================ */
 .section-header {
   text-align: center;
   margin-bottom: 4rem;
@@ -347,7 +487,7 @@ header {
   display: inline-block;
 }
 
-.section-header h2:after {
+.section-header h2::after {
   content: '';
   position: absolute;
   bottom: -12px;
@@ -364,7 +504,14 @@ header {
   margin: 1.5rem auto 0;
 }
 
-/* ========== FEATURED COLLECTION ========== */
+@media (max-width: 768px) {
+  .section-header h2 { font-size: 2rem; }
+  .section-header { margin-bottom: 2.5rem; }
+}
+
+/* ============================================================
+   8. FEATURED COLLECTION
+   ============================================================ */
 .featured-collection {
   padding: 6rem 0;
   background: var(--white);
@@ -419,13 +566,6 @@ header {
   transform: translateY(0);
 }
 
-.btn-small {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  letter-spacing: 1px;
-}
-
 .showcase-info {
   padding: 1.5rem;
   text-align: center;
@@ -447,7 +587,15 @@ header {
   color: #999;
 }
 
-/* ========== CRAFTSMANSHIP ========== */
+@media (max-width: 768px) {
+  .featured-collection { padding: 4rem 0; }
+  .collection-showcase { grid-template-columns: 1fr; }
+  .showcase-overlay { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   9. CRAFTSMANSHIP
+   ============================================================ */
 .craftsmanship {
   padding: 6rem 0;
   background: var(--cream);
@@ -519,7 +667,15 @@ header {
   font-weight: 600;
 }
 
-/* ========== TESTIMONIALS ========== */
+@media (max-width: 968px) {
+  .craft-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .craft-text h2 { font-size: 2rem; }
+  .craftsmanship { padding: 4rem 0; }
+}
+
+/* ============================================================
+   10. TESTIMONIALS
+   ============================================================ */
 .testimonials {
   padding: 6rem 0;
   background: var(--white);
@@ -572,7 +728,14 @@ header {
   font-size: 0.8rem;
 }
 
-/* ========== NEWSLETTER ========== */
+@media (max-width: 968px) {
+  .testimonial-grid { grid-template-columns: 1fr; }
+  .testimonials { padding: 4rem 0; }
+}
+
+/* ============================================================
+   11. NEWSLETTER
+   ============================================================ */
 .newsletter {
   background: linear-gradient(135deg, #5A5752 0%, #3B3935 100%);
   padding: 5rem 0;
@@ -591,6 +754,10 @@ header {
   margin-bottom: 1rem;
 }
 
+.newsletter p {
+  color: rgba(255,255,255,0.75);
+}
+
 .newsletter-form {
   display: flex;
   gap: 1rem;
@@ -603,6 +770,7 @@ header {
   border: none;
   font-family: inherit;
   font-size: 1rem;
+  border-radius: 6px;
 }
 
 .newsletter-form button {
@@ -613,6 +781,9 @@ header {
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 1rem;
 }
 
 .newsletter-form button:hover {
@@ -620,7 +791,15 @@ header {
   transform: translateY(-2px);
 }
 
-/* ========== FOOTER ========== */
+@media (max-width: 768px) {
+  .newsletter { padding: 3.5rem 0; }
+  .newsletter h2 { font-size: 1.6rem; }
+  .newsletter-form { flex-direction: column; }
+}
+
+/* ============================================================
+   12. FOOTER
+   ============================================================ */
 footer {
   background: #3B3935;
   color: #ccc;
@@ -641,11 +820,6 @@ footer {
   margin-bottom: 1rem;
   font-size: 1.5rem;
   color: white;
-}
-
-.footer-logo-img {
-  height: 35px;
-  width: auto;
 }
 
 .footer-logo span {
@@ -707,11 +881,13 @@ footer {
   border-top: 1px solid rgba(255,255,255,0.15);
   font-size: 0.85rem;
   flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .footer-links {
   display: flex;
   gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .footer-links a {
@@ -719,7 +895,14 @@ footer {
   text-decoration: none;
 }
 
-/* ========== PRODUCTS PAGE ========== */
+@media (max-width: 968px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+/* ============================================================
+   13. PRODUCTS PAGE — HERO
+   ============================================================ */
 .products-hero {
   background: linear-gradient(135deg, #FBF7F0 0%, #F5ECD7 30%, #FDF8F0 60%, #FBF3E6 100%);
   color: var(--charcoal);
@@ -753,26 +936,19 @@ footer {
   animation: floatBubble 15s ease-in-out infinite reverse;
 }
 
-@keyframes floatBubble {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -30px) scale(1.05); }
-  66% { transform: translate(-20px, 20px) scale(0.95); }
-}
-
 .products-hero .container {
   position: relative;
   z-index: 2;
 }
 
 .products-hero h1 {
-  color: var(--charcoal);
   margin-bottom: 1rem;
   font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 400;
   background: linear-gradient(180deg, #4B4A47 0%, #2C2B29 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .products-hero p {
@@ -797,16 +973,19 @@ footer {
   background-clip: text;
 }
 
-.products-hero h1 {
-  color: white;
-  margin-bottom: 1rem;
+@media (max-width: 768px) {
+  .products-hero { padding: 3rem 0 2rem; }
+  .products-hero p { font-size: 0.9rem; max-width: 90%; }
 }
 
+/* ============================================================
+   14. FILTER SECTION
+   ============================================================ */
 .filter-section {
   background: white;
   padding: 1.5rem 0;
   position: sticky;
-  top: 78px;
+  top: var(--header-height);
   z-index: 90;
   box-shadow: 0 4px 20px rgba(0,0,0,0.03);
 }
@@ -834,9 +1013,11 @@ footer {
   font-weight: 500;
   font-family: inherit;
   border-radius: 30px;
+  font-size: 0.85rem;
 }
 
-.filter-btn.active, .filter-btn:hover {
+.filter-btn.active,
+.filter-btn:hover {
   background: var(--gold);
   border-color: var(--gold);
   color: white;
@@ -848,8 +1029,40 @@ footer {
   font-family: inherit;
   border-radius: 30px;
   background: white;
+  cursor: pointer;
+  font-size: 0.85rem;
 }
 
+@media (max-width: 900px) {
+  .filter-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.9rem;
+  }
+  .filter-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.4rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .filter-buttons::-webkit-scrollbar { display: none; }
+  .filter-btn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 0.6rem 1rem;
+    font-size: 0.78rem;
+  }
+  #sortSelect {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+  }
+}
+
+/* ============================================================
+   15. PRODUCTS GRID + CARDS
+   ============================================================ */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -866,6 +1079,7 @@ footer {
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  height: 100%;
 }
 
 .product-card:hover {
@@ -874,9 +1088,9 @@ footer {
 }
 
 .product-image {
-  height: 260px;
-  overflow: hidden;
   position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
   background: #f0ebe3;
 }
 
@@ -884,6 +1098,7 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform 0.6s ease;
 }
 
@@ -926,6 +1141,7 @@ footer {
   margin-bottom: 0.5rem;
   font-family: var(--font-heading);
   font-weight: 500;
+  line-height: 1.2;
 }
 
 .product-desc {
@@ -956,29 +1172,63 @@ footer {
   flex-wrap: wrap;
 }
 
-.btn-whatsapp {
-  background: #25D366;
-  color: white;
-  border: none;
-  padding: 0.65rem 1rem;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  transition: var(--transition);
-  font-family: inherit;
-  text-decoration: none;
-  font-size: 0.85rem;
+@media (max-width: 1200px) {
+  .products-grid { grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
+}
+@media (max-width: 900px) {
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+}
+@media (max-width: 600px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    padding: 2rem 0 3rem;
+  }
+  .product-image { aspect-ratio: 3 / 2; }
+  .product-info { padding: 1.1rem 1.2rem 1.3rem; }
+  .product-title { font-size: 1.25rem; }
+  .product-desc {
+    font-size: 0.85rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .product-price { font-size: 1.3rem; }
+  .product-badge {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.8rem;
+    top: 0.7rem;
+    right: 0.7rem;
+  }
 }
 
-.btn-whatsapp:hover {
-  background: #1da851;
-  transform: translateY(-2px);
+@media (max-width: 420px) {
+  .product-actions { flex-direction: column; gap: 0.5rem; }
+  .product-actions .btn-card,
+  .product-actions .btn-whatsapp {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    justify-content: center;
+    min-height: 44px;
+    font-size: 0.82rem;
+  }
 }
 
-/* floating whatsapp */
+@media (min-width: 421px) and (max-width: 768px) {
+  .product-actions .btn-card,
+  .product-actions .btn-whatsapp {
+    flex: 1 1 0;
+    justify-content: center;
+    font-size: 0.8rem;
+    padding: 0.7rem 0.9rem;
+    min-height: 44px;
+  }
+}
+
+/* ============================================================
+   16. FLOATING WHATSAPP
+   ============================================================ */
 .floating-whatsapp {
   position: fixed;
   bottom: 2rem;
@@ -1003,14 +1253,23 @@ footer {
   background: #1da851;
 }
 
-/* ========== PRODUCT MODAL ========== */
+@media (max-width: 600px) {
+  .floating-whatsapp {
+    width: 52px;
+    height: 52px;
+    font-size: 1.6rem;
+    bottom: 1.2rem;
+    right: 1.2rem;
+  }
+}
+
+/* ============================================================
+   17. PRODUCT MODAL
+   ============================================================ */
 .modal-overlay {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0,0,0,0.7);
   z-index: 2000;
   align-items: center;
@@ -1073,14 +1332,15 @@ footer {
   min-height: 400px;
   font-size: 5rem;
   color: var(--gold);
-  padding: 2rem;
+  padding: 0;
+  overflow: hidden;
 }
 
 .modal-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 16px 0 0 0;
+  border-radius: 16px 0 0 16px;
 }
 
 .modal-details {
@@ -1116,6 +1376,7 @@ footer {
   border-radius: 20px;
   text-transform: uppercase;
   margin-bottom: 1rem;
+  align-self: flex-start;
 }
 
 .modal-price-large {
@@ -1177,94 +1438,72 @@ footer {
   display: flex;
   gap: 0.8rem;
   flex-wrap: wrap;
+  margin-top: auto;
 }
 
-.modal-actions .btn-card {
-  flex: 1;
-  text-align: center;
-  padding: 0.85rem 1.5rem;
-}
-
+.modal-actions .btn-card,
 .modal-actions .btn-whatsapp {
   flex: 1;
   text-align: center;
-  justify-content: center;
   padding: 0.85rem 1.5rem;
+  justify-content: center;
 }
 
-/* ========== RESPONSIVE ========== */
 @media (max-width: 968px) {
-  .nav-links, .nav-icons {
-    display: none;
+  .modal-overlay { padding: 0; align-items: stretch; }
+  .modal-content {
+    max-width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+    margin: 0;
   }
-  .mobile-menu-btn {
-    display: block;
-  }
-  .nav-links.active {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 70%;
-    height: 100vh;
-    background: white;
-    padding: 6rem 2rem;
-    box-shadow: -5px 0 25px rgba(0,0,0,0.1);
-    z-index: 999;
-  }
-  .testimonial-grid {
-    grid-template-columns: 1fr;
-  }
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  .craft-grid {
-    grid-template-columns: 1fr;
-  }
-  .newsletter-form {
-    flex-direction: column;
-  }
-  .footer-bottom {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
-  .modal-body {
-    grid-template-columns: 1fr;
-  }
+  .modal-body { grid-template-columns: 1fr; }
   .modal-image {
-    min-height: 250px;
-    border-radius: 16px 16px 0 0;
+    min-height: auto;
+    aspect-ratio: 4 / 3;
+    max-height: 45vh;
   }
+  .modal-image img {
+    border-radius: 0;
+  }
+  .modal-details { padding: 1.5rem 1.3rem 2rem; }
+  .modal-title { font-size: 1.6rem; }
+  .modal-price-large { font-size: 1.5rem; }
+  .modal-description { font-size: 0.9rem; }
+  .modal-specs { padding: 1.1rem; }
+  .modal-specs td { font-size: 0.82rem; padding: 0.5rem 0.3rem; }
+  .modal-actions {
+    flex-direction: column;
+    gap: 0.6rem;
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding: 0.9rem 0 0;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(198,164,92,0.15);
+  }
+  .modal-actions .btn-card,
+  .modal-actions .btn-whatsapp {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    font-size: 0.9rem;
+  }
+  .modal-close {
+    position: fixed;
+    top: 0.7rem;
+    right: 0.7rem;
+    background: rgba(0,0,0,0.55);
+    color: white;
+    width: 42px;
+    height: 42px;
+  }
+  .modal-close:hover { background: var(--gold); }
 }
 
-@media (max-width: 768px) {
-  .collection-showcase, .products-grid {
-    grid-template-columns: 1fr;
-  }
-  .hero-stats {
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-  .section-header h2 {
-    font-size: 2rem;
-  }
-  .product-actions {
-    flex-direction: column;
-  }
-  .modal-details {
-    padding: 1.5rem;
-  }
-  .modal-title {
-    font-size: 1.6rem;
-  }
-}
-
-/* ============================================
-   PREMIUM HERO — Enterprise Edition
-   ============================================ */
+/* ============================================================
+   18. PREMIUM HERO — DARK EDITION
+   ============================================================ */
 .hero-premium {
   position: relative;
   min-height: 100vh;
@@ -1277,7 +1516,6 @@ footer {
   isolation: isolate;
 }
 
-/* Layered background */
 .hero-bg-gradient {
   position: absolute;
   inset: 0;
@@ -1313,7 +1551,6 @@ footer {
   50%      { transform: translate(30px, -40px) scale(1.08); }
 }
 
-/* Layout */
 .hero-inner {
   position: relative;
   display: grid;
@@ -1323,7 +1560,6 @@ footer {
   z-index: 2;
 }
 
-/* -------- LEFT: COPY -------- */
 .hero-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -1349,11 +1585,13 @@ footer {
   color: #f5efe6;
   margin-bottom: 1.4rem;
 }
+
 .hero-title em {
   font-style: italic;
   color: #f5efe6;
   opacity: 0.85;
 }
+
 .gold-text {
   background: linear-gradient(120deg, #C6A45C 0%, #f0d68a 45%, #C6A45C 100%);
   -webkit-background-clip: text;
@@ -1395,7 +1633,6 @@ footer {
 }
 .btn-glow:hover::after { opacity: 0.9; }
 
-/* Trust bar */
 .hero-trust {
   display: flex;
   align-items: center;
@@ -1404,6 +1641,7 @@ footer {
   border-top: 1px solid rgba(198,164,92,0.18);
   flex-wrap: wrap;
 }
+
 .trust-item { text-align: left; }
 .trust-item p {
   font-family: 'Inter', sans-serif;
@@ -1431,7 +1669,6 @@ footer {
   background: rgba(198,164,92,0.2);
 }
 
-/* -------- RIGHT: SHOWCASE -------- */
 .hero-showcase { position: relative; }
 
 .showcase-glow {
@@ -1467,12 +1704,14 @@ footer {
   color: #C6A45C;
   margin-bottom: 1.2rem;
 }
+
 .pulse-dot {
   width: 7px; height: 7px; border-radius: 50%;
   background: #C6A45C;
   box-shadow: 0 0 0 0 rgba(198,164,92,0.7);
   animation: pulseDot 2s infinite;
 }
+
 @keyframes pulseDot {
   0%   { box-shadow: 0 0 0 0 rgba(198,164,92,0.6); }
   70%  { box-shadow: 0 0 0 10px rgba(198,164,92,0); }
@@ -1547,25 +1786,7 @@ footer {
   font-size: 1.4rem;
   color: #C6A45C;
 }
-.btn-mini {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #f5efe6;
-  text-decoration: none;
-  padding: 0.55rem 1rem;
-  border: 1px solid rgba(198,164,92,0.4);
-  border-radius: 999px;
-  transition: all 0.3s;
-}
-.btn-mini:hover {
-  background: #C6A45C;
-  color: #0e0c0a;
-  border-color: #C6A45C;
-}
 
-/* Floating badges */
 .float-badge {
   position: absolute;
   display: inline-flex;
@@ -1594,7 +1815,6 @@ footer {
   50%      { transform: translateY(-10px); }
 }
 
-/* Scroll cue */
 .scroll-cue {
   position: absolute;
   bottom: 2rem;
@@ -1614,12 +1834,12 @@ footer {
   border-radius: 2px;
   animation: scrollDot 1.8s infinite;
 }
+
 @keyframes scrollDot {
   0%   { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(14px); opacity: 0; }
 }
 
-/* Reveal animations */
 .hero-copy > *,
 .hero-showcase {
   opacity: 0;
@@ -1637,7 +1857,6 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
   .hero-showcase { max-width: 520px; margin: 0 auto; width: 100%; }
@@ -1652,78 +1871,12 @@ footer {
   .trust-item { flex: 1 1 40%; }
   .float-badge { display: none; }
   .hero-cta { flex-direction: column; }
-  .hero-cta a { text-align: center; justify-content: center; }
+  .hero-cta a { width: 100%; }
 }
 
-/* ============================================
-   HERO BANNER
-   ============================================ */
-.hero-banner {
-  position: relative;
-  width: 100%;
-  background: #0e0c0a;
-  overflow: hidden;
-}
-
-.hero-banner-link {
-  position: relative;
-  display: block;
-  text-decoration: none;
-  line-height: 0; /* kill inline gap under img */
-}
-
-.hero-banner-img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 85vh;
-  object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.hero-banner-link:hover .hero-banner-img {
-  transform: scale(1.02);
-}
-
-.hero-banner-cta {
-  position: absolute;
-  bottom: 6%;
-  right: 4%;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #0e0c0a;
-  background: linear-gradient(120deg, #C6A45C, #f0d68a);
-  padding: 0.85rem 1.6rem;
-  border-radius: 999px;
-  box-shadow: 0 12px 40px -10px rgba(198,164,92,0.7);
-  transition: transform 0.3s, box-shadow 0.3s;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s, transform 0.4s;
-}
-
-.hero-banner-link:hover .hero-banner-cta {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (max-width: 640px) {
-  .hero-banner-img { max-height: none; }
-  .hero-banner-cta {
-    opacity: 1;
-    transform: none;
-    font-size: 0.68rem;
-    padding: 0.65rem 1.1rem;
-    bottom: 4%;
-    right: 4%;
-  }
-}
-
-/* ============================================
-   HERO BANNER — Fully Responsive
-   ============================================ */
+/* ============================================================
+   19. HERO BANNER — SINGLE, CONSOLIDATED, RESPONSIVE
+   ============================================================ */
 .hero-banner {
   position: relative;
   width: 100%;
@@ -1751,7 +1904,6 @@ footer {
   transform: scale(1.02);
 }
 
-/* CTA pill */
 .hero-banner-cta {
   position: absolute;
   bottom: 6%;
@@ -1769,27 +1921,23 @@ footer {
   transform: translateY(10px);
   transition: opacity 0.4s, transform 0.4s;
 }
+
 .hero-banner-link:hover .hero-banner-cta {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ---------- Tablet ---------- */
+/* Tablet */
 @media (max-width: 1200px) {
-  .hero-banner-img {
-    /* Slight crop so tall product shots don't get cut */
-    object-position: center 40%;
-  }
+  .hero-banner-img { object-position: center 40%; }
 }
 
-/* ---------- Mobile ---------- */
+/* Mobile */
 @media (max-width: 768px) {
   .hero-banner-img {
-    max-height: 780vh;
+    max-height: 78vh;
     object-position: center top;
   }
-
-  /* Always show CTA on touch devices (no hover) */
   .hero-banner-cta {
     opacity: 1;
     transform: none;
@@ -1800,7 +1948,7 @@ footer {
   }
 }
 
-/* ---------- Small phones ---------- */
+/* Small phones */
 @media (max-width: 420px) {
   .hero-banner-cta {
     font-size: 0.6rem;
