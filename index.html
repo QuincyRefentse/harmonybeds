@@ -21,6 +21,9 @@
 </head>
 <body>
 
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
   <!-- ============ ANNOUNCEMENT BAR ============ -->
   <div class="announcement-bar">
     <div class="container announcement-inner">
@@ -68,8 +71,9 @@
 
   <main>
 
-    <!-- ============ ✅ KEPT: BANNER IMAGE AT TOP ============ -->
-    <section class="hero-banner">
+    <!-- ============ HERO BANNER with parallax + particles ============ -->
+    <section class="hero-banner" id="heroBanner">
+      <div class="hb-particles" id="hbParticles"></div>
       <a href="products.html" class="hero-banner-link" aria-label="Summer sale — shop premium bed & base sets">
         <picture>
           <source media="(max-width: 768px)" srcset="assets/images/banner-mobile.jpg">
@@ -85,8 +89,51 @@
       </a>
     </section>
 
+    <!-- ============ LIVE COUNTDOWN + STAT STRIP ============ -->
+    <section class="home-stats-strip">
+      <div class="container">
+        <div class="hs-inner">
+          <div class="hs-countdown" id="hsCountdown">
+            <span class="hs-cd-label">
+              <i class="fas fa-hourglass-half"></i> Sale ends in
+            </span>
+            <div class="hs-cd-cells">
+              <div class="hs-cd-cell"><span id="hsDays">00</span><small>days</small></div>
+              <div class="hs-cd-sep">:</div>
+              <div class="hs-cd-cell"><span id="hsHours">00</span><small>hrs</small></div>
+              <div class="hs-cd-sep">:</div>
+              <div class="hs-cd-cell"><span id="hsMins">00</span><small>min</small></div>
+              <div class="hs-cd-sep">:</div>
+              <div class="hs-cd-cell"><span id="hsSecs">00</span><small>sec</small></div>
+            </div>
+          </div>
+
+          <div class="hs-divider"></div>
+
+          <div class="hs-stats">
+            <div class="hs-stat">
+              <span class="hs-stat-num" data-count="42">0</span>
+              <span class="hs-stat-label">handcrafted pieces</span>
+            </div>
+            <div class="hs-stat">
+              <span class="hs-stat-num" data-count="15" data-suffix="+">0</span>
+              <span class="hs-stat-label">year warranty</span>
+            </div>
+            <div class="hs-stat">
+              <span class="hs-stat-num" data-count="100">0</span>
+              <span class="hs-stat-label">night trial</span>
+            </div>
+            <div class="hs-stat">
+              <span class="hs-stat-num" data-count="5" data-suffix="★">0</span>
+              <span class="hs-stat-label">sleep rating</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ SPECIALS & PROMOTIONS (image-only) ============ -->
-    <section class="specials-section" id="specials">
+    <section class="specials-section reveal-section" id="specials">
       <div class="container">
         <div class="section-header-left">
           <div>
@@ -102,7 +149,7 @@
     </section>
 
     <!-- ============ CATEGORY TILES ============ -->
-    <section class="category-section" id="categories">
+    <section class="category-section reveal-section" id="categories">
       <div class="container">
         <div class="section-header-left">
           <div>
@@ -166,8 +213,8 @@
       </div>
     </section>
 
-    <!-- ============ SIGNATURE / BESTSELLERS (image-only) ============ -->
-    <section class="bestsellers">
+    <!-- ============ SIGNATURE / BESTSELLERS ============ -->
+    <section class="bestsellers reveal-section">
       <div class="container">
         <div class="section-header-left">
           <div>
@@ -182,7 +229,7 @@
     </section>
 
     <!-- ============ CRAFTSMANSHIP ============ -->
-    <section class="craftsmanship">
+    <section class="craftsmanship reveal-section">
       <div class="container">
         <div class="craft-grid">
           <div class="craft-text">
@@ -204,7 +251,7 @@
     </section>
 
     <!-- ============ TESTIMONIALS ============ -->
-    <section class="testimonials">
+    <section class="testimonials reveal-section">
       <div class="container">
         <div class="section-header center">
           <span class="section-subtitle">gold standard</span>
@@ -219,7 +266,7 @@
     </section>
 
     <!-- ============ SHOWROOM ============ -->
-    <section class="showroom" id="showroom">
+    <section class="showroom reveal-section" id="showroom">
       <div class="container">
         <div class="showroom-grid">
           <div class="showroom-info">
@@ -275,7 +322,7 @@
     </section>
 
     <!-- ============ NEWSLETTER ============ -->
-    <section class="newsletter">
+    <section class="newsletter reveal-section">
       <div class="container">
         <div class="newsletter-content">
           <h2>join the golden circle</h2>
@@ -328,76 +375,37 @@
     <i class="fab fa-whatsapp"></i>
   </a>
 
+  <!-- ============ FLOATING PROMO PILL ============ -->
+  <a href="products.html" class="floating-promo" id="floatingPromo" aria-label="Summer sale — shop now">
+    <span class="fp-pulse"></span>
+    <span class="fp-text">
+      <strong>Summer Sale</strong>
+      <small>up to 30% off · shop now</small>
+    </span>
+    <i class="fas fa-arrow-right fp-arrow"></i>
+  </a>
+
   <script>
     /* ============================================================
-       HOMEPAGE SHOWCASE DATA — IMAGES ONLY, NO PRICES
-       Every card links to products.html for full details & pricing
+       HOMEPAGE SHOWCASE DATA
        ============================================================ */
     const specialsShowcase = [
-      {
-        name: "King Max Weight",
-        tag: "flagship · best seller",
-        blurb: "Orthopedic reinforced support",
-        image: "assets/images/beds1.jfif",
-        badge: "Save 30%"
-      },
-      {
-        name: "PillowTop Sanctuary",
-        tag: "plush · euro top",
-        blurb: "Cloud-like softness, all-night support",
-        image: "assets/images/beds2.jfif",
-        badge: "Special"
-      },
-      {
-        name: "King Diamond Headboard",
-        tag: "signature · artisan",
-        blurb: "Hand-tufted diamond detailing",
-        image: "assets/images/beds4.jfif",
-        badge: "Save 25%"
-      },
-      {
-        name: "L-Shape Seater Couch",
-        tag: "grand · lounge",
-        blurb: "Feather-blend, deep-seated comfort",
-        image: "assets/images/beds8.jfif",
-        badge: "Special"
-      }
+      { name: "King Max Weight", tag: "flagship · best seller", blurb: "Orthopedic reinforced support", image: "assets/images/beds1.jfif", badge: "Save 30%" },
+      { name: "PillowTop Sanctuary", tag: "plush · euro top", blurb: "Cloud-like softness, all-night support", image: "assets/images/beds2.jfif", badge: "Special" },
+      { name: "King Diamond Headboard", tag: "signature · artisan", blurb: "Hand-tufted diamond detailing", image: "assets/images/beds4.jfif", badge: "Save 25%" },
+      { name: "L-Shape Seater Couch", tag: "grand · lounge", blurb: "Feather-blend, deep-seated comfort", image: "assets/images/beds8.jfif", badge: "Special" }
     ];
 
     const bestsellersShowcase = [
-      {
-        name: "Orthopedic Form",
-        tag: "therapeutic",
-        blurb: "Zoned coils + memory foam",
-        image: "assets/images/beds4.jfif",
-        badge: "Best seller"
-      },
-      {
-        name: "Storage Base",
-        tag: "space-saving",
-        blurb: "Integrated drawers beneath",
-        image: "assets/images/beds3.jfif",
-        badge: "Popular"
-      },
-      {
-        name: "Dream Star Set",
-        tag: "hybrid",
-        blurb: "Hotel-quality medium-firm",
-        image: "assets/images/beds6.jfif",
-        badge: "Loved"
-      },
-      {
-        name: "Chest of Drawers",
-        tag: "artisan furniture",
-        blurb: "Soft-close, brushed gold handles",
-        image: "assets/images/beds7.jfif",
-        badge: "New"
-      }
+      { name: "Orthopedic Form", tag: "therapeutic", blurb: "Zoned coils + memory foam", image: "assets/images/beds4.jfif", badge: "Best seller" },
+      { name: "Storage Base", tag: "space-saving", blurb: "Integrated drawers beneath", image: "assets/images/beds3.jfif", badge: "Popular" },
+      { name: "Dream Star Set", tag: "hybrid", blurb: "Hotel-quality medium-firm", image: "assets/images/beds6.jfif", badge: "Loved" },
+      { name: "Chest of Drawers", tag: "artisan furniture", blurb: "Soft-close, brushed gold handles", image: "assets/images/beds7.jfif", badge: "New" }
     ];
 
-    function showcaseCardHTML(item) {
+    function showcaseCardHTML(item, index) {
       return `
-        <a href="products.html" class="showcase-promo-card">
+        <a href="products.html" class="showcase-promo-card reveal-item" style="transition-delay:${index * 0.08}s">
           <div class="showcase-promo-image">
             <img src="${item.image}" alt="${item.name}" loading="lazy">
             <span class="showcase-promo-badge">${item.badge}</span>
@@ -423,7 +431,185 @@
     renderShowcases();
 
     /* ============================================================
-       NEWSLETTER + MOBILE MENU
+       1. SCROLL PROGRESS BAR
+       ============================================================ */
+    (function scrollProgress() {
+      const bar = document.getElementById('scrollProgress');
+      if (!bar) return;
+      let ticking = false;
+      const update = () => {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (h > 0 ? Math.min((window.scrollY / h) * 100, 100) : 0) + '%';
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
+    })();
+
+    /* ============================================================
+       2. HERO BANNER — particles + parallax zoom
+       ============================================================ */
+    (function heroParticles() {
+      const wrap = document.getElementById('hbParticles');
+      if (!wrap) return;
+      const count = window.innerWidth < 640 ? 6 : 14;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('span');
+        p.className = 'hb-particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.top = (Math.random() * 70 + 10) + '%';
+        p.style.animationDuration = (6 + Math.random() * 6).toFixed(1) + 's';
+        p.style.animationDelay = (Math.random() * 6).toFixed(1) + 's';
+        const size = (3 + Math.random() * 5).toFixed(1);
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        wrap.appendChild(p);
+      }
+    })();
+
+    (function heroParallax() {
+      const img = document.querySelector('.hero-banner-img');
+      if (!img) return;
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const y = window.scrollY;
+            const h = img.offsetHeight;
+            if (y < h) {
+              const p = y / h;
+              img.style.transform = `scale(${1 + p * 0.06}) translateY(${p * 18}px)`;
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
+
+    /* ============================================================
+       3. LIVE COUNTDOWN
+       ============================================================ */
+    (function countdown() {
+      // Sale end date — 7 days from first visit, stored per session
+      let end = sessionStorage.getItem('harmony_sale_end');
+      if (!end) {
+        end = Date.now() + 7 * 24 * 60 * 60 * 1000;
+        sessionStorage.setItem('harmony_sale_end', String(end));
+      }
+      end = parseInt(end, 10);
+
+      const pad = (n) => String(n).padStart(2, '0');
+      const $ = (id) => document.getElementById(id);
+
+      function tick() {
+        const diff = Math.max(0, end - Date.now());
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+        const daysEl = $('hsDays');
+        if (daysEl) daysEl.textContent = pad(d);
+        if ($('hsHours')) $('hsHours').textContent = pad(h);
+        if ($('hsMins')) $('hsMins').textContent = pad(m);
+        if ($('hsSecs')) $('hsSecs').textContent = pad(s);
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
+
+    /* ============================================================
+       4. COUNT-UP STATS
+       ============================================================ */
+    (function countUp() {
+      const els = document.querySelectorAll('.hs-stat-num[data-count]');
+      if (!els.length) return;
+      const animate = (el) => {
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || '';
+        const dur = 1600;
+        const t0 = performance.now();
+        const step = (now) => {
+          const t = Math.min((now - t0) / dur, 1);
+          const eased = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.round(target * eased) + suffix;
+          if (t < 1) requestAnimationFrame(step);
+          else el.textContent = target + suffix;
+        };
+        requestAnimationFrame(step);
+      };
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.5 });
+      els.forEach(el => io.observe(el));
+    })();
+
+    /* ============================================================
+       5. REVEAL-ON-SCROLL — sections + cards
+       ============================================================ */
+    (function revealOnScroll() {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in-view');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+      // Sections
+      document.querySelectorAll('.reveal-section').forEach(sec => io.observe(sec));
+
+      // Cards inside grids — observe individually for stagger
+      const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in-view');
+            cardObserver.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      const attachCards = () => {
+        document.querySelectorAll('.showcase-promo-card, .category-tile, .testimonial-card, .craft-feature').forEach((c, i) => {
+          if (c.classList.contains('reveal-item')) return;
+          c.classList.add('reveal-item');
+          c.style.transitionDelay = Math.min(i * 0.06, 0.5) + 's';
+          cardObserver.observe(c);
+        });
+      };
+      attachCards();
+    })();
+
+    /* ============================================================
+       6. FLOATING PROMO PILL
+       ============================================================ */
+    (function floatingPromo() {
+      const pill = document.getElementById('floatingPromo');
+      if (!pill) return;
+      if (sessionStorage.getItem('harmony_promo_dismissed')) return;
+
+      // Show after 3s
+      setTimeout(() => pill.classList.add('visible'), 3000);
+
+      // Hide when user reaches footer / showroom section
+      const showroom = document.getElementById('showroom');
+      if (showroom) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) pill.classList.remove('visible');
+          });
+        }, { threshold: 0.4 });
+        io.observe(showroom);
+      }
+    })();
+
+    /* ============================================================
+       7. NEWSLETTER + MOBILE MENU
        ============================================================ */
     document.getElementById('newsletterForm').addEventListener('submit', function(e) {
       e.preventDefault();
