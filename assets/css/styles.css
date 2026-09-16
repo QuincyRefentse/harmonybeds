@@ -1,6 +1,6 @@
 /* ============================================================
    HARMONY REST & COMFORT BEDS — MASTER STYLESHEET
-   Version 3.1 — Search bar overlap fix + consolidated mobile
+   Version 3.2 — Sticky filter bar + search fix + sub-chip filter
    ============================================================ */
 
 /* ============================================================
@@ -22,8 +22,12 @@
   --shadow-lg: 0 25px 50px rgba(0,0,0,0.08);
 
   --transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Header + sticky offsets */
   --header-height: 72px;
-  --sticky-offset: 108px;
+  --announcement-height: 40px;
+  --sticky-offset: 72px; /* header height only — filter bar sticks right beneath */
+  --sticky-offset-mobile: 62px;
 
   --font-heading: 'Cormorant Garamond', serif;
   --font-body: 'Inter', sans-serif;
@@ -1649,18 +1653,25 @@ footer {
 }
 
 /* ============================================================
-   18. FILTER SECTION + SEARCH BAR
+   18. FILTER SECTION + SEARCH BAR  (✅ STICKY UPGRADED)
    ============================================================ */
 .filter-section {
-  background: white;
+  background: #ffffff;
   padding: 1.2rem 0;
   position: sticky;
-  top: var(--sticky-offset);
+  top: var(--sticky-offset);          /* sits right beneath the sticky header */
   z-index: 90;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
   border-bottom: 1px solid rgba(198,164,92,0.12);
+  transition: box-shadow 0.25s ease;
 }
 
+/* Deepened shadow when actually pinned */
+.filter-section.is-stuck {
+  box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+}
+
+/* ---------- Search bar ---------- */
 .filter-top-row {
   display: flex;
   align-items: center;
@@ -1682,6 +1693,8 @@ footer {
   color: var(--charcoal-light);
   font-size: 0.9rem;
   pointer-events: none;
+  z-index: 2;
+  line-height: 1;
 }
 #searchInput {
   width: 100%;
@@ -1692,6 +1705,7 @@ footer {
   font-size: 0.9rem;
   background: #faf8f4;
   transition: var(--transition);
+  box-sizing: border-box;
 }
 #searchInput:focus {
   outline: none;
@@ -1716,6 +1730,7 @@ footer {
   align-items: center;
   justify-content: center;
   transition: var(--transition);
+  z-index: 3;
 }
 .search-clear:hover { background: var(--gold); color: white; }
 
@@ -1786,6 +1801,7 @@ footer {
   padding: 0 0.35rem;
 }
 
+/* ---------- Chip rows ---------- */
 .chip-row {
   display: flex;
   gap: 0.5rem;
@@ -1805,11 +1821,35 @@ footer {
   border-radius: 999px;
   font-size: 0.82rem;
   color: var(--charcoal);
+  white-space: nowrap;
 }
 .filter-btn.active,
 .filter-btn:hover {
   background: var(--charcoal);
   border-color: var(--charcoal);
+  color: white;
+}
+
+/* Sub-category chips (dashed style, slightly smaller) */
+.filter-btn.sub-chip {
+  font-size: 0.78rem;
+  padding: 0.5rem 1rem;
+  opacity: 0.88;
+  border-style: dashed;
+  background: transparent;
+}
+.filter-btn.sub-chip:hover {
+  background: rgba(198,164,92,0.08);
+  border-color: var(--gold);
+  border-style: solid;
+  color: var(--gold-dark);
+  opacity: 1;
+}
+.filter-btn.sub-chip.active {
+  opacity: 1;
+  border-style: solid;
+  background: var(--gold);
+  border-color: var(--gold);
   color: white;
 }
 
@@ -1841,6 +1881,7 @@ footer {
   font-weight: 500;
   cursor: pointer;
   transition: var(--transition);
+  text-transform: capitalize;
 }
 .active-pill:hover { background: var(--gold); color: white; border-color: var(--gold); }
 .active-pill i { font-size: 0.6rem; }
@@ -1851,9 +1892,19 @@ footer {
   white-space: nowrap;
 }
 
+/* Anchor offset — keeps focused content below the sticky bar */
+#productsGrid,
+.products-grid {
+  scroll-margin-top: calc(var(--sticky-offset) + 120px);
+}
+
 @media (max-width: 768px) {
+  .filter-section {
+    top: var(--sticky-offset-mobile);
+    padding: 0.9rem 0;
+  }
   .filter-top-row { flex-direction: column; align-items: stretch; }
-  .search-wrap { width: 100%; }
+  .search-wrap { width: 100%; flex: 1 1 100%; }
   .filter-controls { justify-content: space-between; }
   #sortSelect { flex: 1; min-width: 0; }
   .filters-btn { order: 3; flex: 1 1 100%; justify-content: center; margin-top: 0.3rem; }
@@ -1866,6 +1917,11 @@ footer {
   }
   .chip-row::-webkit-scrollbar { display: none; }
   .filter-btn { flex: 0 0 auto; white-space: nowrap; }
+
+  #productsGrid,
+  .products-grid {
+    scroll-margin-top: calc(var(--sticky-offset-mobile) + 100px);
+  }
 }
 
 /* ============================================================
@@ -2974,7 +3030,6 @@ footer {
   .bank-copy-btn span { display: none; }
 }
 
-/* Ensure the bank panel body link is gold-accented */
 .bank-whatsapp-link {
   color: var(--gold-dark);
   font-weight: 600;
@@ -3270,9 +3325,9 @@ footer {
   .ph-ticker { margin: 0.4rem 0 1rem; }
   .ph-ticker-list li { font-size: 1.15rem; line-height: 26px; }
 
-  /* Filter section */
+  /* Filter section — sticky offset matched to header */
   .filter-section {
-    top: 62px;
+    top: var(--sticky-offset-mobile);
     padding: 0.9rem 0;
   }
   .filter-top-row {
@@ -3280,35 +3335,45 @@ footer {
     margin-bottom: 0.8rem;
   }
 
-  /* ---------- SEARCH BAR FIX — icon no longer overlaps ---------- */
+  /* ---------- SEARCH BAR — no icon overlap ---------- */
   .search-wrap {
+    position: relative;
+    display: block;
     width: 100%;
     flex: 1 1 100%;
   }
   .search-wrap > i {
-    left: 1rem;
-    font-size: 0.95rem;
-    z-index: 1;
+    position: absolute;
+    left: 1.05rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.92rem;
     color: var(--charcoal-light);
+    pointer-events: none;
+    z-index: 2;
+    line-height: 1;
   }
   #searchInput {
-    padding-left: 3.2rem !important;
-    padding-right: 3rem !important;
-    min-height: 48px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 3rem 0 3.1rem !important;
     height: 48px;
     line-height: 48px;
     font-size: 16px !important;
+    border-radius: 999px;
   }
   #searchInput::placeholder {
-    font-size: 0.82rem;
     color: var(--charcoal-light);
+    opacity: 0.85;
+    font-size: 0.82rem;
   }
   .search-clear {
-    right: 0.6rem;
+    right: 0.55rem;
     width: 34px;
     height: 34px;
     font-size: 1.15rem;
-    z-index: 2;
+    z-index: 3;
   }
 
   #sortSelect {
@@ -3522,12 +3587,11 @@ footer {
   .ph-stat-label { font-size: 0.5rem; letter-spacing: 0.1em; }
   .ph-scroll-cue { display: none; }
 
-  .filter-section { top: 58px; padding: 0.8rem 0; }
+  .filter-section { top: var(--sticky-offset-mobile); padding: 0.8rem 0; }
 
   .filter-top-row { margin-bottom: 0.7rem; }
   .search-wrap { flex: 1 1 100%; }
 
-  /* ---------- SEARCH BAR — tighter for phones ---------- */
   #searchInput {
     padding-left: 3rem !important;
     padding-right: 2.8rem !important;
@@ -3604,7 +3668,6 @@ footer {
   .ph-title { font-size: 1.7rem; }
   .ph-stat-num { font-size: 1.05rem; }
 
-  /* ---------- SEARCH BAR — pixel-tight for iPhone SE ---------- */
   #searchInput {
     padding-left: 2.8rem !important;
     padding-right: 2.6rem !important;
@@ -3696,7 +3759,6 @@ body.drawer-open {
 
 /* ============================================================
    29. SEARCH BAR — FINAL DEDICATED FIX
-   Guarantees no icon/text overlap on every phone width
    ============================================================ */
 @media (max-width: 768px) {
   .search-wrap {
@@ -3790,7 +3852,6 @@ body.drawer-open {
   margin-bottom: 2.5rem;
 }
 
-/* Card */
 .policy-card {
   background: white;
   border-radius: 16px;
@@ -3810,7 +3871,6 @@ body.drawer-open {
   box-shadow: 0 20px 50px -22px rgba(198,164,92,0.55);
 }
 
-/* Toggle button — the whole card header */
 .policy-toggle {
   display: flex;
   align-items: flex-start;
@@ -3899,7 +3959,6 @@ body.drawer-open {
   color: white;
 }
 
-/* Body — slides open via max-height */
 .policy-body {
   max-height: 0;
   overflow: hidden;
@@ -3971,7 +4030,6 @@ body.drawer-open {
   border-bottom: 1px solid var(--gold-dark);
 }
 
-/* Footnote */
 .policies-footnote {
   text-align: center;
   font-family: 'Inter', sans-serif;
@@ -3990,7 +4048,6 @@ body.drawer-open {
   margin-right: 0.4rem;
 }
 
-/* ---------- Responsive ---------- */
 @media (max-width: 1024px) {
   .policy-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -4045,7 +4102,6 @@ body.drawer-open {
   .policy-chevron { width: 24px; height: 24px; font-size: 0.65rem; }
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .policy-body { transition: none; }
   .policy-chevron { transition: none; }
