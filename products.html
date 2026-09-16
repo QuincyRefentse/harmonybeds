@@ -14,6 +14,47 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
+
+  <style>
+    /* ===== EXPANDED FILTER CHIP ROW (wraps nicely) ===== */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+    }
+    .chip-row-wrap { flex-wrap: wrap; }
+
+    .filter-btn {
+      white-space: nowrap;
+    }
+
+    /* Sub-category chip (smaller, secondary style) */
+    .filter-btn.sub-chip {
+      font-size: 0.82rem;
+      padding: 0.5rem 1rem;
+      opacity: 0.88;
+      border-style: dashed;
+    }
+    .filter-btn.sub-chip.active {
+      opacity: 1;
+      border-style: solid;
+    }
+
+    /* Divider inside chip row */
+    .chip-divider {
+      width: 1px;
+      height: 28px;
+      background: rgba(198, 164, 92, 0.25);
+      margin: 0 0.4rem;
+      align-self: center;
+    }
+
+    @media (max-width: 768px) {
+      .chip-divider { display: none; }
+      .filter-btn.sub-chip { font-size: 0.78rem; padding: 0.45rem 0.85rem; }
+    }
+  </style>
 </head>
 <body>
   <div class="announcement-bar">
@@ -40,86 +81,6 @@
   </header>
 
   <main>
-
-    <!-- ============ INTERACTIVE PRODUCTS HERO ============ -->
-    <section class="products-hero-v2" id="productsHero">
-      <div class="ph-bg-grain"></div>
-      <div class="ph-particles" id="phParticles"></div>
-      <div class="ph-orb ph-orb-1"></div>
-      <div class="ph-orb ph-orb-2"></div>
-
-      <div class="container ph-inner">
-        <span class="ph-eyebrow">
-          <span class="ph-pulse"></span>
-          the sanctuary awaits
-        </span>
-
-        <h1 class="ph-title">
-          <span class="ph-word">the</span>
-          <span class="ph-word">complete</span>
-          <span class="ph-word gold-shimmer">sanctuary</span>
-          <span class="ph-word">collection</span>
-        </h1>
-
-        <div class="ph-ticker" aria-hidden="true">
-          <span class="ph-ticker-fixed">featuring</span>
-          <div class="ph-ticker-window">
-            <ul class="ph-ticker-list" id="phTicker">
-              <li>beds</li>
-              <li>headboards</li>
-              <li>couches</li>
-              <li>furniture</li>
-              <li>beds</li>
-            </ul>
-          </div>
-        </div>
-
-        <p class="ph-lede">
-          Handcrafted in Pretoria, finished by master artisans — designed for your deepest restoration.
-        </p>
-
-        <div class="ph-actions">
-          <button class="btn-primary btn-glow" id="browseCollectionBtn">
-            browse collection <i class="fas fa-arrow-down"></i>
-          </button>
-          <a href="https://wa.me/27822336883?text=Hi%20Harmony%20Rest%2C%20I%27d%20like%20a%20consultation" target="_blank" class="btn-outline-dark">
-            <i class="fab fa-whatsapp"></i> talk to a consultant
-          </a>
-        </div>
-
-        <div class="ph-stats">
-          <div class="ph-stat">
-            <span class="ph-stat-num" data-count="42">0</span>
-            <span class="ph-stat-label">handcrafted pieces</span>
-          </div>
-          <div class="ph-stat-divider"></div>
-          <div class="ph-stat">
-            <span class="ph-stat-num" data-count="4">0</span>
-            <span class="ph-stat-label">collections</span>
-          </div>
-          <div class="ph-stat-divider"></div>
-          <div class="ph-stat">
-            <span class="ph-stat-num" data-count="15" data-suffix="+">0</span>
-            <span class="ph-stat-label">year warranty</span>
-          </div>
-          <div class="ph-stat-divider"></div>
-          <div class="ph-stat">
-            <span class="ph-stat-num" data-count="5" data-suffix="★">0</span>
-            <span class="ph-stat-label">sleep rating</span>
-          </div>
-        </div>
-      </div>
-
-      <button class="ph-scroll-cue" id="phScrollCue" aria-label="Scroll to collection">
-        <span></span>
-      </button>
-
-      <div class="ph-tip" id="phTip">
-        <i class="fas fa-lightbulb"></i>
-        <span>Tip: press <kbd>/</kbd> to search, or use filters to narrow</span>
-        <button class="ph-tip-close" id="phTipClose" aria-label="Dismiss tip">&times;</button>
-      </div>
-    </section>
 
     <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -153,12 +114,27 @@
           </div>
         </div>
 
-        <div class="chip-row">
+        <!-- ===== MAIN CATEGORY CHIPS ===== -->
+        <div class="chip-row" id="categoryChips">
           <button class="filter-btn active" data-filter="all">all items</button>
           <button class="filter-btn" data-filter="bed">beds</button>
           <button class="filter-btn" data-filter="headboard">headboards</button>
           <button class="filter-btn" data-filter="couch">couches</button>
           <button class="filter-btn" data-filter="furniture">furniture</button>
+        </div>
+
+        <!-- ===== SUB-CATEGORY CHIPS (matches shop-now dropdown) ===== -->
+        <div class="chip-row" id="subCategoryChips">
+          <button class="filter-btn sub-chip" data-tag="set">bed sets</button>
+          <button class="filter-btn sub-chip" data-tag="mattress">mattresses</button>
+          <button class="filter-btn sub-chip" data-tag="base">bed bases</button>
+          <button class="filter-btn sub-chip" data-tag="storage-base">storage bases &amp; combos</button>
+          <button class="filter-btn sub-chip" data-tag="drawers">base with drawers</button>
+          <button class="filter-btn sub-chip" data-tag="steel-base">steel bases</button>
+          <button class="filter-btn sub-chip" data-tag="topper">mattress toppers</button>
+          <button class="filter-btn sub-chip" data-tag="student">student accommodation</button>
+          <button class="filter-btn sub-chip" data-tag="bunk">bunk beds</button>
+          <button class="filter-btn sub-chip" data-tag="promo">promotions</button>
         </div>
 
         <div class="filter-meta-row">
@@ -191,6 +167,22 @@
     </div>
 
     <div class="drawer-body">
+      <div class="drawer-group">
+        <h4>Collection</h4>
+        <div class="chip-row chip-row-wrap" id="collectionChips">
+          <button type="button" class="size-chip" data-tag="set">Bed Sets</button>
+          <button type="button" class="size-chip" data-tag="mattress">Mattresses</button>
+          <button type="button" class="size-chip" data-tag="base">Bed Bases</button>
+          <button type="button" class="size-chip" data-tag="storage-base">Storage Bases</button>
+          <button type="button" class="size-chip" data-tag="drawers">With Drawers</button>
+          <button type="button" class="size-chip" data-tag="steel-base">Steel Bases</button>
+          <button type="button" class="size-chip" data-tag="topper">Toppers</button>
+          <button type="button" class="size-chip" data-tag="student">Student</button>
+          <button type="button" class="size-chip" data-tag="bunk">Bunk Beds</button>
+          <button type="button" class="size-chip" data-tag="promo">Promotions</button>
+        </div>
+      </div>
+
       <div class="drawer-group">
         <h4>Price range</h4>
         <div class="price-range">
@@ -265,7 +257,7 @@
             <a href="https://www.instagram.com/harmonyrestandcomfort?igsh=MW1oOHIyMjh3bnExdQ==" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
           </div>
         </div>
-        <div class="footer-col"><h4>collection</h4><ul><li><a href="products.html">beds</a></li><li><a href="products.html">headboards</a></li><li><a href="products.html">couches</a></li><li><a href="products.html">furniture</a></li></ul></div>
+        <div class="footer-col"><h4>collection</h4><ul><li><a href="products.html?category=bed&filter=set">beds</a></li><li><a href="products.html?category=headboard">headboards</a></li><li><a href="products.html?category=couch">couches</a></li><li><a href="products.html?category=furniture">furniture</a></li></ul></div>
         <div class="footer-col"><h4>support</h4><ul><li><a href="https://wa.me/27822336883">warranty</a></li><li><a href="https://wa.me/27822336883">delivery</a></li><li><a href="https://wa.me/27822336883">returns</a></li><li><a href="https://wa.me/27822336883">contact</a></li></ul></div>
         <div class="footer-col"><h4>flagship atelier</h4><p>Paul Kruger · Maryana Building<br>Pretoria Central · Shop No 1<br><a href="tel:+27822336883">+27 82 233 6883</a></p></div>
       </div>
@@ -273,28 +265,23 @@
     </div>
 
     <!-- ============ BANKING DETAILS MODAL ============ -->
-<div class="bank-modal-overlay" id="bankModal">
-  <div class="bank-modal-content" role="dialog" aria-modal="true" aria-labelledby="bankModalTitle">
-    <button class="bank-modal-close" id="bankModalClose" aria-label="Close banking details">&times;</button>
-
-    <div class="bank-modal-header">
-      <span class="bank-modal-eyebrow">Secure Payment</span>
-      <h2 class="bank-modal-title" id="bankModalTitle">Bank Transfer Details</h2>
-      <p class="bank-modal-sub" id="bankModalSub"></p>
+    <div class="bank-modal-overlay" id="bankModal">
+      <div class="bank-modal-content" role="dialog" aria-modal="true" aria-labelledby="bankModalTitle">
+        <button class="bank-modal-close" id="bankModalClose" aria-label="Close banking details">&times;</button>
+        <div class="bank-modal-header">
+          <span class="bank-modal-eyebrow">Secure Payment</span>
+          <h2 class="bank-modal-title" id="bankModalTitle">Bank Transfer Details</h2>
+          <p class="bank-modal-sub" id="bankModalSub"></p>
+        </div>
+        <div class="bank-modal-body" id="bankModalBody"></div>
+        <div class="bank-modal-footer">
+          <a href="#" class="bank-modal-whatsapp" id="bankModalWhatsApp" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Send proof of payment
+          </a>
+          <button type="button" class="bank-modal-done" id="bankModalDone">Done</button>
+        </div>
+      </div>
     </div>
-
-    <div class="bank-modal-body" id="bankModalBody">
-      <!-- Injected by JS -->
-    </div>
-
-    <div class="bank-modal-footer">
-      <a href="#" class="bank-modal-whatsapp" id="bankModalWhatsApp" target="_blank" rel="noopener">
-        <i class="fab fa-whatsapp"></i> Send proof of payment
-      </a>
-      <button type="button" class="bank-modal-done" id="bankModalDone">Done</button>
-    </div>
-  </div>
-</div>
   </footer>
 
   <a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20would%20like%20to%20inquire%20about%20your%20products." class="floating-whatsapp" target="_blank" aria-label="Chat on WhatsApp">
@@ -303,151 +290,180 @@
 
   <script>
     /* ============================================================
-       PRODUCT DATABASE — 42 products matching master price list
+       PRODUCT DATABASE — 42 products with TAGS for sub-filtering
        ============================================================ */
     const products = [
       /* ==================== BEDS ==================== */
       { id: 1, name: "King Max Weight", category: "bed", price: 6999, size: "King",
+        tags: ["set", "mattress", "base", "promo"],
         image: "assets/images/beds/king-weight-master.jpg",
         desc: "Our flagship heavy-duty bed engineered for exceptional weight support. Reinforced lumbar construction and high-density foam layers deliver deep restorative sleep with superior spinal alignment.",
         badge: "best seller",
         specs: [["Mattress Length","200 cm"],["Mattress Width","183 cm"],["Mattress Height","30 cm"],["Base Length","202 cm"],["Base Width","185 cm"],["Base Height","35 cm"],["Total Height","65 cm"],["Weight Capacity","250 kg per side"],["Spring Count","3,000 pocket springs"],["Comfort Layer","High-density foam + gel infusion"],["Fabric","Premium damask"],["Warranty","15 years"]] },
       { id: 2, name: "Hospitality Queen Bed Set", category: "bed", price: 4999, size: "Queen",
+        tags: ["set", "mattress", "base"],
         image: "assets/images/beds/hospitality-form.jpg",
         desc: "Hotel-grade queen bed set featuring durable pocket springs and a medium-firm comfort layer. Built to withstand daily use while delivering consistent five-star luxury and breathability.",
         badge: "hotel quality",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","28 cm"],["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","33 cm"],["Total Height","61 cm"],["Weight Capacity","200 kg per side"],["Spring Count","2,000 pocket springs"],["Comfort Layer","Medium-firm foam"],["Fabric","Hotel-grade woven fabric"],["Warranty","12 years"]] },
       { id: 3, name: "Hospitality Mattress Queen", category: "bed", price: 3299, size: "Queen",
+        tags: ["mattress"],
         image: "assets/images/beds/hospitality-form.jpg",
         desc: "Hospitality-grade queen mattress on its own. Balanced medium-firm feel with pocket springs and a breathable cover — ideal as a replacement or paired with your existing base.",
         badge: "hotel quality",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","28 cm"],["Weight Capacity","200 kg per side"],["Spring Count","2,000 pocket springs"],["Comfort Layer","Medium-firm foam"],["Fabric","Hotel-grade woven fabric"],["Base Included","No (mattress only)"],["Warranty","12 years"]] },
       { id: 4, name: "Hospitality Double Bed Set", category: "bed", price: 4499, size: "Double",
+        tags: ["set", "mattress", "base"],
         image: "assets/images/beds/hospitality-form.jpg",
         desc: "Full double hospitality set with durable pocket springs and medium-firm comfort — designed for guesthouses, lodges, and Airbnb properties where consistency matters.",
         badge: "hotel quality",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","28 cm"],["Base Length","190 cm"],["Base Width","139 cm"],["Base Height","33 cm"],["Total Height","61 cm"],["Weight Capacity","180 kg per side"],["Spring Count","1,800 pocket springs"],["Comfort Layer","Medium-firm foam"],["Fabric","Hotel-grade woven fabric"],["Warranty","12 years"]] },
       { id: 5, name: "Hospitality Mattress Double", category: "bed", price: 2999, size: "Double",
+        tags: ["mattress"],
         image: "assets/images/beds/hospitality-form.jpg",
         desc: "Double hospitality mattress, sold on its own. Reinforced edges, breathable cover, and consistent support — made for heavy rotation.",
         badge: "hotel quality",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","28 cm"],["Weight Capacity","180 kg per side"],["Spring Count","1,800 pocket springs"],["Comfort Layer","Medium-firm foam"],["Fabric","Hotel-grade woven fabric"],["Base Included","No (mattress only)"],["Warranty","12 years"]] },
       { id: 6, name: "Orthopedic Queen Bed Set", category: "bed", price: 5999, size: "Queen",
+        tags: ["set", "mattress", "base", "promo"],
         image: "assets/images/beds/orthopedic-form.jpg",
         desc: "Therapeutic queen set with zoned coil system and memory foam infusion. Clinically designed to relieve pressure points, reduce motion transfer, and promote healthy posture during sleep.",
         badge: "therapeutic",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","32 cm"],["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","35 cm"],["Total Height","67 cm"],["Weight Capacity","240 kg per side"],["Spring Count","4,000 zoned pocket springs"],["Comfort Layer","Memory foam + copper infusion"],["Fabric","Antimicrobial bamboo blend"],["Warranty","15 years"]] },
       { id: 7, name: "Orthopedic Mattress Queen", category: "bed", price: 3999, size: "Queen",
+        tags: ["mattress"],
         image: "assets/images/beds/orthopedic-form.jpg",
         desc: "Therapeutic queen mattress only. Zoned support relieves pressure points and reduces motion transfer — an easy upgrade for an existing base.",
         badge: "therapeutic",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","32 cm"],["Weight Capacity","240 kg per side"],["Spring Count","4,000 zoned pocket springs"],["Comfort Layer","Memory foam + copper infusion"],["Fabric","Antimicrobial bamboo blend"],["Base Included","No (mattress only)"],["Warranty","15 years"]] },
       { id: 8, name: "Orthopedic Double Bed Set", category: "bed", price: 5499, size: "Double",
+        tags: ["set", "mattress", "base"],
         image: "assets/images/beds/orthopedic-form.jpg",
         desc: "Orthopedic double bed set with zoned coil support and memory foam. Ideal for those needing additional lumbar and shoulder relief in a smaller footprint.",
         badge: "therapeutic",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","32 cm"],["Base Length","190 cm"],["Base Width","139 cm"],["Base Height","35 cm"],["Total Height","67 cm"],["Weight Capacity","220 kg per side"],["Spring Count","3,200 zoned pocket springs"],["Comfort Layer","Memory foam + copper infusion"],["Fabric","Antimicrobial bamboo blend"],["Warranty","15 years"]] },
       { id: 9, name: "Orthopedic Mattress Double", category: "bed", price: 3499, size: "Double",
+        tags: ["mattress"],
         image: "assets/images/beds/orthopedic-form.jpg",
         desc: "Double orthopedic mattress only. Same therapeutic zoning as our queen model, sized for double bases.",
         badge: "therapeutic",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","32 cm"],["Weight Capacity","220 kg per side"],["Spring Count","3,200 zoned pocket springs"],["Comfort Layer","Memory foam + copper infusion"],["Fabric","Antimicrobial bamboo blend"],["Base Included","No (mattress only)"],["Warranty","15 years"]] },
       { id: 10, name: "Pocket Spring Queen Bed Set", category: "bed", price: 6499, size: "Queen",
+        tags: ["set", "mattress", "base"],
         image: "assets/images/beds/pocket-spring.jpg",
         desc: "Individually wrapped pocket springs move independently for tailored support. Encased in breathable fabric with a plush pillow top for that floating-on-air sensation.",
         badge: "popular",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","30 cm"],["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","33 cm"],["Total Height","63 cm"],["Weight Capacity","200 kg per side"],["Spring Count","2,500 pocket springs"],["Comfort Layer","Pillow-top foam layer"],["Fabric","Breathable knit"],["Warranty","12 years"]] },
       { id: 11, name: "Pocket Spring Mattress Queen", category: "bed", price: 4499, size: "Queen",
+        tags: ["mattress"],
         image: "assets/images/beds/pocket-spring.jpg",
         desc: "Queen pocket spring mattress only. Independent coil movement delivers tailored support while minimising partner disturbance.",
         badge: "popular",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","30 cm"],["Weight Capacity","200 kg per side"],["Spring Count","2,500 pocket springs"],["Comfort Layer","Pillow-top foam layer"],["Fabric","Breathable knit"],["Base Included","No (mattress only)"],["Warranty","12 years"]] },
       { id: 12, name: "Pocket Spring Double Bed Set", category: "bed", price: 5999, size: "Double",
+        tags: ["set", "mattress", "base"],
         image: "assets/images/beds/pocket-spring.jpg",
         desc: "Double pocket spring set with independent coils for tailored support and minimal motion transfer — perfect for couples with different sleep preferences.",
         badge: "popular",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","30 cm"],["Base Length","190 cm"],["Base Width","139 cm"],["Base Height","30 cm"],["Total Height","60 cm"],["Weight Capacity","180 kg per side"],["Spring Count","2,000 pocket springs"],["Comfort Layer","Pillow-top foam layer"],["Fabric","Breathable knit"],["Warranty","12 years"]] },
       { id: 13, name: "Pocket Spring Mattress Double", category: "bed", price: 3999, size: "Double",
+        tags: ["mattress"],
         image: "assets/images/beds/pocket-spring.jpg",
         desc: "Double pocket spring mattress only. Independent coil movement, plush top, breathable knit cover.",
         badge: "popular",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","30 cm"],["Weight Capacity","180 kg per side"],["Spring Count","2,000 pocket springs"],["Comfort Layer","Pillow-top foam layer"],["Fabric","Breathable knit"],["Base Included","No (mattress only)"],["Warranty","12 years"]] },
       { id: 14, name: "PillowTop Queen Bed Set", category: "bed", price: 3999, size: "Queen",
+        tags: ["set", "mattress", "base", "promo"],
         image: "assets/images/beds/pillowtop.jpg",
         desc: "Luxurious euro-top queen set with an extra layer of plush cushioning sewn into the surface. Sink into cloud-like softness with underlying support for all sleep positions.",
         badge: "plush",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","34 cm"],["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","33 cm"],["Total Height","67 cm"],["Weight Capacity","220 kg per side"],["Spring Count","2,500 pocket springs"],["Comfort Layer","Euro-top with gel memory foam"],["Fabric","Organic cotton cover"],["Warranty","12 years"]] },
       { id: 15, name: "PillowTop Mattress Queen", category: "bed", price: 3200, size: "Queen",
+        tags: ["mattress", "topper"],
         image: "assets/images/beds/pillowtop.jpg",
         desc: "Queen pillow-top mattress only. Plush euro-top layer over supportive pocket springs — cloud-like softness without sacrificing support.",
         badge: "plush",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","34 cm"],["Weight Capacity","220 kg per side"],["Spring Count","2,500 pocket springs"],["Comfort Layer","Euro-top with gel memory foam"],["Fabric","Organic cotton cover"],["Base Included","No (mattress only)"],["Warranty","12 years"]] },
       { id: 16, name: "PillowTop Double Bed Set", category: "bed", price: 3800, size: "Double",
+        tags: ["set", "mattress", "base"],
         image: "assets/images/beds/pillowtop.jpg",
         desc: "Double pillow-top set with a plush euro-top surface over responsive pocket springs. Elegant and comfortable in any bedroom.",
         badge: "plush",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","34 cm"],["Base Length","190 cm"],["Base Width","139 cm"],["Base Height","30 cm"],["Total Height","64 cm"],["Weight Capacity","200 kg per side"],["Spring Count","2,000 pocket springs"],["Comfort Layer","Euro-top with gel memory foam"],["Fabric","Organic cotton cover"],["Warranty","12 years"]] },
       { id: 17, name: "PillowTop Mattress Double", category: "bed", price: 3100, size: "Double",
+        tags: ["mattress", "topper"],
         image: "assets/images/beds/pillowtop.jpg",
         desc: "Double pillow-top mattress only. Plush euro-top over supportive pocket springs.",
         badge: "plush",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","34 cm"],["Weight Capacity","200 kg per side"],["Spring Count","2,000 pocket springs"],["Comfort Layer","Euro-top with gel memory foam"],["Fabric","Organic cotton cover"],["Base Included","No (mattress only)"],["Warranty","12 years"]] },
       { id: 18, name: "Sleepwell Queen Bed Set", category: "bed", price: 3499, size: "Queen",
+        tags: ["set", "mattress", "base", "promo"],
         image: "assets/images/beds/dream-star.jpg",
         desc: "Sleepwell queen set — a balanced medium-firm sleep system with a durable coil core and quilted cover. Reliable comfort for everyday restorative rest.",
         badge: "everyday luxury",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","26 cm"],["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","30 cm"],["Total Height","56 cm"],["Weight Capacity","180 kg per side"],["Spring Count","2,000 continuous coils"],["Comfort Layer","Medium-firm foam"],["Fabric","Quilted damask"],["Warranty","10 years"]] },
       { id: 19, name: "Sleepwell Mattress Queen", category: "bed", price: 2999, size: "Queen",
+        tags: ["mattress"],
         image: "assets/images/beds/dream-star.jpg",
         desc: "Sleepwell queen mattress only. Medium-firm coil core with quilted damask cover — dependable comfort every night.",
         badge: "everyday luxury",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","26 cm"],["Weight Capacity","180 kg per side"],["Spring Count","2,000 continuous coils"],["Comfort Layer","Medium-firm foam"],["Fabric","Quilted damask"],["Base Included","No (mattress only)"],["Warranty","10 years"]] },
       { id: 20, name: "Sleepwell Double Bed Set", category: "bed", price: 2899, size: "Double",
+        tags: ["set", "mattress", "base"],
         image: "assets/images/beds/dream-star.jpg",
         desc: "Sleepwell double set — balanced medium-firm support with a durable coil core and quilted cover.",
         badge: "everyday luxury",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","26 cm"],["Base Length","190 cm"],["Base Width","139 cm"],["Base Height","30 cm"],["Total Height","56 cm"],["Weight Capacity","170 kg per side"],["Spring Count","1,800 continuous coils"],["Comfort Layer","Medium-firm foam"],["Fabric","Quilted damask"],["Warranty","10 years"]] },
       { id: 21, name: "Sleepwell Mattress Double", category: "bed", price: 2899, size: "Double",
+        tags: ["mattress"],
         image: "assets/images/beds/dream-star.jpg",
         desc: "Sleepwell double mattress only. Medium-firm coil construction for dependable comfort.",
         badge: "everyday luxury",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","26 cm"],["Weight Capacity","170 kg per side"],["Spring Count","1,800 continuous coils"],["Comfort Layer","Medium-firm foam"],["Fabric","Quilted damask"],["Base Included","No (mattress only)"],["Warranty","10 years"]] },
       { id: 22, name: "Budget Queen Bed Set", category: "bed", price: 2499, size: "Queen",
+        tags: ["set", "mattress", "base", "promo"],
         image: "assets/images/beds/comfort-non-turn.jpg",
         desc: "Affordable queen set with a durable foam core and soft knit cover. No-flip design for easy maintenance — ideal for guest rooms or value-focused buyers.",
         badge: "value",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","22 cm"],["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","28 cm"],["Total Height","50 cm"],["Weight Capacity","150 kg per side"],["Spring Count","High-resilience foam core"],["Comfort Layer","Soft foam"],["Fabric","Soft knit cover"],["Warranty","5 years"]] },
       { id: 23, name: "Budget Mattress Queen", category: "bed", price: 1999, size: "Queen",
+        tags: ["mattress"],
         image: "assets/images/beds/comfort-non-turn.jpg",
         desc: "Budget queen mattress only. Durable foam core, soft knit cover, and no-turn design for easy upkeep.",
         badge: "value",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","22 cm"],["Weight Capacity","150 kg per side"],["Spring Count","High-resilience foam core"],["Comfort Layer","Soft foam"],["Fabric","Soft knit cover"],["Base Included","No (mattress only)"],["Warranty","5 years"]] },
       { id: 24, name: "Budget Double Bed Set", category: "bed", price: 2399, size: "Double",
+        tags: ["set", "mattress", "base"],
         image: "assets/images/beds/comfort-non-turn.jpg",
         desc: "Affordable double set with a durable foam core and soft knit cover. Practical comfort for guest rooms and budget-conscious buyers.",
         badge: "value",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","22 cm"],["Base Length","190 cm"],["Base Width","139 cm"],["Base Height","28 cm"],["Total Height","50 cm"],["Weight Capacity","140 kg per side"],["Spring Count","High-resilience foam core"],["Comfort Layer","Soft foam"],["Fabric","Soft knit cover"],["Warranty","5 years"]] },
       { id: 25, name: "Budget Mattress Double", category: "bed", price: 1899, size: "Double",
+        tags: ["mattress"],
         image: "assets/images/beds/comfort-non-turn.jpg",
         desc: "Budget double mattress only. Durable foam core, soft knit cover, no-turn design.",
         badge: "value",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","22 cm"],["Weight Capacity","140 kg per side"],["Spring Count","High-resilience foam core"],["Comfort Layer","Soft foam"],["Fabric","Soft knit cover"],["Base Included","No (mattress only)"],["Warranty","5 years"]] },
       { id: 26, name: "3/4 Bed Set", category: "bed", price: 1999, size: "Three Quarter",
+        tags: ["set", "mattress", "base", "student", "promo"],
         image: "assets/images/beds/3-star-quarter.jpg",
         desc: "Compact three-quarter bed set delivering reliable comfort at an accessible price. High-resilience foam with a soft-touch fabric cover — perfect for smaller spaces.",
         badge: "compact",
         specs: [["Mattress Length","188 cm"],["Mattress Width","107 cm"],["Mattress Height","20 cm"],["Base Length","190 cm"],["Base Width","109 cm"],["Base Height","26 cm"],["Total Height","46 cm"],["Weight Capacity","130 kg"],["Spring Count","High-resilience foam core"],["Comfort Layer","Soft-touch foam"],["Fabric","Soft-touch polyester"],["Warranty","5 years"]] },
       { id: 27, name: "Student Bed Set Form", category: "bed", price: 1999, size: "Single",
+        tags: ["set", "mattress", "base", "student", "promo"],
         image: "assets/images/beds/student-bed-set.jpg",
         desc: "Durable single bed set designed for student accommodation. Sturdy base and medium-firm mattress that withstands daily use while providing restful sleep.",
         badge: "value",
         specs: [["Mattress Length","188 cm"],["Mattress Width","91 cm"],["Mattress Height","20 cm"],["Base Length","190 cm"],["Base Width","93 cm"],["Base Height","26 cm"],["Total Height","46 cm"],["Weight Capacity","110 kg"],["Spring Count","Bonnel spring system"],["Comfort Layer","Medium-firm foam"],["Fabric","Durable polyester cover"],["Warranty","5 years"]] },
       { id: 28, name: "Single Form Mattress", category: "bed", price: 1499, size: "Single",
+        tags: ["mattress", "student"],
         image: "assets/images/beds/student-bed-set.jpg",
         desc: "Single mattress only. Medium-firm foam comfort in a durable cover — pairs with any single base.",
         badge: "value",
         specs: [["Mattress Length","188 cm"],["Mattress Width","91 cm"],["Mattress Height","20 cm"],["Weight Capacity","110 kg"],["Spring Count","Bonnel spring system"],["Comfort Layer","Medium-firm foam"],["Fabric","Durable polyester cover"],["Base Included","No (mattress only)"],["Warranty","5 years"]] },
       { id: 29, name: "Storage Base", category: "bed", price: 2999, size: "Queen",
+        tags: ["base", "storage-base", "drawers", "promo"],
         image: "assets/images/beds/storage-base.jpg",
         desc: "Elegant storage base with integrated drawers beneath. Practical storage meets premium craftsmanship — mattress sold separately.",
         badge: "storage",
@@ -455,31 +471,37 @@
 
       /* ==================== HEADBOARDS ==================== */
       { id: 30, name: "King Headboard — Vertical / Horizontal / Diamond", category: "headboard", price: 1499, size: "King",
+        tags: ["headboard", "promo"],
         image: "assets/images/headboards/king-diamond.jpg",
         desc: "Statement king headboard available in three styling options: vertical channel, horizontal line, or diamond-tufted.",
         badge: "3 styles",
         specs: [["Width","190 cm"],["Height","140–150 cm"],["Depth","10–14 cm"],["Frame Material","Solid timber"],["Upholstery","Premium linen-blend"],["Styles Available","Vertical · Horizontal · Diamond"],["Mounting","Wall-mounted"],["Compatibility","Fits king beds 183–190 cm"],["Warranty","10 years"]] },
       { id: 31, name: "Queen Diamond Headboard", category: "headboard", price: 999, size: "Queen",
+        tags: ["headboard"],
         image: "assets/images/headboards/queen-diamond.jpg",
         desc: "Exquisite queen headboard with diamond-tufted artistry hand-arranged by our artisans.",
         badge: "artisan",
         specs: [["Width","160 cm"],["Height","145 cm"],["Depth","14 cm"],["Frame Material","Solid timber"],["Upholstery","Premium velvet"],["Padding","7 cm premium foam"],["Mounting","Wall-mounted"],["Compatibility","Fits queen beds 152–160 cm"],["Warranty","10 years"]] },
       { id: 32, name: "Queen Headboard — Vertical / Horizontal", category: "headboard", price: 899, size: "Queen",
+        tags: ["headboard"],
         image: "assets/images/headboards/queen-lined.jpg",
         desc: "Understated queen headboard in vertical channel or horizontal line styling.",
         badge: "2 styles",
         specs: [["Width","160 cm"],["Height","130 cm"],["Depth","10 cm"],["Frame Material","Solid timber"],["Upholstery","Smooth fabric"],["Styles Available","Vertical · Horizontal"],["Mounting","Wall-mounted"],["Compatibility","Fits queen beds 152–160 cm"],["Warranty","8 years"]] },
       { id: 33, name: "Double Headboard — Vertical / Horizontal", category: "headboard", price: 899, size: "Double",
+        tags: ["headboard"],
         image: "assets/images/headboards/double-lineup.jpg",
         desc: "Contemporary double headboard in vertical channel or horizontal line styling.",
         badge: "modern",
         specs: [["Width","145 cm"],["Height","120 cm"],["Depth","10 cm"],["Frame Material","Solid timber"],["Upholstery","Contemporary fabric"],["Styles Available","Vertical · Horizontal"],["Mounting","Wall-mounted"],["Compatibility","Fits double beds 137–145 cm"],["Warranty","8 years"]] },
       { id: 34, name: "Three Quarter Headboard — Vertical / Horizontal", category: "headboard", price: 699, size: "Three Quarter",
+        tags: ["headboard", "student"],
         image: "assets/images/headboards/three-quarter.jpg",
         desc: "Perfectly scaled headboard for three-quarter beds.",
         badge: "compact",
         specs: [["Width","115 cm"],["Height","115 cm"],["Depth","8 cm"],["Frame Material","Solid timber"],["Upholstery","Durable fabric"],["Styles Available","Vertical · Horizontal"],["Mounting","Wall-mounted"],["Compatibility","Fits 3/4 beds 107–115 cm"],["Warranty","8 years"]] },
       { id: 35, name: "Single Headboard — Vertical / Horizontal", category: "headboard", price: 699, size: "Single",
+        tags: ["headboard", "student", "bunk"],
         image: "assets/images/headboards/single.jpg",
         desc: "Charming single headboard for children's rooms or guest spaces.",
         badge: "kids",
@@ -487,16 +509,19 @@
 
       /* ==================== COUCHES ==================== */
       { id: 36, name: "L Shape Seater Couch", category: "couch", price: 3499, size: "L-Shape",
+        tags: ["promo"],
         image: "assets/images/couches/l-shape.jpg",
         desc: "Sprawling L-shaped couch that defines comfort. Deep seats, feather-blend cushions, and premium upholstery.",
         badge: "grand",
         specs: [["Overall Length","280 cm"],["Overall Width","200 cm"],["Seat Depth","90 cm"],["Seat Height","45 cm"],["Backrest Height","85 cm"],["Frame Material","Solid timber"],["Cushion Fill","Feather-blend + foam"],["Upholstery","Premium fabric"],["Seating Capacity","5–6 persons"],["Warranty","10 years"]] },
       { id: 37, name: "Double Seater Couch", category: "couch", price: 1699, size: "2-Seater",
+        tags: ["promo"],
         image: "assets/images/couches/double-seater.jpg",
         desc: "Intimate double seater crafted with the same attention to detail as our beds.",
         badge: "cozy",
         specs: [["Overall Length","180 cm"],["Overall Width","90 cm"],["Seat Depth","60 cm"],["Seat Height","45 cm"],["Backrest Height","80 cm"],["Frame Material","Solid timber"],["Cushion Fill","High-density foam"],["Upholstery","Premium fabric"],["Seating Capacity","2 persons"],["Warranty","8 years"]] },
       { id: 38, name: "Single Seater Couch", category: "couch", price: 1199, size: "1-Seater",
+        tags: [],
         image: "assets/images/couches/single-seater.jpg",
         desc: "The perfect accent chair. Combines ergonomic support with sculptural beauty.",
         badge: "accent",
@@ -504,21 +529,25 @@
 
       /* ==================== FURNITURE ==================== */
       { id: 39, name: "Blanket Storage", category: "furniture", price: 999, size: "Standard",
+        tags: ["furniture"],
         image: "assets/images/furniture/blanket-storage.jpg",
         desc: "Beautifully crafted blanket storage chest with cedar lining. Padded top for extra seating.",
         badge: "cedar lined",
         specs: [["Length","100 cm"],["Width","50 cm"],["Height","50 cm"],["Internal Depth","40 cm"],["Material","Solid wood + cedar lining"],["Top","Padded upholstered seat"],["Capacity","Approx. 150 litres"],["Weight","18 kg"],["Warranty","5 years"]] },
       { id: 40, name: "Chest of Drawers", category: "furniture", price: 1499, size: "6-Drawer",
+        tags: ["furniture"],
         image: "assets/images/furniture/chest-of-drawer.jpg",
         desc: "Spacious multi-drawer chest with soft-close drawers, brushed gold handles, and rich wood finish.",
         badge: "premium",
         specs: [["Length","120 cm"],["Width","50 cm"],["Height","80 cm"],["Drawer Count","6 drawers"],["Small Drawer","35 x 40 x 15 cm"],["Large Drawer","35 x 40 x 25 cm"],["Material","Solid wood + veneer"],["Hardware","Soft-close brushed gold"],["Weight","45 kg"],["Warranty","5 years"]] },
       { id: 41, name: "Pedestal (Wooden)", category: "furniture", price: 750, size: "3-Drawer",
+        tags: ["furniture"],
         image: "assets/images/furniture/pedestal.jpg",
         desc: "Compact three-drawer wooden pedestal. Perfect nightstand with ample storage.",
         badge: "matching",
         specs: [["Length","50 cm"],["Width","45 cm"],["Height","60 cm"],["Drawer Count","3 drawers"],["Drawer Dimensions","40 x 38 x 15 cm"],["Material","Solid wood"],["Hardware","Brushed gold handles"],["Weight","15 kg"],["Warranty","5 years"]] },
       { id: 42, name: "Pedestal (Velvet)", category: "furniture", price: 500, size: "3-Drawer",
+        tags: ["furniture"],
         image: "assets/images/furniture/pedestal.jpg",
         desc: "Velvet-upholstered pedestal with three drawers. Soft to the touch and elegantly styled.",
         badge: "velvet",
@@ -526,7 +555,7 @@
     ];
 
     /* ============================================================
-       BANKING DETAILS — shared constant
+       BANKING DETAILS
        ============================================================ */
     const BANK = {
       holder: "Harmony Rest and Comfort (PTY) LTD",
@@ -540,6 +569,7 @@
        ============================================================ */
     const state = {
       filter: 'all',
+      tag: '',                // ← NEW: sub-category tag filter
       sort: 'default',
       search: '',
       sizes: new Set(),
@@ -564,14 +594,15 @@
     const pMax = document.getElementById('priceMax');
 
     /* ============================================================
-       FILTERING
+       FILTERING  (now uses `tags`)
        ============================================================ */
     function filterProducts() {
       let list = [...products];
 
       if (state.filter !== 'all') list = list.filter(p => p.category === state.filter);
-      if (state.sizes.size)     list = list.filter(p => state.sizes.has(p.size));
-      if (state.badges.size)    list = list.filter(p => state.badges.has(p.badge));
+      if (state.tag)              list = list.filter(p => Array.isArray(p.tags) && p.tags.includes(state.tag));
+      if (state.sizes.size)       list = list.filter(p => state.sizes.has(p.size));
+      if (state.badges.size)      list = list.filter(p => state.badges.has(p.badge));
       if (state.search.trim()) {
         const q = state.search.trim().toLowerCase();
         list = list.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
@@ -603,68 +634,68 @@
     }
 
     function bankPanelHTML(product) {
-  const ref = `${product.name} — ${product.size}`;
-  return `
-    <div class="bank-details open" role="region" aria-label="Banking details for ${product.name}">
-      <div class="bank-details-header">
-        <i class="fas fa-university"></i> Pay via EFT / Bank Transfer
-      </div>
-      <div class="bank-rows">
-        <div class="bank-row">
-          <div class="bank-row-text">
-            <span class="bank-row-label">Account Holder</span>
-            <span class="bank-row-value">${BANK.holder}</span>
+      const ref = `${product.name} — ${product.size}`;
+      return `
+        <div class="bank-details open" role="region" aria-label="Banking details for ${product.name}">
+          <div class="bank-details-header">
+            <i class="fas fa-university"></i> Pay via EFT / Bank Transfer
           </div>
-          <button type="button" class="bank-copy-btn" data-copy="${BANK.holder}" aria-label="Copy account holder">
-            <i class="fas fa-copy"></i><span>Copy</span>
-          </button>
-        </div>
-        <div class="bank-row">
-          <div class="bank-row-text">
-            <span class="bank-row-label">Bank</span>
-            <span class="bank-row-value">${BANK.bank}</span>
+          <div class="bank-rows">
+            <div class="bank-row">
+              <div class="bank-row-text">
+                <span class="bank-row-label">Account Holder</span>
+                <span class="bank-row-value">${BANK.holder}</span>
+              </div>
+              <button type="button" class="bank-copy-btn" data-copy="${BANK.holder}" aria-label="Copy account holder">
+                <i class="fas fa-copy"></i><span>Copy</span>
+              </button>
+            </div>
+            <div class="bank-row">
+              <div class="bank-row-text">
+                <span class="bank-row-label">Bank</span>
+                <span class="bank-row-value">${BANK.bank}</span>
+              </div>
+              <button type="button" class="bank-copy-btn" data-copy="${BANK.bank}" aria-label="Copy bank name">
+                <i class="fas fa-copy"></i><span>Copy</span>
+              </button>
+            </div>
+            <div class="bank-row">
+              <div class="bank-row-text">
+                <span class="bank-row-label">Account Number</span>
+                <span class="bank-row-value">${BANK.account}</span>
+              </div>
+              <button type="button" class="bank-copy-btn" data-copy="${BANK.account}" aria-label="Copy account number">
+                <i class="fas fa-copy"></i><span>Copy</span>
+              </button>
+            </div>
+            <div class="bank-row">
+              <div class="bank-row-text">
+                <span class="bank-row-label">Branch Code</span>
+                <span class="bank-row-value">${BANK.branch}</span>
+              </div>
+              <button type="button" class="bank-copy-btn" data-copy="${BANK.branch}" aria-label="Copy branch code">
+                <i class="fas fa-copy"></i><span>Copy</span>
+              </button>
+            </div>
+            <div class="bank-row">
+              <div class="bank-row-text">
+                <span class="bank-row-label">Reference</span>
+                <span class="bank-row-value">${ref}</span>
+              </div>
+              <button type="button" class="bank-copy-btn" data-copy="${ref}" aria-label="Copy payment reference">
+                <i class="fas fa-copy"></i><span>Copy</span>
+              </button>
+            </div>
           </div>
-          <button type="button" class="bank-copy-btn" data-copy="${BANK.bank}" aria-label="Copy bank name">
-            <i class="fas fa-copy"></i><span>Copy</span>
-          </button>
+          <p class="bank-footer-note">
+            <strong>Important:</strong> Use the product name as your reference.
+            Send your proof of payment to
+            <a href="https://wa.me/27822336883?text=Proof%20of%20payment%20for%20${encodeURIComponent(product.name)}" target="_blank" class="bank-whatsapp-link">WhatsApp</a>
+            so we can confirm your order.
+          </p>
         </div>
-        <div class="bank-row">
-          <div class="bank-row-text">
-            <span class="bank-row-label">Account Number</span>
-            <span class="bank-row-value">${BANK.account}</span>
-          </div>
-          <button type="button" class="bank-copy-btn" data-copy="${BANK.account}" aria-label="Copy account number">
-            <i class="fas fa-copy"></i><span>Copy</span>
-          </button>
-        </div>
-        <div class="bank-row">
-          <div class="bank-row-text">
-            <span class="bank-row-label">Branch Code</span>
-            <span class="bank-row-value">${BANK.branch}</span>
-          </div>
-          <button type="button" class="bank-copy-btn" data-copy="${BANK.branch}" aria-label="Copy branch code">
-            <i class="fas fa-copy"></i><span>Copy</span>
-          </button>
-        </div>
-        <div class="bank-row">
-          <div class="bank-row-text">
-            <span class="bank-row-label">Reference</span>
-            <span class="bank-row-value">${ref}</span>
-          </div>
-          <button type="button" class="bank-copy-btn" data-copy="${ref}" aria-label="Copy payment reference">
-            <i class="fas fa-copy"></i><span>Copy</span>
-          </button>
-        </div>
-      </div>
-      <p class="bank-footer-note">
-        <strong>Important:</strong> Use the product name as your reference.
-        Send your proof of payment to
-        <a href="https://wa.me/27822336883?text=Proof%20of%20payment%20for%20${encodeURIComponent(product.name)}" target="_blank" class="bank-whatsapp-link">WhatsApp</a>
-        so we can confirm your order.
-      </p>
-    </div>
-  `;
-}
+      `;
+    }
 
     function productCardHTML(product, index) {
       const isFav = state.favorites.has(product.id);
@@ -708,11 +739,9 @@
                 <i class="fab fa-whatsapp"></i> Chat
               </a>
               <button type="button" class="btn-eft" data-eft-toggle="${product.id}">
-  <i class="fas fa-university"></i> Pay EFT
-</button>
+                <i class="fas fa-university"></i> Pay EFT
+              </button>
             </div>
-
-            
           </div>
         </div>
       `;
@@ -726,6 +755,7 @@
 
       if (state.search.trim()) pills.push({ key: 'search', label: `"${state.search.trim()}"` });
       if (state.filter !== 'all') pills.push({ key: 'filter', label: state.filter });
+      if (state.tag) pills.push({ key: 'tag', value: state.tag, label: state.tag });
       state.sizes.forEach(s => pills.push({ key: 'size', value: s, label: s }));
       state.badges.forEach(b => pills.push({ key: 'badge', value: b, label: b }));
       if (state.priceMin > 0 || state.priceMax < 7000) {
@@ -772,62 +802,42 @@
     }
 
     /* ============================================================
-       EVENT DELEGATION — single click handler on grid
-       Handles: favorites, quick view, view details, EFT toggle, copy, card open
+       EVENT DELEGATION — grid clicks
        ============================================================ */
     grid.addEventListener('click', (e) => {
-      // ---- 1. Favorite heart ----
       const favBtn = e.target.closest('.fav-btn');
       if (favBtn) {
         e.stopPropagation();
         toggleFavorite(parseInt(favBtn.dataset.favId, 10), favBtn);
         return;
       }
-
-      // ---- 2. Quick view ----
       const qv = e.target.closest('.quick-view-btn');
       if (qv) {
         e.stopPropagation();
         openProductModal(parseInt(qv.dataset.quickId, 10));
         return;
       }
-
-      // ---- 3. Copy button inside bank panel ----
       const copyBtn = e.target.closest('.bank-copy-btn');
       if (copyBtn) {
         e.stopPropagation();
         copyToClipboard(copyBtn.dataset.copy, copyBtn);
         return;
       }
-
-      // ---- 4. EFT toggle → open banking modal ----
       const eftBtn = e.target.closest('.btn-eft');
       if (eftBtn) {
         e.stopPropagation();
         openBankModal(parseInt(eftBtn.dataset.eftToggle, 10));
         return;
       }
-
-      // ---- 5. Explicit "view details" button ----
       const vd = e.target.closest('[data-view-id]');
       if (vd) {
         e.stopPropagation();
         openProductModal(parseInt(vd.dataset.viewId, 10));
         return;
       }
+      if (e.target.closest('.bank-details')) { e.stopPropagation(); return; }
+      if (e.target.closest('.product-actions')) { return; }
 
-      // ---- 6. Click inside bank panel (but not on buttons) ----
-      if (e.target.closest('.bank-details')) {
-        e.stopPropagation();
-        return;
-      }
-
-      // ---- 7. Click inside actions (WhatsApp, etc.) ----
-      if (e.target.closest('.product-actions')) {
-        return;
-      }
-
-      // ---- 8. Click anywhere else on card → open modal ----
       const card = e.target.closest('.product-card');
       if (card && !e.target.closest('a')) {
         openProductModal(parseInt(card.dataset.id, 10));
@@ -835,25 +845,8 @@
     });
 
     /* ============================================================
-       BANK PANEL — toggle + copy
+       COPY / FAVORITES
        ============================================================ */
-    function toggleBankDetails(btn) {
-      const productId = btn.dataset.eftToggle;
-      const panel = document.getElementById('bank-' + productId);
-      if (!panel) return;
-
-      const isOpen = panel.classList.contains('open');
-      panel.classList.toggle('open', !isOpen);
-      btn.classList.toggle('active', !isOpen);
-      btn.setAttribute('aria-expanded', String(!isOpen));
-
-      if (!isOpen) {
-        setTimeout(() => {
-          panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 120);
-      }
-    }
-
     function copyToClipboard(text, btn) {
       const done = () => {
         const original = btn.innerHTML;
@@ -864,14 +857,12 @@
           btn.innerHTML = original;
         }, 1600);
       };
-
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
       } else {
         fallbackCopy(text, done);
       }
     }
-
     function fallbackCopy(text, cb) {
       const ta = document.createElement('textarea');
       ta.value = text;
@@ -879,13 +870,10 @@
       ta.style.opacity = '0';
       document.body.appendChild(ta);
       ta.select();
-      try { document.execCommand('copy'); cb && cb(); } catch (err) { /* silent */ }
+      try { document.execCommand('copy'); cb && cb(); } catch (err) {}
       document.body.removeChild(ta);
     }
 
-    /* ============================================================
-       FAVORITES
-       ============================================================ */
     function toggleFavorite(id, btn) {
       if (state.favorites.has(id)) state.favorites.delete(id);
       else state.favorites.add(id);
@@ -896,7 +884,6 @@
       icon.classList.toggle('far');
       updateFavCount();
     }
-
     function updateFavCount() {
       document.getElementById('favCount').textContent = state.favorites.size;
     }
@@ -904,11 +891,32 @@
     /* ============================================================
        FILTER HANDLERS
        ============================================================ */
-    document.querySelectorAll('.filter-btn').forEach(btn => {
+    // Main category chips
+    document.querySelectorAll('#categoryChips .filter-btn').forEach(btn => {
       btn.addEventListener('click', function () {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('#categoryChips .filter-btn').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         state.filter = this.dataset.filter;
+        render();
+      });
+    });
+
+    // Sub-category tag chips — toggle behaviour (click again to clear)
+    document.querySelectorAll('#subCategoryChips .filter-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const tag = this.dataset.tag;
+        if (state.tag === tag) {
+          state.tag = '';
+          this.classList.remove('active');
+        } else {
+          state.tag = tag;
+          document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          // Reset main category to 'all' so tag spans everything
+          state.filter = 'all';
+          document.querySelectorAll('#categoryChips .filter-btn').forEach(b => b.classList.remove('active'));
+          document.querySelector('#categoryChips .filter-btn[data-filter="all"]').classList.add('active');
+        }
         render();
       });
     });
@@ -918,7 +926,6 @@
       render();
     });
 
-    // Search with debounce
     let searchTimer;
     searchInput.addEventListener('input', function () {
       clearTimeout(searchTimer);
@@ -935,7 +942,6 @@
       render();
     });
 
-    // "/" keyboard shortcut
     document.addEventListener('keydown', (e) => {
       if (e.key === '/' && document.activeElement !== searchInput && !e.target.matches('input, textarea')) {
         e.preventDefault();
@@ -943,7 +949,6 @@
       }
     });
 
-    // View toggle
     document.querySelectorAll('.view-btn').forEach(btn => {
       btn.addEventListener('click', function () {
         document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
@@ -953,14 +958,12 @@
       });
     });
 
-    // Nav search
     document.getElementById('navSearchBtn').addEventListener('click', (e) => {
       e.preventDefault();
       searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
       setTimeout(() => searchInput.focus(), 400);
     });
 
-    // Nav favorites filter
     document.getElementById('navFavBtn').addEventListener('click', (e) => {
       e.preventDefault();
       if (state.favorites.size === 0) {
@@ -968,14 +971,16 @@
         return;
       }
       state.filter = 'all';
+      state.tag = '';
       state.sizes.clear();
       state.badges.clear();
       state.search = '';
       searchInput.value = '';
       state.priceMin = 0;
       state.priceMax = 7000;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+      document.querySelectorAll('#categoryChips .filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('#categoryChips .filter-btn[data-filter="all"]').classList.add('active');
+      document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => b.classList.remove('active'));
 
       const favs = new Set(state.favorites);
       grid.innerHTML = skeletonHTML(4);
@@ -999,8 +1004,12 @@
         state.search = '';
       } else if (key === 'filter') {
         state.filter = 'all';
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+        document.querySelectorAll('#categoryChips .filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('#categoryChips .filter-btn[data-filter="all"]').classList.add('active');
+      } else if (key === 'tag') {
+        state.tag = '';
+        document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('#collectionChips .size-chip').forEach(c => c.classList.remove('active'));
       } else if (key === 'size') {
         state.sizes.delete(value);
         document.querySelectorAll('.size-chip').forEach(c => {
@@ -1056,11 +1065,15 @@
       updatePriceLabels();
     });
 
-    // Size + badge chips in drawer
+    // Size + badge chips
     document.querySelectorAll('.size-chip[data-size]').forEach(chip => {
       chip.addEventListener('click', () => chip.classList.toggle('active'));
     });
     document.querySelectorAll('.size-chip[data-badge]').forEach(chip => {
+      chip.addEventListener('click', () => chip.classList.toggle('active'));
+    });
+    // Collection chips (mobile drawer)
+    document.querySelectorAll('#collectionChips .size-chip[data-tag]').forEach(chip => {
       chip.addEventListener('click', () => chip.classList.toggle('active'));
     });
 
@@ -1070,6 +1083,15 @@
       document.querySelectorAll('.size-chip[data-size].active').forEach(c => state.sizes.add(c.dataset.size));
       state.badges.clear();
       document.querySelectorAll('.size-chip[data-badge].active').forEach(c => state.badges.add(c.dataset.badge));
+
+      // Collection tag (single-select)
+      const activeTag = document.querySelector('#collectionChips .size-chip[data-tag].active');
+      state.tag = activeTag ? activeTag.dataset.tag : '';
+      // Sync desktop chips
+      document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.tag === state.tag);
+      });
+
       state.priceMin = parseInt(pMin.value, 10);
       state.priceMax = parseInt(pMax.value, 10);
       closeDrawer();
@@ -1087,6 +1109,7 @@
     // Reset all from empty state
     document.getElementById('resetFiltersBtn').addEventListener('click', () => {
       state.filter = 'all';
+      state.tag = '';
       state.search = '';
       state.sizes.clear();
       state.badges.clear();
@@ -1095,8 +1118,9 @@
       state.sort = 'default';
       searchInput.value = '';
       document.getElementById('sortSelect').value = 'default';
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+      document.querySelectorAll('#categoryChips .filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('#categoryChips .filter-btn[data-filter="all"]').classList.add('active');
+      document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.size-chip.active').forEach(c => c.classList.remove('active'));
       pMin.value = 0;
       pMax.value = 7000;
@@ -1149,60 +1173,157 @@
       if (e.target === this) closeProductModal();
     });
     document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') {
-    closeProductModal();
-    closeBankModal();
-    if (drawer.classList.contains('open')) closeDrawer();
-  }
-});
-
+      if (e.key === 'Escape') {
+        closeProductModal();
+        closeBankModal();
+        if (drawer.classList.contains('open')) closeDrawer();
+      }
+    });
 
     /* ============================================================
-   BANKING MODAL — open / close
+       BANKING MODAL
+       ============================================================ */
+    function openBankModal(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      document.getElementById('bankModalSub').textContent =
+        `${product.name} · ${product.size} · R${product.price.toLocaleString()}`;
+
+      document.getElementById('bankModalBody').innerHTML = bankPanelHTML(product);
+
+      document.getElementById('bankModalWhatsApp').href =
+        `https://wa.me/27822336883?text=Proof%20of%20payment%20for%20${encodeURIComponent(product.name)}%20(${encodeURIComponent(product.size)})%20-%20R${product.price}`;
+
+      const modal = document.getElementById('bankModal');
+      modal.classList.add('active');
+      document.body.classList.add('modal-open');
+
+      document.getElementById('bankModalBody').onclick = (e) => {
+        const copyBtn = e.target.closest('.bank-copy-btn');
+        if (!copyBtn) return;
+        e.preventDefault();
+        e.stopPropagation();
+        copyToClipboard(copyBtn.dataset.copy, copyBtn);
+      };
+    }
+
+    function closeBankModal() {
+      const modal = document.getElementById('bankModal');
+      modal.classList.remove('active');
+      document.body.classList.remove('modal-open');
+    }
+    document.getElementById('bankModalClose').addEventListener('click', closeBankModal);
+    document.getElementById('bankModalDone').addEventListener('click', closeBankModal);
+    document.getElementById('bankModal').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeBankModal();
+    });
+
+    /* ============================================================
+       READ URL PARAMS — pre-filter from homepage dropdown links
+       ============================================================ */
+    /* ============================================================
+   READ URL PARAMS — pre-filter from homepage dropdown links
+   Supports: ?category=bed&filter=mattress
+   Also handles legacy: ?category=mattresses
    ============================================================ */
-function openBankModal(productId) {
-  const product = products.find(p => p.id === productId);
-  if (!product) return;
+(function readURLParams() {
+  const params = new URLSearchParams(window.location.search);
+  let cat = params.get('category');
+  let filter = params.get('filter');
 
-  // Set subtitle
-  document.getElementById('bankModalSub').textContent =
-    `${product.name} · ${product.size} · R${product.price.toLocaleString()}`;
-
-  // Inject bank panel
-  document.getElementById('bankModalBody').innerHTML = bankPanelHTML(product);
-
-  // Wire up the WhatsApp proof link
-  document.getElementById('bankModalWhatsApp').href =
-    `https://wa.me/27822336883?text=Proof%20of%20payment%20for%20${encodeURIComponent(product.name)}%20(${encodeURIComponent(product.size)})%20-%20R${product.price}`;
-
-  // Show modal
-  const modal = document.getElementById('bankModal');
-  modal.classList.add('active');
-  document.body.classList.add('modal-open');
-
-  // Copy buttons inside modal — delegate
-  document.getElementById('bankModalBody').onclick = (e) => {
-    const copyBtn = e.target.closest('.bank-copy-btn');
-    if (!copyBtn) return;
-    e.preventDefault();
-    e.stopPropagation();
-    copyToClipboard(copyBtn.dataset.copy, copyBtn);
+  // ---- Legacy mapping: convert old-style URLs to new ----
+  const legacyMap = {
+    'mattresses':            { cat: 'bed',       filter: 'mattress' },
+    'bed-sets':              { cat: 'bed',       filter: 'set' },
+    'bed-bases':             { cat: 'bed',       filter: 'base' },
+    'standard-bases':        { cat: 'bed',       filter: 'standard-base' },
+    'storage-bases-combos':  { cat: 'bed',       filter: 'storage-base' },
+    'base-with-drawers':     { cat: 'bed',       filter: 'drawers' },
+    'steel-bases':           { cat: 'bed',       filter: 'steel-base' },
+    'mattress-toppers':      { cat: 'bed',       filter: 'topper' },
+    'furniture':             { cat: 'furniture', filter: null },
+    'student-accommodation': { cat: 'bed',       filter: 'student' },
+    'bunk-beds':             { cat: 'bed',       filter: 'bunk' },
+    'promotions':            { cat: 'all',       filter: 'promo' }
   };
-}
 
-function closeBankModal() {
-  const modal = document.getElementById('bankModal');
-  modal.classList.remove('active');
-  document.body.classList.remove('modal-open');
-}
+  if (cat && legacyMap[cat] && !filter) {
+    const mapped = legacyMap[cat];
+    cat = mapped.cat;
+    filter = mapped.filter;
+  }
 
-// Close handlers
-document.getElementById('bankModalClose').addEventListener('click', closeBankModal);
-document.getElementById('bankModalDone').addEventListener('click', closeBankModal);
-document.getElementById('bankModal').addEventListener('click', (e) => {
-  if (e.target === e.currentTarget) closeBankModal();
-});
+  // ---- Set main category ----
+  if (cat && ['all', 'bed', 'headboard', 'couch', 'furniture'].includes(cat)) {
+    state.filter = cat;
+    document.querySelectorAll('#categoryChips .filter-btn').forEach(b => b.classList.remove('active'));
+    const btn = document.querySelector(`#categoryChips .filter-btn[data-filter="${cat}"]`);
+    if (btn) btn.classList.add('active');
+  }
 
+  // ---- Set sub-category tag ----
+  if (filter) {
+    state.tag = filter;
+
+    // Activate matching desktop sub-chip
+    let matchedChip = false;
+    document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => {
+      if (b.dataset.tag === filter) {
+        b.classList.add('active');
+        matchedChip = true;
+      } else {
+        b.classList.remove('active');
+      }
+    });
+
+    // Activate matching mobile drawer chip
+    document.querySelectorAll('#collectionChips .size-chip').forEach(c => {
+      c.classList.toggle('active', c.dataset.tag === filter);
+    });
+
+    // ---- FALLBACK: if no chip matched OR no products have this tag,
+    //      use the search box instead ----
+    const tagHasProducts = products.some(p => Array.isArray(p.tags) && p.tags.includes(filter));
+
+    if (!matchedChip || !tagHasProducts) {
+      // Reset tag so the "no products" state doesn't trigger
+      state.tag = '';
+
+      // Map the filter value to a friendly search keyword
+      const keywordMap = {
+        'mattress':       'mattress',
+        'set':            'bed set',
+        'base':           'base',
+        'standard-base':  'base',
+        'storage-base':   'storage base',
+        'drawers':        'drawer',
+        'steel-base':     'base',
+        'topper':         'topper',
+        'student':        'student',
+        'bunk':           'bunk',
+        'promo':          'save'
+      };
+      const keyword = keywordMap[filter] || filter;
+
+      state.search = keyword;
+      if (typeof searchInput !== 'undefined' && searchInput) {
+        searchInput.value = keyword;
+      }
+    }
+  }
+
+  // ---- Smooth scroll to grid ----
+  if (cat || filter) {
+    setTimeout(() => {
+      const gridEl = document.getElementById('productsGrid');
+      if (gridEl) {
+        const top = gridEl.getBoundingClientRect().top + window.scrollY - 120;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }, 400);
+  }
+})();
     /* ============================================================
        INIT
        ============================================================ */
@@ -1226,7 +1347,6 @@ document.getElementById('bankModal').addEventListener('click', (e) => {
        PRODUCTS PAGE INTERACTIVE INTRO
        ============================================================ */
 
-    /* ---------- 1. Floating particles ---------- */
     (function spawnParticles() {
       const wrap = document.getElementById('phParticles');
       if (!wrap) return;
@@ -1245,11 +1365,9 @@ document.getElementById('bankModal').addEventListener('click', (e) => {
       }
     })();
 
-    /* ---------- 2. Count-up for stat strip ---------- */
     (function initCounters() {
       const counters = document.querySelectorAll('.ph-stat-num[data-count]');
       if (!counters.length) return;
-
       const animate = (el) => {
         const target = parseInt(el.dataset.count, 10);
         const suffix = el.dataset.suffix || '';
@@ -1264,20 +1382,14 @@ document.getElementById('bankModal').addEventListener('click', (e) => {
         };
         requestAnimationFrame(tick);
       };
-
       const io = new IntersectionObserver((entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) {
-            animate(e.target);
-            io.unobserve(e.target);
-          }
+          if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); }
         });
       }, { threshold: 0.4 });
-
       counters.forEach((c) => io.observe(c));
     })();
 
-    /* ---------- 3. Smooth scroll ---------- */
     function scrollToGrid() {
       const grid = document.getElementById('productsGrid');
       if (!grid) return;
@@ -1287,15 +1399,12 @@ document.getElementById('bankModal').addEventListener('click', (e) => {
     document.getElementById('browseCollectionBtn')?.addEventListener('click', scrollToGrid);
     document.getElementById('phScrollCue')?.addEventListener('click', scrollToGrid);
 
-    /* ---------- 4. Tip bubble ---------- */
     (function tipBubble() {
       const tip = document.getElementById('phTip');
       const closeBtn = document.getElementById('phTipClose');
       if (!tip) return;
       if (sessionStorage.getItem('harmony_tip_dismissed')) return;
-
       setTimeout(() => tip.classList.add('visible'), 2200);
-
       const dismiss = () => {
         tip.classList.remove('visible');
         sessionStorage.setItem('harmony_tip_dismissed', '1');
@@ -1304,7 +1413,6 @@ document.getElementById('bankModal').addEventListener('click', (e) => {
       setTimeout(dismiss, 10000);
     })();
 
-    /* ---------- 5. Scroll progress bar ---------- */
     (function scrollProgress() {
       const bar = document.getElementById('scrollProgress');
       if (!bar) return;
@@ -1316,15 +1424,11 @@ document.getElementById('bankModal').addEventListener('click', (e) => {
         ticking = false;
       };
       window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(update);
-          ticking = true;
-        }
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
       }, { passive: true });
       update();
     })();
 
-    /* ---------- 6. Reveal-on-scroll ---------- */
     (function revealOnScroll() {
       const io = new IntersectionObserver((entries) => {
         entries.forEach((e) => {
@@ -1334,7 +1438,6 @@ document.getElementById('bankModal').addEventListener('click', (e) => {
           }
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
       const applyReveal = () => {
         document.querySelectorAll('.product-card').forEach((card, i) => {
           if (card.classList.contains('reveal')) return;
@@ -1343,9 +1446,7 @@ document.getElementById('bankModal').addEventListener('click', (e) => {
           io.observe(card);
         });
       };
-
       applyReveal();
-
       const grid = document.getElementById('productsGrid');
       if (grid) {
         const mo = new MutationObserver(() => applyReveal());
@@ -1353,7 +1454,6 @@ document.getElementById('bankModal').addEventListener('click', (e) => {
       }
     })();
 
-    /* ---------- 7. Hero parallax fade ---------- */
     (function heroParallax() {
       const hero = document.getElementById('productsHero');
       if (!hero) return;
@@ -1377,50 +1477,36 @@ document.getElementById('bankModal').addEventListener('click', (e) => {
       }, { passive: true });
     })();
 
-    /* ============================================================
-   POLICY ACCORDIONS — expand/collapse on tap
-   ============================================================ */
-(function initPolicyAccordions() {
-  const toggles = document.querySelectorAll('.policy-toggle');
-  if (!toggles.length) return;
-
-  toggles.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('.policy-card');
-      const body = card.querySelector('.policy-body');
-      const isOpen = card.classList.contains('open');
-
-      // Close all others (accordion behavior)
-      document.querySelectorAll('.policy-card.open').forEach(other => {
-        if (other !== card) {
-          other.classList.remove('open');
-          const oBtn = other.querySelector('.policy-toggle');
-          const oBody = other.querySelector('.policy-body');
-          oBtn.setAttribute('aria-expanded', 'false');
-          oBody.style.maxHeight = null;
-        }
+    (function initPolicyAccordions() {
+      const toggles = document.querySelectorAll('.policy-toggle');
+      if (!toggles.length) return;
+      toggles.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('.policy-card');
+          const body = card.querySelector('.policy-body');
+          const isOpen = card.classList.contains('open');
+          document.querySelectorAll('.policy-card.open').forEach(other => {
+            if (other !== card) {
+              other.classList.remove('open');
+              const oBtn = other.querySelector('.policy-toggle');
+              const oBody = other.querySelector('.policy-body');
+              oBtn.setAttribute('aria-expanded', 'false');
+              oBody.style.maxHeight = null;
+            }
+          });
+          card.classList.toggle('open', !isOpen);
+          btn.setAttribute('aria-expanded', String(!isOpen));
+          if (!isOpen) body.style.maxHeight = body.scrollHeight + 'px';
+          else body.style.maxHeight = null;
+        });
       });
-
-      // Toggle this one
-      card.classList.toggle('open', !isOpen);
-      btn.setAttribute('aria-expanded', String(!isOpen));
-
-      if (!isOpen) {
-        body.style.maxHeight = body.scrollHeight + 'px';
-      } else {
-        body.style.maxHeight = null;
-      }
-    });
-  });
-
-  // Recalculate height on resize (text rewraps)
-  window.addEventListener('resize', () => {
-    document.querySelectorAll('.policy-card.open .policy-body').forEach(body => {
-      body.style.maxHeight = body.scrollHeight + 'px';
-    });
-  });
-})();
+      window.addEventListener('resize', () => {
+        document.querySelectorAll('.policy-card.open .policy-body').forEach(body => {
+          body.style.maxHeight = body.scrollHeight + 'px';
+        });
+      });
+    })();
   </script>
-  
+
 </body>
 </html>
