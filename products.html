@@ -42,100 +42,90 @@
   <main>
 
     <!-- ============ INTERACTIVE PRODUCTS HERO ============ -->
-<section class="products-hero-v2" id="productsHero">
-  <!-- Ambient background layers -->
-  <div class="ph-bg-grain"></div>
-  <div class="ph-particles" id="phParticles"></div>
-  <div class="ph-orb ph-orb-1"></div>
-  <div class="ph-orb ph-orb-2"></div>
+    <section class="products-hero-v2" id="productsHero">
+      <div class="ph-bg-grain"></div>
+      <div class="ph-particles" id="phParticles"></div>
+      <div class="ph-orb ph-orb-1"></div>
+      <div class="ph-orb ph-orb-2"></div>
 
-  <div class="container ph-inner">
-    <!-- Eyebrow with pulse -->
-    <span class="ph-eyebrow">
-      <span class="ph-pulse"></span>
-      the sanctuary awaits
-    </span>
+      <div class="container ph-inner">
+        <span class="ph-eyebrow">
+          <span class="ph-pulse"></span>
+          the sanctuary awaits
+        </span>
 
-    <!-- Animated title (each word wraps) -->
-    <h1 class="ph-title">
-      <span class="ph-word">the</span>
-      <span class="ph-word">complete</span>
-      <span class="ph-word gold-shimmer">sanctuary</span>
-      <span class="ph-word">collection</span>
-    </h1>
+        <h1 class="ph-title">
+          <span class="ph-word">the</span>
+          <span class="ph-word">complete</span>
+          <span class="ph-word gold-shimmer">sanctuary</span>
+          <span class="ph-word">collection</span>
+        </h1>
 
-    <!-- Rotating category ticker -->
-    <div class="ph-ticker" aria-hidden="true">
-      <span class="ph-ticker-fixed">featuring</span>
-      <div class="ph-ticker-window">
-        <ul class="ph-ticker-list" id="phTicker">
-          <li>beds</li>
-          <li>headboards</li>
-          <li>couches</li>
-          <li>furniture</li>
-          <li>beds</li>
-        </ul>
+        <div class="ph-ticker" aria-hidden="true">
+          <span class="ph-ticker-fixed">featuring</span>
+          <div class="ph-ticker-window">
+            <ul class="ph-ticker-list" id="phTicker">
+              <li>beds</li>
+              <li>headboards</li>
+              <li>couches</li>
+              <li>furniture</li>
+              <li>beds</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="ph-lede">
+          Handcrafted in Pretoria, finished by master artisans — designed for your deepest restoration.
+        </p>
+
+        <div class="ph-actions">
+          <button class="btn-primary btn-glow" id="browseCollectionBtn">
+            browse collection <i class="fas fa-arrow-down"></i>
+          </button>
+          <a href="https://wa.me/27822336883?text=Hi%20Harmony%20Rest%2C%20I%27d%20like%20a%20consultation" target="_blank" class="btn-outline-dark">
+            <i class="fab fa-whatsapp"></i> talk to a consultant
+          </a>
+        </div>
+
+        <div class="ph-stats">
+          <div class="ph-stat">
+            <span class="ph-stat-num" data-count="42">0</span>
+            <span class="ph-stat-label">handcrafted pieces</span>
+          </div>
+          <div class="ph-stat-divider"></div>
+          <div class="ph-stat">
+            <span class="ph-stat-num" data-count="4">0</span>
+            <span class="ph-stat-label">collections</span>
+          </div>
+          <div class="ph-stat-divider"></div>
+          <div class="ph-stat">
+            <span class="ph-stat-num" data-count="15" data-suffix="+">0</span>
+            <span class="ph-stat-label">year warranty</span>
+          </div>
+          <div class="ph-stat-divider"></div>
+          <div class="ph-stat">
+            <span class="ph-stat-num" data-count="5" data-suffix="★">0</span>
+            <span class="ph-stat-label">sleep rating</span>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <p class="ph-lede">
-      Handcrafted in Pretoria, finished by master artisans — designed for your deepest restoration.
-    </p>
-
-    <!-- CTA buttons -->
-    <div class="ph-actions">
-      <button class="btn-primary btn-glow" id="browseCollectionBtn">
-        browse collection <i class="fas fa-arrow-down"></i>
+      <button class="ph-scroll-cue" id="phScrollCue" aria-label="Scroll to collection">
+        <span></span>
       </button>
-      <a href="https://wa.me/27822336883?text=Hi%20Harmony%20Rest%2C%20I%27d%20like%20a%20consultation" target="_blank" class="btn-outline-dark">
-        <i class="fab fa-whatsapp"></i> talk to a consultant
-      </a>
-    </div>
 
-    <!-- Live stat strip -->
-    <div class="ph-stats">
-      <div class="ph-stat">
-        <span class="ph-stat-num" data-count="42">0</span>
-        <span class="ph-stat-label">handcrafted pieces</span>
+      <div class="ph-tip" id="phTip">
+        <i class="fas fa-lightbulb"></i>
+        <span>Tip: press <kbd>/</kbd> to search, or use filters to narrow</span>
+        <button class="ph-tip-close" id="phTipClose" aria-label="Dismiss tip">&times;</button>
       </div>
-      <div class="ph-stat-divider"></div>
-      <div class="ph-stat">
-        <span class="ph-stat-num" data-count="4">0</span>
-        <span class="ph-stat-label">collections</span>
-      </div>
-      <div class="ph-stat-divider"></div>
-      <div class="ph-stat">
-        <span class="ph-stat-num" data-count="15" data-suffix="+">0</span>
-        <span class="ph-stat-label">year warranty</span>
-      </div>
-      <div class="ph-stat-divider"></div>
-      <div class="ph-stat">
-        <span class="ph-stat-num" data-count="5" data-suffix="★">0</span>
-        <span class="ph-stat-label">sleep rating</span>
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- Scroll cue -->
-  <button class="ph-scroll-cue" id="phScrollCue" aria-label="Scroll to collection">
-    <span></span>
-  </button>
-
-  <!-- Floating tip bubble -->
-  <div class="ph-tip" id="phTip">
-    <i class="fas fa-lightbulb"></i>
-    <span>Tip: press <kbd>/</kbd> to search, or use filters to narrow</span>
-    <button class="ph-tip-close" id="phTipClose" aria-label="Dismiss tip">&times;</button>
-  </div>
-</section>
-
-<!-- Scroll progress bar (fixed under header) -->
-<div class="scroll-progress" id="scrollProgress"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
 
     <!-- ============ INTERACTIVE FILTER BAR ============ -->
     <section class="filter-section" id="filterSection">
       <div class="container">
-        <!-- Row 1: Search + Sort + View toggle + Filter drawer (mobile) -->
         <div class="filter-top-row">
           <div class="search-wrap">
             <i class="fas fa-search"></i>
@@ -163,7 +153,6 @@
           </div>
         </div>
 
-        <!-- Row 2: Category chips -->
         <div class="chip-row">
           <button class="filter-btn active" data-filter="all">all items</button>
           <button class="filter-btn" data-filter="bed">beds</button>
@@ -172,7 +161,6 @@
           <button class="filter-btn" data-filter="furniture">furniture</button>
         </div>
 
-        <!-- Row 3: Active filters + result count -->
         <div class="filter-meta-row">
           <div class="active-filters" id="activeFilters"></div>
           <span class="results-count" id="resultsCount">Showing all 42 items</span>
@@ -203,7 +191,6 @@
     </div>
 
     <div class="drawer-body">
-      <!-- Price range -->
       <div class="drawer-group">
         <h4>Price range</h4>
         <div class="price-range">
@@ -216,7 +203,6 @@
         </div>
       </div>
 
-      <!-- Size chips -->
       <div class="drawer-group">
         <h4>Size</h4>
         <div class="chip-row chip-row-wrap" id="sizeChips">
@@ -228,7 +214,6 @@
         </div>
       </div>
 
-      <!-- Badges -->
       <div class="drawer-group">
         <h4>Tag</h4>
         <div class="chip-row chip-row-wrap" id="badgeChips">
@@ -286,6 +271,30 @@
       </div>
       <div class="footer-bottom"><p>&copy; 2025 Harmony Rest &amp; Comfort Beds.</p></div>
     </div>
+
+    <!-- ============ BANKING DETAILS MODAL ============ -->
+<div class="bank-modal-overlay" id="bankModal">
+  <div class="bank-modal-content" role="dialog" aria-modal="true" aria-labelledby="bankModalTitle">
+    <button class="bank-modal-close" id="bankModalClose" aria-label="Close banking details">&times;</button>
+
+    <div class="bank-modal-header">
+      <span class="bank-modal-eyebrow">Secure Payment</span>
+      <h2 class="bank-modal-title" id="bankModalTitle">Bank Transfer Details</h2>
+      <p class="bank-modal-sub" id="bankModalSub"></p>
+    </div>
+
+    <div class="bank-modal-body" id="bankModalBody">
+      <!-- Injected by JS -->
+    </div>
+
+    <div class="bank-modal-footer">
+      <a href="#" class="bank-modal-whatsapp" id="bankModalWhatsApp" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i> Send proof of payment
+      </a>
+      <button type="button" class="bank-modal-done" id="bankModalDone">Done</button>
+    </div>
+  </div>
+</div>
   </footer>
 
   <a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20would%20like%20to%20inquire%20about%20your%20products." class="floating-whatsapp" target="_blank" aria-label="Chat on WhatsApp">
@@ -294,7 +303,7 @@
 
   <script>
     /* ============================================================
-       PRODUCT DATABASE (identical to your sheet — 42 products)
+       PRODUCT DATABASE — 42 products matching master price list
        ============================================================ */
     const products = [
       /* ==================== BEDS ==================== */
@@ -517,6 +526,16 @@
     ];
 
     /* ============================================================
+       BANKING DETAILS — shared constant
+       ============================================================ */
+    const BANK = {
+      holder: "Harmony Rest and Comfort (PTY) LTD",
+      bank: "Capitec Business Account",
+      account: "1053773241",
+      branch: "450105"
+    };
+
+    /* ============================================================
        STATE
        ============================================================ */
     const state = {
@@ -528,19 +547,25 @@
       priceMin: 0,
       priceMax: 7000,
       view: 'grid',
-      favorites: new Set(JSON.parse(localStorage.getItem('harmony_favs') || '[]')),
-      drawerPriceMin: 0,
-      drawerPriceMax: 7000
+      favorites: new Set(JSON.parse(localStorage.getItem('harmony_favs') || '[]'))
     };
 
     /* ============================================================
-       RENDER
+       DOM REFS
        ============================================================ */
     const grid = document.getElementById('productsGrid');
     const emptyState = document.getElementById('emptyState');
     const resultsCount = document.getElementById('resultsCount');
     const activeFiltersEl = document.getElementById('activeFilters');
+    const searchInput = document.getElementById('searchInput');
+    const drawer = document.getElementById('filterDrawer');
+    const overlay = document.getElementById('drawerOverlay');
+    const pMin = document.getElementById('priceMin');
+    const pMax = document.getElementById('priceMax');
 
+    /* ============================================================
+       FILTERING
+       ============================================================ */
     function filterProducts() {
       let list = [...products];
 
@@ -560,6 +585,9 @@
       return list;
     }
 
+    /* ============================================================
+       SKELETON + CARD TEMPLATES
+       ============================================================ */
     function skeletonHTML(n = 8) {
       return Array.from({ length: n }).map(() => `
         <div class="product-card skeleton-card">
@@ -573,6 +601,70 @@
         </div>
       `).join('');
     }
+
+    function bankPanelHTML(product) {
+  const ref = `${product.name} — ${product.size}`;
+  return `
+    <div class="bank-details open" role="region" aria-label="Banking details for ${product.name}">
+      <div class="bank-details-header">
+        <i class="fas fa-university"></i> Pay via EFT / Bank Transfer
+      </div>
+      <div class="bank-rows">
+        <div class="bank-row">
+          <div class="bank-row-text">
+            <span class="bank-row-label">Account Holder</span>
+            <span class="bank-row-value">${BANK.holder}</span>
+          </div>
+          <button type="button" class="bank-copy-btn" data-copy="${BANK.holder}" aria-label="Copy account holder">
+            <i class="fas fa-copy"></i><span>Copy</span>
+          </button>
+        </div>
+        <div class="bank-row">
+          <div class="bank-row-text">
+            <span class="bank-row-label">Bank</span>
+            <span class="bank-row-value">${BANK.bank}</span>
+          </div>
+          <button type="button" class="bank-copy-btn" data-copy="${BANK.bank}" aria-label="Copy bank name">
+            <i class="fas fa-copy"></i><span>Copy</span>
+          </button>
+        </div>
+        <div class="bank-row">
+          <div class="bank-row-text">
+            <span class="bank-row-label">Account Number</span>
+            <span class="bank-row-value">${BANK.account}</span>
+          </div>
+          <button type="button" class="bank-copy-btn" data-copy="${BANK.account}" aria-label="Copy account number">
+            <i class="fas fa-copy"></i><span>Copy</span>
+          </button>
+        </div>
+        <div class="bank-row">
+          <div class="bank-row-text">
+            <span class="bank-row-label">Branch Code</span>
+            <span class="bank-row-value">${BANK.branch}</span>
+          </div>
+          <button type="button" class="bank-copy-btn" data-copy="${BANK.branch}" aria-label="Copy branch code">
+            <i class="fas fa-copy"></i><span>Copy</span>
+          </button>
+        </div>
+        <div class="bank-row">
+          <div class="bank-row-text">
+            <span class="bank-row-label">Reference</span>
+            <span class="bank-row-value">${ref}</span>
+          </div>
+          <button type="button" class="bank-copy-btn" data-copy="${ref}" aria-label="Copy payment reference">
+            <i class="fas fa-copy"></i><span>Copy</span>
+          </button>
+        </div>
+      </div>
+      <p class="bank-footer-note">
+        <strong>Important:</strong> Use the product name as your reference.
+        Send your proof of payment to
+        <a href="https://wa.me/27822336883?text=Proof%20of%20payment%20for%20${encodeURIComponent(product.name)}" target="_blank" class="bank-whatsapp-link">WhatsApp</a>
+        so we can confirm your order.
+      </p>
+    </div>
+  `;
+}
 
     function productCardHTML(product, index) {
       const isFav = state.favorites.has(product.id);
@@ -608,15 +700,27 @@
             <h3 class="product-title">${product.name}</h3>
             <p class="product-desc">${product.desc}</p>
             <div class="product-price">R${product.price.toLocaleString()} <small>${product.size}</small></div>
-            <div class="product-actions" onclick="event.stopPropagation();">
-              <button class="btn-card" data-view-id="${product.id}">view details →</button>
-              <a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(product.name)}%20(R${product.price}%20-%20${product.size})." target="_blank" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat</a>
+
+            <div class="product-actions">
+              <button type="button" class="btn-card" data-view-id="${product.id}">view details →</button>
+              <a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(product.name)}%20(R${product.price}%20-%20${product.size})."
+                 target="_blank" rel="noopener" class="btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> Chat
+              </a>
+              <button type="button" class="btn-eft" data-eft-toggle="${product.id}">
+  <i class="fas fa-university"></i> Pay EFT
+</button>
             </div>
+
+            
           </div>
         </div>
       `;
     }
 
+    /* ============================================================
+       ACTIVE FILTER PILLS
+       ============================================================ */
     function renderActiveFilters() {
       const pills = [];
 
@@ -629,25 +733,24 @@
       }
 
       activeFiltersEl.innerHTML = pills.map(p => `
-        <button class="active-pill" data-pill-key="${p.key}" data-pill-value="${p.value || ''}">
+        <button type="button" class="active-pill" data-pill-key="${p.key}" data-pill-value="${p.value || ''}">
           ${p.label} <i class="fas fa-times"></i>
         </button>
       `).join('');
 
-      // Update badge count on mobile button
       const badge = document.getElementById('filtersBadge');
-      const nonCat = pills.length;
-      if (nonCat > 0) { badge.hidden = false; badge.textContent = nonCat; }
+      if (pills.length > 0) { badge.hidden = false; badge.textContent = pills.length; }
       else { badge.hidden = true; }
 
-      // Update search clear button
       document.getElementById('searchClear').style.display = state.search ? 'flex' : 'none';
     }
 
+    /* ============================================================
+       MAIN RENDER
+       ============================================================ */
     function render() {
       grid.innerHTML = skeletonHTML(8);
 
-      // Simulated async feel
       setTimeout(() => {
         const list = filterProducts();
 
@@ -669,19 +772,19 @@
     }
 
     /* ============================================================
-       EVENT DELEGATION
+       EVENT DELEGATION — single click handler on grid
+       Handles: favorites, quick view, view details, EFT toggle, copy, card open
        ============================================================ */
     grid.addEventListener('click', (e) => {
-      // Favorite button
+      // ---- 1. Favorite heart ----
       const favBtn = e.target.closest('.fav-btn');
       if (favBtn) {
         e.stopPropagation();
-        const id = parseInt(favBtn.dataset.favId, 10);
-        toggleFavorite(id, favBtn);
+        toggleFavorite(parseInt(favBtn.dataset.favId, 10), favBtn);
         return;
       }
 
-      // Quick view
+      // ---- 2. Quick view ----
       const qv = e.target.closest('.quick-view-btn');
       if (qv) {
         e.stopPropagation();
@@ -689,7 +792,23 @@
         return;
       }
 
-      // View details button
+      // ---- 3. Copy button inside bank panel ----
+      const copyBtn = e.target.closest('.bank-copy-btn');
+      if (copyBtn) {
+        e.stopPropagation();
+        copyToClipboard(copyBtn.dataset.copy, copyBtn);
+        return;
+      }
+
+      // ---- 4. EFT toggle → open banking modal ----
+      const eftBtn = e.target.closest('.btn-eft');
+      if (eftBtn) {
+        e.stopPropagation();
+        openBankModal(parseInt(eftBtn.dataset.eftToggle, 10));
+        return;
+      }
+
+      // ---- 5. Explicit "view details" button ----
       const vd = e.target.closest('[data-view-id]');
       if (vd) {
         e.stopPropagation();
@@ -697,13 +816,76 @@
         return;
       }
 
-      // Card click (but not on the WhatsApp link inside)
+      // ---- 6. Click inside bank panel (but not on buttons) ----
+      if (e.target.closest('.bank-details')) {
+        e.stopPropagation();
+        return;
+      }
+
+      // ---- 7. Click inside actions (WhatsApp, etc.) ----
+      if (e.target.closest('.product-actions')) {
+        return;
+      }
+
+      // ---- 8. Click anywhere else on card → open modal ----
       const card = e.target.closest('.product-card');
       if (card && !e.target.closest('a')) {
         openProductModal(parseInt(card.dataset.id, 10));
       }
     });
 
+    /* ============================================================
+       BANK PANEL — toggle + copy
+       ============================================================ */
+    function toggleBankDetails(btn) {
+      const productId = btn.dataset.eftToggle;
+      const panel = document.getElementById('bank-' + productId);
+      if (!panel) return;
+
+      const isOpen = panel.classList.contains('open');
+      panel.classList.toggle('open', !isOpen);
+      btn.classList.toggle('active', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+
+      if (!isOpen) {
+        setTimeout(() => {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 120);
+      }
+    }
+
+    function copyToClipboard(text, btn) {
+      const done = () => {
+        const original = btn.innerHTML;
+        btn.classList.add('copied');
+        btn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = original;
+        }, 1600);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+      } else {
+        fallbackCopy(text, done);
+      }
+    }
+
+    function fallbackCopy(text, cb) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); cb && cb(); } catch (err) { /* silent */ }
+      document.body.removeChild(ta);
+    }
+
+    /* ============================================================
+       FAVORITES
+       ============================================================ */
     function toggleFavorite(id, btn) {
       if (state.favorites.has(id)) state.favorites.delete(id);
       else state.favorites.add(id);
@@ -736,8 +918,7 @@
       render();
     });
 
-    // Search
-    const searchInput = document.getElementById('searchInput');
+    // Search with debounce
     let searchTimer;
     searchInput.addEventListener('input', function () {
       clearTimeout(searchTimer);
@@ -747,13 +928,14 @@
         render();
       }, 220);
     });
+
     document.getElementById('searchClear').addEventListener('click', () => {
       searchInput.value = '';
       state.search = '';
       render();
     });
 
-    // Keyboard: "/" to focus search
+    // "/" keyboard shortcut
     document.addEventListener('keydown', (e) => {
       if (e.key === '/' && document.activeElement !== searchInput && !e.target.matches('input, textarea')) {
         e.preventDefault();
@@ -771,19 +953,20 @@
       });
     });
 
-    // Nav search + fav buttons just scroll into view / show favs
+    // Nav search
     document.getElementById('navSearchBtn').addEventListener('click', (e) => {
       e.preventDefault();
       searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
       setTimeout(() => searchInput.focus(), 400);
     });
+
+    // Nav favorites filter
     document.getElementById('navFavBtn').addEventListener('click', (e) => {
       e.preventDefault();
       if (state.favorites.size === 0) {
         alert('You haven\'t saved any favorites yet. Tap the ♥ on any product to save it.');
         return;
       }
-      // Filter to only favorites by clearing other filters
       state.filter = 'all';
       state.sizes.clear();
       state.badges.clear();
@@ -793,9 +976,8 @@
       state.priceMax = 7000;
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
-      // Custom filter: only favs
+
       const favs = new Set(state.favorites);
-      const originalFilter = filterProducts;
       grid.innerHTML = skeletonHTML(4);
       setTimeout(() => {
         const list = products.filter(p => favs.has(p.id));
@@ -832,16 +1014,16 @@
       } else if (key === 'price') {
         state.priceMin = 0;
         state.priceMax = 7000;
-        document.getElementById('priceMin').value = 0;
-        document.getElementById('priceMax').value = 7000;
+        pMin.value = 0;
+        pMax.value = 7000;
         updatePriceLabels();
       }
       render();
     });
 
-    // Mobile drawer
-    const drawer = document.getElementById('filterDrawer');
-    const overlay = document.getElementById('drawerOverlay');
+    /* ============================================================
+       MOBILE DRAWER
+       ============================================================ */
     function openDrawer() {
       drawer.classList.add('open');
       overlay.classList.add('visible');
@@ -858,9 +1040,9 @@
     document.getElementById('drawerClose').addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
 
-    // Price range inputs
-    const pMin = document.getElementById('priceMin');
-    const pMax = document.getElementById('priceMax');
+    /* ============================================================
+       PRICE RANGE
+       ============================================================ */
     function updatePriceLabels() {
       document.getElementById('priceMinLabel').textContent = 'R' + parseInt(pMin.value, 10).toLocaleString();
       document.getElementById('priceMaxLabel').textContent = 'R' + parseInt(pMax.value, 10).toLocaleString();
@@ -874,19 +1056,15 @@
       updatePriceLabels();
     });
 
-    // Size chips in drawer
+    // Size + badge chips in drawer
     document.querySelectorAll('.size-chip[data-size]').forEach(chip => {
-      chip.addEventListener('click', function () {
-        this.classList.toggle('active');
-      });
+      chip.addEventListener('click', () => chip.classList.toggle('active'));
     });
     document.querySelectorAll('.size-chip[data-badge]').forEach(chip => {
-      chip.addEventListener('click', function () {
-        this.classList.toggle('active');
-      });
+      chip.addEventListener('click', () => chip.classList.toggle('active'));
     });
 
-    // Apply drawer filters
+    // Apply drawer
     document.getElementById('drawerApply').addEventListener('click', () => {
       state.sizes.clear();
       document.querySelectorAll('.size-chip[data-size].active').forEach(c => state.sizes.add(c.dataset.size));
@@ -927,7 +1105,7 @@
     });
 
     /* ============================================================
-       MODAL
+       PRODUCT MODAL
        ============================================================ */
     function openProductModal(productId) {
       const product = products.find(p => p.id === productId);
@@ -971,11 +1149,59 @@
       if (e.target === this) closeProductModal();
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        closeProductModal();
-        if (drawer.classList.contains('open')) closeDrawer();
-      }
-    });
+  if (e.key === 'Escape') {
+    closeProductModal();
+    closeBankModal();
+    if (drawer.classList.contains('open')) closeDrawer();
+  }
+});
+
+
+    /* ============================================================
+   BANKING MODAL — open / close
+   ============================================================ */
+function openBankModal(productId) {
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+
+  // Set subtitle
+  document.getElementById('bankModalSub').textContent =
+    `${product.name} · ${product.size} · R${product.price.toLocaleString()}`;
+
+  // Inject bank panel
+  document.getElementById('bankModalBody').innerHTML = bankPanelHTML(product);
+
+  // Wire up the WhatsApp proof link
+  document.getElementById('bankModalWhatsApp').href =
+    `https://wa.me/27822336883?text=Proof%20of%20payment%20for%20${encodeURIComponent(product.name)}%20(${encodeURIComponent(product.size)})%20-%20R${product.price}`;
+
+  // Show modal
+  const modal = document.getElementById('bankModal');
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  // Copy buttons inside modal — delegate
+  document.getElementById('bankModalBody').onclick = (e) => {
+    const copyBtn = e.target.closest('.bank-copy-btn');
+    if (!copyBtn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    copyToClipboard(copyBtn.dataset.copy, copyBtn);
+  };
+}
+
+function closeBankModal() {
+  const modal = document.getElementById('bankModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close handlers
+document.getElementById('bankModalClose').addEventListener('click', closeBankModal);
+document.getElementById('bankModalDone').addEventListener('click', closeBankModal);
+document.getElementById('bankModal').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeBankModal();
+});
 
     /* ============================================================
        INIT
@@ -984,7 +1210,7 @@
     updatePriceLabels();
     render();
 
-    // Mobile menu (existing)
+    // Mobile menu
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
     mobileMenuBtn.addEventListener('click', () => {
@@ -994,167 +1220,162 @@
       icon.classList.toggle('fa-times');
     });
   </script>
+
   <script>
-/* ============================================================
-   PRODUCTS PAGE INTERACTIVE INTRO
-   ============================================================ */
+    /* ============================================================
+       PRODUCTS PAGE INTERACTIVE INTRO
+       ============================================================ */
 
-/* ---------- 1. Floating particles ---------- */
-(function spawnParticles() {
-  const wrap = document.getElementById('phParticles');
-  if (!wrap) return;
-  const count = window.innerWidth < 640 ? 8 : 18;
-  for (let i = 0; i < count; i++) {
-    const p = document.createElement('span');
-    p.className = 'ph-particle';
-    p.style.left = Math.random() * 100 + '%';
-    p.style.bottom = (Math.random() * 40) + '%';
-    p.style.animationDuration = (5 + Math.random() * 6).toFixed(1) + 's';
-    p.style.animationDelay = (Math.random() * 6).toFixed(1) + 's';
-    const size = (3 + Math.random() * 4).toFixed(1);
-    p.style.width = size + 'px';
-    p.style.height = size + 'px';
-    wrap.appendChild(p);
-  }
-})();
-
-/* ---------- 2. Count-up animation for stat strip ---------- */
-(function initCounters() {
-  const counters = document.querySelectorAll('.ph-stat-num[data-count]');
-  if (!counters.length) return;
-
-  const animate = (el) => {
-    const target = parseInt(el.dataset.count, 10);
-    const suffix = el.dataset.suffix || '';
-    const dur = 1400;
-    const start = performance.now();
-    const tick = (now) => {
-      const t = Math.min((now - start) / dur, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
-      el.textContent = Math.round(target * eased) + suffix;
-      if (t < 1) requestAnimationFrame(tick);
-      else el.textContent = target + suffix;
-    };
-    requestAnimationFrame(tick);
-  };
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) {
-        animate(e.target);
-        io.unobserve(e.target);
+    /* ---------- 1. Floating particles ---------- */
+    (function spawnParticles() {
+      const wrap = document.getElementById('phParticles');
+      if (!wrap) return;
+      const count = window.innerWidth < 640 ? 8 : 18;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('span');
+        p.className = 'ph-particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.bottom = (Math.random() * 40) + '%';
+        p.style.animationDuration = (5 + Math.random() * 6).toFixed(1) + 's';
+        p.style.animationDelay = (Math.random() * 6).toFixed(1) + 's';
+        const size = (3 + Math.random() * 4).toFixed(1);
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        wrap.appendChild(p);
       }
-    });
-  }, { threshold: 0.4 });
+    })();
 
-  counters.forEach((c) => io.observe(c));
-})();
+    /* ---------- 2. Count-up for stat strip ---------- */
+    (function initCounters() {
+      const counters = document.querySelectorAll('.ph-stat-num[data-count]');
+      if (!counters.length) return;
 
-/* ---------- 3. Smooth scroll for browse / scroll cue ---------- */
-function scrollToGrid() {
-  const grid = document.getElementById('productsGrid');
-  if (!grid) return;
-  const top = grid.getBoundingClientRect().top + window.scrollY - 100;
-  window.scrollTo({ top, behavior: 'smooth' });
-}
-document.getElementById('browseCollectionBtn')?.addEventListener('click', scrollToGrid);
-document.getElementById('phScrollCue')?.addEventListener('click', scrollToGrid);
+      const animate = (el) => {
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || '';
+        const dur = 1400;
+        const start = performance.now();
+        const tick = (now) => {
+          const t = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.round(target * eased) + suffix;
+          if (t < 1) requestAnimationFrame(tick);
+          else el.textContent = target + suffix;
+        };
+        requestAnimationFrame(tick);
+      };
 
-/* ---------- 4. Tip bubble (appears after 2s, dismissible) ---------- */
-(function tipBubble() {
-  const tip = document.getElementById('phTip');
-  const closeBtn = document.getElementById('phTipClose');
-  if (!tip) return;
-  if (sessionStorage.getItem('harmony_tip_dismissed')) return;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            animate(e.target);
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.4 });
 
-  setTimeout(() => tip.classList.add('visible'), 2200);
+      counters.forEach((c) => io.observe(c));
+    })();
 
-  const dismiss = () => {
-    tip.classList.remove('visible');
-    sessionStorage.setItem('harmony_tip_dismissed', '1');
-  };
-  closeBtn?.addEventListener('click', dismiss);
-
-  // Auto-dismiss after 8s
-  setTimeout(dismiss, 10000);
-})();
-
-/* ---------- 5. Scroll progress bar ---------- */
-(function scrollProgress() {
-  const bar = document.getElementById('scrollProgress');
-  if (!bar) return;
-  let ticking = false;
-  const update = () => {
-    const h = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
-    bar.style.width = Math.min(pct, 100) + '%';
-    ticking = false;
-  };
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(update);
-      ticking = true;
+    /* ---------- 3. Smooth scroll ---------- */
+    function scrollToGrid() {
+      const grid = document.getElementById('productsGrid');
+      if (!grid) return;
+      const top = grid.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
-  }, { passive: true });
-  update();
-})();
+    document.getElementById('browseCollectionBtn')?.addEventListener('click', scrollToGrid);
+    document.getElementById('phScrollCue')?.addEventListener('click', scrollToGrid);
 
-/* ---------- 6. Reveal-on-scroll for product cards ---------- */
-(function revealOnScroll() {
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in-view');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    /* ---------- 4. Tip bubble ---------- */
+    (function tipBubble() {
+      const tip = document.getElementById('phTip');
+      const closeBtn = document.getElementById('phTipClose');
+      if (!tip) return;
+      if (sessionStorage.getItem('harmony_tip_dismissed')) return;
 
-  // Re-apply whenever products are rendered
-  const applyReveal = () => {
-    document.querySelectorAll('.product-card').forEach((card, i) => {
-      if (card.classList.contains('reveal')) return;
-      card.classList.add('reveal');
-      // stagger
-      card.style.transitionDelay = Math.min(i * 0.035, 0.4) + 's';
-      io.observe(card);
-    });
-  };
+      setTimeout(() => tip.classList.add('visible'), 2200);
 
-  applyReveal();
+      const dismiss = () => {
+        tip.classList.remove('visible');
+        sessionStorage.setItem('harmony_tip_dismissed', '1');
+      };
+      closeBtn?.addEventListener('click', dismiss);
+      setTimeout(dismiss, 10000);
+    })();
 
-  // Re-run when products re-render (filter, sort, search)
-  const grid = document.getElementById('productsGrid');
-  if (grid) {
-    const mo = new MutationObserver(() => applyReveal());
-    mo.observe(grid, { childList: true });
-  }
-})();
-
-/* ---------- 7. Auto-hide hero on deep scroll (parallax fade) ---------- */
-(function heroParallax() {
-  const hero = document.getElementById('productsHero');
-  if (!hero) return;
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        const y = window.scrollY;
-        const max = hero.offsetHeight;
-        const progress = Math.min(y / max, 1);
-        hero.style.setProperty('--scroll-fade', progress);
-        // Subtle fade of title as user scrolls
-        const title = hero.querySelector('.ph-title');
-        if (title) {
-          title.style.transform = `translateY(${progress * 30}px)`;
-          title.style.opacity = String(1 - progress * 0.9);
-        }
+    /* ---------- 5. Scroll progress bar ---------- */
+    (function scrollProgress() {
+      const bar = document.getElementById('scrollProgress');
+      if (!bar) return;
+      let ticking = false;
+      const update = () => {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+        bar.style.width = Math.min(pct, 100) + '%';
         ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-})();
-</script>
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
+      update();
+    })();
+
+    /* ---------- 6. Reveal-on-scroll ---------- */
+    (function revealOnScroll() {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in-view');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      const applyReveal = () => {
+        document.querySelectorAll('.product-card').forEach((card, i) => {
+          if (card.classList.contains('reveal')) return;
+          card.classList.add('reveal');
+          card.style.transitionDelay = Math.min(i * 0.035, 0.4) + 's';
+          io.observe(card);
+        });
+      };
+
+      applyReveal();
+
+      const grid = document.getElementById('productsGrid');
+      if (grid) {
+        const mo = new MutationObserver(() => applyReveal());
+        mo.observe(grid, { childList: true });
+      }
+    })();
+
+    /* ---------- 7. Hero parallax fade ---------- */
+    (function heroParallax() {
+      const hero = document.getElementById('productsHero');
+      if (!hero) return;
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const y = window.scrollY;
+            const max = hero.offsetHeight;
+            const progress = Math.min(y / max, 1);
+            hero.style.setProperty('--scroll-fade', progress);
+            const title = hero.querySelector('.ph-title');
+            if (title) {
+              title.style.transform = `translateY(${progress * 30}px)`;
+              title.style.opacity = String(1 - progress * 0.9);
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
+  </script>
 </body>
 </html>

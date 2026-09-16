@@ -2802,3 +2802,413 @@ footer {
   }
   .hero-banner-img { transform: none !important; }
 }
+
+/* ============================================================
+   26. PRODUCT CARD — BANKING / EFT PAYMENT PANEL
+   ============================================================ */
+.bank-details {
+  display: none;
+  margin-top: 1rem;
+  padding: 1.1rem 1.2rem;
+  background: linear-gradient(135deg, #FBF7F0 0%, #F5ECD7 100%);
+  border: 1px solid rgba(198,164,92,0.28);
+  border-radius: 12px;
+  animation: bankSlideDown 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.bank-details.open { display: block; }
+
+@keyframes bankSlideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.bank-details-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px dashed rgba(198,164,92,0.35);
+}
+.bank-details-header i {
+  font-size: 0.85rem;
+  color: var(--gold);
+}
+
+.bank-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.bank-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.5rem 0.7rem;
+  background: rgba(255,255,255,0.65);
+  border-radius: 8px;
+  border: 1px solid rgba(198,164,92,0.15);
+  transition: var(--transition);
+}
+.bank-row:hover {
+  background: rgba(255,255,255,0.95);
+  border-color: rgba(198,164,92,0.35);
+}
+.bank-row-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+.bank-row-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--charcoal-light);
+  font-weight: 600;
+}
+.bank-row-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  color: var(--charcoal);
+  font-weight: 500;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+.bank-copy-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.7rem;
+  background: white;
+  border: 1px solid rgba(198,164,92,0.4);
+  border-radius: 999px;
+  color: var(--gold-dark);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
+.bank-copy-btn i { font-size: 0.7rem; }
+.bank-copy-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: white;
+  transform: translateY(-1px);
+}
+.bank-copy-btn.copied {
+  background: #1da851;
+  border-color: #1da851;
+  color: white;
+}
+
+.bank-footer-note {
+  margin-top: 0.8rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  line-height: 1.5;
+  color: var(--charcoal-light);
+  font-style: italic;
+  padding-top: 0.7rem;
+  border-top: 1px dashed rgba(198,164,92,0.25);
+}
+.bank-footer-note strong {
+  color: var(--gold-dark);
+  font-style: normal;
+}
+
+/* EFT toggle button variant */
+.btn-eft {
+  background: linear-gradient(120deg, #A8863B, #C6A45C);
+  color: white;
+  padding: 0.65rem 1.2rem;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.btn-eft::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, #f0d68a, #C6A45C, #f0d68a);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.btn-eft:hover::before { opacity: 1; }
+.btn-eft > * { position: relative; z-index: 1; }
+.btn-eft:hover {
+  color: #0e0c0a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px -8px rgba(198, 164, 92, 0.7);
+}
+.btn-eft i { font-size: 0.85rem; }
+
+@media (max-width: 420px) {
+  .bank-row { padding: 0.55rem 0.6rem; }
+  .bank-copy-btn {
+    padding: 0.5rem 0.7rem;
+    min-height: 32px;
+  }
+  .bank-copy-btn span { display: none; } /* icon only on tiny phones */
+}
+
+/* Ensure the bank panel body link is gold-accented */
+.bank-whatsapp-link {
+  color: var(--gold-dark);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold-dark);
+}
+
+/* ============================================================
+   27. BANKING MODAL — Pop-up payment details
+   ============================================================ */
+.bank-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 12, 10, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 2500;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow-y: auto;
+  animation: bankModalFadeIn 0.3s ease;
+}
+.bank-modal-overlay.active {
+  display: flex;
+}
+
+@keyframes bankModalFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.bank-modal-content {
+  background: linear-gradient(160deg, #FDFCFB 0%, #FBF7F0 100%);
+  border-radius: 20px;
+  max-width: 520px;
+  width: 100%;
+  max-height: 92vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow:
+    0 40px 100px -20px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(198, 164, 92, 0.25) inset;
+  padding: 2rem 2rem 1.5rem;
+  animation: bankModalPop 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.15);
+}
+
+@keyframes bankModalPop {
+  0%   { opacity: 0; transform: translateY(20px) scale(0.94); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.bank-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(198, 164, 92, 0.12);
+  color: var(--charcoal);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  z-index: 2;
+}
+.bank-modal-close:hover {
+  background: var(--gold);
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* Header */
+.bank-modal-header {
+  text-align: center;
+  padding-bottom: 1.2rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px dashed rgba(198, 164, 92, 0.35);
+}
+.bank-modal-eyebrow {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(198, 164, 92, 0.1);
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+}
+.bank-modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--charcoal);
+  margin-bottom: 0.35rem;
+  line-height: 1.15;
+}
+.bank-modal-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  color: var(--charcoal-light);
+  letter-spacing: 0.02em;
+}
+
+/* Body */
+.bank-modal-body .bank-details {
+  display: block;
+  margin-top: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  animation: none;
+}
+.bank-modal-body .bank-details-header {
+  display: none; /* already have header in modal */
+}
+.bank-modal-body .bank-rows {
+  gap: 0.6rem;
+}
+.bank-modal-body .bank-row {
+  padding: 0.75rem 0.9rem;
+  background: white;
+  border: 1px solid rgba(198, 164, 92, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+.bank-modal-body .bank-row:hover {
+  border-color: var(--gold);
+  box-shadow: 0 6px 18px -6px rgba(198, 164, 92, 0.35);
+  transform: translateY(-1px);
+}
+.bank-modal-body .bank-row-label {
+  font-size: 0.62rem;
+}
+.bank-modal-body .bank-row-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+.bank-modal-body .bank-copy-btn {
+  padding: 0.5rem 0.85rem;
+  font-size: 0.7rem;
+}
+.bank-modal-body .bank-footer-note {
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+  background: rgba(198, 164, 92, 0.08);
+  border-radius: 10px;
+  border-top: none;
+  font-size: 0.72rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Footer */
+.bank-modal-footer {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 1.4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(198, 164, 92, 0.15);
+}
+.bank-modal-whatsapp,
+.bank-modal-done {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+}
+.bank-modal-whatsapp {
+  background: #25D366;
+  color: white;
+}
+.bank-modal-whatsapp:hover {
+  background: #1da851;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -8px rgba(37, 211, 102, 0.6);
+}
+.bank-modal-done {
+  background: var(--charcoal);
+  color: white;
+}
+.bank-modal-done:hover {
+  background: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -8px rgba(198, 164, 92, 0.6);
+}
+
+/* Mobile */
+@media (max-width: 520px) {
+  .bank-modal-overlay { padding: 0; align-items: flex-end; }
+  .bank-modal-content {
+    border-radius: 20px 20px 0 0;
+    max-height: 94vh;
+    padding: 1.8rem 1.2rem 1.2rem;
+    animation: bankModalSlideUp 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.05);
+  }
+  .bank-modal-title { font-size: 1.5rem; }
+  .bank-modal-footer { flex-direction: column; }
+  .bank-modal-body .bank-row { padding: 0.65rem 0.75rem; }
+  .bank-modal-body .bank-row-value { font-size: 0.82rem; }
+  .bank-modal-body .bank-copy-btn span { display: none; }
+  .bank-modal-body .bank-copy-btn { padding: 0.5rem; }
+}
+
+@keyframes bankModalSlideUp {
+  0%   { opacity: 0; transform: translateY(100%); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .bank-modal-overlay,
+  .bank-modal-content {
+    animation: none !important;
+  }
+}
