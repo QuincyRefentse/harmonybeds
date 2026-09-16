@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 
-<!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon_io/apple-touch-icon.png">
@@ -33,7 +32,8 @@
           <li><a href="products.html" class="active">collection</a></li>
         </ul>
         <div class="nav-icons">
-          <a href="#"><i class="fas fa-search"></i></a>
+          <a href="#" id="navSearchBtn" aria-label="Search"><i class="fas fa-search"></i></a>
+          <a href="#" id="navFavBtn" aria-label="Favorites"><i class="far fa-heart"></i><span class="fav-count" id="favCount">0</span></a>
         </div>
       </nav>
     </div>
@@ -41,48 +41,217 @@
 
   <main>
 
-    <section class="products-hero">
-      <div class="container">
-        <span class="section-subtitle">the sanctuary awaits</span>
-        <h1>the complete sanctuary collection</h1>
-        <p>Handcrafted beds, headboards, couches & furniture — designed for your deepest restoration</p>
-      </div>
-    </section>
+    <!-- ============ INTERACTIVE PRODUCTS HERO ============ -->
+<section class="products-hero-v2" id="productsHero">
+  <!-- Ambient background layers -->
+  <div class="ph-bg-grain"></div>
+  <div class="ph-particles" id="phParticles"></div>
+  <div class="ph-orb ph-orb-1"></div>
+  <div class="ph-orb ph-orb-2"></div>
 
-    <section class="filter-section">
+  <div class="container ph-inner">
+    <!-- Eyebrow with pulse -->
+    <span class="ph-eyebrow">
+      <span class="ph-pulse"></span>
+      the sanctuary awaits
+    </span>
+
+    <!-- Animated title (each word wraps) -->
+    <h1 class="ph-title">
+      <span class="ph-word">the</span>
+      <span class="ph-word">complete</span>
+      <span class="ph-word gold-shimmer">sanctuary</span>
+      <span class="ph-word">collection</span>
+    </h1>
+
+    <!-- Rotating category ticker -->
+    <div class="ph-ticker" aria-hidden="true">
+      <span class="ph-ticker-fixed">featuring</span>
+      <div class="ph-ticker-window">
+        <ul class="ph-ticker-list" id="phTicker">
+          <li>beds</li>
+          <li>headboards</li>
+          <li>couches</li>
+          <li>furniture</li>
+          <li>beds</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="ph-lede">
+      Handcrafted in Pretoria, finished by master artisans — designed for your deepest restoration.
+    </p>
+
+    <!-- CTA buttons -->
+    <div class="ph-actions">
+      <button class="btn-primary btn-glow" id="browseCollectionBtn">
+        browse collection <i class="fas fa-arrow-down"></i>
+      </button>
+      <a href="https://wa.me/27822336883?text=Hi%20Harmony%20Rest%2C%20I%27d%20like%20a%20consultation" target="_blank" class="btn-outline-dark">
+        <i class="fab fa-whatsapp"></i> talk to a consultant
+      </a>
+    </div>
+
+    <!-- Live stat strip -->
+    <div class="ph-stats">
+      <div class="ph-stat">
+        <span class="ph-stat-num" data-count="42">0</span>
+        <span class="ph-stat-label">handcrafted pieces</span>
+      </div>
+      <div class="ph-stat-divider"></div>
+      <div class="ph-stat">
+        <span class="ph-stat-num" data-count="4">0</span>
+        <span class="ph-stat-label">collections</span>
+      </div>
+      <div class="ph-stat-divider"></div>
+      <div class="ph-stat">
+        <span class="ph-stat-num" data-count="15" data-suffix="+">0</span>
+        <span class="ph-stat-label">year warranty</span>
+      </div>
+      <div class="ph-stat-divider"></div>
+      <div class="ph-stat">
+        <span class="ph-stat-num" data-count="5" data-suffix="★">0</span>
+        <span class="ph-stat-label">sleep rating</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <button class="ph-scroll-cue" id="phScrollCue" aria-label="Scroll to collection">
+    <span></span>
+  </button>
+
+  <!-- Floating tip bubble -->
+  <div class="ph-tip" id="phTip">
+    <i class="fas fa-lightbulb"></i>
+    <span>Tip: press <kbd>/</kbd> to search, or use filters to narrow</span>
+    <button class="ph-tip-close" id="phTipClose" aria-label="Dismiss tip">&times;</button>
+  </div>
+</section>
+
+<!-- Scroll progress bar (fixed under header) -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ============ INTERACTIVE FILTER BAR ============ -->
+    <section class="filter-section" id="filterSection">
       <div class="container">
-        <div class="filter-wrapper">
-          <div class="filter-buttons">
-            <button class="filter-btn active" data-filter="all">all items</button>
-            <button class="filter-btn" data-filter="bed">beds</button>
-            <button class="filter-btn" data-filter="headboard">headboards</button>
-            <button class="filter-btn" data-filter="couch">couches</button>
-            <button class="filter-btn" data-filter="furniture">furniture</button>
+        <!-- Row 1: Search + Sort + View toggle + Filter drawer (mobile) -->
+        <div class="filter-top-row">
+          <div class="search-wrap">
+            <i class="fas fa-search"></i>
+            <input type="search" id="searchInput" placeholder="Search products… (press / to focus)" autocomplete="off" aria-label="Search products">
+            <button type="button" class="search-clear" id="searchClear" aria-label="Clear search">&times;</button>
           </div>
-          <select id="sortSelect">
-            <option value="default">sort by</option>
-            <option value="price-low">price: low to high</option>
-            <option value="price-high">price: high to low</option>
-          </select>
+
+          <div class="filter-controls">
+            <select id="sortSelect" aria-label="Sort products">
+              <option value="default">sort: featured</option>
+              <option value="price-low">price: low to high</option>
+              <option value="price-high">price: high to low</option>
+              <option value="name">name: A → Z</option>
+            </select>
+
+            <div class="view-toggle" role="group" aria-label="View mode">
+              <button type="button" class="view-btn active" data-view="grid" aria-label="Grid view"><i class="fas fa-th-large"></i></button>
+              <button type="button" class="view-btn" data-view="list" aria-label="List view"><i class="fas fa-list"></i></button>
+            </div>
+
+            <button type="button" class="filters-btn" id="filtersBtn">
+              <i class="fas fa-sliders-h"></i> Filters
+              <span class="filters-badge" id="filtersBadge" hidden>0</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Row 2: Category chips -->
+        <div class="chip-row">
+          <button class="filter-btn active" data-filter="all">all items</button>
+          <button class="filter-btn" data-filter="bed">beds</button>
+          <button class="filter-btn" data-filter="headboard">headboards</button>
+          <button class="filter-btn" data-filter="couch">couches</button>
+          <button class="filter-btn" data-filter="furniture">furniture</button>
+        </div>
+
+        <!-- Row 3: Active filters + result count -->
+        <div class="filter-meta-row">
+          <div class="active-filters" id="activeFilters"></div>
+          <span class="results-count" id="resultsCount">Showing all 42 items</span>
         </div>
       </div>
     </section>
 
+    <!-- ============ PRODUCTS GRID ============ -->
     <section>
       <div class="container">
         <div class="products-grid" id="productsGrid"></div>
+        <div class="empty-state" id="emptyState" hidden>
+          <i class="fas fa-search-minus"></i>
+          <h3>No products match your filters</h3>
+          <p>Try removing a filter or clearing your search.</p>
+          <button class="btn-primary" id="resetFiltersBtn">Reset all filters</button>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- Product Detail Modal -->
+  <!-- ============ MOBILE FILTER DRAWER ============ -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="filter-drawer" id="filterDrawer" aria-hidden="true">
+    <div class="drawer-header">
+      <h3>Filters</h3>
+      <button type="button" class="drawer-close" id="drawerClose" aria-label="Close filters">&times;</button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Price range -->
+      <div class="drawer-group">
+        <h4>Price range</h4>
+        <div class="price-range">
+          <input type="range" id="priceMin" min="0" max="7000" step="100" value="0" aria-label="Minimum price">
+          <input type="range" id="priceMax" min="0" max="7000" step="100" value="7000" aria-label="Maximum price">
+          <div class="price-labels">
+            <span id="priceMinLabel">R0</span>
+            <span id="priceMaxLabel">R7,000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Size chips -->
+      <div class="drawer-group">
+        <h4>Size</h4>
+        <div class="chip-row chip-row-wrap" id="sizeChips">
+          <button type="button" class="size-chip" data-size="King">King</button>
+          <button type="button" class="size-chip" data-size="Queen">Queen</button>
+          <button type="button" class="size-chip" data-size="Double">Double</button>
+          <button type="button" class="size-chip" data-size="Single">Single</button>
+          <button type="button" class="size-chip" data-size="Three Quarter">3/4</button>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div class="drawer-group">
+        <h4>Tag</h4>
+        <div class="chip-row chip-row-wrap" id="badgeChips">
+          <button type="button" class="size-chip" data-badge="best seller">Best seller</button>
+          <button type="button" class="size-chip" data-badge="value">Value</button>
+          <button type="button" class="size-chip" data-badge="therapeutic">Therapeutic</button>
+          <button type="button" class="size-chip" data-badge="hotel quality">Hotel quality</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-footer">
+      <button type="button" class="btn-outline-dark" id="drawerReset">Reset all</button>
+      <button type="button" class="btn-primary" id="drawerApply">Apply filters</button>
+    </div>
+  </aside>
+
+  <!-- ============ PRODUCT DETAIL MODAL ============ -->
   <div class="modal-overlay" id="productModal">
     <div class="modal-content">
       <button class="modal-close" id="modalClose">&times;</button>
       <div class="modal-body">
-        <div class="modal-image" id="modalImage">
-          <i class="fas fa-bed"></i>
-        </div>
+        <div class="modal-image" id="modalImage"><i class="fas fa-bed"></i></div>
         <div class="modal-details">
           <div class="modal-category" id="modalCategory"></div>
           <h2 class="modal-title" id="modalTitle"></h2>
@@ -112,13 +281,10 @@
           </div>
         </div>
         <div class="footer-col"><h4>collection</h4><ul><li><a href="products.html">beds</a></li><li><a href="products.html">headboards</a></li><li><a href="products.html">couches</a></li><li><a href="products.html">furniture</a></li></ul></div>
-        <div class="footer-col"><h4>support</h4><ul><li><a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20would%20like%20to%20inquire%20about%20your%20luxury%20beds.">warranty</a></li><li><a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20would%20like%20to%20inquire%20about%20your%20luxury%20beds.">delivery</a></li><li><a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20would%20like%20to%20inquire%20about%20your%20luxury%20beds.">returns</a></li><li><a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20would%20like%20to%20inquire%20about%20your%20luxury%20beds.">contact</a></li></ul></div>
-        <div class="footer-col"><h4>flagship atelier</h4><p>Paul Kruger 
-Maryana Building
-Pretoria Central 
-Shop No1 <br>+27 82 233 6883</p></div>
+        <div class="footer-col"><h4>support</h4><ul><li><a href="https://wa.me/27822336883">warranty</a></li><li><a href="https://wa.me/27822336883">delivery</a></li><li><a href="https://wa.me/27822336883">returns</a></li><li><a href="https://wa.me/27822336883">contact</a></li></ul></div>
+        <div class="footer-col"><h4>flagship atelier</h4><p>Paul Kruger · Maryana Building<br>Pretoria Central · Shop No 1<br><a href="tel:+27822336883">+27 82 233 6883</a></p></div>
       </div>
-      <div class="footer-bottom"><p>&copy; 2025 Harmony Rest & Comfort Beds.</p></div>
+      <div class="footer-bottom"><p>&copy; 2025 Harmony Rest &amp; Comfort Beds.</p></div>
     </div>
   </footer>
 
@@ -128,579 +294,314 @@ Shop No1 <br>+27 82 233 6883</p></div>
 
   <script>
     /* ============================================================
-       PRODUCT DATABASE — real prices, real descriptions
+       PRODUCT DATABASE (identical to your sheet — 42 products)
        ============================================================ */
     const products = [
-
       /* ==================== BEDS ==================== */
-      {
-        id: 1, name: "King Max Weight", category: "bed", price: 6999, size: "King",
+      { id: 1, name: "King Max Weight", category: "bed", price: 6999, size: "King",
         image: "assets/images/beds/king-weight-master.jpg",
         desc: "Our flagship heavy-duty bed engineered for exceptional weight support. Reinforced lumbar construction and high-density foam layers deliver deep restorative sleep with superior spinal alignment.",
         badge: "best seller",
-        specs: [
-          ["Mattress Length", "200 cm"], ["Mattress Width", "183 cm"], ["Mattress Height", "30 cm"],
-          ["Base Length", "202 cm"], ["Base Width", "185 cm"], ["Base Height", "35 cm"],
-          ["Total Height", "65 cm"], ["Weight Capacity", "250 kg per side"],
-          ["Spring Count", "3,000 pocket springs"], ["Comfort Layer", "High-density foam + gel infusion"],
-          ["Fabric", "Premium damask"], ["Warranty", "15 years"]
-        ]
-      },
-      {
-        id: 2, name: "Hospitality Queen Bed Set", category: "bed", price: 4999, size: "Queen",
+        specs: [["Mattress Length","200 cm"],["Mattress Width","183 cm"],["Mattress Height","30 cm"],["Base Length","202 cm"],["Base Width","185 cm"],["Base Height","35 cm"],["Total Height","65 cm"],["Weight Capacity","250 kg per side"],["Spring Count","3,000 pocket springs"],["Comfort Layer","High-density foam + gel infusion"],["Fabric","Premium damask"],["Warranty","15 years"]] },
+      { id: 2, name: "Hospitality Queen Bed Set", category: "bed", price: 4999, size: "Queen",
         image: "assets/images/beds/hospitality-form.jpg",
         desc: "Hotel-grade queen bed set featuring durable pocket springs and a medium-firm comfort layer. Built to withstand daily use while delivering consistent five-star luxury and breathability.",
         badge: "hotel quality",
-        specs: [
-          ["Mattress Length", "200 cm"], ["Mattress Width", "152 cm"], ["Mattress Height", "28 cm"],
-          ["Base Length", "202 cm"], ["Base Width", "154 cm"], ["Base Height", "33 cm"],
-          ["Total Height", "61 cm"], ["Weight Capacity", "200 kg per side"],
-          ["Spring Count", "2,000 pocket springs"], ["Comfort Layer", "Medium-firm foam"],
-          ["Fabric", "Hotel-grade woven fabric"], ["Warranty", "12 years"]
-        ]
-      },
-      {
-        id: 3, name: "Hospitality Mattress Queen", category: "bed", price: 3299, size: "Queen",
+        specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","28 cm"],["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","33 cm"],["Total Height","61 cm"],["Weight Capacity","200 kg per side"],["Spring Count","2,000 pocket springs"],["Comfort Layer","Medium-firm foam"],["Fabric","Hotel-grade woven fabric"],["Warranty","12 years"]] },
+      { id: 3, name: "Hospitality Mattress Queen", category: "bed", price: 3299, size: "Queen",
         image: "assets/images/beds/hospitality-form.jpg",
         desc: "Hospitality-grade queen mattress on its own. Balanced medium-firm feel with pocket springs and a breathable cover — ideal as a replacement or paired with your existing base.",
         badge: "hotel quality",
-        specs: [
-          ["Mattress Length", "200 cm"], ["Mattress Width", "152 cm"], ["Mattress Height", "28 cm"],
-          ["Weight Capacity", "200 kg per side"], ["Spring Count", "2,000 pocket springs"],
-          ["Comfort Layer", "Medium-firm foam"], ["Fabric", "Hotel-grade woven fabric"],
-          ["Base Included", "No (mattress only)"], ["Warranty", "12 years"]
-        ]
-      },
-      {
-        id: 4, name: "Hospitality Double Bed Set", category: "bed", price: 4499, size: "Double",
+        specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","28 cm"],["Weight Capacity","200 kg per side"],["Spring Count","2,000 pocket springs"],["Comfort Layer","Medium-firm foam"],["Fabric","Hotel-grade woven fabric"],["Base Included","No (mattress only)"],["Warranty","12 years"]] },
+      { id: 4, name: "Hospitality Double Bed Set", category: "bed", price: 4499, size: "Double",
         image: "assets/images/beds/hospitality-form.jpg",
         desc: "Full double hospitality set with durable pocket springs and medium-firm comfort — designed for guesthouses, lodges, and Airbnb properties where consistency matters.",
         badge: "hotel quality",
-        specs: [
-          ["Mattress Length", "188 cm"], ["Mattress Width", "137 cm"], ["Mattress Height", "28 cm"],
-          ["Base Length", "190 cm"], ["Base Width", "139 cm"], ["Base Height", "33 cm"],
-          ["Total Height", "61 cm"], ["Weight Capacity", "180 kg per side"],
-          ["Spring Count", "1,800 pocket springs"], ["Comfort Layer", "Medium-firm foam"],
-          ["Fabric", "Hotel-grade woven fabric"], ["Warranty", "12 years"]
-        ]
-      },
-      {
-        id: 5, name: "Hospitality Mattress Double", category: "bed", price: 2999, size: "Double",
+        specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","28 cm"],["Base Length","190 cm"],["Base Width","139 cm"],["Base Height","33 cm"],["Total Height","61 cm"],["Weight Capacity","180 kg per side"],["Spring Count","1,800 pocket springs"],["Comfort Layer","Medium-firm foam"],["Fabric","Hotel-grade woven fabric"],["Warranty","12 years"]] },
+      { id: 5, name: "Hospitality Mattress Double", category: "bed", price: 2999, size: "Double",
         image: "assets/images/beds/hospitality-form.jpg",
         desc: "Double hospitality mattress, sold on its own. Reinforced edges, breathable cover, and consistent support — made for heavy rotation.",
         badge: "hotel quality",
-        specs: [
-          ["Mattress Length", "188 cm"], ["Mattress Width", "137 cm"], ["Mattress Height", "28 cm"],
-          ["Weight Capacity", "180 kg per side"], ["Spring Count", "1,800 pocket springs"],
-          ["Comfort Layer", "Medium-firm foam"], ["Fabric", "Hotel-grade woven fabric"],
-          ["Base Included", "No (mattress only)"], ["Warranty", "12 years"]
-        ]
-      },
-      {
-        id: 6, name: "Orthopedic Queen Bed Set", category: "bed", price: 5999, size: "Queen",
+        specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","28 cm"],["Weight Capacity","180 kg per side"],["Spring Count","1,800 pocket springs"],["Comfort Layer","Medium-firm foam"],["Fabric","Hotel-grade woven fabric"],["Base Included","No (mattress only)"],["Warranty","12 years"]] },
+      { id: 6, name: "Orthopedic Queen Bed Set", category: "bed", price: 5999, size: "Queen",
         image: "assets/images/beds/orthopedic-form.jpg",
         desc: "Therapeutic queen set with zoned coil system and memory foam infusion. Clinically designed to relieve pressure points, reduce motion transfer, and promote healthy posture during sleep.",
         badge: "therapeutic",
-        specs: [
-          ["Mattress Length", "200 cm"], ["Mattress Width", "152 cm"], ["Mattress Height", "32 cm"],
-          ["Base Length", "202 cm"], ["Base Width", "154 cm"], ["Base Height", "35 cm"],
-          ["Total Height", "67 cm"], ["Weight Capacity", "240 kg per side"],
-          ["Spring Count", "4,000 zoned pocket springs"], ["Comfort Layer", "Memory foam + copper infusion"],
-          ["Fabric", "Antimicrobial bamboo blend"], ["Warranty", "15 years"]
-        ]
-      },
-      {
-        id: 7, name: "Orthopedic Mattress Queen", category: "bed", price: 3999, size: "Queen",
+        specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","32 cm"],["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","35 cm"],["Total Height","67 cm"],["Weight Capacity","240 kg per side"],["Spring Count","4,000 zoned pocket springs"],["Comfort Layer","Memory foam + copper infusion"],["Fabric","Antimicrobial bamboo blend"],["Warranty","15 years"]] },
+      { id: 7, name: "Orthopedic Mattress Queen", category: "bed", price: 3999, size: "Queen",
         image: "assets/images/beds/orthopedic-form.jpg",
         desc: "Therapeutic queen mattress only. Zoned support relieves pressure points and reduces motion transfer — an easy upgrade for an existing base.",
         badge: "therapeutic",
-        specs: [
-          ["Mattress Length", "200 cm"], ["Mattress Width", "152 cm"], ["Mattress Height", "32 cm"],
-          ["Weight Capacity", "240 kg per side"], ["Spring Count", "4,000 zoned pocket springs"],
-          ["Comfort Layer", "Memory foam + copper infusion"], ["Fabric", "Antimicrobial bamboo blend"],
-          ["Base Included", "No (mattress only)"], ["Warranty", "15 years"]
-        ]
-      },
-      {
-        id: 8, name: "Orthopedic Double Bed Set", category: "bed", price: 5499, size: "Double",
+        specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","32 cm"],["Weight Capacity","240 kg per side"],["Spring Count","4,000 zoned pocket springs"],["Comfort Layer","Memory foam + copper infusion"],["Fabric","Antimicrobial bamboo blend"],["Base Included","No (mattress only)"],["Warranty","15 years"]] },
+      { id: 8, name: "Orthopedic Double Bed Set", category: "bed", price: 5499, size: "Double",
         image: "assets/images/beds/orthopedic-form.jpg",
         desc: "Orthopedic double bed set with zoned coil support and memory foam. Ideal for those needing additional lumbar and shoulder relief in a smaller footprint.",
         badge: "therapeutic",
-        specs: [
-          ["Mattress Length", "188 cm"], ["Mattress Width", "137 cm"], ["Mattress Height", "32 cm"],
-          ["Base Length", "190 cm"], ["Base Width", "139 cm"], ["Base Height", "35 cm"],
-          ["Total Height", "67 cm"], ["Weight Capacity", "220 kg per side"],
-          ["Spring Count", "3,200 zoned pocket springs"], ["Comfort Layer", "Memory foam + copper infusion"],
-          ["Fabric", "Antimicrobial bamboo blend"], ["Warranty", "15 years"]
-        ]
-      },
-      {
-        id: 9, name: "Orthopedic Mattress Double", category: "bed", price: 3499, size: "Double",
+        specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","32 cm"],["Base Length","190 cm"],["Base Width","139 cm"],["Base Height","35 cm"],["Total Height","67 cm"],["Weight Capacity","220 kg per side"],["Spring Count","3,200 zoned pocket springs"],["Comfort Layer","Memory foam + copper infusion"],["Fabric","Antimicrobial bamboo blend"],["Warranty","15 years"]] },
+      { id: 9, name: "Orthopedic Mattress Double", category: "bed", price: 3499, size: "Double",
         image: "assets/images/beds/orthopedic-form.jpg",
         desc: "Double orthopedic mattress only. Same therapeutic zoning as our queen model, sized for double bases.",
         badge: "therapeutic",
-        specs: [
-          ["Mattress Length", "188 cm"], ["Mattress Width", "137 cm"], ["Mattress Height", "32 cm"],
-          ["Weight Capacity", "220 kg per side"], ["Spring Count", "3,200 zoned pocket springs"],
-          ["Comfort Layer", "Memory foam + copper infusion"], ["Fabric", "Antimicrobial bamboo blend"],
-          ["Base Included", "No (mattress only)"], ["Warranty", "15 years"]
-        ]
-      },
-      {
-        id: 10, name: "Pocket Spring Queen Bed Set", category: "bed", price: 6499, size: "Queen",
+        specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","32 cm"],["Weight Capacity","220 kg per side"],["Spring Count","3,200 zoned pocket springs"],["Comfort Layer","Memory foam + copper infusion"],["Fabric","Antimicrobial bamboo blend"],["Base Included","No (mattress only)"],["Warranty","15 years"]] },
+      { id: 10, name: "Pocket Spring Queen Bed Set", category: "bed", price: 6499, size: "Queen",
         image: "assets/images/beds/pocket-spring.jpg",
         desc: "Individually wrapped pocket springs move independently for tailored support. Encased in breathable fabric with a plush pillow top for that floating-on-air sensation.",
         badge: "popular",
-        specs: [
-          ["Mattress Length", "200 cm"], ["Mattress Width", "152 cm"], ["Mattress Height", "30 cm"],
-          ["Base Length", "202 cm"], ["Base Width", "154 cm"], ["Base Height", "33 cm"],
-          ["Total Height", "63 cm"], ["Weight Capacity", "200 kg per side"],
-          ["Spring Count", "2,500 pocket springs"], ["Comfort Layer", "Pillow-top foam layer"],
-          ["Fabric", "Breathable knit"], ["Warranty", "12 years"]
-        ]
-      },
-      {
-        id: 11, name: "Pocket Spring Mattress Queen", category: "bed", price: 4499, size: "Queen",
+        specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","30 cm"],["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","33 cm"],["Total Height","63 cm"],["Weight Capacity","200 kg per side"],["Spring Count","2,500 pocket springs"],["Comfort Layer","Pillow-top foam layer"],["Fabric","Breathable knit"],["Warranty","12 years"]] },
+      { id: 11, name: "Pocket Spring Mattress Queen", category: "bed", price: 4499, size: "Queen",
         image: "assets/images/beds/pocket-spring.jpg",
         desc: "Queen pocket spring mattress only. Independent coil movement delivers tailored support while minimising partner disturbance.",
         badge: "popular",
-        specs: [
-          ["Mattress Length", "200 cm"], ["Mattress Width", "152 cm"], ["Mattress Height", "30 cm"],
-          ["Weight Capacity", "200 kg per side"], ["Spring Count", "2,500 pocket springs"],
-          ["Comfort Layer", "Pillow-top foam layer"], ["Fabric", "Breathable knit"],
-          ["Base Included", "No (mattress only)"], ["Warranty", "12 years"]
-        ]
-      },
-      {
-        id: 12, name: "Pocket Spring Double Bed Set", category: "bed", price: 5999, size: "Double",
+        specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","30 cm"],["Weight Capacity","200 kg per side"],["Spring Count","2,500 pocket springs"],["Comfort Layer","Pillow-top foam layer"],["Fabric","Breathable knit"],["Base Included","No (mattress only)"],["Warranty","12 years"]] },
+      { id: 12, name: "Pocket Spring Double Bed Set", category: "bed", price: 5999, size: "Double",
         image: "assets/images/beds/pocket-spring.jpg",
         desc: "Double pocket spring set with independent coils for tailored support and minimal motion transfer — perfect for couples with different sleep preferences.",
         badge: "popular",
-        specs: [
-          ["Mattress Length", "188 cm"], ["Mattress Width", "137 cm"], ["Mattress Height", "30 cm"],
-          ["Base Length", "190 cm"], ["Base Width", "139 cm"], ["Base Height", "30 cm"],
-          ["Total Height", "60 cm"], ["Weight Capacity", "180 kg per side"],
-          ["Spring Count", "2,000 pocket springs"], ["Comfort Layer", "Pillow-top foam layer"],
-          ["Fabric", "Breathable knit"], ["Warranty", "12 years"]
-        ]
-      },
-      {
-        id: 13, name: "Pocket Spring Mattress Double", category: "bed", price: 3999, size: "Double",
+        specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","30 cm"],["Base Length","190 cm"],["Base Width","139 cm"],["Base Height","30 cm"],["Total Height","60 cm"],["Weight Capacity","180 kg per side"],["Spring Count","2,000 pocket springs"],["Comfort Layer","Pillow-top foam layer"],["Fabric","Breathable knit"],["Warranty","12 years"]] },
+      { id: 13, name: "Pocket Spring Mattress Double", category: "bed", price: 3999, size: "Double",
         image: "assets/images/beds/pocket-spring.jpg",
         desc: "Double pocket spring mattress only. Independent coil movement, plush top, breathable knit cover.",
         badge: "popular",
-        specs: [
-          ["Mattress Length", "188 cm"], ["Mattress Width", "137 cm"], ["Mattress Height", "30 cm"],
-          ["Weight Capacity", "180 kg per side"], ["Spring Count", "2,000 pocket springs"],
-          ["Comfort Layer", "Pillow-top foam layer"], ["Fabric", "Breathable knit"],
-          ["Base Included", "No (mattress only)"], ["Warranty", "12 years"]
-        ]
-      },
-      {
-        id: 14, name: "PillowTop Queen Bed Set", category: "bed", price: 3999, size: "Queen",
+        specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","30 cm"],["Weight Capacity","180 kg per side"],["Spring Count","2,000 pocket springs"],["Comfort Layer","Pillow-top foam layer"],["Fabric","Breathable knit"],["Base Included","No (mattress only)"],["Warranty","12 years"]] },
+      { id: 14, name: "PillowTop Queen Bed Set", category: "bed", price: 3999, size: "Queen",
         image: "assets/images/beds/pillowtop.jpg",
         desc: "Luxurious euro-top queen set with an extra layer of plush cushioning sewn into the surface. Sink into cloud-like softness with underlying support for all sleep positions.",
         badge: "plush",
-        specs: [
-          ["Mattress Length", "200 cm"], ["Mattress Width", "152 cm"], ["Mattress Height", "34 cm"],
-          ["Base Length", "202 cm"], ["Base Width", "154 cm"], ["Base Height", "33 cm"],
-          ["Total Height", "67 cm"], ["Weight Capacity", "220 kg per side"],
-          ["Spring Count", "2,500 pocket springs"], ["Comfort Layer", "Euro-top with gel memory foam"],
-          ["Fabric", "Organic cotton cover"], ["Warranty", "12 years"]
-        ]
-      },
-      {
-        id: 15, name: "PillowTop Mattress Queen", category: "bed", price: 3200, size: "Queen",
+        specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","34 cm"],["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","33 cm"],["Total Height","67 cm"],["Weight Capacity","220 kg per side"],["Spring Count","2,500 pocket springs"],["Comfort Layer","Euro-top with gel memory foam"],["Fabric","Organic cotton cover"],["Warranty","12 years"]] },
+      { id: 15, name: "PillowTop Mattress Queen", category: "bed", price: 3200, size: "Queen",
         image: "assets/images/beds/pillowtop.jpg",
         desc: "Queen pillow-top mattress only. Plush euro-top layer over supportive pocket springs — cloud-like softness without sacrificing support.",
         badge: "plush",
-        specs: [
-          ["Mattress Length", "200 cm"], ["Mattress Width", "152 cm"], ["Mattress Height", "34 cm"],
-          ["Weight Capacity", "220 kg per side"], ["Spring Count", "2,500 pocket springs"],
-          ["Comfort Layer", "Euro-top with gel memory foam"], ["Fabric", "Organic cotton cover"],
-          ["Base Included", "No (mattress only)"], ["Warranty", "12 years"]
-        ]
-      },
-      {
-        id: 16, name: "PillowTop Double Bed Set", category: "bed", price: 3800, size: "Double",
+        specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","34 cm"],["Weight Capacity","220 kg per side"],["Spring Count","2,500 pocket springs"],["Comfort Layer","Euro-top with gel memory foam"],["Fabric","Organic cotton cover"],["Base Included","No (mattress only)"],["Warranty","12 years"]] },
+      { id: 16, name: "PillowTop Double Bed Set", category: "bed", price: 3800, size: "Double",
         image: "assets/images/beds/pillowtop.jpg",
         desc: "Double pillow-top set with a plush euro-top surface over responsive pocket springs. Elegant and comfortable in any bedroom.",
         badge: "plush",
-        specs: [
-          ["Mattress Length", "188 cm"], ["Mattress Width", "137 cm"], ["Mattress Height", "34 cm"],
-          ["Base Length", "190 cm"], ["Base Width", "139 cm"], ["Base Height", "30 cm"],
-          ["Total Height", "64 cm"], ["Weight Capacity", "200 kg per side"],
-          ["Spring Count", "2,000 pocket springs"], ["Comfort Layer", "Euro-top with gel memory foam"],
-          ["Fabric", "Organic cotton cover"], ["Warranty", "12 years"]
-        ]
-      },
-      {
-        id: 17, name: "PillowTop Mattress Double", category: "bed", price: 3100, size: "Double",
+        specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","34 cm"],["Base Length","190 cm"],["Base Width","139 cm"],["Base Height","30 cm"],["Total Height","64 cm"],["Weight Capacity","200 kg per side"],["Spring Count","2,000 pocket springs"],["Comfort Layer","Euro-top with gel memory foam"],["Fabric","Organic cotton cover"],["Warranty","12 years"]] },
+      { id: 17, name: "PillowTop Mattress Double", category: "bed", price: 3100, size: "Double",
         image: "assets/images/beds/pillowtop.jpg",
         desc: "Double pillow-top mattress only. Plush euro-top over supportive pocket springs.",
         badge: "plush",
-        specs: [
-          ["Mattress Length", "188 cm"], ["Mattress Width", "137 cm"], ["Mattress Height", "34 cm"],
-          ["Weight Capacity", "200 kg per side"], ["Spring Count", "2,000 pocket springs"],
-          ["Comfort Layer", "Euro-top with gel memory foam"], ["Fabric", "Organic cotton cover"],
-          ["Base Included", "No (mattress only)"], ["Warranty", "12 years"]
-        ]
-      },
-      {
-        id: 18, name: "Sleepwell Queen Bed Set", category: "bed", price: 3499, size: "Queen",
+        specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","34 cm"],["Weight Capacity","200 kg per side"],["Spring Count","2,000 pocket springs"],["Comfort Layer","Euro-top with gel memory foam"],["Fabric","Organic cotton cover"],["Base Included","No (mattress only)"],["Warranty","12 years"]] },
+      { id: 18, name: "Sleepwell Queen Bed Set", category: "bed", price: 3499, size: "Queen",
         image: "assets/images/beds/dream-star.jpg",
         desc: "Sleepwell queen set — a balanced medium-firm sleep system with a durable coil core and quilted cover. Reliable comfort for everyday restorative rest.",
         badge: "everyday luxury",
-        specs: [
-          ["Mattress Length", "200 cm"], ["Mattress Width", "152 cm"], ["Mattress Height", "26 cm"],
-          ["Base Length", "202 cm"], ["Base Width", "154 cm"], ["Base Height", "30 cm"],
-          ["Total Height", "56 cm"], ["Weight Capacity", "180 kg per side"],
-          ["Spring Count", "2,000 continuous coils"], ["Comfort Layer", "Medium-firm foam"],
-          ["Fabric", "Quilted damask"], ["Warranty", "10 years"]
-        ]
-      },
-      {
-        id: 19, name: "Sleepwell Mattress Queen", category: "bed", price: 2999, size: "Queen",
+        specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","26 cm"],["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","30 cm"],["Total Height","56 cm"],["Weight Capacity","180 kg per side"],["Spring Count","2,000 continuous coils"],["Comfort Layer","Medium-firm foam"],["Fabric","Quilted damask"],["Warranty","10 years"]] },
+      { id: 19, name: "Sleepwell Mattress Queen", category: "bed", price: 2999, size: "Queen",
         image: "assets/images/beds/dream-star.jpg",
         desc: "Sleepwell queen mattress only. Medium-firm coil core with quilted damask cover — dependable comfort every night.",
         badge: "everyday luxury",
-        specs: [
-          ["Mattress Length", "200 cm"], ["Mattress Width", "152 cm"], ["Mattress Height", "26 cm"],
-          ["Weight Capacity", "180 kg per side"], ["Spring Count", "2,000 continuous coils"],
-          ["Comfort Layer", "Medium-firm foam"], ["Fabric", "Quilted damask"],
-          ["Base Included", "No (mattress only)"], ["Warranty", "10 years"]
-        ]
-      },
-      {
-        id: 20, name: "Sleepwell Double Bed Set", category: "bed", price: 2899, size: "Double",
+        specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","26 cm"],["Weight Capacity","180 kg per side"],["Spring Count","2,000 continuous coils"],["Comfort Layer","Medium-firm foam"],["Fabric","Quilted damask"],["Base Included","No (mattress only)"],["Warranty","10 years"]] },
+      { id: 20, name: "Sleepwell Double Bed Set", category: "bed", price: 2899, size: "Double",
         image: "assets/images/beds/dream-star.jpg",
         desc: "Sleepwell double set — balanced medium-firm support with a durable coil core and quilted cover.",
         badge: "everyday luxury",
-        specs: [
-          ["Mattress Length", "188 cm"], ["Mattress Width", "137 cm"], ["Mattress Height", "26 cm"],
-          ["Base Length", "190 cm"], ["Base Width", "139 cm"], ["Base Height", "30 cm"],
-          ["Total Height", "56 cm"], ["Weight Capacity", "170 kg per side"],
-          ["Spring Count", "1,800 continuous coils"], ["Comfort Layer", "Medium-firm foam"],
-          ["Fabric", "Quilted damask"], ["Warranty", "10 years"]
-        ]
-      },
-      {
-        id: 21, name: "Sleepwell Mattress Double", category: "bed", price: 2899, size: "Double",
+        specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","26 cm"],["Base Length","190 cm"],["Base Width","139 cm"],["Base Height","30 cm"],["Total Height","56 cm"],["Weight Capacity","170 kg per side"],["Spring Count","1,800 continuous coils"],["Comfort Layer","Medium-firm foam"],["Fabric","Quilted damask"],["Warranty","10 years"]] },
+      { id: 21, name: "Sleepwell Mattress Double", category: "bed", price: 2899, size: "Double",
         image: "assets/images/beds/dream-star.jpg",
         desc: "Sleepwell double mattress only. Medium-firm coil construction for dependable comfort.",
         badge: "everyday luxury",
-        specs: [
-          ["Mattress Length", "188 cm"], ["Mattress Width", "137 cm"], ["Mattress Height", "26 cm"],
-          ["Weight Capacity", "170 kg per side"], ["Spring Count", "1,800 continuous coils"],
-          ["Comfort Layer", "Medium-firm foam"], ["Fabric", "Quilted damask"],
-          ["Base Included", "No (mattress only)"], ["Warranty", "10 years"]
-        ]
-      },
-      {
-        id: 22, name: "Budget Queen Bed Set", category: "bed", price: 2499, size: "Queen",
+        specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","26 cm"],["Weight Capacity","170 kg per side"],["Spring Count","1,800 continuous coils"],["Comfort Layer","Medium-firm foam"],["Fabric","Quilted damask"],["Base Included","No (mattress only)"],["Warranty","10 years"]] },
+      { id: 22, name: "Budget Queen Bed Set", category: "bed", price: 2499, size: "Queen",
         image: "assets/images/beds/comfort-non-turn.jpg",
         desc: "Affordable queen set with a durable foam core and soft knit cover. No-flip design for easy maintenance — ideal for guest rooms or value-focused buyers.",
         badge: "value",
-        specs: [
-          ["Mattress Length", "200 cm"], ["Mattress Width", "152 cm"], ["Mattress Height", "22 cm"],
-          ["Base Length", "202 cm"], ["Base Width", "154 cm"], ["Base Height", "28 cm"],
-          ["Total Height", "50 cm"], ["Weight Capacity", "150 kg per side"],
-          ["Spring Count", "High-resilience foam core"], ["Comfort Layer", "Soft foam"],
-          ["Fabric", "Soft knit cover"], ["Warranty", "5 years"]
-        ]
-      },
-      {
-        id: 23, name: "Budget Mattress Queen", category: "bed", price: 1999, size: "Queen",
+        specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","22 cm"],["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","28 cm"],["Total Height","50 cm"],["Weight Capacity","150 kg per side"],["Spring Count","High-resilience foam core"],["Comfort Layer","Soft foam"],["Fabric","Soft knit cover"],["Warranty","5 years"]] },
+      { id: 23, name: "Budget Mattress Queen", category: "bed", price: 1999, size: "Queen",
         image: "assets/images/beds/comfort-non-turn.jpg",
         desc: "Budget queen mattress only. Durable foam core, soft knit cover, and no-turn design for easy upkeep.",
         badge: "value",
-        specs: [
-          ["Mattress Length", "200 cm"], ["Mattress Width", "152 cm"], ["Mattress Height", "22 cm"],
-          ["Weight Capacity", "150 kg per side"], ["Spring Count", "High-resilience foam core"],
-          ["Comfort Layer", "Soft foam"], ["Fabric", "Soft knit cover"],
-          ["Base Included", "No (mattress only)"], ["Warranty", "5 years"]
-        ]
-      },
-      {
-        id: 24, name: "Budget Double Bed Set", category: "bed", price: 2399, size: "Double",
+        specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","22 cm"],["Weight Capacity","150 kg per side"],["Spring Count","High-resilience foam core"],["Comfort Layer","Soft foam"],["Fabric","Soft knit cover"],["Base Included","No (mattress only)"],["Warranty","5 years"]] },
+      { id: 24, name: "Budget Double Bed Set", category: "bed", price: 2399, size: "Double",
         image: "assets/images/beds/comfort-non-turn.jpg",
         desc: "Affordable double set with a durable foam core and soft knit cover. Practical comfort for guest rooms and budget-conscious buyers.",
         badge: "value",
-        specs: [
-          ["Mattress Length", "188 cm"], ["Mattress Width", "137 cm"], ["Mattress Height", "22 cm"],
-          ["Base Length", "190 cm"], ["Base Width", "139 cm"], ["Base Height", "28 cm"],
-          ["Total Height", "50 cm"], ["Weight Capacity", "140 kg per side"],
-          ["Spring Count", "High-resilience foam core"], ["Comfort Layer", "Soft foam"],
-          ["Fabric", "Soft knit cover"], ["Warranty", "5 years"]
-        ]
-      },
-      {
-        id: 25, name: "Budget Mattress Double", category: "bed", price: 1899, size: "Double",
+        specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","22 cm"],["Base Length","190 cm"],["Base Width","139 cm"],["Base Height","28 cm"],["Total Height","50 cm"],["Weight Capacity","140 kg per side"],["Spring Count","High-resilience foam core"],["Comfort Layer","Soft foam"],["Fabric","Soft knit cover"],["Warranty","5 years"]] },
+      { id: 25, name: "Budget Mattress Double", category: "bed", price: 1899, size: "Double",
         image: "assets/images/beds/comfort-non-turn.jpg",
         desc: "Budget double mattress only. Durable foam core, soft knit cover, no-turn design.",
         badge: "value",
-        specs: [
-          ["Mattress Length", "188 cm"], ["Mattress Width", "137 cm"], ["Mattress Height", "22 cm"],
-          ["Weight Capacity", "140 kg per side"], ["Spring Count", "High-resilience foam core"],
-          ["Comfort Layer", "Soft foam"], ["Fabric", "Soft knit cover"],
-          ["Base Included", "No (mattress only)"], ["Warranty", "5 years"]
-        ]
-      },
-      {
-        id: 26, name: "3/4 Bed Set", category: "bed", price: 1999, size: "Three Quarter",
+        specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Mattress Height","22 cm"],["Weight Capacity","140 kg per side"],["Spring Count","High-resilience foam core"],["Comfort Layer","Soft foam"],["Fabric","Soft knit cover"],["Base Included","No (mattress only)"],["Warranty","5 years"]] },
+      { id: 26, name: "3/4 Bed Set", category: "bed", price: 1999, size: "Three Quarter",
         image: "assets/images/beds/3-star-quarter.jpg",
         desc: "Compact three-quarter bed set delivering reliable comfort at an accessible price. High-resilience foam with a soft-touch fabric cover — perfect for smaller spaces.",
         badge: "compact",
-        specs: [
-          ["Mattress Length", "188 cm"], ["Mattress Width", "107 cm"], ["Mattress Height", "20 cm"],
-          ["Base Length", "190 cm"], ["Base Width", "109 cm"], ["Base Height", "26 cm"],
-          ["Total Height", "46 cm"], ["Weight Capacity", "130 kg"],
-          ["Spring Count", "High-resilience foam core"], ["Comfort Layer", "Soft-touch foam"],
-          ["Fabric", "Soft-touch polyester"], ["Warranty", "5 years"]
-        ]
-      },
-      {
-        id: 27, name: "Student Bed Set Form", category: "bed", price: 1999, size: "Single",
+        specs: [["Mattress Length","188 cm"],["Mattress Width","107 cm"],["Mattress Height","20 cm"],["Base Length","190 cm"],["Base Width","109 cm"],["Base Height","26 cm"],["Total Height","46 cm"],["Weight Capacity","130 kg"],["Spring Count","High-resilience foam core"],["Comfort Layer","Soft-touch foam"],["Fabric","Soft-touch polyester"],["Warranty","5 years"]] },
+      { id: 27, name: "Student Bed Set Form", category: "bed", price: 1999, size: "Single",
         image: "assets/images/beds/student-bed-set.jpg",
         desc: "Durable single bed set designed for student accommodation. Sturdy base and medium-firm mattress that withstands daily use while providing restful sleep.",
         badge: "value",
-        specs: [
-          ["Mattress Length", "188 cm"], ["Mattress Width", "91 cm"], ["Mattress Height", "20 cm"],
-          ["Base Length", "190 cm"], ["Base Width", "93 cm"], ["Base Height", "26 cm"],
-          ["Total Height", "46 cm"], ["Weight Capacity", "110 kg"],
-          ["Spring Count", "Bonnel spring system"], ["Comfort Layer", "Medium-firm foam"],
-          ["Fabric", "Durable polyester cover"], ["Warranty", "5 years"]
-        ]
-      },
-      {
-        id: 28, name: "Single Form Mattress", category: "bed", price: 1499, size: "Single",
+        specs: [["Mattress Length","188 cm"],["Mattress Width","91 cm"],["Mattress Height","20 cm"],["Base Length","190 cm"],["Base Width","93 cm"],["Base Height","26 cm"],["Total Height","46 cm"],["Weight Capacity","110 kg"],["Spring Count","Bonnel spring system"],["Comfort Layer","Medium-firm foam"],["Fabric","Durable polyester cover"],["Warranty","5 years"]] },
+      { id: 28, name: "Single Form Mattress", category: "bed", price: 1499, size: "Single",
         image: "assets/images/beds/student-bed-set.jpg",
         desc: "Single mattress only. Medium-firm foam comfort in a durable cover — pairs with any single base.",
         badge: "value",
-        specs: [
-          ["Mattress Length", "188 cm"], ["Mattress Width", "91 cm"], ["Mattress Height", "20 cm"],
-          ["Weight Capacity", "110 kg"], ["Spring Count", "Bonnel spring system"],
-          ["Comfort Layer", "Medium-firm foam"], ["Fabric", "Durable polyester cover"],
-          ["Base Included", "No (mattress only)"], ["Warranty", "5 years"]
-        ]
-      },
-      {
-        id: 29, name: "Storage Base", category: "bed", price: 2999, size: "Queen",
+        specs: [["Mattress Length","188 cm"],["Mattress Width","91 cm"],["Mattress Height","20 cm"],["Weight Capacity","110 kg"],["Spring Count","Bonnel spring system"],["Comfort Layer","Medium-firm foam"],["Fabric","Durable polyester cover"],["Base Included","No (mattress only)"],["Warranty","5 years"]] },
+      { id: 29, name: "Storage Base", category: "bed", price: 2999, size: "Queen",
         image: "assets/images/beds/storage-base.jpg",
         desc: "Elegant storage base with integrated drawers beneath. Practical storage meets premium craftsmanship — mattress sold separately.",
         badge: "storage",
-        specs: [
-          ["Base Length", "205 cm"], ["Base Width", "157 cm"], ["Base Height", "38 cm"],
-          ["Drawer Count", "4 spacious drawers"],
-          ["Drawer Dimensions", "45cm x 60cm x 20cm each"],
-          ["Weight Capacity", "200 kg per side"], ["Fabric", "Premium upholstered finish"],
-          ["Mattress Included", "No (base only)"], ["Warranty", "12 years"]
-        ]
-      },
+        specs: [["Base Length","205 cm"],["Base Width","157 cm"],["Base Height","38 cm"],["Drawer Count","4 spacious drawers"],["Drawer Dimensions","45cm x 60cm x 20cm each"],["Weight Capacity","200 kg per side"],["Fabric","Premium upholstered finish"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
 
       /* ==================== HEADBOARDS ==================== */
-      {
-        id: 30, name: "King Headboard — Vertical / Horizontal / Diamond", category: "headboard", price: 1499, size: "King",
+      { id: 30, name: "King Headboard — Vertical / Horizontal / Diamond", category: "headboard", price: 1499, size: "King",
         image: "assets/images/headboards/king-diamond.jpg",
-        desc: "Statement king headboard available in three styling options: vertical channel, horizontal line, or diamond-tufted. Choose the look that matches your bedroom sanctuary.",
+        desc: "Statement king headboard available in three styling options: vertical channel, horizontal line, or diamond-tufted.",
         badge: "3 styles",
-        specs: [
-          ["Width", "190 cm"], ["Height", "140–150 cm (style dependent)"], ["Depth", "10–14 cm"],
-          ["Frame Material", "Solid timber frame"], ["Upholstery", "Premium linen-blend fabric"],
-          ["Styles Available", "Vertical · Horizontal · Diamond"],
-          ["Mounting", "Wall-mounted with brackets included"],
-          ["Compatibility", "Fits all king beds 183–190 cm wide"], ["Warranty", "10 years"]
-        ]
-      },
-      {
-        id: 31, name: "Queen Diamond Headboard", category: "headboard", price: 999, size: "Queen",
+        specs: [["Width","190 cm"],["Height","140–150 cm"],["Depth","10–14 cm"],["Frame Material","Solid timber"],["Upholstery","Premium linen-blend"],["Styles Available","Vertical · Horizontal · Diamond"],["Mounting","Wall-mounted"],["Compatibility","Fits king beds 183–190 cm"],["Warranty","10 years"]] },
+      { id: 31, name: "Queen Diamond Headboard", category: "headboard", price: 999, size: "Queen",
         image: "assets/images/headboards/queen-diamond.jpg",
-        desc: "Exquisite queen headboard showcasing diamond-tufted artistry. Each fold hand-arranged by our artisans, creating a three-dimensional pattern that catches light beautifully.",
+        desc: "Exquisite queen headboard with diamond-tufted artistry hand-arranged by our artisans.",
         badge: "artisan",
-        specs: [
-          ["Width", "160 cm"], ["Height", "145 cm"], ["Depth", "14 cm"],
-          ["Frame Material", "Solid timber frame"],
-          ["Upholstery", "Premium velvet with diamond tufting"],
-          ["Padding", "7 cm premium foam, hand-tufted"],
-          ["Mounting", "Wall-mounted with brackets included"],
-          ["Compatibility", "Fits all queen beds 152–160 cm wide"], ["Warranty", "10 years"]
-        ]
-      },
-      {
-        id: 32, name: "Queen Headboard — Vertical / Horizontal", category: "headboard", price: 899, size: "Queen",
+        specs: [["Width","160 cm"],["Height","145 cm"],["Depth","14 cm"],["Frame Material","Solid timber"],["Upholstery","Premium velvet"],["Padding","7 cm premium foam"],["Mounting","Wall-mounted"],["Compatibility","Fits queen beds 152–160 cm"],["Warranty","10 years"]] },
+      { id: 32, name: "Queen Headboard — Vertical / Horizontal", category: "headboard", price: 899, size: "Queen",
         image: "assets/images/headboards/queen-lined.jpg",
-        desc: "Understated queen headboard in either vertical channel or horizontal line styling. Clean lines, quality lining, and quiet sophistication.",
+        desc: "Understated queen headboard in vertical channel or horizontal line styling.",
         badge: "2 styles",
-        specs: [
-          ["Width", "160 cm"], ["Height", "130 cm"], ["Depth", "10 cm"],
-          ["Frame Material", "Solid timber frame"],
-          ["Upholstery", "Smooth fabric (multiple colours available)"],
-          ["Styles Available", "Vertical · Horizontal"],
-          ["Mounting", "Wall-mounted with brackets included"],
-          ["Compatibility", "Fits all queen beds 152–160 cm wide"], ["Warranty", "8 years"]
-        ]
-      },
-      {
-        id: 33, name: "Double Headboard — Vertical / Horizontal", category: "headboard", price: 899, size: "Double",
+        specs: [["Width","160 cm"],["Height","130 cm"],["Depth","10 cm"],["Frame Material","Solid timber"],["Upholstery","Smooth fabric"],["Styles Available","Vertical · Horizontal"],["Mounting","Wall-mounted"],["Compatibility","Fits queen beds 152–160 cm"],["Warranty","8 years"]] },
+      { id: 33, name: "Double Headboard — Vertical / Horizontal", category: "headboard", price: 899, size: "Double",
         image: "assets/images/headboards/double-lineup.jpg",
-        desc: "Contemporary double headboard in either vertical channel or horizontal line styling. Adds visual width and provides comfortable backrest support.",
+        desc: "Contemporary double headboard in vertical channel or horizontal line styling.",
         badge: "modern",
-        specs: [
-          ["Width", "145 cm"], ["Height", "120 cm"], ["Depth", "10 cm"],
-          ["Frame Material", "Solid timber frame"],
-          ["Upholstery", "Contemporary fabric"],
-          ["Styles Available", "Vertical · Horizontal"],
-          ["Mounting", "Wall-mounted with brackets included"],
-          ["Compatibility", "Fits all double beds 137–145 cm wide"], ["Warranty", "8 years"]
-        ]
-      },
-      {
-        id: 34, name: "Three Quarter Headboard — Vertical / Horizontal", category: "headboard", price: 699, size: "Three Quarter",
+        specs: [["Width","145 cm"],["Height","120 cm"],["Depth","10 cm"],["Frame Material","Solid timber"],["Upholstery","Contemporary fabric"],["Styles Available","Vertical · Horizontal"],["Mounting","Wall-mounted"],["Compatibility","Fits double beds 137–145 cm"],["Warranty","8 years"]] },
+      { id: 34, name: "Three Quarter Headboard — Vertical / Horizontal", category: "headboard", price: 699, size: "Three Quarter",
         image: "assets/images/headboards/three-quarter.jpg",
-        desc: "Perfectly scaled headboard for three-quarter beds. Compact yet stylish, bringing cohesion to smaller bedroom spaces.",
+        desc: "Perfectly scaled headboard for three-quarter beds.",
         badge: "compact",
-        specs: [
-          ["Width", "115 cm"], ["Height", "115 cm"], ["Depth", "8 cm"],
-          ["Frame Material", "Solid timber frame"], ["Upholstery", "Durable fabric"],
-          ["Styles Available", "Vertical · Horizontal"],
-          ["Mounting", "Wall-mounted with brackets included"],
-          ["Compatibility", "Fits three-quarter beds 107–115 cm wide"], ["Warranty", "8 years"]
-        ]
-      },
-      {
-        id: 35, name: "Single Headboard — Vertical / Horizontal", category: "headboard", price: 699, size: "Single",
+        specs: [["Width","115 cm"],["Height","115 cm"],["Depth","8 cm"],["Frame Material","Solid timber"],["Upholstery","Durable fabric"],["Styles Available","Vertical · Horizontal"],["Mounting","Wall-mounted"],["Compatibility","Fits 3/4 beds 107–115 cm"],["Warranty","8 years"]] },
+      { id: 35, name: "Single Headboard — Vertical / Horizontal", category: "headboard", price: 699, size: "Single",
         image: "assets/images/headboards/single.jpg",
-        desc: "Charming single headboard for children's rooms or guest spaces. Soft, durable fabric and easy wall-mounting make it both safe and practical.",
+        desc: "Charming single headboard for children's rooms or guest spaces.",
         badge: "kids",
-        specs: [
-          ["Width", "98 cm"], ["Height", "110 cm"], ["Depth", "8 cm"],
-          ["Frame Material", "Solid timber with rounded edges"],
-          ["Upholstery", "Durable, easy-clean fabric"],
-          ["Styles Available", "Vertical · Horizontal"],
-          ["Mounting", "Wall-mounted with brackets included"],
-          ["Compatibility", "Fits single beds 91–98 cm wide"], ["Warranty", "8 years"]
-        ]
-      },
+        specs: [["Width","98 cm"],["Height","110 cm"],["Depth","8 cm"],["Frame Material","Solid timber"],["Upholstery","Durable easy-clean fabric"],["Styles Available","Vertical · Horizontal"],["Mounting","Wall-mounted"],["Compatibility","Fits single beds 91–98 cm"],["Warranty","8 years"]] },
 
       /* ==================== COUCHES ==================== */
-      {
-        id: 36, name: "L Shape Seater Couch", category: "couch", price: 3499, size: "L-Shape",
+      { id: 36, name: "L Shape Seater Couch", category: "couch", price: 3499, size: "L-Shape",
         image: "assets/images/couches/l-shape.jpg",
-        desc: "Sprawling L-shaped couch that defines comfort in your living space. Deep seats, feather-blend cushions, and premium upholstery invite you to lounge, entertain, and unwind.",
+        desc: "Sprawling L-shaped couch that defines comfort. Deep seats, feather-blend cushions, and premium upholstery.",
         badge: "grand",
-        specs: [
-          ["Overall Length", "280 cm (long side)"], ["Overall Width", "200 cm (short side)"],
-          ["Seat Depth", "90 cm"], ["Seat Height", "45 cm"], ["Backrest Height", "85 cm"],
-          ["Frame Material", "Solid timber with reinforced corners"],
-          ["Cushion Fill", "Feather-blend with foam core"],
-          ["Upholstery", "Premium fabric (multiple colours available)"],
-          ["Seating Capacity", "5–6 persons"], ["Warranty", "10 years"]
-        ]
-      },
-      {
-        id: 37, name: "Double Seater Couch", category: "couch", price: 1699, size: "2-Seater",
+        specs: [["Overall Length","280 cm"],["Overall Width","200 cm"],["Seat Depth","90 cm"],["Seat Height","45 cm"],["Backrest Height","85 cm"],["Frame Material","Solid timber"],["Cushion Fill","Feather-blend + foam"],["Upholstery","Premium fabric"],["Seating Capacity","5–6 persons"],["Warranty","10 years"]] },
+      { id: 37, name: "Double Seater Couch", category: "couch", price: 1699, size: "2-Seater",
         image: "assets/images/couches/double-seater.jpg",
-        desc: "Intimate double seater crafted with the same attention to detail as our beds. High-density foam cushions on a solid timber frame, wrapped in luxurious fabric.",
+        desc: "Intimate double seater crafted with the same attention to detail as our beds.",
         badge: "cozy",
-        specs: [
-          ["Overall Length", "180 cm"], ["Overall Width", "90 cm"], ["Seat Depth", "60 cm"],
-          ["Seat Height", "45 cm"], ["Backrest Height", "80 cm"],
-          ["Frame Material", "Solid timber frame"],
-          ["Cushion Fill", "High-density foam"], ["Upholstery", "Premium fabric"],
-          ["Seating Capacity", "2 persons"], ["Warranty", "8 years"]
-        ]
-      },
-      {
-        id: 38, name: "Single Seater Couch", category: "couch", price: 1199, size: "1-Seater",
+        specs: [["Overall Length","180 cm"],["Overall Width","90 cm"],["Seat Depth","60 cm"],["Seat Height","45 cm"],["Backrest Height","80 cm"],["Frame Material","Solid timber"],["Cushion Fill","High-density foam"],["Upholstery","Premium fabric"],["Seating Capacity","2 persons"],["Warranty","8 years"]] },
+      { id: 38, name: "Single Seater Couch", category: "couch", price: 1199, size: "1-Seater",
         image: "assets/images/couches/single-seater.jpg",
-        desc: "The perfect accent chair. Combines ergonomic support with sculptural beauty — ideal for reading nooks, bedroom corners, or as a statement piece in any room.",
+        desc: "The perfect accent chair. Combines ergonomic support with sculptural beauty.",
         badge: "accent",
-        specs: [
-          ["Overall Length", "100 cm"], ["Overall Width", "90 cm"], ["Seat Depth", "58 cm"],
-          ["Seat Height", "45 cm"], ["Backrest Height", "80 cm"],
-          ["Frame Material", "Solid timber frame"],
-          ["Cushion Fill", "High-density foam"], ["Upholstery", "Premium fabric"],
-          ["Seating Capacity", "1 person"], ["Warranty", "8 years"]
-        ]
-      },
+        specs: [["Overall Length","100 cm"],["Overall Width","90 cm"],["Seat Depth","58 cm"],["Seat Height","45 cm"],["Backrest Height","80 cm"],["Frame Material","Solid timber"],["Cushion Fill","High-density foam"],["Upholstery","Premium fabric"],["Seating Capacity","1 person"],["Warranty","8 years"]] },
 
       /* ==================== FURNITURE ==================== */
-      {
-        id: 39, name: "Blanket Storage", category: "furniture", price: 999, size: "Standard",
+      { id: 39, name: "Blanket Storage", category: "furniture", price: 999, size: "Standard",
         image: "assets/images/furniture/blanket-storage.jpg",
-        desc: "Beautifully crafted blanket storage chest with cedar lining. Keeps your linens fresh and organized while serving as an elegant bedroom furnishing with a padded top.",
+        desc: "Beautifully crafted blanket storage chest with cedar lining. Padded top for extra seating.",
         badge: "cedar lined",
-        specs: [
-          ["Length", "100 cm"], ["Width", "50 cm"], ["Height", "50 cm"],
-          ["Internal Depth", "40 cm"], ["Material", "Solid wood with cedar lining"],
-          ["Top", "Padded upholstered seat"], ["Capacity", "Approx. 150 litres"],
-          ["Weight", "18 kg"], ["Warranty", "5 years"]
-        ]
-      },
-      {
-        id: 40, name: "Chest of Drawers", category: "furniture", price: 1499, size: "6-Drawer",
+        specs: [["Length","100 cm"],["Width","50 cm"],["Height","50 cm"],["Internal Depth","40 cm"],["Material","Solid wood + cedar lining"],["Top","Padded upholstered seat"],["Capacity","Approx. 150 litres"],["Weight","18 kg"],["Warranty","5 years"]] },
+      { id: 40, name: "Chest of Drawers", category: "furniture", price: 1499, size: "6-Drawer",
         image: "assets/images/furniture/chest-of-drawer.jpg",
-        desc: "Spacious multi-drawer chest combining classic design with modern functionality. Soft-close drawers, brushed gold handles, and a rich wood finish bring organized luxury to your dressing area.",
+        desc: "Spacious multi-drawer chest with soft-close drawers, brushed gold handles, and rich wood finish.",
         badge: "premium",
-        specs: [
-          ["Length", "120 cm"], ["Width", "50 cm"], ["Height", "80 cm"],
-          ["Drawer Count", "6 drawers (3 small, 3 large)"],
-          ["Small Drawer", "35cm x 40cm x 15cm each"],
-          ["Large Drawer", "35cm x 40cm x 25cm each"],
-          ["Material", "Solid wood with veneer finish"],
-          ["Hardware", "Soft-close, brushed gold handles"],
-          ["Weight", "45 kg"], ["Warranty", "5 years"]
-        ]
-      },
-      {
-        id: 41, name: "Pedestal (Wooden)", category: "furniture", price: 750, size: "3-Drawer",
+        specs: [["Length","120 cm"],["Width","50 cm"],["Height","80 cm"],["Drawer Count","6 drawers"],["Small Drawer","35 x 40 x 15 cm"],["Large Drawer","35 x 40 x 25 cm"],["Material","Solid wood + veneer"],["Hardware","Soft-close brushed gold"],["Weight","45 kg"],["Warranty","5 years"]] },
+      { id: 41, name: "Pedestal (Wooden)", category: "furniture", price: 750, size: "3-Drawer",
         image: "assets/images/furniture/pedestal.jpg",
-        desc: "Compact three-drawer wooden pedestal that fits neatly beside any bed. Perfect nightstand with ample storage for bedtime essentials, finished to match our headboard collection.",
+        desc: "Compact three-drawer wooden pedestal. Perfect nightstand with ample storage.",
         badge: "matching",
-        specs: [
-          ["Length", "50 cm"], ["Width", "45 cm"], ["Height", "60 cm"],
-          ["Drawer Count", "3 drawers"],
-          ["Drawer Dimensions", "40cm x 38cm x 15cm each"],
-          ["Material", "Solid wood with matching finish"],
-          ["Hardware", "Brushed gold handles"],
-          ["Weight", "15 kg"], ["Warranty", "5 years"]
-        ]
-      },
-      {
-        id: 42, name: "Pedestal (Velvet)", category: "furniture", price: 500, size: "3-Drawer",
+        specs: [["Length","50 cm"],["Width","45 cm"],["Height","60 cm"],["Drawer Count","3 drawers"],["Drawer Dimensions","40 x 38 x 15 cm"],["Material","Solid wood"],["Hardware","Brushed gold handles"],["Weight","15 kg"],["Warranty","5 years"]] },
+      { id: 42, name: "Pedestal (Velvet)", category: "furniture", price: 500, size: "3-Drawer",
         image: "assets/images/furniture/pedestal.jpg",
-        desc: "Velvet-upholstered pedestal with three drawers. Soft to the touch and elegantly styled — a luxurious bedside companion.",
+        desc: "Velvet-upholstered pedestal with three drawers. Soft to the touch and elegantly styled.",
         badge: "velvet",
-        specs: [
-          ["Length", "50 cm"], ["Width", "45 cm"], ["Height", "60 cm"],
-          ["Drawer Count", "3 drawers"],
-          ["Drawer Dimensions", "40cm x 38cm x 15cm each"],
-          ["Material", "Timber frame with velvet upholstery"],
-          ["Hardware", "Brushed gold handles"],
-          ["Weight", "14 kg"], ["Warranty", "5 years"]
-        ]
-      }
+        specs: [["Length","50 cm"],["Width","45 cm"],["Height","60 cm"],["Drawer Count","3 drawers"],["Drawer Dimensions","40 x 38 x 15 cm"],["Material","Timber + velvet upholstery"],["Hardware","Brushed gold handles"],["Weight","14 kg"],["Warranty","5 years"]] }
     ];
 
-    let currentFilter = 'all';
-    let currentSort = 'default';
+    /* ============================================================
+       STATE
+       ============================================================ */
+    const state = {
+      filter: 'all',
+      sort: 'default',
+      search: '',
+      sizes: new Set(),
+      badges: new Set(),
+      priceMin: 0,
+      priceMax: 7000,
+      view: 'grid',
+      favorites: new Set(JSON.parse(localStorage.getItem('harmony_favs') || '[]')),
+      drawerPriceMin: 0,
+      drawerPriceMax: 7000
+    };
 
-    function renderProducts() {
-      let filtered = [...products];
-      if (currentFilter !== 'all') filtered = filtered.filter(p => p.category === currentFilter);
-      if (currentSort === 'price-low') filtered.sort((a,b) => a.price - b.price);
-      if (currentSort === 'price-high') filtered.sort((a,b) => b.price - a.price);
+    /* ============================================================
+       RENDER
+       ============================================================ */
+    const grid = document.getElementById('productsGrid');
+    const emptyState = document.getElementById('emptyState');
+    const resultsCount = document.getElementById('resultsCount');
+    const activeFiltersEl = document.getElementById('activeFilters');
 
-      const grid = document.getElementById('productsGrid');
-      grid.innerHTML = filtered.map(product => `
-        <div class="product-card" onclick="openProductModal(${product.id})">
+    function filterProducts() {
+      let list = [...products];
+
+      if (state.filter !== 'all') list = list.filter(p => p.category === state.filter);
+      if (state.sizes.size)     list = list.filter(p => state.sizes.has(p.size));
+      if (state.badges.size)    list = list.filter(p => state.badges.has(p.badge));
+      if (state.search.trim()) {
+        const q = state.search.trim().toLowerCase();
+        list = list.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+      }
+      list = list.filter(p => p.price >= state.priceMin && p.price <= state.priceMax);
+
+      if (state.sort === 'price-low')  list.sort((a,b) => a.price - b.price);
+      if (state.sort === 'price-high') list.sort((a,b) => b.price - a.price);
+      if (state.sort === 'name')       list.sort((a,b) => a.name.localeCompare(b.name));
+
+      return list;
+    }
+
+    function skeletonHTML(n = 8) {
+      return Array.from({ length: n }).map(() => `
+        <div class="product-card skeleton-card">
+          <div class="skeleton-img"></div>
+          <div class="product-info">
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line short"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function productCardHTML(product, index) {
+      const isFav = state.favorites.has(product.id);
+      const icon = product.category === 'bed' ? 'bed'
+                 : product.category === 'headboard' ? 'grip-lines'
+                 : product.category === 'couch' ? 'couch' : 'box';
+      return `
+        <div class="product-card ${state.view === 'list' ? 'product-card-list' : ''}"
+             data-id="${product.id}"
+             data-cat="${product.category}"
+             style="animation-delay: ${Math.min(index * 0.04, 0.4)}s">
           <div class="product-image">
-            <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.style.display='none'; this.parentElement.querySelector('.image-fallback').style.display='flex';">
-            <div class="image-fallback" style="display:none; width:100%; height:100%; background: linear-gradient(135deg, #f0ebe3, #f5efe6); align-items:center; justify-content:center; font-size:3rem; color:#C6A45C; flex-direction:column; gap:0.5rem;">
-              <i class="fas fa-${product.category === 'bed' ? 'bed' : product.category === 'headboard' ? 'grip-lines' : product.category === 'couch' ? 'couch' : 'box'}"></i>
-              <span style="font-size:0.7rem; font-family:'Inter',sans-serif; color:#999;">image coming soon</span>
+            <img src="${product.image}" alt="${product.name}" loading="lazy"
+                 onerror="this.style.display='none'; this.parentElement.querySelector('.image-fallback').style.display='flex';">
+            <div class="image-fallback" style="display:none">
+              <i class="fas fa-${icon}"></i>
+              <span>image coming soon</span>
             </div>
             <div class="product-badge">${product.badge}</div>
+            <button class="fav-btn ${isFav ? 'active' : ''}"
+                    data-fav-id="${product.id}"
+                    aria-label="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
+              <i class="${isFav ? 'fas' : 'far'} fa-heart"></i>
+            </button>
+            <div class="quick-view-overlay">
+              <button class="quick-view-btn" data-quick-id="${product.id}">
+                <i class="fas fa-eye"></i> quick view
+              </button>
+            </div>
           </div>
           <div class="product-info">
             <div class="product-category">${product.category}</div>
@@ -708,15 +609,326 @@ Shop No1 <br>+27 82 233 6883</p></div>
             <p class="product-desc">${product.desc}</p>
             <div class="product-price">R${product.price.toLocaleString()} <small>${product.size}</small></div>
             <div class="product-actions" onclick="event.stopPropagation();">
-              <button class="btn-card" onclick="openProductModal(${product.id})">view details →</button>
+              <button class="btn-card" data-view-id="${product.id}">view details →</button>
               <a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(product.name)}%20(R${product.price}%20-%20${product.size})." target="_blank" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat</a>
             </div>
           </div>
         </div>
-      `).join('');
+      `;
     }
 
-    // Modal functions
+    function renderActiveFilters() {
+      const pills = [];
+
+      if (state.search.trim()) pills.push({ key: 'search', label: `"${state.search.trim()}"` });
+      if (state.filter !== 'all') pills.push({ key: 'filter', label: state.filter });
+      state.sizes.forEach(s => pills.push({ key: 'size', value: s, label: s }));
+      state.badges.forEach(b => pills.push({ key: 'badge', value: b, label: b }));
+      if (state.priceMin > 0 || state.priceMax < 7000) {
+        pills.push({ key: 'price', label: `R${state.priceMin.toLocaleString()} – R${state.priceMax.toLocaleString()}` });
+      }
+
+      activeFiltersEl.innerHTML = pills.map(p => `
+        <button class="active-pill" data-pill-key="${p.key}" data-pill-value="${p.value || ''}">
+          ${p.label} <i class="fas fa-times"></i>
+        </button>
+      `).join('');
+
+      // Update badge count on mobile button
+      const badge = document.getElementById('filtersBadge');
+      const nonCat = pills.length;
+      if (nonCat > 0) { badge.hidden = false; badge.textContent = nonCat; }
+      else { badge.hidden = true; }
+
+      // Update search clear button
+      document.getElementById('searchClear').style.display = state.search ? 'flex' : 'none';
+    }
+
+    function render() {
+      grid.innerHTML = skeletonHTML(8);
+
+      // Simulated async feel
+      setTimeout(() => {
+        const list = filterProducts();
+
+        if (!list.length) {
+          grid.innerHTML = '';
+          emptyState.hidden = false;
+        } else {
+          emptyState.hidden = true;
+          grid.className = state.view === 'list' ? 'products-grid list-view' : 'products-grid';
+          grid.innerHTML = list.map((p, i) => productCardHTML(p, i)).join('');
+        }
+
+        resultsCount.textContent = list.length === products.length
+          ? `Showing all ${products.length} items`
+          : `Showing ${list.length} of ${products.length} items`;
+
+        renderActiveFilters();
+      }, 180);
+    }
+
+    /* ============================================================
+       EVENT DELEGATION
+       ============================================================ */
+    grid.addEventListener('click', (e) => {
+      // Favorite button
+      const favBtn = e.target.closest('.fav-btn');
+      if (favBtn) {
+        e.stopPropagation();
+        const id = parseInt(favBtn.dataset.favId, 10);
+        toggleFavorite(id, favBtn);
+        return;
+      }
+
+      // Quick view
+      const qv = e.target.closest('.quick-view-btn');
+      if (qv) {
+        e.stopPropagation();
+        openProductModal(parseInt(qv.dataset.quickId, 10));
+        return;
+      }
+
+      // View details button
+      const vd = e.target.closest('[data-view-id]');
+      if (vd) {
+        e.stopPropagation();
+        openProductModal(parseInt(vd.dataset.viewId, 10));
+        return;
+      }
+
+      // Card click (but not on the WhatsApp link inside)
+      const card = e.target.closest('.product-card');
+      if (card && !e.target.closest('a')) {
+        openProductModal(parseInt(card.dataset.id, 10));
+      }
+    });
+
+    function toggleFavorite(id, btn) {
+      if (state.favorites.has(id)) state.favorites.delete(id);
+      else state.favorites.add(id);
+      localStorage.setItem('harmony_favs', JSON.stringify([...state.favorites]));
+      btn.classList.toggle('active');
+      const icon = btn.querySelector('i');
+      icon.classList.toggle('fas');
+      icon.classList.toggle('far');
+      updateFavCount();
+    }
+
+    function updateFavCount() {
+      document.getElementById('favCount').textContent = state.favorites.size;
+    }
+
+    /* ============================================================
+       FILTER HANDLERS
+       ============================================================ */
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        state.filter = this.dataset.filter;
+        render();
+      });
+    });
+
+    document.getElementById('sortSelect').addEventListener('change', function () {
+      state.sort = this.value;
+      render();
+    });
+
+    // Search
+    const searchInput = document.getElementById('searchInput');
+    let searchTimer;
+    searchInput.addEventListener('input', function () {
+      clearTimeout(searchTimer);
+      const v = this.value;
+      searchTimer = setTimeout(() => {
+        state.search = v;
+        render();
+      }, 220);
+    });
+    document.getElementById('searchClear').addEventListener('click', () => {
+      searchInput.value = '';
+      state.search = '';
+      render();
+    });
+
+    // Keyboard: "/" to focus search
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== searchInput && !e.target.matches('input, textarea')) {
+        e.preventDefault();
+        searchInput.focus();
+      }
+    });
+
+    // View toggle
+    document.querySelectorAll('.view-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        state.view = this.dataset.view;
+        render();
+      });
+    });
+
+    // Nav search + fav buttons just scroll into view / show favs
+    document.getElementById('navSearchBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => searchInput.focus(), 400);
+    });
+    document.getElementById('navFavBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      if (state.favorites.size === 0) {
+        alert('You haven\'t saved any favorites yet. Tap the ♥ on any product to save it.');
+        return;
+      }
+      // Filter to only favorites by clearing other filters
+      state.filter = 'all';
+      state.sizes.clear();
+      state.badges.clear();
+      state.search = '';
+      searchInput.value = '';
+      state.priceMin = 0;
+      state.priceMax = 7000;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+      // Custom filter: only favs
+      const favs = new Set(state.favorites);
+      const originalFilter = filterProducts;
+      grid.innerHTML = skeletonHTML(4);
+      setTimeout(() => {
+        const list = products.filter(p => favs.has(p.id));
+        grid.innerHTML = list.map((p, i) => productCardHTML(p, i)).join('');
+        resultsCount.textContent = `Showing ${list.length} favorite${list.length === 1 ? '' : 's'}`;
+        renderActiveFilters();
+      }, 180);
+    });
+
+    // Active filter pills
+    activeFiltersEl.addEventListener('click', (e) => {
+      const pill = e.target.closest('.active-pill');
+      if (!pill) return;
+      const key = pill.dataset.pillKey;
+      const value = pill.dataset.pillValue;
+
+      if (key === 'search') {
+        searchInput.value = '';
+        state.search = '';
+      } else if (key === 'filter') {
+        state.filter = 'all';
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+      } else if (key === 'size') {
+        state.sizes.delete(value);
+        document.querySelectorAll('.size-chip').forEach(c => {
+          if (c.dataset.size === value) c.classList.remove('active');
+        });
+      } else if (key === 'badge') {
+        state.badges.delete(value);
+        document.querySelectorAll('.size-chip').forEach(c => {
+          if (c.dataset.badge === value) c.classList.remove('active');
+        });
+      } else if (key === 'price') {
+        state.priceMin = 0;
+        state.priceMax = 7000;
+        document.getElementById('priceMin').value = 0;
+        document.getElementById('priceMax').value = 7000;
+        updatePriceLabels();
+      }
+      render();
+    });
+
+    // Mobile drawer
+    const drawer = document.getElementById('filterDrawer');
+    const overlay = document.getElementById('drawerOverlay');
+    function openDrawer() {
+      drawer.classList.add('open');
+      overlay.classList.add('visible');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      overlay.classList.remove('visible');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('filtersBtn').addEventListener('click', openDrawer);
+    document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+
+    // Price range inputs
+    const pMin = document.getElementById('priceMin');
+    const pMax = document.getElementById('priceMax');
+    function updatePriceLabels() {
+      document.getElementById('priceMinLabel').textContent = 'R' + parseInt(pMin.value, 10).toLocaleString();
+      document.getElementById('priceMaxLabel').textContent = 'R' + parseInt(pMax.value, 10).toLocaleString();
+    }
+    pMin.addEventListener('input', () => {
+      if (parseInt(pMin.value, 10) > parseInt(pMax.value, 10)) pMin.value = pMax.value;
+      updatePriceLabels();
+    });
+    pMax.addEventListener('input', () => {
+      if (parseInt(pMax.value, 10) < parseInt(pMin.value, 10)) pMax.value = pMin.value;
+      updatePriceLabels();
+    });
+
+    // Size chips in drawer
+    document.querySelectorAll('.size-chip[data-size]').forEach(chip => {
+      chip.addEventListener('click', function () {
+        this.classList.toggle('active');
+      });
+    });
+    document.querySelectorAll('.size-chip[data-badge]').forEach(chip => {
+      chip.addEventListener('click', function () {
+        this.classList.toggle('active');
+      });
+    });
+
+    // Apply drawer filters
+    document.getElementById('drawerApply').addEventListener('click', () => {
+      state.sizes.clear();
+      document.querySelectorAll('.size-chip[data-size].active').forEach(c => state.sizes.add(c.dataset.size));
+      state.badges.clear();
+      document.querySelectorAll('.size-chip[data-badge].active').forEach(c => state.badges.add(c.dataset.badge));
+      state.priceMin = parseInt(pMin.value, 10);
+      state.priceMax = parseInt(pMax.value, 10);
+      closeDrawer();
+      render();
+    });
+
+    // Reset in drawer
+    document.getElementById('drawerReset').addEventListener('click', () => {
+      document.querySelectorAll('.size-chip.active').forEach(c => c.classList.remove('active'));
+      pMin.value = 0;
+      pMax.value = 7000;
+      updatePriceLabels();
+    });
+
+    // Reset all from empty state
+    document.getElementById('resetFiltersBtn').addEventListener('click', () => {
+      state.filter = 'all';
+      state.search = '';
+      state.sizes.clear();
+      state.badges.clear();
+      state.priceMin = 0;
+      state.priceMax = 7000;
+      state.sort = 'default';
+      searchInput.value = '';
+      document.getElementById('sortSelect').value = 'default';
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+      document.querySelectorAll('.size-chip.active').forEach(c => c.classList.remove('active'));
+      pMin.value = 0;
+      pMax.value = 7000;
+      updatePriceLabels();
+      render();
+    });
+
+    /* ============================================================
+       MODAL
+       ============================================================ */
     function openProductModal(productId) {
       const product = products.find(p => p.id === productId);
       if (!product) return;
@@ -727,15 +939,11 @@ Shop No1 <br>+27 82 233 6883</p></div>
       document.getElementById('modalPrice').innerHTML = `R${product.price.toLocaleString()} <small>${product.size}</small>`;
       document.getElementById('modalDescription').textContent = product.desc;
 
-      // Build specs table
       let specsHTML = '<h4>Specifications</h4><table>';
-      product.specs.forEach(spec => {
-        specsHTML += `<tr><td>${spec[0]}</td><td>${spec[1]}</td></tr>`;
-      });
+      product.specs.forEach(spec => { specsHTML += `<tr><td>${spec[0]}</td><td>${spec[1]}</td></tr>`; });
       specsHTML += '</table>';
       document.getElementById('modalSpecs').innerHTML = specsHTML;
 
-      // Set modal image with fallback
       const iconMap = { bed: 'bed', headboard: 'grip-lines', couch: 'couch', furniture: 'box' };
       document.getElementById('modalImage').innerHTML = `
         <img src="${product.image}" alt="${product.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -745,8 +953,7 @@ Shop No1 <br>+27 82 233 6883</p></div>
         </div>
       `;
 
-      // Update buttons
-      document.getElementById('modalInquire').onclick = function() {
+      document.getElementById('modalInquire').onclick = function () {
         alert(`✨ Thank you for your interest in the ${product.name}. A sleep consultant will contact you shortly.`);
       };
       document.getElementById('modalWhatsApp').href = `https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(product.name)}%20(R${product.price}%20-%20${product.size}).`;
@@ -759,34 +966,25 @@ Shop No1 <br>+27 82 233 6883</p></div>
       document.getElementById('productModal').classList.remove('active');
       document.body.style.overflow = '';
     }
-
     document.getElementById('modalClose').addEventListener('click', closeProductModal);
-    document.getElementById('productModal').addEventListener('click', function(e) {
+    document.getElementById('productModal').addEventListener('click', function (e) {
       if (e.target === this) closeProductModal();
     });
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeProductModal();
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeProductModal();
+        if (drawer.classList.contains('open')) closeDrawer();
+      }
     });
 
-    // Filter and sort handlers
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        currentFilter = this.dataset.filter;
-        renderProducts();
-      });
-    });
+    /* ============================================================
+       INIT
+       ============================================================ */
+    updateFavCount();
+    updatePriceLabels();
+    render();
 
-    document.getElementById('sortSelect').addEventListener('change', function() {
-      currentSort = this.value;
-      renderProducts();
-    });
-
-    renderProducts();
-
-    // Mobile menu
+    // Mobile menu (existing)
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
     mobileMenuBtn.addEventListener('click', () => {
@@ -796,5 +994,167 @@ Shop No1 <br>+27 82 233 6883</p></div>
       icon.classList.toggle('fa-times');
     });
   </script>
+  <script>
+/* ============================================================
+   PRODUCTS PAGE INTERACTIVE INTRO
+   ============================================================ */
+
+/* ---------- 1. Floating particles ---------- */
+(function spawnParticles() {
+  const wrap = document.getElementById('phParticles');
+  if (!wrap) return;
+  const count = window.innerWidth < 640 ? 8 : 18;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('span');
+    p.className = 'ph-particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.bottom = (Math.random() * 40) + '%';
+    p.style.animationDuration = (5 + Math.random() * 6).toFixed(1) + 's';
+    p.style.animationDelay = (Math.random() * 6).toFixed(1) + 's';
+    const size = (3 + Math.random() * 4).toFixed(1);
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    wrap.appendChild(p);
+  }
+})();
+
+/* ---------- 2. Count-up animation for stat strip ---------- */
+(function initCounters() {
+  const counters = document.querySelectorAll('.ph-stat-num[data-count]');
+  if (!counters.length) return;
+
+  const animate = (el) => {
+    const target = parseInt(el.dataset.count, 10);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1400;
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = target + suffix;
+    };
+    requestAnimationFrame(tick);
+  };
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        animate(e.target);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  counters.forEach((c) => io.observe(c));
+})();
+
+/* ---------- 3. Smooth scroll for browse / scroll cue ---------- */
+function scrollToGrid() {
+  const grid = document.getElementById('productsGrid');
+  if (!grid) return;
+  const top = grid.getBoundingClientRect().top + window.scrollY - 100;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+document.getElementById('browseCollectionBtn')?.addEventListener('click', scrollToGrid);
+document.getElementById('phScrollCue')?.addEventListener('click', scrollToGrid);
+
+/* ---------- 4. Tip bubble (appears after 2s, dismissible) ---------- */
+(function tipBubble() {
+  const tip = document.getElementById('phTip');
+  const closeBtn = document.getElementById('phTipClose');
+  if (!tip) return;
+  if (sessionStorage.getItem('harmony_tip_dismissed')) return;
+
+  setTimeout(() => tip.classList.add('visible'), 2200);
+
+  const dismiss = () => {
+    tip.classList.remove('visible');
+    sessionStorage.setItem('harmony_tip_dismissed', '1');
+  };
+  closeBtn?.addEventListener('click', dismiss);
+
+  // Auto-dismiss after 8s
+  setTimeout(dismiss, 10000);
+})();
+
+/* ---------- 5. Scroll progress bar ---------- */
+(function scrollProgress() {
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  let ticking = false;
+  const update = () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+    bar.style.width = Math.min(pct, 100) + '%';
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+  update();
+})();
+
+/* ---------- 6. Reveal-on-scroll for product cards ---------- */
+(function revealOnScroll() {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  // Re-apply whenever products are rendered
+  const applyReveal = () => {
+    document.querySelectorAll('.product-card').forEach((card, i) => {
+      if (card.classList.contains('reveal')) return;
+      card.classList.add('reveal');
+      // stagger
+      card.style.transitionDelay = Math.min(i * 0.035, 0.4) + 's';
+      io.observe(card);
+    });
+  };
+
+  applyReveal();
+
+  // Re-run when products re-render (filter, sort, search)
+  const grid = document.getElementById('productsGrid');
+  if (grid) {
+    const mo = new MutationObserver(() => applyReveal());
+    mo.observe(grid, { childList: true });
+  }
+})();
+
+/* ---------- 7. Auto-hide hero on deep scroll (parallax fade) ---------- */
+(function heroParallax() {
+  const hero = document.getElementById('productsHero');
+  if (!hero) return;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const max = hero.offsetHeight;
+        const progress = Math.min(y / max, 1);
+        hero.style.setProperty('--scroll-fade', progress);
+        // Subtle fade of title as user scrolls
+        const title = hero.querySelector('.ph-title');
+        if (title) {
+          title.style.transform = `translateY(${progress * 30}px)`;
+          title.style.opacity = String(1 - progress * 0.9);
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+</script>
 </body>
 </html>

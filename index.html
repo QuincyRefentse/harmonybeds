@@ -2,129 +2,186 @@
 <html lang="en">
 <head>
 
-  <!-- Favicon -->
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon_io/apple-touch-icon.png">
-<link rel="manifest" href="assets/favicon_io/site.webmanifest">
-<meta name="theme-color" content="#C6A45C">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="assets/favicon_io/site.webmanifest">
+  <meta name="theme-color" content="#C6A45C">
 
-<meta name="google-site-verification" content="8mqSP0ypPEWGCpImANigYRcEa9i1e_xzQrG6p4oRkgg" />
+  <meta name="google-site-verification" content="8mqSP0ypPEWGCpImANigYRcEa9i1e_xzQrG6p4oRkgg" />
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Harmony Rest & Comfort Beds - South Africa's premier luxury bed artisans. Handcrafted sanctuary beds with 15-year warranty.">
-  <title>Harmony Rest | Artisan Luxury Beds South Africa</title>
+  <meta name="description" content="Harmony Rest & Comfort Beds — South Africa's premier artisan bed factory. Handcrafted beds, mattresses, headboards & couches. Summer sale now on.">
+  <title>Harmony Rest & Comfort Beds | Artisan Beds, Mattresses & Couches | SA</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+
+  <!-- ============ ANNOUNCEMENT BAR ============ -->
   <div class="announcement-bar">
-    <span>✨ complimentary white glove delivery + 100-night trial ✨</span>
+    <div class="container announcement-inner">
+      <span><i class="fas fa-map-marker-alt"></i> Visit our showroom · Pretoria Central</span>
+      <a href="tel:+27822336883" class="announcement-phone">
+        <i class="fas fa-phone-alt"></i> +27 82 233 6883
+      </a>
+    </div>
   </div>
 
+  <!-- ============ HEADER ============ -->
   <header>
     <div class="container">
       <nav class="navbar">
-       <a href="index.html" class="logo">
-          <img src="/assets/image-logo.png" alt="Harmony Rest Logo" class="logo-img">
-          
+        <a href="index.html" class="logo">
+          <img src="assets/image-logo.png" alt="Harmony Rest Logo" class="logo-img">
         </a>
         <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
         <ul class="nav-links" id="navLinks">
           <li><a href="index.html" class="active">home</a></li>
-          <li><a href="products.html">collection</a></li>
-          
+          <li><a href="products.html">shop now</a></li>
+          <li><a href="#specials">specials</a></li>
+          <li><a href="#categories">categories</a></li>
+          <li><a href="#showroom">visit us</a></li>
         </ul>
         <div class="nav-icons">
-          <a href="#"><i class="fas fa-search"></i></a>
-          
+          <a href="products.html" aria-label="Search"><i class="fas fa-search"></i></a>
+          <a href="https://wa.me/27822336883" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://wa.me/27822336883?text=Hi%20Harmony%20Rest%2C%20I%27d%20like%20to%20place%20an%20order" target="_blank" aria-label="Order" class="nav-cart">
+            <i class="fas fa-shopping-bag"></i>
+          </a>
         </div>
       </nav>
     </div>
   </header>
 
-  <main>
-   <section class="hero-banner">
-  <a href="products.html" class="hero-banner-link" aria-label="Summer sale — shop premium bed & base sets">
-    <picture>
-      <!-- Mobile / portrait first -->
-      <source
-        media="(max-width: 768px)"
-        srcset="assets/images/banner-mobile.jpg">
-      <!-- Tablet -->
-      <source
-        media="(max-width: 1200px)"
-        srcset="assets/images/banner.jpg">
-      <!-- Desktop default -->
-      <img
-        src="assets/images/banner.jpg"
-        alt="Summer Sale 30% off — Premium Bed & Base Sets featuring King Max Weight"
-        class="hero-banner-img"
-        loading="eager"
-        fetchpriority="high">
-    </picture>
-    <span class="hero-banner-cta">shop the sale →</span>
-  </a>
-</section>
+  <!-- ============ SUB-BAR TRUST LINE ============ -->
+  <div class="sub-bar">
+    <div class="container">
+      <span><i class="fas fa-truck-fast"></i> Complimentary white glove delivery</span>
+      <span><i class="fas fa-moon"></i> 100-night sleep trial</span>
+      <span><i class="fas fa-shield-halved"></i> Up to 15-year warranty</span>
+    </div>
+  </div>
 
-    <section class="featured-collection">
+  <main>
+
+    <!-- ============ ✅ KEPT: BANNER IMAGE AT TOP ============ -->
+    <section class="hero-banner">
+      <a href="products.html" class="hero-banner-link" aria-label="Summer sale — shop premium bed & base sets">
+        <picture>
+          <source media="(max-width: 768px)" srcset="assets/images/banner-mobile.jpg">
+          <source media="(max-width: 1200px)" srcset="assets/images/banner.jpg">
+          <img
+            src="assets/images/banner.jpg"
+            alt="Summer Sale 30% off — Premium Bed & Base Sets featuring King Max Weight"
+            class="hero-banner-img"
+            loading="eager"
+            fetchpriority="high">
+        </picture>
+        <span class="hero-banner-cta">shop the sale →</span>
+      </a>
+    </section>
+
+    <!-- ============ SPECIALS & PROMOTIONS (image-only) ============ -->
+    <section class="specials-section" id="specials">
       <div class="container">
-        <div class="section-header">
-          <span class="section-subtitle">the sanctuary</span>
-          <h2>signature collection</h2>
-          <p>Each bed is handcrafted over 40 hours by master artisans</p>
+        <div class="section-header-left">
+          <div>
+            <span class="section-subtitle">limited time</span>
+            <h2>Specials &amp; Promotions</h2>
+            <p>Handpicked pieces on offer this season</p>
+          </div>
+          <a href="products.html" class="view-all-link">view all →</a>
         </div>
-        <div class="collection-showcase">
-          <div class="showcase-card">
-            <div class="showcase-image">
-              <img src="assets/images/beds1.jfif" alt="King Weight Master">
-              <div class="showcase-overlay"><a href="products.html" class="btn-small">discover →</a></div>
-            </div>
-            <div class="showcase-info">
-              <h3>King Weight Master</h3>
-              <p>Premium support • Orthopedic base</p>
-              <div class="price">From R4,999 <span>king</span></div>
-            </div>
+
+        <div class="showcase-promo-grid" id="specialsGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ CATEGORY TILES ============ -->
+    <section class="category-section" id="categories">
+      <div class="container">
+        <div class="section-header-left">
+          <div>
+            <span class="section-subtitle">browse</span>
+            <h2>Shop by Category</h2>
+            <p>Everything handcrafted in our Pretoria atelier</p>
           </div>
-          <div class="showcase-card">
-            <div class="showcase-image">
-              <img src="assets/images/beds2.jfif" alt="PillowTop">
-              <div class="showcase-overlay"><a href="products.html" class="btn-small">discover →</a></div>
-            </div>
-            <div class="showcase-info">
-              <h3>PillowTop</h3>
-              <p>Plush comfort • Euro top design</p>
-              <div class="price">From R5,499 <span>queen</span></div>
-            </div>
-          </div>
-          <div class="showcase-card">
-            <div class="showcase-image">
-              <img src="assets/images/beds4.jfif" alt="King Diamond">
-              <div class="showcase-overlay"><a href="products.html" class="btn-small">discover →</a></div>
-            </div>
-            <div class="showcase-info">
-              <h3>King Diamond</h3>
-              <p>Luxury quilted • Diamond stitching</p>
-              <div class="price">From R6,999 <span>king</span></div>
-            </div>
-          </div>
-          <div class="showcase-card">
-            <div class="showcase-image">
-              <img src="assets/images/beds8.jfif" alt="Dream Star">
-              <div class="showcase-overlay"><a href="products.html" class="btn-small">discover →</a></div>
-            </div>
-            <div class="showcase-info">
-              <h3>Dream Star</h3>
-              <p>Hotel quality • Medium-firm</p>
-              <div class="price">From R3,799 <span>double</span></div>
-            </div>
-          </div>
+          <a href="products.html" class="view-all-link">all products →</a>
+        </div>
+
+        <div class="category-tiles">
+          <a href="products.html" class="category-tile">
+            <div class="tile-image"><img src="assets/images/beds1.jfif" alt="Bed Sets" loading="lazy"></div>
+            <span>Bed Sets</span>
+          </a>
+          <a href="products.html" class="category-tile">
+            <div class="tile-image"><img src="assets/images/beds2.jfif" alt="Mattresses" loading="lazy"></div>
+            <span>Mattresses</span>
+          </a>
+          <a href="products.html" class="category-tile">
+            <div class="tile-image"><img src="assets/images/beds3.jfif" alt="Storage Bases" loading="lazy"></div>
+            <span>Storage Bases</span>
+          </a>
+          <a href="products.html" class="category-tile">
+            <div class="tile-image"><img src="assets/images/beds4.jfif" alt="Headboards" loading="lazy"></div>
+            <span>Headboards</span>
+          </a>
+          <a href="products.html" class="category-tile">
+            <div class="tile-image"><img src="assets/images/beds5.jfif" alt="Couches" loading="lazy"></div>
+            <span>Couches</span>
+          </a>
+          <a href="products.html" class="category-tile">
+            <div class="tile-image"><img src="assets/images/beds6.jfif" alt="Bunk Beds" loading="lazy"></div>
+            <span>Bunk Beds</span>
+          </a>
+          <a href="products.html" class="category-tile">
+            <div class="tile-image"><img src="assets/images/beds7.jfif" alt="Bed Bases" loading="lazy"></div>
+            <span>Bed Bases</span>
+          </a>
+          <a href="products.html" class="category-tile">
+            <div class="tile-image"><img src="assets/images/beds8.jfif" alt="Student Range" loading="lazy"></div>
+            <span>Student Range</span>
+          </a>
+          <a href="products.html" class="category-tile">
+            <div class="tile-image"><img src="assets/images/beds9.jfif" alt="Toppers" loading="lazy"></div>
+            <span>Toppers</span>
+          </a>
+          <a href="products.html" class="category-tile">
+            <div class="tile-image"><img src="assets/images/beds11.jfif" alt="Pedestals" loading="lazy"></div>
+            <span>Pedestals</span>
+          </a>
+          <a href="products.html" class="category-tile">
+            <div class="tile-image"><img src="assets/images/beds12.jfif" alt="Drawers" loading="lazy"></div>
+            <span>Drawers</span>
+          </a>
+          <a href="products.html" class="category-tile">
+            <div class="tile-image"><img src="assets/images/beds13.jfif" alt="Ottomans" loading="lazy"></div>
+            <span>Ottomans</span>
+          </a>
         </div>
       </div>
     </section>
 
+    <!-- ============ SIGNATURE / BESTSELLERS (image-only) ============ -->
+    <section class="bestsellers">
+      <div class="container">
+        <div class="section-header-left">
+          <div>
+            <span class="section-subtitle">loved by our patrons</span>
+            <h2>Signature Pieces</h2>
+            <p>The pieces our customers keep coming back for</p>
+          </div>
+          <a href="products.html" class="view-all-link">shop all →</a>
+        </div>
+        <div class="showcase-promo-grid" id="bestsellersGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ CRAFTSMANSHIP ============ -->
     <section class="craftsmanship">
       <div class="container">
         <div class="craft-grid">
@@ -146,6 +203,7 @@
       </div>
     </section>
 
+    <!-- ============ TESTIMONIALS ============ -->
     <section class="testimonials">
       <div class="container">
         <div class="section-header center">
@@ -160,20 +218,80 @@
       </div>
     </section>
 
+    <!-- ============ SHOWROOM ============ -->
+    <section class="showroom" id="showroom">
+      <div class="container">
+        <div class="showroom-grid">
+          <div class="showroom-info">
+            <span class="section-subtitle">visit our flagship atelier</span>
+            <h2>come feel the craft</h2>
+            <p>Step into our Pretoria showroom and experience every mattress, headboard, and finish in person. Our sleep consultants will help you find your perfect sanctuary.</p>
+
+            <div class="showroom-details">
+              <div class="showroom-detail">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                  <strong>Showroom Address</strong>
+                  <p>Paul Kruger · Maryana Building<br>Pretoria Central · Shop No 1</p>
+                </div>
+              </div>
+              <div class="showroom-detail">
+                <i class="fas fa-phone-alt"></i>
+                <div>
+                  <strong>Call us</strong>
+                  <p><a href="tel:+27822336883">+27 82 233 6883</a></p>
+                </div>
+              </div>
+              <div class="showroom-detail">
+                <i class="fab fa-whatsapp"></i>
+                <div>
+                  <strong>WhatsApp</strong>
+                  <p><a href="https://wa.me/27822336883" target="_blank">+27 82 233 6883</a></p>
+                </div>
+              </div>
+              <div class="showroom-detail">
+                <i class="fas fa-clock"></i>
+                <div>
+                  <strong>Opening hours</strong>
+                  <p>Mon–Fri: 9:00 – 17:30<br>Sat: 9:00 – 14:00 · Sun: closed</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="showroom-actions">
+              <a href="https://wa.me/27822336883?text=Hi%20Harmony%20Rest%2C%20I%27d%20like%20to%20book%20a%20showroom%20visit" target="_blank" class="btn-primary"><i class="fab fa-whatsapp"></i> book a visit</a>
+              <a href="https://maps.google.com/?q=Paul+Kruger+Maryana+Building+Pretoria+Central" target="_blank" class="btn-outline-dark"><i class="fas fa-directions"></i> get directions</a>
+            </div>
+          </div>
+          <div class="showroom-map">
+            <iframe
+              src="https://www.google.com/maps?q=Paul%20Kruger%20Street%2C%20Pretoria%20Central&output=embed"
+              loading="lazy"
+              title="Harmony Rest showroom location">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NEWSLETTER ============ -->
     <section class="newsletter">
       <div class="container">
         <div class="newsletter-content">
           <h2>join the golden circle</h2>
-          <p>Exclusive access to new collections, private events, and sleep insights</p>
+          <p>Get early access to new specials, private events, and sleep insights</p>
           <form class="newsletter-form" id="newsletterForm">
             <input type="email" placeholder="your email address" required>
             <button type="submit">subscribe →</button>
           </form>
+          <p class="newsletter-small">We respect your inbox. Unsubscribe anytime.</p>
         </div>
       </div>
     </section>
+
   </main>
 
+  <!-- ============ FOOTER ============ -->
   <footer>
     <div class="container">
       <div class="footer-grid">
@@ -184,21 +302,24 @@
             <a href="https://www.facebook.com/share/18oNGWFW1V/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.tiktok.com/@harmony.restcomfo?_r=1&_t=ZS-96tmphqoLB4" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
             <a href="https://www.instagram.com/harmonyrestandcomfort?igsh=MW1oOHIyMjh3bnExdQ==" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            
-          
           </div>
         </div>
-        <div class="footer-col"><h4>collection</h4><ul><li><a href="products.html">beds</a></li><li><a href="products.html">headboards</a></li><li><a href="products.html">couches</a></li><li><a href="products.html">furniture</a></li></ul></div>
-        <div class="footer-col"><h4>support</h4><ul><li><a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20would%20like%20to%20inquire%20about%20your%20luxury%20beds.">warranty</a></li><li><a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20would%20like%20to%20inquire%20about%20your%20luxury%20beds.">delivery</a></li><li><a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20would%20like%20to%20inquire%20about%20your%20luxury%20beds.">returns</a></li><li><a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20would%20like%20to%20inquire%20about%20your%20luxury%20beds.">contact</a></li></ul></div>
-        
-       <div class="footer-col"><h4>flagship atelier</h4><p>Paul Kruger 
-Maryana Building
-Pretoria Central 
-Shop No1 <br>+27 82 233 6883</p></div>
+        <div class="footer-col"><h4>shop</h4><ul><li><a href="products.html">bed sets</a></li><li><a href="products.html">mattresses</a></li><li><a href="products.html">headboards</a></li><li><a href="products.html">couches</a></li><li><a href="products.html">furniture</a></li></ul></div>
+        <div class="footer-col"><h4>help</h4><ul><li><a href="https://wa.me/27822336883">contact us</a></li><li><a href="https://wa.me/27822336883">delivery info</a></li><li><a href="https://wa.me/27822336883">returns policy</a></li><li><a href="https://wa.me/27822336883">warranty</a></li></ul></div>
+        <div class="footer-col">
+          <h4>showroom</h4>
+          <p>Paul Kruger · Maryana Building<br>Pretoria Central · Shop No 1<br><a href="tel:+27822336883">+27 82 233 6883</a></p>
+          <div class="payment-icons">
+            <i class="fab fa-cc-visa" title="Visa"></i>
+            <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+            <i class="fas fa-money-bill-wave" title="Cash on delivery"></i>
+            <i class="fas fa-mobile-alt" title="EFT / Instant EFT"></i>
+          </div>
+        </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 Harmony Rest & Comfort Beds. All rights reserved.</p>
-        <div class="footer-links"><a href="#">privacy</a><a href="#">terms</a><a href="#">accessibility</a></div>
+        <p>&copy; 2025 Harmony Rest &amp; Comfort Beds. All rights reserved.</p>
+        <div class="footer-links"><a href="#">privacy</a><a href="#">terms</a><a href="#">shipping</a><a href="#">refunds</a></div>
       </div>
     </div>
   </footer>
@@ -208,11 +329,108 @@ Shop No1 <br>+27 82 233 6883</p></div>
   </a>
 
   <script>
+    /* ============================================================
+       HOMEPAGE SHOWCASE DATA — IMAGES ONLY, NO PRICES
+       Every card links to products.html for full details & pricing
+       ============================================================ */
+    const specialsShowcase = [
+      {
+        name: "King Max Weight",
+        tag: "flagship · best seller",
+        blurb: "Orthopedic reinforced support",
+        image: "assets/images/beds1.jfif",
+        badge: "Save 30%"
+      },
+      {
+        name: "PillowTop Sanctuary",
+        tag: "plush · euro top",
+        blurb: "Cloud-like softness, all-night support",
+        image: "assets/images/beds2.jfif",
+        badge: "Special"
+      },
+      {
+        name: "King Diamond Headboard",
+        tag: "signature · artisan",
+        blurb: "Hand-tufted diamond detailing",
+        image: "assets/images/beds4.jfif",
+        badge: "Save 25%"
+      },
+      {
+        name: "L-Shape Seater Couch",
+        tag: "grand · lounge",
+        blurb: "Feather-blend, deep-seated comfort",
+        image: "assets/images/beds8.jfif",
+        badge: "Special"
+      }
+    ];
+
+    const bestsellersShowcase = [
+      {
+        name: "Orthopedic Form",
+        tag: "therapeutic",
+        blurb: "Zoned coils + memory foam",
+        image: "assets/images/beds4.jfif",
+        badge: "Best seller"
+      },
+      {
+        name: "Storage Base",
+        tag: "space-saving",
+        blurb: "Integrated drawers beneath",
+        image: "assets/images/beds3.jfif",
+        badge: "Popular"
+      },
+      {
+        name: "Dream Star Set",
+        tag: "hybrid",
+        blurb: "Hotel-quality medium-firm",
+        image: "assets/images/beds6.jfif",
+        badge: "Loved"
+      },
+      {
+        name: "Chest of Drawers",
+        tag: "artisan furniture",
+        blurb: "Soft-close, brushed gold handles",
+        image: "assets/images/beds7.jfif",
+        badge: "New"
+      }
+    ];
+
+    function showcaseCardHTML(item) {
+      return `
+        <a href="products.html" class="showcase-promo-card">
+          <div class="showcase-promo-image">
+            <img src="${item.image}" alt="${item.name}" loading="lazy">
+            <span class="showcase-promo-badge">${item.badge}</span>
+            <div class="showcase-promo-overlay">
+              <span class="showcase-promo-cta">view details <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </div>
+          <div class="showcase-promo-body">
+            <span class="showcase-promo-tag">${item.tag}</span>
+            <h3>${item.name}</h3>
+            <p>${item.blurb}</p>
+          </div>
+        </a>
+      `;
+    }
+
+    function renderShowcases() {
+      const s = document.getElementById('specialsGrid');
+      const b = document.getElementById('bestsellersGrid');
+      if (s) s.innerHTML = specialsShowcase.map(showcaseCardHTML).join('');
+      if (b) b.innerHTML = bestsellersShowcase.map(showcaseCardHTML).join('');
+    }
+    renderShowcases();
+
+    /* ============================================================
+       NEWSLETTER + MOBILE MENU
+       ============================================================ */
     document.getElementById('newsletterForm').addEventListener('submit', function(e) {
       e.preventDefault();
       alert('✨ Welcome to the Golden Circle! A sleep guide awaits.');
       this.reset();
     });
+
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
     mobileMenuBtn.addEventListener('click', () => {
