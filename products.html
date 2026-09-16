@@ -1028,13 +1028,13 @@
       drawer.classList.add('open');
       overlay.classList.add('visible');
       drawer.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('modal-open');
     }
     function closeDrawer() {
       drawer.classList.remove('open');
       overlay.classList.remove('visible');
       drawer.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+      document.body.classList.remove('modal-open');
     }
     document.getElementById('filtersBtn').addEventListener('click', openDrawer);
     document.getElementById('drawerClose').addEventListener('click', closeDrawer);
@@ -1137,12 +1137,12 @@
       document.getElementById('modalWhatsApp').href = `https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(product.name)}%20(R${product.price}%20-%20${product.size}).`;
 
       document.getElementById('productModal').classList.add('active');
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('modal-open');
     }
 
     function closeProductModal() {
       document.getElementById('productModal').classList.remove('active');
-      document.body.style.overflow = '';
+      document.body.classList.remove('modal-open');
     }
     document.getElementById('modalClose').addEventListener('click', closeProductModal);
     document.getElementById('productModal').addEventListener('click', function (e) {
@@ -1178,7 +1178,7 @@ function openBankModal(productId) {
   // Show modal
   const modal = document.getElementById('bankModal');
   modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  document.body.classList.add('modal-open');
 
   // Copy buttons inside modal — delegate
   document.getElementById('bankModalBody').onclick = (e) => {
@@ -1193,7 +1193,7 @@ function openBankModal(productId) {
 function closeBankModal() {
   const modal = document.getElementById('bankModal');
   modal.classList.remove('active');
-  document.body.style.overflow = '';
+  document.body.classList.remove('modal-open');
 }
 
 // Close handlers
@@ -1376,6 +1376,51 @@ document.getElementById('bankModal').addEventListener('click', (e) => {
         }
       }, { passive: true });
     })();
+
+    /* ============================================================
+   POLICY ACCORDIONS — expand/collapse on tap
+   ============================================================ */
+(function initPolicyAccordions() {
+  const toggles = document.querySelectorAll('.policy-toggle');
+  if (!toggles.length) return;
+
+  toggles.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.policy-card');
+      const body = card.querySelector('.policy-body');
+      const isOpen = card.classList.contains('open');
+
+      // Close all others (accordion behavior)
+      document.querySelectorAll('.policy-card.open').forEach(other => {
+        if (other !== card) {
+          other.classList.remove('open');
+          const oBtn = other.querySelector('.policy-toggle');
+          const oBody = other.querySelector('.policy-body');
+          oBtn.setAttribute('aria-expanded', 'false');
+          oBody.style.maxHeight = null;
+        }
+      });
+
+      // Toggle this one
+      card.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+
+      if (!isOpen) {
+        body.style.maxHeight = body.scrollHeight + 'px';
+      } else {
+        body.style.maxHeight = null;
+      }
+    });
+  });
+
+  // Recalculate height on resize (text rewraps)
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.policy-card.open .policy-body').forEach(body => {
+      body.style.maxHeight = body.scrollHeight + 'px';
+    });
+  });
+})();
   </script>
+  
 </body>
 </html>
