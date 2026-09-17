@@ -436,6 +436,38 @@
     .showcase-promo-grid, .category-tiles, .showroom-grid, .craft-grid {
       display: none !important;
     }
+
+    /* ============================================================
+       FIX: MOBILE HERO BANNER SPACING & OVERLAP
+       ============================================================ */
+    @media (max-width: 768px) {
+      /* Ensure the hero banner has breathing room and is fully visible */
+      .hero-banner {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+      .hero-banner-img {
+        max-height: 70vh; /* Prevents image from being too tall */
+        object-position: center center;
+      }
+      /* Add space between the banner and the stats strip */
+      .home-stats-strip {
+        margin-top: 0;
+        position: relative;
+        z-index: 1;
+      }
+      /* Ensure the stats strip doesn't overlap */
+      .hs-inner {
+        padding: 0 1rem;
+      }
+    }
+
+    /* Even smaller screens */
+    @media (max-width: 520px) {
+      .hero-banner-img {
+        max-height: 60vh; /* More conservative height for small phones */
+      }
+    }
   </style>
 </head>
 <body>
@@ -515,8 +547,8 @@
       <div class="hb-particles" id="hbParticles"></div>
       <a href="products.html" class="hero-banner-link" aria-label="Summer sale — shop premium bed & base sets">
         <picture>
-          <source media="(max-width: 768px)" srcset="assets/images/harmobe (2).jpg">
-          <source media="(max-width: 1200px)" srcset="assets/images/harmobe.jpg">
+          <source media="(max-width: 768px)" srcset="assets/images/harmobes.jpg">
+          <source media="(max-width: 1200px)" srcset="assets/images/harmobes.jpg">
           <img src="assets/images/harmobe.jpg" alt="Summer Sale 30% off — Premium Bed & Base Sets featuring King Max Weight"
             class="hero-banner-img" loading="eager" fetchpriority="high">
         </picture>
