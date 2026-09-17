@@ -322,10 +322,10 @@
               <li><a href="products.html?category=bed&filter=drawers">Base with Drawers</a></li>
               <li><a href="products.html?category=bed&filter=steel-base">Steel Bases</a></li>
               <li class="dropdown-divider"></li>
-              <li><a href="products.html?category=bed&filter=topper">Mattress Toppers</a></li>
+              
               <li><a href="products.html?category=furniture">Furniture</a></li>
               <li><a href="products.html?category=bed&filter=student">Student Accommodation</a></li>
-              <li><a href="products.html?category=bed&filter=bunk">Bunk Beds</a></li>
+             
               <li><a href="products.html?category=all&filter=promo">Promotions</a></li>
             </ul>
           </li>
@@ -909,10 +909,10 @@
     /* ============================================================
        ★ MAIN RENDER — reads URL params and renders accordingly
 
-       KEY FIX: When filter = "mattress", we ONLY show products
-       whose name ENDS with the word "Mattress". This excludes
-       Bed Sets and Bed Bases (which are still tagged with the
-       "mattress" tag but are NOT standalone mattresses).
+       Name-ending filters:
+         - "mattress" → name ends with "Mattress"
+         - "set"      → name ends with "Bed Set"
+       Tag-based filters for everything else.
        ============================================================ */
     function render() {
       const params = new URLSearchParams(window.location.search);
@@ -948,7 +948,16 @@
         return;
       }
 
-      // ---- CASE 2: other specific filter tags (set, base, bunk, promo, etc.)
+      // ---- CASE 2: BED SET — filter by name ending in "Bed Set"
+      if (filter === 'set') {
+        const list = products.filter(p => /\bbed\s*set$/i.test(p.name.trim()));
+        const label = FILTER_LABELS['set'];
+        showCollectionHeader(label.title, 'collection', label.desc, list.length);
+        renderProductsGrid(list);
+        return;
+      }
+
+      // ---- CASE 3: other specific filter tags (base, bunk, promo, etc.)
       if (filter) {
         const list = products.filter(p => Array.isArray(p.tags) && p.tags.includes(filter));
         const label = FILTER_LABELS[filter] || { title: filter, desc: '' };
@@ -957,7 +966,7 @@
         return;
       }
 
-      // ---- CASE 3: category selected (bed, headboard, couch, furniture)
+      // ---- CASE 4: category selected (bed, headboard, couch, furniture)
       if (cat && cat !== 'all') {
         const list = products.filter(p => p.category === cat);
         const label = CATEGORY_LABELS[cat] || { title: cat, desc: '' };
@@ -966,7 +975,7 @@
         return;
       }
 
-      // ---- CASE 4: no filters — show everything, grouped by category
+      // ---- CASE 5: no filters — show everything, grouped by category
       hideCollectionHeader();
       renderGroupedByCategory(products);
     }
