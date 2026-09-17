@@ -208,7 +208,6 @@
       background: #fff;
     }
 
-    /* Page header bar (shows what you're viewing) */
     .collection-header {
       text-align: center;
       margin-bottom: 3rem;
@@ -254,13 +253,8 @@
       border: 1px solid rgba(198, 164, 92, 0.3);
     }
 
-    /* Section group (used when viewing all items) */
-    .product-group {
-      margin-bottom: 4rem;
-    }
-    .product-group:last-child {
-      margin-bottom: 0;
-    }
+    .product-group { margin-bottom: 4rem; }
+    .product-group:last-child { margin-bottom: 0; }
     .product-group-header {
       display: flex;
       align-items: baseline;
@@ -281,10 +275,7 @@
       align-items: center;
       gap: 0.7rem;
     }
-    .product-group-title i {
-      font-size: 1.1rem;
-      color: #C6A45C;
-    }
+    .product-group-title i { font-size: 1.1rem; color: #C6A45C; }
     .product-group-count {
       font-family: 'Inter', sans-serif;
       font-size: 0.75rem;
@@ -316,7 +307,6 @@
         <ul class="nav-links" id="navLinks">
           <li><a href="index.html">home</a></li>
 
-          <!-- ===== SHOP NOW DROPDOWN ===== -->
           <li class="nav-item-dropdown" id="shopDropdown">
             <a href="products.html" class="dropdown-toggle active">
               shop now
@@ -358,11 +348,9 @@
 
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- ============ PRODUCTS SECTION ============ -->
     <section class="products-wrapper">
       <div class="container">
 
-        <!-- Dynamic collection header (populated by JS) -->
         <div class="collection-header" id="collectionHeader" hidden>
           <span class="collection-subtitle" id="collectionSubtitle">collection</span>
           <h1 id="collectionTitle"></h1>
@@ -375,7 +363,6 @@
     </section>
   </main>
 
-  <!-- ============ PRODUCT DETAIL MODAL ============ -->
   <div class="modal-overlay" id="productModal">
     <div class="modal-content">
       <button class="modal-close" id="modalClose">&times;</button>
@@ -416,7 +403,6 @@
       <div class="footer-bottom"><p>&copy; 2025 Harmony Rest &amp; Comfort Beds.</p></div>
     </div>
 
-    <!-- ============ BANKING DETAILS MODAL ============ -->
     <div class="bank-modal-overlay" id="bankModal">
       <div class="bank-modal-content" role="dialog" aria-modal="true" aria-labelledby="bankModalTitle">
         <button class="bank-modal-close" id="bankModalClose" aria-label="Close banking details">&times;</button>
@@ -457,7 +443,7 @@
         desc: "Hotel-grade queen bed set featuring durable pocket springs and a medium-firm comfort layer.",
         badge: "hotel quality",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","28 cm"],["Warranty","12 years"]] },
-      { id: 3, name: "Hospitality Queen Mattress ", category: "bed", price: 3299, size: "Queen",
+      { id: 3, name: "Hospitality Queen Mattress", category: "bed", price: 3299, size: "Queen",
         tags: ["mattress"],
         image: "assets/images/beds/hospitality-form.jpg",
         desc: "Hospitality-grade queen mattress on its own.",
@@ -469,7 +455,7 @@
         desc: "Full double hospitality set with durable pocket springs.",
         badge: "hotel quality",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Warranty","12 years"]] },
-      { id: 5, name: "Hospitality Double Mattress ", category: "bed", price: 2999, size: "Double",
+      { id: 5, name: "Hospitality Double Mattress", category: "bed", price: 2999, size: "Double",
         tags: ["mattress"],
         image: "assets/images/beds/hospitality-form.jpg",
         desc: "Double hospitality mattress, sold on its own.",
@@ -481,7 +467,7 @@
         desc: "Therapeutic queen set with zoned coil system and memory foam infusion.",
         badge: "therapeutic",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Warranty","15 years"]] },
-      { id: 7, name: "Orthopedic Queen Mattress ", category: "bed", price: 3999, size: "Queen",
+      { id: 7, name: "Orthopedic Queen Mattress", category: "bed", price: 3999, size: "Queen",
         tags: ["mattress"],
         image: "assets/images/beds/orthopedic-form.jpg",
         desc: "Therapeutic queen mattress only.",
@@ -493,7 +479,7 @@
         desc: "Orthopedic double bed set with zoned coil support.",
         badge: "therapeutic",
         specs: [["Mattress Length","188 cm"],["Warranty","15 years"]] },
-      { id: 9, name: "Orthopedic  Double Mattress", category: "bed", price: 3499, size: "Double",
+      { id: 9, name: "Orthopedic Double Mattress", category: "bed", price: 3499, size: "Double",
         tags: ["mattress"],
         image: "assets/images/beds/orthopedic-form.jpg",
         desc: "Double orthopedic mattress only.",
@@ -505,7 +491,7 @@
         desc: "Individually wrapped pocket springs move independently for tailored support.",
         badge: "popular",
         specs: [["Mattress Length","200 cm"],["Warranty","12 years"]] },
-      { id: 11, name: "Pocket Spring  Queen Mattress", category: "bed", price: 4499, size: "Queen",
+      { id: 11, name: "Pocket Spring Queen Mattress", category: "bed", price: 4499, size: "Queen",
         tags: ["mattress"],
         image: "assets/images/beds/pocket-spring.jpg",
         desc: "Queen pocket spring mattress only.",
@@ -517,7 +503,7 @@
         desc: "Double pocket spring set with independent coils.",
         badge: "popular",
         specs: [["Mattress Length","188 cm"],["Warranty","12 years"]] },
-      { id: 13, name: "Pocket Spring  Double Mattress", category: "bed", price: 3999, size: "Double",
+      { id: 13, name: "Pocket Spring Double Mattress", category: "bed", price: 3999, size: "Double",
         tags: ["mattress"],
         image: "assets/images/beds/pocket-spring.jpg",
         desc: "Double pocket spring mattress only.",
@@ -529,7 +515,7 @@
         desc: "Luxurious euro-top queen set with plush cushioning.",
         badge: "plush",
         specs: [["Mattress Length","200 cm"],["Warranty","12 years"]] },
-      { id: 15, name: "PillowTop Mattress Queen", category: "bed", price: 3200, size: "Queen",
+      { id: 15, name: "PillowTop Queen Mattress", category: "bed", price: 3200, size: "Queen",
         tags: ["mattress", "topper"],
         image: "assets/images/beds/pillowtop.jpg",
         desc: "Queen pillow-top mattress only.",
@@ -541,7 +527,7 @@
         desc: "Double pillow-top set.",
         badge: "plush",
         specs: [["Mattress Length","188 cm"],["Warranty","12 years"]] },
-      { id: 17, name: "PillowTop  Double Mattress" , category: "bed", price: 3100, size: "Double",
+      { id: 17, name: "PillowTop Double Mattress", category: "bed", price: 3100, size: "Double",
         tags: ["mattress", "topper"],
         image: "assets/images/beds/pillowtop.jpg",
         desc: "Double pillow-top mattress only.",
@@ -577,7 +563,7 @@
         desc: "Affordable queen set with durable foam core.",
         badge: "value",
         specs: [["Mattress Length","200 cm"],["Warranty","5 years"]] },
-      { id: 23, name: "Budget Queen Mattress ", category: "bed", price: 1999, size: "Queen",
+      { id: 23, name: "Budget Queen Mattress", category: "bed", price: 1999, size: "Queen",
         tags: ["mattress"],
         image: "assets/images/beds/comfort-non-turn.jpg",
         desc: "Budget queen mattress only.",
@@ -589,7 +575,7 @@
         desc: "Affordable double set.",
         badge: "value",
         specs: [["Mattress Length","188 cm"],["Warranty","5 years"]] },
-      { id: 25, name: "Budget Mattress Double", category: "bed", price: 1899, size: "Double",
+      { id: 25, name: "Budget Double Mattress", category: "bed", price: 1899, size: "Double",
         tags: ["mattress"],
         image: "assets/images/beds/comfort-non-turn.jpg",
         desc: "Budget double mattress only.",
@@ -717,9 +703,6 @@
     const collectionDescription = document.getElementById('collectionDescription');
     const collectionCount = document.getElementById('collectionCount');
 
-    /* ============================================================
-       Friendly label map for URL filters
-       ============================================================ */
     const FILTER_LABELS = {
       'mattress':       { title: 'Mattresses',              desc: 'Explore our full range of handcrafted mattresses — from budget-friendly foam to therapeutic pocket spring.' },
       'set':            { title: 'Bed Sets',                desc: 'Complete bed sets with matching base and mattress, crafted for a lifetime of comfort.' },
@@ -742,9 +725,6 @@
       'furniture': { title: 'Furniture',          icon: 'fa-box' }
     };
 
-    /* ============================================================
-       Skeleton loader
-       ============================================================ */
     function skeletonHTML(n = 8) {
       return `<div class="products-grid">${Array.from({ length: n }).map(() => `
         <div class="product-card skeleton-card">
@@ -759,9 +739,6 @@
       `).join('')}</div>`;
     }
 
-    /* ============================================================
-       Banking panel
-       ============================================================ */
     function bankPanelHTML(product) {
       const ref = `${product.name} — ${product.size}`;
       return `
@@ -815,9 +792,6 @@
       `;
     }
 
-    /* ============================================================
-       Product card
-       ============================================================ */
     function productCardHTML(product, index) {
       const isFav = state.favorites.has(product.id);
       const icon = product.category === 'bed' ? 'bed'
@@ -866,9 +840,6 @@
       `;
     }
 
-    /* ============================================================
-       Render helpers
-       ============================================================ */
     function renderProductsGrid(list) {
       if (!list.length) {
         grid.innerHTML = `
@@ -884,9 +855,7 @@
       grid.innerHTML = `<div class="products-grid">${list.map((p, i) => productCardHTML(p, i)).join('')}</div>`;
     }
 
-    /* Render products grouped by category (for the "all items" view) */
     function renderGroupedByCategory(list) {
-      // Group by category, preserving the order in CATEGORY_LABELS
       const order = ['bed', 'headboard', 'couch', 'furniture'];
       const groups = {};
       order.forEach(cat => { groups[cat] = []; });
@@ -924,9 +893,6 @@
       `;
     }
 
-    /* ============================================================
-       Collection header control
-       ============================================================ */
     function showCollectionHeader(title, subtitle, desc, count) {
       collectionTitle.textContent = title;
       collectionSubtitle.textContent = subtitle;
@@ -941,7 +907,12 @@
     }
 
     /* ============================================================
-       MAIN RENDER — reads URL params and renders accordingly
+       ★ MAIN RENDER — reads URL params and renders accordingly
+
+       KEY FIX: When filter = "mattress", we ONLY show products
+       whose name ENDS with the word "Mattress". This excludes
+       Bed Sets and Bed Bases (which are still tagged with the
+       "mattress" tag but are NOT standalone mattresses).
        ============================================================ */
     function render() {
       const params = new URLSearchParams(window.location.search);
@@ -968,7 +939,16 @@
         cat = m.cat; filter = m.filter;
       }
 
-      // ---- CASE 1: specific filter tag (mattress, set, bunk, promo, etc.)
+      // ---- CASE 1: MATTRESS — filter by name ending in "Mattress"
+      if (filter === 'mattress') {
+        const list = products.filter(p => /\bmattress$/i.test(p.name.trim()));
+        const label = FILTER_LABELS['mattress'];
+        showCollectionHeader(label.title, 'collection', label.desc, list.length);
+        renderProductsGrid(list);
+        return;
+      }
+
+      // ---- CASE 2: other specific filter tags (set, base, bunk, promo, etc.)
       if (filter) {
         const list = products.filter(p => Array.isArray(p.tags) && p.tags.includes(filter));
         const label = FILTER_LABELS[filter] || { title: filter, desc: '' };
@@ -977,7 +957,7 @@
         return;
       }
 
-      // ---- CASE 2: category selected (bed, headboard, couch, furniture)
+      // ---- CASE 3: category selected (bed, headboard, couch, furniture)
       if (cat && cat !== 'all') {
         const list = products.filter(p => p.category === cat);
         const label = CATEGORY_LABELS[cat] || { title: cat, desc: '' };
@@ -986,14 +966,11 @@
         return;
       }
 
-      // ---- CASE 3: no filters — show everything, grouped by category
+      // ---- CASE 4: no filters — show everything, grouped by category
       hideCollectionHeader();
       renderGroupedByCategory(products);
     }
 
-    /* ============================================================
-       Grid click delegation
-       ============================================================ */
     grid.addEventListener('click', (e) => {
       const favBtn = e.target.closest('.fav-btn');
       if (favBtn) { e.stopPropagation(); toggleFavorite(parseInt(favBtn.dataset.favId, 10), favBtn); return; }
@@ -1011,9 +988,6 @@
       if (card && !e.target.closest('a')) { openProductModal(parseInt(card.dataset.id, 10)); }
     });
 
-    /* ============================================================
-       Copy / favorites
-       ============================================================ */
     function copyToClipboard(text, btn) {
       const done = () => {
         const original = btn.innerHTML;
@@ -1041,9 +1015,6 @@
       icon.classList.toggle('fas'); icon.classList.toggle('far');
     }
 
-    /* ============================================================
-       Product modal
-       ============================================================ */
     function openProductModal(productId) {
       const product = products.find(p => p.id === productId);
       if (!product) return;
@@ -1083,9 +1054,6 @@
       if (e.key === 'Escape') { closeProductModal(); closeBankModal(); }
     });
 
-    /* ============================================================
-       Bank modal
-       ============================================================ */
     function openBankModal(productId) {
       const product = products.find(p => p.id === productId);
       if (!product) return;
@@ -1115,15 +1083,9 @@
       if (e.target === e.currentTarget) closeBankModal();
     });
 
-    /* ============================================================
-       Init
-       ============================================================ */
     grid.innerHTML = skeletonHTML(8);
     setTimeout(render, 180);
 
-    /* ============================================================
-       MOBILE MENU — hamburger toggle
-       ============================================================ */
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
     if (mobileMenuBtn && navLinks) {
@@ -1141,9 +1103,6 @@
       });
     }
 
-    /* ============================================================
-       DROPDOWN TOGGLE (mobile)
-       ============================================================ */
     (function dropdownToggle() {
       const shopItem = document.getElementById('shopDropdown');
       if (!shopItem) return;
