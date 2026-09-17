@@ -426,7 +426,9 @@
               <i class="fas fa-clock"></i>
               <div>
                 <strong>Opening Hours</strong>
-                <p>Mon–Fri: 9:00 – 17:30<br>Sat: 9:00 – 14:00 · Sun: Closed</p>
+                <p>Mon–Fri: 9:00 – 17:30<br>Sat: 9:00 – 14:00 · Sun: Opened</p>
+                <br>
+                <p>Open on public holidays as well</p>
               </div>
             </div>
 
@@ -624,7 +626,7 @@
     })();
 
     // ============================================================
-    // CONTACT FORM SUBMISSION -> SEND TO WHATSAPP
+    // CONTACT FORM SUBMISSION -> SEND TO WHATSAPP (Professional Style)
     // ============================================================
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -639,16 +641,22 @@
       // Your WhatsApp number (international format, no + sign)
       const whatsappNumber = '27822336883'; 
 
-      // Build the message text
+      // Build a professional, well-formatted message
       const whatsappMessage = 
-        `*New Contact Form Enquiry*%0A` +
-        `--------------------------%0A` +
+        `*🏠 HARMONY REST & COMFORT BEDS*%0A` +
+        `*Website Enquiry*%0A` +
+        `━━━━━━━━━━━━━━━━━━━━%0A%0A` +
+        `*👤 Customer Details*%0A` +
         `*Name:* ${name}%0A` +
         `*Phone:* ${phone}%0A` +
-        `*Email:* ${email}%0A` +
-        `*Subject:* ${subject}%0A` +
-        `--------------------------%0A` +
-        `*Message:*%0A${message}`;
+        `*Email:* ${email}%0A%0A` +
+        `*📋 Enquiry Subject*%0A` +
+        `*Topic:* ${subject}%0A%0A` +
+        `*💬 Message*%0A` +
+        `${message}%0A%0A` +
+        `━━━━━━━━━━━━━━━━━━━━%0A` +
+        `*Sent via website contact form*%0A` +
+        `*Time:* ${new Date().toLocaleString('en-ZA', { timeZone: 'Africa/Johannesburg' })}`;
 
       // Create the WhatsApp URL
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
@@ -659,8 +667,8 @@
       // Reset the form
       this.reset();
 
-      // Optional: Show a confirmation message
-      alert('✨ Thank you! Your message is being redirected to our WhatsApp. Please press "Send" in WhatsApp to complete your enquiry.');
+      // Show a beautiful confirmation message
+      alert('✨ Thank you for your enquiry!\n\nYour message has been prepared for WhatsApp. Please press "Send" in the WhatsApp window that just opened to complete your enquiry.\n\nWe look forward to assisting you!');
     });
   </script>
 </body>
