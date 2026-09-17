@@ -439,33 +439,39 @@
 
     /* ============================================================
        FIX: MOBILE HERO BANNER SPACING & OVERLAP
+       This overrides the master CSS specifically for the homepage.
        ============================================================ */
     @media (max-width: 768px) {
-      /* Ensure the hero banner has breathing room and is fully visible */
-      .hero-banner {
-        margin-bottom: 0;
-        padding-bottom: 0;
-      }
-      .hero-banner-img {
-        max-height: 70vh; /* Prevents image from being too tall */
+      /* 1. Remove the height cap so the full image shows */
+      .hero-banner-home .hero-banner-img {
+        max-height: none !important;
+        height: auto !important;
+        object-fit: contain;
         object-position: center center;
       }
-      /* Add space between the banner and the stats strip */
+      
+      /* 2. Add a clear gap between the banner and the stats strip */
+      .hero-banner-home {
+        padding-bottom: 1.5rem;
+        margin-bottom: 0;
+      }
+      
+      /* 3. Ensure the stats strip sits cleanly below the banner */
       .home-stats-strip {
-        margin-top: 0;
         position: relative;
         z-index: 1;
-      }
-      /* Ensure the stats strip doesn't overlap */
-      .hs-inner {
-        padding: 0 1rem;
+        margin-top: 0;
       }
     }
 
     /* Even smaller screens */
     @media (max-width: 520px) {
-      .hero-banner-img {
-        max-height: 60vh; /* More conservative height for small phones */
+      .hero-banner-home .hero-banner-img {
+        max-height: none !important;
+        height: auto !important;
+      }
+      .hero-banner-home {
+        padding-bottom: 1rem;
       }
     }
   </style>
@@ -542,8 +548,8 @@
 
   <main>
 
-    <!-- HERO BANNER (Kept as is) -->
-    <section class="hero-banner" id="heroBanner">
+    <!-- HERO BANNER (Added unique class "hero-banner-home") -->
+    <section class="hero-banner hero-banner-home" id="heroBanner">
       <div class="hb-particles" id="hbParticles"></div>
       <a href="products.html" class="hero-banner-link" aria-label="Summer sale — shop premium bed & base sets">
         <picture>
@@ -582,16 +588,6 @@
         </div>
       </div>
     </section>
-
-    <!-- ============================================================
-         1. SPECIALS & PROMOTIONS (Mimics Image 1)
-         ============================================================ -->
-  
-
-    <!-- ============================================================
-         2. SHOP BY CATEGORY (Mimics Image 2)
-         ============================================================ -->
-   
 
     <!-- ============================================================
          3. BED SIZES - STANDARD LENGTH (Mimics Image 3)
@@ -778,7 +774,7 @@
   </main>
 
   <!-- ============================================================
-       POLICIES & GUARANTEES SECTION (Updated Content)
+       POLICIES & GUARANTEES SECTION
        ============================================================ -->
   <section class="policies" id="policies" style="display:block;">
     <div class="container">
