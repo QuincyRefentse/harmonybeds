@@ -626,7 +626,8 @@
     })();
 
     // ============================================================
-    // CONTACT FORM SUBMISSION -> SEND TO WHATSAPP (Professional Style)
+    // CONTACT FORM SUBMISSION -> SEND TO WHATSAPP
+    // Using encodeURIComponent for proper formatting of the full message
     // ============================================================
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -641,25 +642,28 @@
       // Your WhatsApp number (international format, no + sign)
       const whatsappNumber = '27822336883'; 
 
-      // Build a professional, well-formatted message
+      // Build a professional, well-formatted message using actual newlines
       const whatsappMessage = 
-        `*🏠 HARMONY REST & COMFORT BEDS*%0A` +
-        `*Website Enquiry*%0A` +
-        `━━━━━━━━━━━━━━━━━━━━%0A%0A` +
-        `*👤 Customer Details*%0A` +
-        `*Name:* ${name}%0A` +
-        `*Phone:* ${phone}%0A` +
-        `*Email:* ${email}%0A%0A` +
-        `*📋 Enquiry Subject*%0A` +
-        `*Topic:* ${subject}%0A%0A` +
-        `*💬 Message*%0A` +
-        `${message}%0A%0A` +
-        `━━━━━━━━━━━━━━━━━━━━%0A` +
-        `*Sent via website contact form*%0A` +
-        `*Time:* ${new Date().toLocaleString('en-ZA', { timeZone: 'Africa/Johannesburg' })}`;
+        "🏠 *HARMONY REST & COMFORT BEDS*\n" +
+        "*Website Enquiry*\n" +
+        "━━━━━━━━━━━━━━━━━━━━\n\n" +
+        "👤 *Customer Details*\n" +
+        "*Name:* " + name + "\n" +
+        "*Phone:* " + phone + "\n" +
+        "*Email:* " + email + "\n\n" +
+        "📋 *Enquiry Subject*\n" +
+        "*Topic:* " + subject + "\n\n" +
+        "💬 *Message*\n" +
+        message + "\n\n" +
+        "━━━━━━━━━━━━━━━━━━━━\n" +
+        "*Sent via website contact form*\n" +
+        "*Time:* " + new Date().toLocaleString('en-ZA', { timeZone: 'Africa/Johannesburg' });
+
+      // Properly encode the message for the URL
+      const encodedMessage = encodeURIComponent(whatsappMessage);
 
       // Create the WhatsApp URL
-      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+      const whatsappUrl = "https://wa.me/" + whatsappNumber + "?text=" + encodedMessage;
 
       // Open WhatsApp in a new tab
       window.open(whatsappUrl, '_blank');
@@ -668,7 +672,7 @@
       this.reset();
 
       // Show a beautiful confirmation message
-      alert('✨ Thank you for your enquiry!\n\nYour message has been prepared for WhatsApp. Please press "Send" in the WhatsApp window that just opened to complete your enquiry.\n\nWe look forward to assisting you!');
+      alert('✨ Thank you for your enquiry, ' + name + '!\n\nYour message has been prepared for WhatsApp. Please press "Send" in the WhatsApp window that just opened to complete your enquiry.\n\nWe look forward to assisting you!');
     });
   </script>
 </body>
