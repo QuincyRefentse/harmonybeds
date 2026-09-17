@@ -16,6 +16,183 @@
   <link rel="stylesheet" href="assets/css/styles.css">
 
   <style>
+    /* ============================================================
+       NAVBAR STYLING — COPIED FROM HOMEPAGE
+       ============================================================ */
+    header { position: relative; z-index: 9999; }
+    .navbar { position: relative; overflow: visible; }
+    .nav-item-dropdown { position: relative; }
+    .nav-item-dropdown > a.dropdown-toggle {
+      display: flex; align-items: center; gap: 0.5rem; cursor: pointer;
+    }
+    .nav-item-dropdown > a.dropdown-toggle .fa-chevron-down {
+      font-size: 0.85rem; transition: transform 0.3s ease;
+    }
+    .nav-item-dropdown:hover > a.dropdown-toggle .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+    .dropdown-menu {
+      position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      min-width: 320px; background: #ffffff; border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(198, 164, 92, 0.12);
+      padding: 0.8rem 0; opacity: 0; visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 10000; list-style: none; margin: 0; pointer-events: none;
+    }
+    .nav-item-dropdown:hover .dropdown-menu,
+    .nav-item-dropdown.open .dropdown-menu {
+      opacity: 1; visibility: visible;
+      transform: translateX(-50%) translateY(0); pointer-events: auto;
+    }
+    .dropdown-menu li { margin: 0; padding: 0; }
+    .dropdown-menu li a {
+      display: block; padding: 0.85rem 1.8rem;
+      font-family: 'Inter', sans-serif; font-size: 1.05rem;
+      font-weight: 500; color: #1a1a2e; text-decoration: none;
+      transition: all 0.22s ease; letter-spacing: 0.3px;
+      border-left: 3px solid transparent; line-height: 1.4;
+    }
+    .dropdown-menu li a:hover {
+      background: #faf7f0; color: #C6A45C;
+      border-left-color: #C6A45C; padding-left: 2.1rem;
+    }
+    .dropdown-divider {
+      height: 1px; background: rgba(198, 164, 92, 0.18);
+      margin: 0.5rem 1.4rem; list-style: none;
+    }
+
+    /* ============================================================
+       MOBILE NAVBAR — FIXED HAMBURGER MENU
+       ============================================================ */
+    @media (max-width: 992px) {
+      /* Mobile menu panel */
+      .nav-links.active {
+        display: flex !important;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 78%;
+        max-width: 340px;
+        height: 100vh;
+        background: #ffffff;
+        padding: 6rem 1.8rem 3rem;
+        box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+        z-index: 10001;
+        gap: 0.4rem;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        list-style: none;
+        margin: 0;
+      }
+      .nav-links.active li { width: 100%; margin: 0; }
+      .nav-links.active li > a:not(.dropdown-toggle) {
+        display: block;
+        padding: 0.9rem 0.5rem;
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: #1a1a1a;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(198,164,92,0.12);
+        letter-spacing: 0.3px;
+      }
+      .nav-links.active li > a:not(.dropdown-toggle):hover,
+      .nav-links.active li > a.active:not(.dropdown-toggle) {
+        color: #C6A45C;
+      }
+
+      /* Mobile dropdown */
+      .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        box-shadow: none !important;
+        background: #FBF9F6 !important;
+        border-radius: 10px;
+        margin: 0.3rem 0 0.6rem 0;
+        padding: 0;
+        min-width: 0 !important;
+        width: 100% !important;
+        display: none;
+        border: 1px solid rgba(198, 164, 92, 0.2);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.3s ease;
+        list-style: none;
+      }
+      .nav-item-dropdown.open .dropdown-menu {
+        display: block !important;
+        max-height: 800px !important;
+        padding: 0.5rem 0 !important;
+      }
+      .nav-item-dropdown > a.dropdown-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.9rem 0.5rem;
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: #1a1a1a;
+        border-bottom: 1px solid rgba(198,164,92,0.12);
+        text-decoration: none;
+        width: 100%;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+      .nav-item-dropdown > a.dropdown-toggle.active {
+        color: #C6A45C;
+      }
+      .nav-item-dropdown > a.dropdown-toggle .fa-chevron-down {
+        font-size: 0.95rem;
+        color: #C6A45C;
+        margin-left: auto;
+        transition: transform 0.3s ease;
+      }
+      .nav-item-dropdown.open > a.dropdown-toggle .fa-chevron-down {
+        transform: rotate(180deg);
+      }
+      .dropdown-menu li a {
+        color: #4B4A47 !important;
+        font-size: 0.95rem !important;
+        font-weight: 500;
+        padding: 0.75rem 1.2rem !important;
+        border-left: 3px solid transparent;
+        border-bottom: none !important;
+        letter-spacing: 0.2px;
+        text-decoration: none;
+        display: block;
+      }
+      .dropdown-menu li a:hover,
+      .dropdown-menu li a:active {
+        background: rgba(198, 164, 92, 0.12) !important;
+        color: #C6A45C !important;
+        border-left-color: #C6A45C;
+        padding-left: 1.5rem !important;
+      }
+      .dropdown-divider {
+        background: rgba(198, 164, 92, 0.2) !important;
+        margin: 0.3rem 1rem !important;
+      }
+    }
+
+    /* ============================================================
+       FIX: SEARCH BAR SCROLLS AWAY ON MOBILE (no longer sticky)
+       ============================================================ */
+    @media (max-width: 768px) {
+      .filter-section {
+        position: relative !important;
+        top: auto !important;
+        z-index: 1;
+      }
+      #productsGrid,
+      .products-grid {
+        scroll-margin-top: 20px !important;
+      }
+    }
+
     /* ===== EXPANDED FILTER CHIP ROW (wraps nicely) ===== */
     .chip-row {
       display: flex;
@@ -29,7 +206,6 @@
       white-space: nowrap;
     }
 
-    /* Sub-category chip (smaller, secondary style) */
     .filter-btn.sub-chip {
       font-size: 0.82rem;
       padding: 0.5rem 1rem;
@@ -41,7 +217,6 @@
       border-style: solid;
     }
 
-    /* Divider inside chip row */
     .chip-divider {
       width: 1px;
       height: 28px;
@@ -66,6 +241,7 @@
       </a>
     </div>
   </div>
+
   <header>
     <div class="container">
       <nav class="navbar">
@@ -75,13 +251,40 @@
         <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
         <ul class="nav-links" id="navLinks">
           <li><a href="index.html">home</a></li>
-          <li><a href="products.html" class="active">collection</a></li>
-           <li><a href="about.html">about us</a></li>
+
+          <!-- ===== SHOP NOW DROPDOWN ===== -->
+          <li class="nav-item-dropdown" id="shopDropdown">
+            <a href="products.html" class="dropdown-toggle active">
+              shop now
+              <i class="fas fa-chevron-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="products.html?category=bed&filter=mattress">Mattresses</a></li>
+              <li><a href="products.html?category=bed&filter=set">Bed Sets</a></li>
+              <li><a href="products.html?category=bed&filter=base">Bed Bases</a></li>
+              <li class="dropdown-divider"></li>
+              <li><a href="products.html?category=bed&filter=standard-base">Standard Bases</a></li>
+              <li><a href="products.html?category=bed&filter=storage-base">Storage Bases &amp; Combos</a></li>
+              <li><a href="products.html?category=bed&filter=drawers">Base with Drawers</a></li>
+              <li><a href="products.html?category=bed&filter=steel-base">Steel Bases</a></li>
+              <li class="dropdown-divider"></li>
+              <li><a href="products.html?category=bed&filter=topper">Mattress Toppers</a></li>
+              <li><a href="products.html?category=furniture">Furniture</a></li>
+              <li><a href="products.html?category=bed&filter=student">Student Accommodation</a></li>
+              <li><a href="products.html?category=bed&filter=bunk">Bunk Beds</a></li>
+              <li><a href="products.html?category=all&filter=promo">Promotions</a></li>
+            </ul>
+          </li>
+
+          <li><a href="about.html">about us</a></li>
           <li><a href="contact.html">contact us</a></li>
         </ul>
         <div class="nav-icons">
-          <a href="#" id="navSearchBtn" aria-label="Search"><i class="fas fa-search"></i></a>
-          <a href="#" id="navFavBtn" aria-label="Favorites"><i class="far fa-heart"></i><span class="fav-count" id="favCount">0</span></a>
+          <a href="products.html" aria-label="Search"><i class="fas fa-search"></i></a>
+          <a href="https://wa.me/27822336883" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://wa.me/27822336883?text=Hi%20Harmony%20Rest%2C%20I%27d%20like%20to%20place%20an%20order" target="_blank" aria-label="Order" class="nav-cart">
+            <i class="fas fa-shopping-bag"></i>
+          </a>
         </div>
       </nav>
     </div>
@@ -121,7 +324,6 @@
           </div>
         </div>
 
-        <!-- ===== MAIN CATEGORY CHIPS ===== -->
         <div class="chip-row" id="categoryChips">
           <button class="filter-btn active" data-filter="all">all items</button>
           <button class="filter-btn" data-filter="bed">beds</button>
@@ -130,7 +332,6 @@
           <button class="filter-btn" data-filter="furniture">furniture</button>
         </div>
 
-        <!-- ===== SUB-CATEGORY CHIPS (matches shop-now dropdown) ===== -->
         <div class="chip-row" id="subCategoryChips">
           <button class="filter-btn sub-chip" data-tag="set">bed sets</button>
           <button class="filter-btn sub-chip" data-tag="mattress">mattresses</button>
@@ -576,7 +777,7 @@
        ============================================================ */
     const state = {
       filter: 'all',
-      tag: '',                // ← NEW: sub-category tag filter
+      tag: '',
       sort: 'default',
       search: '',
       sizes: new Set(),
@@ -601,7 +802,7 @@
     const pMax = document.getElementById('priceMax');
 
     /* ============================================================
-       FILTERING  (now uses `tags`)
+       FILTERING
        ============================================================ */
     function filterProducts() {
       let list = [...products];
@@ -898,7 +1099,6 @@
     /* ============================================================
        FILTER HANDLERS
        ============================================================ */
-    // Main category chips
     document.querySelectorAll('#categoryChips .filter-btn').forEach(btn => {
       btn.addEventListener('click', function () {
         document.querySelectorAll('#categoryChips .filter-btn').forEach(b => b.classList.remove('active'));
@@ -908,7 +1108,6 @@
       });
     });
 
-    // Sub-category tag chips — toggle behaviour (click again to clear)
     document.querySelectorAll('#subCategoryChips .filter-btn').forEach(btn => {
       btn.addEventListener('click', function () {
         const tag = this.dataset.tag;
@@ -919,7 +1118,6 @@
           state.tag = tag;
           document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => b.classList.remove('active'));
           this.classList.add('active');
-          // Reset main category to 'all' so tag spans everything
           state.filter = 'all';
           document.querySelectorAll('#categoryChips .filter-btn').forEach(b => b.classList.remove('active'));
           document.querySelector('#categoryChips .filter-btn[data-filter="all"]').classList.add('active');
@@ -999,7 +1197,6 @@
       }, 180);
     });
 
-    // Active filter pills
     activeFiltersEl.addEventListener('click', (e) => {
       const pill = e.target.closest('.active-pill');
       if (!pill) return;
@@ -1072,29 +1269,24 @@
       updatePriceLabels();
     });
 
-    // Size + badge chips
     document.querySelectorAll('.size-chip[data-size]').forEach(chip => {
       chip.addEventListener('click', () => chip.classList.toggle('active'));
     });
     document.querySelectorAll('.size-chip[data-badge]').forEach(chip => {
       chip.addEventListener('click', () => chip.classList.toggle('active'));
     });
-    // Collection chips (mobile drawer)
     document.querySelectorAll('#collectionChips .size-chip[data-tag]').forEach(chip => {
       chip.addEventListener('click', () => chip.classList.toggle('active'));
     });
 
-    // Apply drawer
     document.getElementById('drawerApply').addEventListener('click', () => {
       state.sizes.clear();
       document.querySelectorAll('.size-chip[data-size].active').forEach(c => state.sizes.add(c.dataset.size));
       state.badges.clear();
       document.querySelectorAll('.size-chip[data-badge].active').forEach(c => state.badges.add(c.dataset.badge));
 
-      // Collection tag (single-select)
       const activeTag = document.querySelector('#collectionChips .size-chip[data-tag].active');
       state.tag = activeTag ? activeTag.dataset.tag : '';
-      // Sync desktop chips
       document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.tag === state.tag);
       });
@@ -1105,7 +1297,6 @@
       render();
     });
 
-    // Reset in drawer
     document.getElementById('drawerReset').addEventListener('click', () => {
       document.querySelectorAll('.size-chip.active').forEach(c => c.classList.remove('active'));
       pMin.value = 0;
@@ -1113,7 +1304,6 @@
       updatePriceLabels();
     });
 
-    // Reset all from empty state
     document.getElementById('resetFiltersBtn').addEventListener('click', () => {
       state.filter = 'all';
       state.tag = '';
@@ -1227,110 +1417,96 @@
     });
 
     /* ============================================================
-       READ URL PARAMS — pre-filter from homepage dropdown links
+       READ URL PARAMS
        ============================================================ */
-    /* ============================================================
-   READ URL PARAMS — pre-filter from homepage dropdown links
-   Supports: ?category=bed&filter=mattress
-   Also handles legacy: ?category=mattresses
-   ============================================================ */
-(function readURLParams() {
-  const params = new URLSearchParams(window.location.search);
-  let cat = params.get('category');
-  let filter = params.get('filter');
+    (function readURLParams() {
+      const params = new URLSearchParams(window.location.search);
+      let cat = params.get('category');
+      let filter = params.get('filter');
 
-  // ---- Legacy mapping: convert old-style URLs to new ----
-  const legacyMap = {
-    'mattresses':            { cat: 'bed',       filter: 'mattress' },
-    'bed-sets':              { cat: 'bed',       filter: 'set' },
-    'bed-bases':             { cat: 'bed',       filter: 'base' },
-    'standard-bases':        { cat: 'bed',       filter: 'standard-base' },
-    'storage-bases-combos':  { cat: 'bed',       filter: 'storage-base' },
-    'base-with-drawers':     { cat: 'bed',       filter: 'drawers' },
-    'steel-bases':           { cat: 'bed',       filter: 'steel-base' },
-    'mattress-toppers':      { cat: 'bed',       filter: 'topper' },
-    'furniture':             { cat: 'furniture', filter: null },
-    'student-accommodation': { cat: 'bed',       filter: 'student' },
-    'bunk-beds':             { cat: 'bed',       filter: 'bunk' },
-    'promotions':            { cat: 'all',       filter: 'promo' }
-  };
-
-  if (cat && legacyMap[cat] && !filter) {
-    const mapped = legacyMap[cat];
-    cat = mapped.cat;
-    filter = mapped.filter;
-  }
-
-  // ---- Set main category ----
-  if (cat && ['all', 'bed', 'headboard', 'couch', 'furniture'].includes(cat)) {
-    state.filter = cat;
-    document.querySelectorAll('#categoryChips .filter-btn').forEach(b => b.classList.remove('active'));
-    const btn = document.querySelector(`#categoryChips .filter-btn[data-filter="${cat}"]`);
-    if (btn) btn.classList.add('active');
-  }
-
-  // ---- Set sub-category tag ----
-  if (filter) {
-    state.tag = filter;
-
-    // Activate matching desktop sub-chip
-    let matchedChip = false;
-    document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => {
-      if (b.dataset.tag === filter) {
-        b.classList.add('active');
-        matchedChip = true;
-      } else {
-        b.classList.remove('active');
-      }
-    });
-
-    // Activate matching mobile drawer chip
-    document.querySelectorAll('#collectionChips .size-chip').forEach(c => {
-      c.classList.toggle('active', c.dataset.tag === filter);
-    });
-
-    // ---- FALLBACK: if no chip matched OR no products have this tag,
-    //      use the search box instead ----
-    const tagHasProducts = products.some(p => Array.isArray(p.tags) && p.tags.includes(filter));
-
-    if (!matchedChip || !tagHasProducts) {
-      // Reset tag so the "no products" state doesn't trigger
-      state.tag = '';
-
-      // Map the filter value to a friendly search keyword
-      const keywordMap = {
-        'mattress':       'mattress',
-        'set':            'bed set',
-        'base':           'base',
-        'standard-base':  'base',
-        'storage-base':   'storage base',
-        'drawers':        'drawer',
-        'steel-base':     'base',
-        'topper':         'topper',
-        'student':        'student',
-        'bunk':           'bunk',
-        'promo':          'save'
+      const legacyMap = {
+        'mattresses':            { cat: 'bed',       filter: 'mattress' },
+        'bed-sets':              { cat: 'bed',       filter: 'set' },
+        'bed-bases':             { cat: 'bed',       filter: 'base' },
+        'standard-bases':        { cat: 'bed',       filter: 'standard-base' },
+        'storage-bases-combos':  { cat: 'bed',       filter: 'storage-base' },
+        'base-with-drawers':     { cat: 'bed',       filter: 'drawers' },
+        'steel-bases':           { cat: 'bed',       filter: 'steel-base' },
+        'mattress-toppers':      { cat: 'bed',       filter: 'topper' },
+        'furniture':             { cat: 'furniture', filter: null },
+        'student-accommodation': { cat: 'bed',       filter: 'student' },
+        'bunk-beds':             { cat: 'bed',       filter: 'bunk' },
+        'promotions':            { cat: 'all',       filter: 'promo' }
       };
-      const keyword = keywordMap[filter] || filter;
 
-      state.search = keyword;
-      if (typeof searchInput !== 'undefined' && searchInput) {
-        searchInput.value = keyword;
+      if (cat && legacyMap[cat] && !filter) {
+        const mapped = legacyMap[cat];
+        cat = mapped.cat;
+        filter = mapped.filter;
       }
-    }
-  }
 
-  // ---- Smooth scroll to grid ----
-  if (cat || filter) {
-    setTimeout(() => {
-      const gridEl = document.getElementById('productsGrid');
-      if (gridEl) {
-        const top = gridEl.getBoundingClientRect().top + window.scrollY - 120;
-        window.scrollTo({ top, behavior: 'smooth' });
+      if (cat && ['all', 'bed', 'headboard', 'couch', 'furniture'].includes(cat)) {
+        state.filter = cat;
+        document.querySelectorAll('#categoryChips .filter-btn').forEach(b => b.classList.remove('active'));
+        const btn = document.querySelector(`#categoryChips .filter-btn[data-filter="${cat}"]`);
+        if (btn) btn.classList.add('active');
       }
-    }, 400);
-  }
-})();
+
+      if (filter) {
+        state.tag = filter;
+
+        let matchedChip = false;
+        document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => {
+          if (b.dataset.tag === filter) {
+            b.classList.add('active');
+            matchedChip = true;
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        document.querySelectorAll('#collectionChips .size-chip').forEach(c => {
+          c.classList.toggle('active', c.dataset.tag === filter);
+        });
+
+        const tagHasProducts = products.some(p => Array.isArray(p.tags) && p.tags.includes(filter));
+
+        if (!matchedChip || !tagHasProducts) {
+          state.tag = '';
+
+          const keywordMap = {
+            'mattress':       'mattress',
+            'set':            'bed set',
+            'base':           'base',
+            'standard-base':  'base',
+            'storage-base':   'storage base',
+            'drawers':        'drawer',
+            'steel-base':     'base',
+            'topper':         'topper',
+            'student':        'student',
+            'bunk':           'bunk',
+            'promo':          'save'
+          };
+          const keyword = keywordMap[filter] || filter;
+
+          state.search = keyword;
+          if (typeof searchInput !== 'undefined' && searchInput) {
+            searchInput.value = keyword;
+          }
+        }
+      }
+
+      if (cat || filter) {
+        setTimeout(() => {
+          const gridEl = document.getElementById('productsGrid');
+          if (gridEl) {
+            const top = gridEl.getBoundingClientRect().top + window.scrollY - 120;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        }, 400);
+      }
+    })();
+
     /* ============================================================
        INIT
        ============================================================ */
@@ -1338,7 +1514,9 @@
     updatePriceLabels();
     render();
 
-    // Mobile menu
+    /* ============================================================
+       MOBILE MENU
+       ============================================================ */
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
     mobileMenuBtn.addEventListener('click', () => {
@@ -1346,171 +1524,50 @@
       const icon = mobileMenuBtn.querySelector('i');
       icon.classList.toggle('fa-bars');
       icon.classList.toggle('fa-times');
-    });
-  </script>
-
-  <script>
-    /* ============================================================
-       PRODUCTS PAGE INTERACTIVE INTRO
-       ============================================================ */
-
-    (function spawnParticles() {
-      const wrap = document.getElementById('phParticles');
-      if (!wrap) return;
-      const count = window.innerWidth < 640 ? 8 : 18;
-      for (let i = 0; i < count; i++) {
-        const p = document.createElement('span');
-        p.className = 'ph-particle';
-        p.style.left = Math.random() * 100 + '%';
-        p.style.bottom = (Math.random() * 40) + '%';
-        p.style.animationDuration = (5 + Math.random() * 6).toFixed(1) + 's';
-        p.style.animationDelay = (Math.random() * 6).toFixed(1) + 's';
-        const size = (3 + Math.random() * 4).toFixed(1);
-        p.style.width = size + 'px';
-        p.style.height = size + 'px';
-        wrap.appendChild(p);
+      if (!navLinks.classList.contains('active')) {
+        document.getElementById('shopDropdown').classList.remove('open');
       }
-    })();
+    });
 
-    (function initCounters() {
-      const counters = document.querySelectorAll('.ph-stat-num[data-count]');
-      if (!counters.length) return;
-      const animate = (el) => {
-        const target = parseInt(el.dataset.count, 10);
-        const suffix = el.dataset.suffix || '';
-        const dur = 1400;
-        const start = performance.now();
-        const tick = (now) => {
-          const t = Math.min((now - start) / dur, 1);
-          const eased = 1 - Math.pow(1 - t, 3);
-          el.textContent = Math.round(target * eased) + suffix;
-          if (t < 1) requestAnimationFrame(tick);
-          else el.textContent = target + suffix;
-        };
-        requestAnimationFrame(tick);
-      };
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.4 });
-      counters.forEach((c) => io.observe(c));
-    })();
-
-    function scrollToGrid() {
-      const grid = document.getElementById('productsGrid');
-      if (!grid) return;
-      const top = grid.getBoundingClientRect().top + window.scrollY - 100;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-    document.getElementById('browseCollectionBtn')?.addEventListener('click', scrollToGrid);
-    document.getElementById('phScrollCue')?.addEventListener('click', scrollToGrid);
-
-    (function tipBubble() {
-      const tip = document.getElementById('phTip');
-      const closeBtn = document.getElementById('phTipClose');
-      if (!tip) return;
-      if (sessionStorage.getItem('harmony_tip_dismissed')) return;
-      setTimeout(() => tip.classList.add('visible'), 2200);
-      const dismiss = () => {
-        tip.classList.remove('visible');
-        sessionStorage.setItem('harmony_tip_dismissed', '1');
-      };
-      closeBtn?.addEventListener('click', dismiss);
-      setTimeout(dismiss, 10000);
-    })();
-
-    (function scrollProgress() {
-      const bar = document.getElementById('scrollProgress');
-      if (!bar) return;
-      let ticking = false;
-      const update = () => {
-        const h = document.documentElement.scrollHeight - window.innerHeight;
-        const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
-        bar.style.width = Math.min(pct, 100) + '%';
-        ticking = false;
-      };
-      window.addEventListener('scroll', () => {
-        if (!ticking) { requestAnimationFrame(update); ticking = true; }
-      }, { passive: true });
-      update();
-    })();
-
-    (function revealOnScroll() {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('in-view');
-            io.unobserve(e.target);
+    /* ============================================================
+       DROPDOWN TOGGLE (mobile)
+       ============================================================ */
+    (function dropdownToggle() {
+      const shopItem = document.getElementById('shopDropdown');
+      if (!shopItem) return;
+      const toggleLink = shopItem.querySelector('.dropdown-toggle');
+      toggleLink.addEventListener('click', function(e) {
+        if (window.innerWidth <= 992) {
+          e.preventDefault();
+          e.stopPropagation();
+          document.querySelectorAll('.nav-item-dropdown.open').forEach(item => {
+            if (item !== shopItem) item.classList.remove('open');
+          });
+          shopItem.classList.toggle('open');
+        }
+      });
+      document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 992) {
+          if (!shopItem.contains(e.target)) shopItem.classList.remove('open');
+        }
+      });
+      shopItem.querySelectorAll('.dropdown-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 992) {
+            shopItem.classList.remove('open');
+            navLinks.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
           }
         });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-      const applyReveal = () => {
-        document.querySelectorAll('.product-card').forEach((card, i) => {
-          if (card.classList.contains('reveal')) return;
-          card.classList.add('reveal');
-          card.style.transitionDelay = Math.min(i * 0.035, 0.4) + 's';
-          io.observe(card);
-        });
-      };
-      applyReveal();
-      const grid = document.getElementById('productsGrid');
-      if (grid) {
-        const mo = new MutationObserver(() => applyReveal());
-        mo.observe(grid, { childList: true });
-      }
-    })();
-
-    (function heroParallax() {
-      const hero = document.getElementById('productsHero');
-      if (!hero) return;
-      let ticking = false;
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            const y = window.scrollY;
-            const max = hero.offsetHeight;
-            const progress = Math.min(y / max, 1);
-            hero.style.setProperty('--scroll-fade', progress);
-            const title = hero.querySelector('.ph-title');
-            if (title) {
-              title.style.transform = `translateY(${progress * 30}px)`;
-              title.style.opacity = String(1 - progress * 0.9);
-            }
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }, { passive: true });
-    })();
-
-    (function initPolicyAccordions() {
-      const toggles = document.querySelectorAll('.policy-toggle');
-      if (!toggles.length) return;
-      toggles.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const card = btn.closest('.policy-card');
-          const body = card.querySelector('.policy-body');
-          const isOpen = card.classList.contains('open');
-          document.querySelectorAll('.policy-card.open').forEach(other => {
-            if (other !== card) {
-              other.classList.remove('open');
-              const oBtn = other.querySelector('.policy-toggle');
-              const oBody = other.querySelector('.policy-body');
-              oBtn.setAttribute('aria-expanded', 'false');
-              oBody.style.maxHeight = null;
-            }
-          });
-          card.classList.toggle('open', !isOpen);
-          btn.setAttribute('aria-expanded', String(!isOpen));
-          if (!isOpen) body.style.maxHeight = body.scrollHeight + 'px';
-          else body.style.maxHeight = null;
-        });
       });
+      let resizeTimer;
       window.addEventListener('resize', () => {
-        document.querySelectorAll('.policy-card.open .policy-body').forEach(body => {
-          body.style.maxHeight = body.scrollHeight + 'px';
-        });
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (window.innerWidth > 992) shopItem.classList.remove('open');
+        }, 200);
       });
     })();
   </script>
