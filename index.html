@@ -20,6 +20,9 @@
   <link rel="stylesheet" href="assets/css/styles.css">
 
   <style>
+    /* ============================================================
+       NAVBAR STYLING (RESTORED FROM YOUR MASTER STYLESHEET)
+       ============================================================ */
     header { position: relative; z-index: 9999; }
     .navbar { position: relative; overflow: visible; }
     .nav-item-dropdown { position: relative; }
@@ -100,6 +103,339 @@
     @media (max-width: 480px) {
       .dropdown-menu li a { font-size: 0.98rem; padding: 0.8rem 1.2rem; }
     }
+
+    /* ============================================================
+       MIMIC THE PROVIDED IMAGES - SPECIFIC HOMEPAGE LAYOUT
+       ============================================================ */
+    
+    /* --- GLOBAL RESETS FOR THIS SPECIFIC LAYOUT --- */
+    .specials-section, .category-section, .bed-sizes-section {
+      padding: 3rem 0;
+      background: #fff;
+    }
+
+    /* --- 1. SPECIALS & PROMOTIONS (Image 1) --- */
+    .specials-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      align-items: start;
+    }
+    .special-item {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      position: relative;
+    }
+    .special-image-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #f4f4f4;
+      margin-bottom: 0.75rem;
+    }
+    .special-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .sale-badge {
+      display: inline-block;
+      background: #fff;
+      color: #333;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      padding: 0.2rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      align-self: flex-start;
+    }
+    .discount-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #dc2626;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      z-index: 2;
+    }
+    .special-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
+    }
+    .special-old-price {
+      font-size: 0.9rem;
+      color: #888;
+      text-decoration: line-through;
+      margin-bottom: 0.1rem;
+    }
+    .special-new-price {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    .special-item-split {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.25rem;
+    }
+    .special-item-split .special-old-price { margin-bottom: 0; }
+    .special-item-split .special-new-price { margin-left: auto; }
+
+    /* --- 2. SHOP BY CATEGORY (Image 2) --- */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .category-tile-rect {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: #1a1a1a;
+      transition: transform 0.3s ease;
+      text-align: left;
+    }
+    .category-tile-rect:hover {
+      transform: translateY(-4px);
+    }
+    .category-tile-rect .tile-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: #f0f4f8;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+      border: 1px solid #e5e7eb;
+    }
+    .category-tile-rect .tile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 0.5rem;
+    }
+    .category-tile-rect span {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .category-tile-rect span i {
+      font-size: 0.8rem;
+      color: #1a1a1a;
+    }
+
+    /* --- 3. BED SIZES (Images 3 & 4) --- */
+    .bed-sizes-section {
+      background: #fff;
+      padding: 2rem 0 4rem;
+    }
+    .bed-sizes-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .bed-sizes-header h2 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 2.2rem;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0;
+    }
+    .bed-sizes-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      position: relative;
+    }
+    .bed-size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      min-width: 120px;
+      max-width: 200px;
+    }
+    .bed-size-visual {
+      width: 100%;
+      aspect-ratio: 1 / 1.6;
+      background: #0ea5e9;
+      border-radius: 4px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0.5rem;
+      border: 2px solid #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .bed-size-visual .pillow {
+      position: absolute;
+      top: 4%;
+      left: 10%;
+      width: 80%;
+      height: 18%;
+      background: #7dd3fc;
+      border-radius: 4px;
+      border: 1px solid #fff;
+    }
+    .bed-size-visual .pillow-split {
+      position: absolute;
+      top: 4%;
+      left: 10%;
+      width: 38%;
+      height: 18%;
+      background: #7dd3fc;
+      border-radius: 4px;
+      border: 1px solid #fff;
+    }
+    .bed-size-visual .pillow-split.right {
+      left: 52%;
+    }
+    .bed-size-visual .blanket {
+      position: absolute;
+      bottom: 4%;
+      left: 10%;
+      width: 80%;
+      height: 70%;
+      background: #0284c7;
+      border-radius: 4px;
+      border: 1px solid #fff;
+    }
+    .measure-height {
+      position: absolute;
+      left: -30px;
+      top: 10%;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #0f172a;
+      gap: 4px;
+    }
+    .measure-height::before, .measure-height::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 10px;
+      background: #0f172a;
+    }
+    .measure-height .line {
+      width: 1px;
+      flex: 1;
+      background: #0f172a;
+      position: relative;
+    }
+    .measure-height .line::before, .measure-height .line::after {
+      content: '';
+      position: absolute;
+      left: -4px;
+      width: 8px;
+      height: 1px;
+      background: #0f172a;
+    }
+    .measure-height .line::before { top: 0; }
+    .measure-height .line::after { bottom: 0; }
+
+    .measure-width {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #0f172a;
+      margin-top: 0.25rem;
+      position: relative;
+    }
+    .measure-width .line {
+      width: 80%;
+      height: 1px;
+      background: #0f172a;
+      position: relative;
+    }
+    .measure-width .line::before, .measure-width .line::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      width: 1px;
+      height: 8px;
+      background: #0f172a;
+    }
+    .measure-width .line::before { left: 0; }
+    .measure-width .line::after { right: 0; }
+    .measure-width span {
+      margin: 0 0.5rem;
+    }
+
+    .bed-sizes-container.extra-length .bed-size-visual {
+      background: #1e3a8a;
+    }
+    .bed-sizes-container.extra-length .bed-size-visual .pillow,
+    .bed-sizes-container.extra-length .bed-size-visual .pillow-split {
+      background: #3b82f6;
+    }
+    .bed-sizes-container.extra-length .bed-size-visual .blanket {
+      background: #1e40af;
+    }
+
+    /* --- RESPONSIVE ADJUSTMENTS --- */
+    @media (max-width: 1024px) {
+      .specials-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      .category-grid { grid-template-columns: repeat(4, 1fr); }
+      .bed-sizes-container { gap: 0.5rem; }
+    }
+    @media (max-width: 768px) {
+      .specials-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .category-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+      .category-tile-rect span { font-size: 0.85rem; }
+      .bed-sizes-header h2 { font-size: 1.6rem; }
+      .bed-size-item { min-width: 80px; }
+      .measure-height { left: -20px; font-size: 0.7rem; }
+      .measure-width { font-size: 0.7rem; }
+      .measure-width .line { width: 70%; }
+    }
+    @media (max-width: 520px) {
+      .category-grid { grid-template-columns: repeat(2, 1fr); }
+      .bed-sizes-container { gap: 0.25rem; }
+      .bed-size-item { min-width: 60px; }
+      .measure-height { left: -15px; font-size: 0.6rem; }
+      .measure-width { font-size: 0.6rem; }
+      .measure-width .line { width: 60%; }
+      .bed-size-visual { border-width: 1px; }
+    }
+
+    /* Hide old section styles to prevent conflicts */
+    .showcase-promo-grid, .category-tiles, .showroom-grid, .craft-grid {
+      display: none !important;
+    }
   </style>
 </head>
 <body>
@@ -174,6 +510,7 @@
 
   <main>
 
+    <!-- HERO BANNER (Kept as is) -->
     <section class="hero-banner" id="heroBanner">
       <div class="hb-particles" id="hbParticles"></div>
       <a href="products.html" class="hero-banner-link" aria-label="Summer sale — shop premium bed & base sets">
@@ -187,6 +524,7 @@
       </a>
     </section>
 
+    <!-- STATS STRIP (Kept as is) -->
     <section class="home-stats-strip">
       <div class="container">
         <div class="hs-inner">
@@ -213,121 +551,248 @@
       </div>
     </section>
 
-    <section class="specials-section reveal-section" id="specials">
+    <!-- ============================================================
+         1. SPECIALS & PROMOTIONS (Mimics Image 1)
+         ============================================================ -->
+    <section class="specials-section" id="specials">
       <div class="container">
-        <div class="section-header-left">
+        <div class="section-header-left" style="margin-bottom: 2rem;">
           <div>
-            <span class="section-subtitle">limited time</span>
-            <h2>Specials &amp; Promotions</h2>
-            <p>Handpicked pieces on offer this season</p>
+            <h2 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 2.5rem; color: #1a1a1a; margin: 0;">Specials & Promotions</h2>
           </div>
-          <a href="products.html" class="view-all-link">view all →</a>
         </div>
-        <div class="showcase-promo-grid" id="specialsGrid"></div>
-      </div>
-    </section>
-
-    <section class="category-section reveal-section" id="categories">
-      <div class="container">
-        <div class="section-header-left">
-          <div>
-            <span class="section-subtitle">browse</span>
-            <h2>Shop by Category</h2>
-            <p>Everything handcrafted in our Pretoria atelier</p>
-          </div>
-          <a href="products.html" class="view-all-link">all products →</a>
-        </div>
-
-        <!-- CATEGORY TILES — now routed correctly too -->
-        <div class="category-tiles">
-          <a href="products.html?category=bed&filter=set" class="category-tile">
-            <div class="tile-image"><img src="assets/images/beds1.jfif" alt="Bed Sets" loading="lazy"></div>
-            <span>Bed Sets</span>
-          </a>
-          <a href="products.html?category=bed&filter=mattress" class="category-tile">
-            <div class="tile-image"><img src="assets/images/beds2.jfif" alt="Mattresses" loading="lazy"></div>
-            <span>Mattresses</span>
-          </a>
-          <a href="products.html?category=bed&filter=storage-base" class="category-tile">
-            <div class="tile-image"><img src="assets/images/beds3.jfif" alt="Storage Bases" loading="lazy"></div>
-            <span>Storage Bases</span>
-          </a>
-          <a href="products.html?category=headboard" class="category-tile">
-            <div class="tile-image"><img src="assets/images/beds4.jfif" alt="Headboards" loading="lazy"></div>
-            <span>Headboards</span>
-          </a>
-          <a href="products.html?category=couch" class="category-tile">
-            <div class="tile-image"><img src="assets/images/beds5.jfif" alt="Couches" loading="lazy"></div>
-            <span>Couches</span>
-          </a>
-          <a href="products.html?category=bed&filter=bunk" class="category-tile">
-            <div class="tile-image"><img src="assets/images/beds6.jfif" alt="Bunk Beds" loading="lazy"></div>
-            <span>Bunk Beds</span>
-          </a>
-          <a href="products.html?category=bed&filter=base" class="category-tile">
-            <div class="tile-image"><img src="assets/images/beds7.jfif" alt="Bed Bases" loading="lazy"></div>
-            <span>Bed Bases</span>
-          </a>
-          <a href="products.html?category=bed&filter=student" class="category-tile">
-            <div class="tile-image"><img src="assets/images/beds8.jfif" alt="Student Range" loading="lazy"></div>
-            <span>Student Range</span>
-          </a>
-          <a href="products.html?category=bed&filter=topper" class="category-tile">
-            <div class="tile-image"><img src="assets/images/beds9.jfif" alt="Toppers" loading="lazy"></div>
-            <span>Toppers</span>
-          </a>
-          <a href="products.html?category=furniture" class="category-tile">
-            <div class="tile-image"><img src="assets/images/beds11.jfif" alt="Pedestals" loading="lazy"></div>
-            <span>Pedestals</span>
-          </a>
-          <a href="products.html?category=furniture" class="category-tile">
-            <div class="tile-image"><img src="assets/images/beds12.jfif" alt="Drawers" loading="lazy"></div>
-            <span>Drawers</span>
-          </a>
-          <a href="products.html?category=furniture" class="category-tile">
-            <div class="tile-image"><img src="assets/images/beds13.jfif" alt="Ottomans" loading="lazy"></div>
-            <span>Ottomans</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="bestsellers reveal-section">
-      <div class="container">
-        <div class="section-header-left">
-          <div>
-            <span class="section-subtitle">loved by our patrons</span>
-            <h2>Signature Pieces</h2>
-            <p>The pieces our customers keep coming back for</p>
-          </div>
-          <a href="products.html" class="view-all-link">shop all →</a>
-        </div>
-        <div class="showcase-promo-grid" id="bestsellersGrid"></div>
-      </div>
-    </section>
-
-    <section class="craftsmanship reveal-section">
-      <div class="container">
-        <div class="craft-grid">
-          <div class="craft-text">
-            <span class="section-subtitle">artisan heritage</span>
-            <h2>the art of rest</h2>
-            <p>For over four decades, Harmony Rest has perfected the alchemy of sleep. Each bed is meticulously handcrafted using time-honored techniques passed through generations of master upholsterers.</p>
-            <div class="craft-features">
-              <div class="craft-feature"><i class="fas fa-feather-alt"></i><div><h4>40+ hours</h4><p>perfection per bed</p></div></div>
-              <div class="craft-feature"><i class="fas fa-leaf"></i><div><h4>100% quality</h4><p>certified materials</p></div></div>
+        
+        <div class="specials-grid">
+          
+          <!-- Item 1: Flip-Top Storage Bed Base -->
+          <div class="special-item">
+            <div class="special-image-wrap">
+              <img src="assets/images/beds3.jfif" alt="Flip-Top Storage Bed Base">
             </div>
-            <a href="products.html" class="btn-outline-dark">view full collection →</a>
+            <span class="sale-badge">Sale</span>
+            <h3 class="special-title">Flip-Top Storage Bed Base - Standard Length</h3>
+            <div class="special-old-price">R 2,948.00 ZAR</div>
+            <div class="special-new-price">From R 2,653.00 ZAR</div>
           </div>
-          <div class="craft-image">
-            <img src="assets/images/beds6.jfif" alt="Craftsmanship detail">
-            <div class="craft-badge"><i class="fas fa-gem"></i><span>since 1982</span></div>
+
+          <!-- Item 2: Angelica Couch (with discount) -->
+          <div class="special-item">
+            <div class="special-image-wrap">
+              <img src="assets/images/beds5.jfif" alt="Angelica Round 2-Seater Couch">
+              <span class="discount-badge">20% OFF!</span>
+            </div>
+            <span class="sale-badge">Sale</span>
+            <h3 class="special-title">Single Base-Set</h3>
+            <div class="special-item-split">
+              <span class="special-old-price">R 2,437.00 ZAR</span>
+              <span class="special-new-price">R 1,950.00 ZAR</span>
+            </div>
           </div>
+
+          <!-- Item 3: Single Bunk Bed Frame (with discount) -->
+          <div class="special-item">
+            <div class="special-image-wrap">
+              <img src="assets/images/beds/matress.jpg" alt="Single Bunk Bed Frame">
+              <span class="discount-badge">20% OFF!</span>
+            </div>
+            <span class="sale-badge">Sale</span>
+            <h3 class="special-title">Mattress (Student Accomodation)</h3>
+            <div class="special-old-price">R 1,879.00 ZAR</div>
+            <div class="special-new-price">From R 1,499.00 ZAR</div>
+          </div>
+
+          <!-- Item 4: Comfort Non-Turn Bed Set -->
+          <div class="special-item">
+            <div class="special-image-wrap">
+              <img src="assets/images/beds1.jfif" alt="Comfort Non-Turn Bed Set">
+            </div>
+            <span class="sale-badge">Sale</span>
+            <h3 class="special-title">Hospitality Queen Bed Set</h3>
+            <div class="special-old-price">R 5,450.00 ZAR</div>
+            <div class="special-new-price">From R R4,999  ZAR</div>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <section class="testimonials reveal-section">
+    <!-- ============================================================
+         2. SHOP BY CATEGORY (Mimics Image 2)
+         ============================================================ -->
+    <section class="category-section" id="categories">
+      <div class="container">
+        <div class="section-header-left" style="margin-bottom: 1.5rem;">
+          <div>
+            <h2 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 2rem; color: #1a1a1a; margin: 0;">Shop by Category</h2>
+          </div>
+        </div>
+
+        <div class="category-grid">
+          <!-- Row 1 -->
+          <a href="products.html?category=bed&filter=drawers" class="category-tile-rect">
+            <div class="tile-image"><img src="assets/images/beds1.jfif" alt="Base with Drawers"></div>
+            <span>Base with Drawers <i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a href="products.html?category=bed&filter=mattress" class="category-tile-rect">
+            <div class="tile-image"><img src="assets/images/beds2.jfif" alt="Mattresses"></div>
+            <span>Mattresses <i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a href="products.html?category=bed&filter=set" class="category-tile-rect">
+            <div class="tile-image"><img src="assets/images/beds6.jfif" alt="Bed Sets"></div>
+            <span>Bed Sets <i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a href="products.html?category=bed&filter=storage-base" class="category-tile-rect">
+            <div class="tile-image"><img src="assets/images/beds3.jfif" alt="Storage Bases"></div>
+            <span>Storage Bases <i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a href="products.html?category=bed&filter=base" class="category-tile-rect">
+            <div class="tile-image"><img src="assets/images/beds7.jfif" alt="Bed Bases"></div>
+            <span>Bed Bases <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <!-- Row 2 -->
+          <a href="products.html?category=bed&filter=bunk" class="category-tile-rect">
+            <div class="tile-image"><img src="assets/images/beds6.jfif" alt="Bunk Beds"></div>
+            <span>Bunk Beds <i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a href="products.html?category=bed&filter=student" class="category-tile-rect">
+            <div class="tile-image"><img src="assets/images/beds2.jfif" alt="Student Accommodation"></div>
+            <span>Student Accommodation <i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a href="products.html?category=couch" class="category-tile-rect">
+            <div class="tile-image"><img src="assets/images/beds5.jfif" alt="Couches"></div>
+            <span>Couches <i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a href="products.html?category=headboard" class="category-tile-rect">
+            <div class="tile-image"><img src="assets/images/beds4.jfif" alt="Headboards & Ottomans"></div>
+            <span>Headboards &amp; Ottomans <i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a href="products.html?category=bed&filter=topper" class="category-tile-rect">
+            <div class="tile-image"><img src="assets/images/beds9.jfif" alt="Mattress Toppers"></div>
+            <span>Mattress Toppers <i class="fas fa-arrow-right"></i></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. BED SIZES - STANDARD LENGTH (Mimics Image 3)
+         ============================================================ -->
+    <section class="bed-sizes-section">
+      <div class="container">
+        <div class="bed-sizes-header">
+          <h2>BED SIZES - STANDARD LENGTH</h2>
+        </div>
+        <div class="bed-sizes-container">
+          
+          <div class="bed-size-item">
+            <div class="bed-size-visual">
+              <div class="pillow"></div>
+              <div class="blanket"></div>
+            </div>
+            <div class="measure-width"><div class="line"></div><span>91 cm</span><div class="line"></div></div>
+            <div class="measure-height"><span>188 cm</span><div class="line"></div></div>
+          </div>
+
+          <div class="bed-size-item">
+            <div class="bed-size-visual">
+              <div class="pillow"></div>
+              <div class="blanket"></div>
+            </div>
+            <div class="measure-width"><div class="line"></div><span>107 cm</span><div class="line"></div></div>
+          </div>
+
+          <div class="bed-size-item">
+            <div class="bed-size-visual">
+              <div class="pillow-split"></div>
+              <div class="pillow-split right"></div>
+              <div class="blanket"></div>
+            </div>
+            <div class="measure-width"><div class="line"></div><span>137 cm</span><div class="line"></div></div>
+          </div>
+
+          <div class="bed-size-item">
+            <div class="bed-size-visual">
+              <div class="pillow-split"></div>
+              <div class="pillow-split right"></div>
+              <div class="blanket"></div>
+            </div>
+            <div class="measure-width"><div class="line"></div><span>152 cm</span><div class="line"></div></div>
+          </div>
+
+          <div class="bed-size-item">
+            <div class="bed-size-visual">
+              <div class="pillow-split"></div>
+              <div class="pillow-split right"></div>
+              <div class="blanket"></div>
+            </div>
+            <div class="measure-width"><div class="line"></div><span>183 cm</span><div class="line"></div></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. BED SIZES - EXTRA LENGTH (Mimics Image 4)
+         ============================================================ -->
+    <section class="bed-sizes-section" style="padding-top: 1rem;">
+      <div class="container">
+        <div class="bed-sizes-header">
+          <h2>BED SIZES - EXTRA LENGTH</h2>
+        </div>
+        <div class="bed-sizes-container extra-length">
+          
+          <div class="bed-size-item">
+            <div class="bed-size-visual">
+              <div class="pillow"></div>
+              <div class="blanket"></div>
+            </div>
+            <div class="measure-width"><div class="line"></div><span>91 cm</span><div class="line"></div></div>
+            <div class="measure-height"><span>200 cm</span><div class="line"></div></div>
+          </div>
+
+          <div class="bed-size-item">
+            <div class="bed-size-visual">
+              <div class="pillow"></div>
+              <div class="blanket"></div>
+            </div>
+            <div class="measure-width"><div class="line"></div><span>107 cm</span><div class="line"></div></div>
+          </div>
+
+          <div class="bed-size-item">
+            <div class="bed-size-visual">
+              <div class="pillow-split"></div>
+              <div class="pillow-split right"></div>
+              <div class="blanket"></div>
+            </div>
+            <div class="measure-width"><div class="line"></div><span>137 cm</span><div class="line"></div></div>
+          </div>
+
+          <div class="bed-size-item">
+            <div class="bed-size-visual">
+              <div class="pillow-split"></div>
+              <div class="pillow-split right"></div>
+              <div class="blanket"></div>
+            </div>
+            <div class="measure-width"><div class="line"></div><span>152 cm</span><div class="line"></div></div>
+          </div>
+
+          <div class="bed-size-item">
+            <div class="bed-size-visual">
+              <div class="pillow-split"></div>
+              <div class="pillow-split right"></div>
+              <div class="blanket"></div>
+            </div>
+            <div class="measure-width"><div class="line"></div><span>183 cm</span><div class="line"></div></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- KEEPING EXISTING SECTIONS (Showroom, Newsletter, etc.) -->
+    <section class="testimonials reveal-section" style="display:block;">
       <div class="container">
         <div class="section-header center">
           <span class="section-subtitle">gold standard</span>
@@ -341,7 +806,7 @@
       </div>
     </section>
 
-    <section class="showroom reveal-section" id="showroom">
+    <section class="showroom reveal-section" id="showroom" style="display:block;">
       <div class="container">
         <div class="showroom-grid">
           <div class="showroom-info">
@@ -378,7 +843,7 @@
       </div>
     </section>
 
-    <section class="newsletter reveal-section">
+    <section class="newsletter reveal-section" style="display:block;">
       <div class="container">
         <div class="newsletter-content">
           <h2>join the golden circle</h2>
@@ -394,7 +859,10 @@
 
   </main>
 
-  <section class="policies" id="policies">
+  <!-- ============================================================
+       POLICIES & GUARANTEES SECTION (Updated Content)
+       ============================================================ -->
+  <section class="policies" id="policies" style="display:block;">
     <div class="container">
       <div class="section-header">
         <span class="section-subtitle">peace of mind</span>
@@ -402,114 +870,110 @@
         <p>Every purchase is protected by our artisan promise — read the fine print that matters</p>
       </div>
       <div class="policy-grid">
-        <article class="policy-card">
-          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-warranty">
-            <span class="policy-icon"><i class="fas fa-shield-halved"></i></span>
-            <span class="policy-head"><span class="policy-tag">warranty</span><span class="policy-title">Up to 15-Year Warranty</span><span class="policy-sub">Covers manufacturing &amp; structural integrity</span></span>
-            <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
-          </button>
-          <div class="policy-body" id="policy-warranty" role="region"><div class="policy-body-inner">
-            <p>Harmony Rest &amp; Comfort Beds guarantees our craftsmanship against manufacturing defects under normal domestic use.</p>
-            <ul>
-              <li><strong>15 years</strong> — King Max Weight, Orthopedic, Pocket Spring series (frame, springs, base)</li>
-              <li><strong>12 years</strong> — Hospitality, PillowTop, Storage Base (frame, springs)</li>
-              <li><strong>10 years</strong> — Sleepwell, headboards, couches (frame, upholstery integrity)</li>
-              <li><strong>5 years</strong> — Budget range, student beds, furniture, mattress protectors</li>
-            </ul>
-            <p class="policy-note"><strong>What's covered:</strong> broken springs, sagging over 3&nbsp;cm, split timber, defective stitching, base failure.</p>
-            <p class="policy-note"><strong>What's not:</strong> normal softening, stains, tears from misuse, or damage caused by improper cleaning.</p>
-          </div></div>
-        </article>
-        <article class="policy-card">
-          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-delivery">
-            <span class="policy-icon"><i class="fas fa-truck-fast"></i></span>
-            <span class="policy-head"><span class="policy-tag">delivery</span><span class="policy-title">White-Glove Delivery</span><span class="policy-sub">Complimentary across South Africa</span></span>
-            <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
-          </button>
-          <div class="policy-body" id="policy-delivery" role="region"><div class="policy-body-inner">
-            <p>Every order includes our signature <strong>white-glove service</strong> — delivered, assembled, positioned, and packaging removed.</p>
-            <ul>
-              <li><strong>Gauteng:</strong> 3–5 working days</li>
-              <li><strong>Major metros</strong> (Cape Town, Durban, PE, Bloem): 5–7 working days</li>
-              <li><strong>Outlying areas:</strong> 7–10 working days</li>
-              <li><strong>Lead time</strong> for custom finishes: 10–14 working days</li>
-            </ul>
-            <p class="policy-note">Our crew will contact you to schedule a delivery window. Please ensure clear access to the room of choice.</p>
-            <p class="policy-note"><strong>Free storage</strong> for up to 30 days if your home isn't quite ready.</p>
-          </div></div>
-        </article>
+        
+        <!-- 1. Returns & Exchanges -->
         <article class="policy-card">
           <button class="policy-toggle" aria-expanded="false" aria-controls="policy-returns">
             <span class="policy-icon"><i class="fas fa-rotate-left"></i></span>
-            <span class="policy-head"><span class="policy-tag">returns</span><span class="policy-title">100-Night Sleep Trial</span><span class="policy-sub">Love it, or we'll make it right</span></span>
+            <span class="policy-head"><span class="policy-tag">returns</span><span class="policy-title">Returns &amp; Exchanges</span><span class="policy-sub">7-day exchange on eligible items</span></span>
             <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
           </button>
           <div class="policy-body" id="policy-returns" role="region"><div class="policy-body-inner">
-            <p>Sleep on your new bed for <strong>100 nights</strong>. If it isn't the sanctuary you hoped for, we'll arrange an exchange or refund.</p>
-            <ul>
-              <li>Exchange or full refund on mattresses within 100 nights</li>
-              <li>Free collection arranged by our team</li>
-              <li>Mattress must be in original condition with protector used</li>
-              <li>One trial per household, per mattress</li>
-            </ul>
-            <p class="policy-note"><strong>Headboards, couches &amp; furniture:</strong> 7-day return window for manufacturing faults (not change-of-mind).</p>
-            <p class="policy-note"><strong>Custom orders:</strong> non-returnable unless faulty, as they're made specifically for you.</p>
+            <p>We offer exchanges on eligible unused products within <strong>7 days</strong> of delivery or collection. Products must be in their original condition, with proof of purchase.</p>
+            <p>All returns and exchanges are subject to applicable South African consumer protection laws.</p>
           </div></div>
         </article>
+
+        <!-- 2. Lay-By -->
         <article class="policy-card">
-          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-payment">
-            <span class="policy-icon"><i class="fas fa-credit-card"></i></span>
-            <span class="policy-head"><span class="policy-tag">payment</span><span class="policy-title">Payment &amp; Layby Options</span><span class="policy-sub">EFT, card, or 3-month instalments</span></span>
+          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-layby">
+            <span class="policy-icon"><i class="fas fa-hand-holding-dollar"></i></span>
+            <span class="policy-head"><span class="policy-tag">lay-by</span><span class="policy-title">Lay-By</span><span class="policy-sub">Secure your purchase with a deposit</span></span>
             <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
           </button>
-          <div class="policy-body" id="policy-payment" role="region"><div class="policy-body-inner">
-            <p>Pay via <strong>EFT</strong>, card in-store, or split into <strong>3 interest-free instalments</strong> on orders over R3&nbsp;000.</p>
-            <ul>
-              <li><strong>EFT:</strong> Capitec Business — details on each product card</li>
-              <li><strong>Card:</strong> Visa, Mastercard (in showroom or telephonic)</li>
-              <li><strong>Layby:</strong> 3 months, 30% deposit, zero interest</li>
-              <li><strong>Cash on delivery:</strong> available within Gauteng only</li>
-            </ul>
-            <p class="policy-note"><strong>Banking details:</strong> Harmony Rest and Comfort (PTY) LTD &middot; Capitec Business Account &middot; 1053773241 &middot; Branch 450105</p>
-            <p class="policy-note"><strong>Important:</strong> Use your product name as the payment reference. Send proof of payment via WhatsApp for immediate order confirmation.</p>
+          <div class="policy-body" id="policy-layby" role="region"><div class="policy-body-inner">
+            <p>Secure your purchase through our convenient lay-by option. A minimum deposit of <strong>R500</strong> applies, with payments completed within the agreed period.</p>
+            <p>Products are released once full payment has been received. Lay-by cancellations are handled in accordance with applicable law.</p>
           </div></div>
         </article>
+
+        <!-- 3. Custom Orders -->
         <article class="policy-card">
-          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-privacy">
-            <span class="policy-icon"><i class="fas fa-lock"></i></span>
-            <span class="policy-head"><span class="policy-tag">privacy</span><span class="policy-title">Privacy &amp; Data</span><span class="policy-sub">Your details stay yours</span></span>
+          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-custom">
+            <span class="policy-icon"><i class="fas fa-pencil-ruler"></i></span>
+            <span class="policy-head"><span class="policy-tag">custom</span><span class="policy-title">Custom Orders</span><span class="policy-sub">Made to your specifications</span></span>
             <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
           </button>
-          <div class="policy-body" id="policy-privacy" role="region"><div class="policy-body-inner">
-            <p>We collect only what we need to process your order and improve your experience. We never sell your data.</p>
-            <ul>
-              <li>Contact details used solely for order &amp; delivery communication</li>
-              <li>Email used for newsletters only if you opt in</li>
-              <li>Favorites saved locally on your device (never shared)</li>
-              <li>No third-party ad tracking on this site</li>
-            </ul>
-            <p class="policy-note">To have your data removed, email <a href="https://wa.me/27822336883">+27 82 233 6883</a> or WhatsApp us.</p>
+          <div class="policy-body" id="policy-custom" role="region"><div class="policy-body-inner">
+            <p>Custom-made beds, headboards and other furniture are produced according to your specifications. A deposit may be required before production.</p>
+            <p>Manufacturing times are communicated when the order is confirmed. Custom orders remain subject to applicable consumer rights.</p>
           </div></div>
         </article>
+
+        <!-- 4. Delivery -->
         <article class="policy-card">
-          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-care">
-            <span class="policy-icon"><i class="fas fa-hands-bubbles"></i></span>
-            <span class="policy-head"><span class="policy-tag">care</span><span class="policy-title">Care &amp; Maintenance</span><span class="policy-sub">Keep your bed pristine for decades</span></span>
+          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-delivery">
+            <span class="policy-icon"><i class="fas fa-truck-fast"></i></span>
+            <span class="policy-head"><span class="policy-tag">delivery</span><span class="policy-title">Delivery</span><span class="policy-sub">Across South Africa</span></span>
             <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
           </button>
-          <div class="policy-body" id="policy-care" role="region"><div class="policy-body-inner">
-            <p>Simple routines preserve comfort and extend the life of your Harmony Rest investment.</p>
-            <ul>
-              <li>Rotate your mattress head-to-foot every 3 months</li>
-              <li>Use a waterproof protector — protects your warranty</li>
-              <li>Air the mattress monthly to release moisture</li>
-              <li>Clean spills immediately with a mild soap solution</li>
-              <li>Vacuum fabric surfaces every 6 months</li>
-              <li>Never fold or bend a pocket-spring mattress</li>
-            </ul>
-            <p class="policy-note"><strong>Do not:</strong> use bleach, steam cleaners, or harsh chemicals — they void your warranty.</p>
+          <div class="policy-body" id="policy-delivery" role="region"><div class="policy-body-inner">
+            <p>We deliver to customers across South Africa. Delivery fees and estimated delivery times depend on the destination and products ordered.</p>
+            <p>Customers are encouraged to inspect goods upon delivery and report any concerns promptly.</p>
           </div></div>
         </article>
+
+        <!-- 5. Prices & Quotations -->
+        <article class="policy-card">
+          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-prices">
+            <span class="policy-icon"><i class="fas fa-tag"></i></span>
+            <span class="policy-head"><span class="policy-tag">pricing</span><span class="policy-title">Prices &amp; Quotations</span><span class="policy-sub">Valid for 14 days</span></span>
+            <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="policy-body" id="policy-prices" role="region"><div class="policy-body-inner">
+            <p>Our prices are clearly communicated before purchase. Quotations are normally valid for <strong>14 days</strong> unless otherwise stated.</p>
+            <p>Prices and promotions are subject to the terms communicated at the time of purchase.</p>
+          </div></div>
+        </article>
+
+        <!-- 6. Quality & Warranty -->
+        <article class="policy-card">
+          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-warranty">
+            <span class="policy-icon"><i class="fas fa-shield-halved"></i></span>
+            <span class="policy-head"><span class="policy-tag">warranty</span><span class="policy-title">Quality &amp; Warranty</span><span class="policy-sub">Manufacturer warranties apply</span></span>
+            <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="policy-body" id="policy-warranty" role="region"><div class="policy-body-inner">
+            <p>We are committed to providing quality beds, mattresses and furniture. Products may carry manufacturer warranties, while statutory consumer rights continue to apply where applicable.</p>
+          </div></div>
+        </article>
+
+        <!-- 7. Customer Complaints -->
+        <article class="policy-card">
+          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-complaints">
+            <span class="policy-icon"><i class="fas fa-comment-dots"></i></span>
+            <span class="policy-head"><span class="policy-tag">support</span><span class="policy-title">Customer Complaints</span><span class="policy-sub">We resolve concerns quickly</span></span>
+            <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="policy-body" id="policy-complaints" role="region"><div class="policy-body-inner">
+            <p>We value our customers and aim to resolve concerns quickly and fairly. Please contact us with your proof of purchase and details of the issue so that we can assist you.</p>
+            <p class="policy-note"><strong>Contact us:</strong> <a href="https://wa.me/27822336883">+27 82 233 6883</a> or visit our showroom.</p>
+          </div></div>
+        </article>
+
+        <!-- 8. Legal Compliance -->
+        <article class="policy-card">
+          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-legal">
+            <span class="policy-icon"><i class="fas fa-gavel"></i></span>
+            <span class="policy-head"><span class="policy-tag">legal</span><span class="policy-title">Legal Compliance</span><span class="policy-sub">CPA 68 of 2008</span></span>
+            <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="policy-body" id="policy-legal" role="region"><div class="policy-body-inner">
+            <p>Harmony Rest and Comfort conducts its business in accordance with applicable South African laws and regulations, including the <strong>Consumer Protection Act 68 of 2008</strong>.</p>
+            <p>Nothing in our policies limits rights provided to consumers by law.</p>
+          </div></div>
+        </article>
+
       </div>
       <p class="policies-footnote">
         <i class="fas fa-circle-info"></i>
@@ -569,61 +1033,7 @@
   </a>
 
   <script>
-    const specialsShowcase = [
-      { name: "King Max Weight", tag: "flagship · best seller", blurb: "Orthopedic reinforced support", image: "assets/images/beds1.jfif", badge: "Save 30%" },
-      { name: "PillowTop Sanctuary", tag: "plush · euro top", blurb: "Cloud-like softness, all-night support", image: "assets/images/beds2.jfif", badge: "Special" },
-      { name: "King Diamond Headboard", tag: "signature · artisan", blurb: "Hand-tufted diamond detailing", image: "assets/images/beds4.jfif", badge: "Save 25%" },
-      { name: "L-Shape Seater Couch", tag: "grand · lounge", blurb: "Feather-blend, deep-seated comfort", image: "assets/images/beds8.jfif", badge: "Special" }
-    ];
-    const bestsellersShowcase = [
-      { name: "Orthopedic Form", tag: "therapeutic", blurb: "Zoned coils + memory foam", image: "assets/images/beds4.jfif", badge: "Best seller" },
-      { name: "Storage Base", tag: "space-saving", blurb: "Integrated drawers beneath", image: "assets/images/beds3.jfif", badge: "Popular" },
-      { name: "Dream Star Set", tag: "hybrid", blurb: "Hotel-quality medium-firm", image: "assets/images/beds6.jfif", badge: "Loved" },
-      { name: "Chest of Drawers", tag: "artisan furniture", blurb: "Soft-close, brushed gold handles", image: "assets/images/beds7.jfif", badge: "New" }
-    ];
-
-    function showcaseCardHTML(item, index) {
-      return `
-        <a href="products.html" class="showcase-promo-card reveal-item" style="transition-delay:${index * 0.08}s">
-          <div class="showcase-promo-image">
-            <img src="${item.image}" alt="${item.name}" loading="lazy">
-            <span class="showcase-promo-badge">${item.badge}</span>
-            <div class="showcase-promo-overlay">
-              <span class="showcase-promo-cta">view details <i class="fas fa-arrow-right"></i></span>
-            </div>
-          </div>
-          <div class="showcase-promo-body">
-            <span class="showcase-promo-tag">${item.tag}</span>
-            <h3>${item.name}</h3>
-            <p>${item.blurb}</p>
-          </div>
-        </a>
-      `;
-    }
-
-    function renderShowcases() {
-      const s = document.getElementById('specialsGrid');
-      const b = document.getElementById('bestsellersGrid');
-      if (s) s.innerHTML = specialsShowcase.map(showcaseCardHTML).join('');
-      if (b) b.innerHTML = bestsellersShowcase.map(showcaseCardHTML).join('');
-    }
-    renderShowcases();
-
-    (function scrollProgress() {
-      const bar = document.getElementById('scrollProgress');
-      if (!bar) return;
-      let ticking = false;
-      const update = () => {
-        const h = document.documentElement.scrollHeight - window.innerHeight;
-        bar.style.width = (h > 0 ? Math.min((window.scrollY / h) * 100, 100) : 0) + '%';
-        ticking = false;
-      };
-      window.addEventListener('scroll', () => {
-        if (!ticking) { requestAnimationFrame(update); ticking = true; }
-      }, { passive: true });
-      update();
-    })();
-
+    // --- HERO BANNER ANIMATIONS ---
     (function heroParticles() {
       const wrap = document.getElementById('hbParticles');
       if (!wrap) return;
@@ -662,6 +1072,7 @@
       }, { passive: true });
     })();
 
+    // --- COUNTDOWN ---
     (function countdown() {
       let end = sessionStorage.getItem('harmony_sale_end');
       if (!end) {
@@ -687,6 +1098,7 @@
       setInterval(tick, 1000);
     })();
 
+    // --- STATS COUNT UP ---
     (function countUp() {
       const els = document.querySelectorAll('.hs-stat-num[data-count]');
       if (!els.length) return;
@@ -712,6 +1124,23 @@
       els.forEach(el => io.observe(el));
     })();
 
+    // --- SCROLL PROGRESS ---
+    (function scrollProgress() {
+      const bar = document.getElementById('scrollProgress');
+      if (!bar) return;
+      let ticking = false;
+      const update = () => {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (h > 0 ? Math.min((window.scrollY / h) * 100, 100) : 0) + '%';
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
+    })();
+
+    // --- REVEAL ON SCROLL ---
     (function revealOnScroll() {
       const io = new IntersectionObserver((entries) => {
         entries.forEach(e => {
@@ -719,22 +1148,9 @@
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
       document.querySelectorAll('.reveal-section').forEach(sec => io.observe(sec));
-      const cardObserver = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('in-view'); cardObserver.unobserve(e.target); }
-        });
-      }, { threshold: 0.1 });
-      const attachCards = () => {
-        document.querySelectorAll('.showcase-promo-card, .category-tile, .testimonial-card, .craft-feature').forEach((c, i) => {
-          if (c.classList.contains('reveal-item')) return;
-          c.classList.add('reveal-item');
-          c.style.transitionDelay = Math.min(i * 0.06, 0.5) + 's';
-          cardObserver.observe(c);
-        });
-      };
-      attachCards();
     })();
 
+    // --- FLOATING PROMO ---
     (function floatingPromo() {
       const pill = document.getElementById('floatingPromo');
       if (!pill) return;
@@ -749,12 +1165,14 @@
       }
     })();
 
+    // --- NEWSLETTER ---
     document.getElementById('newsletterForm').addEventListener('submit', function(e) {
       e.preventDefault();
       alert('✨ Welcome to the Golden Circle! A sleep guide awaits.');
       this.reset();
     });
 
+    // --- MOBILE MENU ---
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
 
@@ -768,6 +1186,7 @@
       }
     });
 
+    // --- DROPDOWN TOGGLE ---
     (function dropdownToggle() {
       const shopItem = document.getElementById('shopDropdown');
       if (!shopItem) return;
@@ -804,6 +1223,31 @@
         resizeTimer = setTimeout(() => {
           if (window.innerWidth > 992) shopItem.classList.remove('open');
         }, 200);
+      });
+    })();
+
+    // --- POLICY TOGGLES ---
+    (function policyToggles() {
+      document.querySelectorAll('.policy-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('.policy-card');
+          const body = card.querySelector('.policy-body');
+          const isOpen = card.classList.contains('open');
+          
+          // Close all other cards
+          document.querySelectorAll('.policy-card').forEach(c => {
+            c.classList.remove('open');
+            c.querySelector('.policy-body').style.maxHeight = null;
+            c.querySelector('.policy-toggle').setAttribute('aria-expanded', 'false');
+          });
+          
+          // Toggle the clicked one
+          if (!isOpen) {
+            card.classList.add('open');
+            body.style.maxHeight = body.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
       });
     })();
   </script>
