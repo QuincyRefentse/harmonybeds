@@ -445,7 +445,7 @@
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","28 cm"],["Warranty","12 years"]] },
       { id: 3, name: "Hospitality Queen Mattress", category: "bed", price: 3299, size: "Queen",
         tags: ["mattress"],
-        image: "assets/images/beds/hospitality-form.jpg",
+        image: "assets/images/beds/queenmatress.jpg",
         desc: "Hospitality-grade queen mattress on its own.",
         badge: "hotel quality",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Warranty","12 years"]] },
@@ -457,7 +457,7 @@
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Warranty","12 years"]] },
       { id: 5, name: "Hospitality Double Mattress", category: "bed", price: 2999, size: "Double",
         tags: ["mattress"],
-        image: "assets/images/beds/hospitality-form.jpg",
+        image: "assets/images/beds/queenmatress.jpg",
         desc: "Double hospitality mattress, sold on its own.",
         badge: "hotel quality",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Warranty","12 years"]] },
@@ -469,7 +469,7 @@
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Warranty","15 years"]] },
       { id: 7, name: "Orthopedic Queen Mattress", category: "bed", price: 3999, size: "Queen",
         tags: ["mattress"],
-        image: "assets/images/beds/orthopedic-form.jpg",
+        image: "assets/images/beds/orthop.jpg",
         desc: "Therapeutic queen mattress only.",
         badge: "therapeutic",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Warranty","15 years"]] },
@@ -481,7 +481,7 @@
         specs: [["Mattress Length","188 cm"],["Warranty","15 years"]] },
       { id: 9, name: "Orthopedic Double Mattress", category: "bed", price: 3499, size: "Double",
         tags: ["mattress"],
-        image: "assets/images/beds/orthopedic-form.jpg",
+        image: "assets/images/beds/orthop.jpg",
         desc: "Double orthopedic mattress only.",
         badge: "therapeutic",
         specs: [["Mattress Length","188 cm"],["Warranty","15 years"]] },
@@ -493,7 +493,7 @@
         specs: [["Mattress Length","200 cm"],["Warranty","12 years"]] },
       { id: 11, name: "Pocket Spring Queen Mattress", category: "bed", price: 4499, size: "Queen",
         tags: ["mattress"],
-        image: "assets/images/beds/pocket-spring.jpg",
+        image: "assets/images/beds/pocketspring.jpg",
         desc: "Queen pocket spring mattress only.",
         badge: "popular",
         specs: [["Mattress Length","200 cm"],["Warranty","12 years"]] },
@@ -505,7 +505,7 @@
         specs: [["Mattress Length","188 cm"],["Warranty","12 years"]] },
       { id: 13, name: "Pocket Spring Double Mattress", category: "bed", price: 3999, size: "Double",
         tags: ["mattress"],
-        image: "assets/images/beds/pocket-spring.jpg",
+        image: "assets/images/beds/pocketspring.jpg",
         desc: "Double pocket spring mattress only.",
         badge: "popular",
         specs: [["Mattress Length","188 cm"],["Warranty","12 years"]] },
@@ -599,12 +599,40 @@
         desc: "Single mattress only.",
         badge: "value",
         specs: [["Mattress Length","188 cm"],["Warranty","5 years"]] },
-      { id: 29, name: "Storage Base", category: "bed", price: 2999, size: "Queen",
+
+      /* ============ BED BASES (new additions) ============ */
+      { id: 43, name: "Single Base", category: "bed", price: 1499, size: "Single",
+        tags: ["base", "standard-base", "promo"],
+        image: "assets/images/beds/single-base.jpg",
+        desc: "Handcrafted single bed base, upholstered in premium fabric. Solid timber frame with reinforced support.",
+        badge: "value",
+        specs: [["Base Length","190 cm"],["Base Width","93 cm"],["Base Height","30 cm"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","10 years"]] },
+      { id: 44, name: "Three Quarter Base", category: "bed", price: 1699, size: "Three Quarter",
+        tags: ["base", "standard-base"],
+        image: "assets/images/beds/three-quarter-base.jpg",
+        desc: "Compact three-quarter bed base. Perfect for smaller bedrooms and student accommodation.",
+        badge: "compact",
+        specs: [["Base Length","190 cm"],["Base Width","109 cm"],["Base Height","30 cm"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","10 years"]] },
+      { id: 45, name: "Double Base", category: "bed", price: 2199, size: "Double",
+        tags: ["base", "standard-base", "promo"],
+        image: "assets/images/beds/double-base.jpg",
+        desc: "Elegant double bed base with a solid timber frame and premium upholstery.",
+        badge: "popular",
+        specs: [["Base Length","190 cm"],["Base Width","139 cm"],["Base Height","30 cm"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
+      { id: 46, name: "Queen Base", category: "bed", price: 2499, size: "Queen",
+        tags: ["base", "standard-base", "promo"],
+        image: "assets/images/beds/queen-base.jpg",
+        desc: "Spacious queen bed base with reinforced timber frame and premium fabric upholstery.",
+        badge: "best seller",
+        specs: [["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","30 cm"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
+      { id: 47, name: "Storage Base", category: "bed", price: 2999, size: "Queen",
         tags: ["base", "storage-base", "drawers", "promo"],
         image: "assets/images/beds/storage-base.jpg",
-        desc: "Elegant storage base with integrated drawers.",
+        desc: "Elegant storage base with integrated drawers — practical storage meets premium craftsmanship.",
         badge: "storage",
-        specs: [["Base Length","205 cm"],["Warranty","12 years"]] },
+        specs: [["Base Length","205 cm"],["Base Width","157 cm"],["Base Height","38 cm"],["Drawer Count","4 spacious drawers"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
+
+      /* ============ HEADBOARDS ============ */
       { id: 30, name: "King Headboard — Vertical / Horizontal / Diamond", category: "headboard", price: 1499, size: "King",
         tags: ["headboard", "promo"],
         image: "assets/images/headboards/king-diamond.jpg",
@@ -641,6 +669,8 @@
         desc: "Charming single headboard.",
         badge: "kids",
         specs: [["Width","98 cm"],["Warranty","8 years"]] },
+
+      /* ============ COUCHES ============ */
       { id: 36, name: "L Shape Seater Couch", category: "couch", price: 3499, size: "L-Shape",
         tags: ["promo"],
         image: "assets/images/couches/l-shape.jpg",
@@ -659,6 +689,8 @@
         desc: "The perfect accent chair.",
         badge: "accent",
         specs: [["Overall Length","100 cm"],["Warranty","8 years"]] },
+
+      /* ============ FURNITURE ============ */
       { id: 39, name: "Blanket Storage", category: "furniture", price: 999, size: "Standard",
         tags: ["furniture"],
         image: "assets/images/furniture/blanket-storage.jpg",
@@ -707,7 +739,7 @@
       'mattress':       { title: 'Mattresses',              desc: 'Explore our full range of handcrafted mattresses — from budget-friendly foam to therapeutic pocket spring.' },
       'set':            { title: 'Bed Sets',                desc: 'Complete bed sets with matching base and mattress, crafted for a lifetime of comfort.' },
       'base':           { title: 'Bed Bases',               desc: 'Solid, upholstered bed bases designed to support your mattress and elevate your bedroom.' },
-      'standard-base':  { title: 'Standard Bases',          desc: 'Classic bed bases available in all standard sizes.' },
+      'standard-base':  { title: 'Standard Bases',          desc: 'Classic bed bases available in all standard sizes — single, 3/4, double and queen.' },
       'storage-base':   { title: 'Storage Bases & Combos',  desc: 'Practical storage bases with integrated drawers — maximise space without sacrificing style.' },
       'drawers':        { title: 'Base with Drawers',       desc: 'Bed bases with built-in drawers for smart, elegant bedroom storage.' },
       'steel-base':     { title: 'Steel Bases',             desc: 'Durable steel bed bases — strong, functional, and long-lasting.' },
@@ -910,8 +942,10 @@
        ★ MAIN RENDER — reads URL params and renders accordingly
 
        Name-ending filters:
-         - "mattress" → name ends with "Mattress"
-         - "set"      → name ends with "Bed Set"
+         - "mattress"     → name ends with "Mattress"
+         - "set"          → name ends with "Bed Set"
+         - "standard-base"→ name ends with "Base" AND does not
+                            contain "Storage"
        Tag-based filters for everything else.
        ============================================================ */
     function render() {
@@ -939,7 +973,7 @@
         cat = m.cat; filter = m.filter;
       }
 
-      // ---- CASE 1: MATTRESS — filter by name ending in "Mattress"
+      // ---- CASE 1: MATTRESS — name ends with "Mattress"
       if (filter === 'mattress') {
         const list = products.filter(p => /\bmattress$/i.test(p.name.trim()));
         const label = FILTER_LABELS['mattress'];
@@ -948,7 +982,7 @@
         return;
       }
 
-      // ---- CASE 2: BED SET — filter by name ending in "Bed Set"
+      // ---- CASE 2: BED SET — name ends with "Bed Set"
       if (filter === 'set') {
         const list = products.filter(p => /\bbed\s*set$/i.test(p.name.trim()));
         const label = FILTER_LABELS['set'];
@@ -957,7 +991,19 @@
         return;
       }
 
-      // ---- CASE 3: other specific filter tags (base, bunk, promo, etc.)
+      // ---- CASE 3: STANDARD BASE — name ends with "Base" and NOT storage
+      if (filter === 'standard-base') {
+        const list = products.filter(p => {
+          const n = p.name.trim();
+          return /\bbase$/i.test(n) && !/storage/i.test(n);
+        });
+        const label = FILTER_LABELS['standard-base'];
+        showCollectionHeader(label.title, 'collection', label.desc, list.length);
+        renderProductsGrid(list);
+        return;
+      }
+
+      // ---- CASE 4: other specific filter tags (base, bunk, promo, etc.)
       if (filter) {
         const list = products.filter(p => Array.isArray(p.tags) && p.tags.includes(filter));
         const label = FILTER_LABELS[filter] || { title: filter, desc: '' };
@@ -966,7 +1012,7 @@
         return;
       }
 
-      // ---- CASE 4: category selected (bed, headboard, couch, furniture)
+      // ---- CASE 5: category selected (bed, headboard, couch, furniture)
       if (cat && cat !== 'all') {
         const list = products.filter(p => p.category === cat);
         const label = CATEGORY_LABELS[cat] || { title: cat, desc: '' };
@@ -975,7 +1021,7 @@
         return;
       }
 
-      // ---- CASE 5: no filters — show everything, grouped by category
+      // ---- CASE 6: no filters — show everything, grouped by category
       hideCollectionHeader();
       renderGroupedByCategory(products);
     }
