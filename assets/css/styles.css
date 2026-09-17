@@ -223,27 +223,7 @@ header {
   color: var(--charcoal);
 }
 
-@media (max-width: 968px) {
-  .logo-img { height: 42px; }
-  .nav-links, .nav-icons { display: none; }
-  .mobile-menu-btn { display: block; }
 
-  .nav-links.active {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 70%;
-    max-width: 320px;
-    height: 100vh;
-    background: white;
-    padding: 6rem 2rem;
-    box-shadow: -5px 0 25px rgba(0,0,0,0.1);
-    z-index: 999;
-    gap: 1.8rem;
-  }
-}
 
 /* ============================================================
    5. SUB-BAR

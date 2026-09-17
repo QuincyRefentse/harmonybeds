@@ -21,7 +21,7 @@
 
   <style>
     /* ============================================================
-       NAVBAR STYLING (RESTORED FROM YOUR MASTER STYLESHEET)
+       NAVBAR STYLING
        ============================================================ */
     header { position: relative; z-index: 9999; }
     .navbar { position: relative; overflow: visible; }
@@ -65,56 +65,139 @@
       height: 1px; background: rgba(198, 164, 92, 0.18);
       margin: 0.5rem 1.4rem; list-style: none;
     }
+
+    /* ============================================================
+       FIX: MOBILE NAVBAR — HAMBURGER MENU
+       ============================================================ */
     @media (max-width: 992px) {
+      .mobile-menu-btn { display: block; }
+
+      /* Mobile menu panel — hidden by default */
+      .nav-links {
+        display: none;
+      }
+
+      /* When .active is added via JS, show the panel */
+      .nav-links.active {
+        display: flex !important;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 78%;
+        max-width: 340px;
+        height: 100vh;
+        background: #ffffff;
+        padding: 6rem 1.8rem 3rem;
+        box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+        z-index: 10001;
+        gap: 0.4rem;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        list-style: none;
+        margin: 0;
+      }
+      .nav-links.active li { width: 100%; margin: 0; }
+      .nav-links.active li > a:not(.dropdown-toggle) {
+        display: block;
+        padding: 0.9rem 0.5rem;
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: #1a1a1a;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(198,164,92,0.12);
+        letter-spacing: 0.3px;
+      }
+      .nav-links.active li > a:not(.dropdown-toggle):hover,
+      .nav-links.active li > a.active:not(.dropdown-toggle) {
+        color: #C6A45C;
+      }
+
+      /* Mobile dropdown inside menu */
       .dropdown-menu {
-        position: static; transform: none !important;
-        opacity: 1 !important; visibility: visible !important;
-        pointer-events: auto !important; box-shadow: none;
-        background: rgba(255, 255, 255, 0.05); border-radius: 10px;
-        margin: 0.4rem 0 0.6rem 0.8rem; padding: 0.4rem 0;
-        min-width: 0; width: calc(100% - 1.6rem);
-        display: none; border: 1px solid rgba(198, 164, 92, 0.15);
-        max-height: 0; overflow: hidden;
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        box-shadow: none !important;
+        background: #FBF9F6 !important;
+        border-radius: 10px;
+        margin: 0.3rem 0 0.6rem 0;
+        padding: 0;
+        min-width: 0 !important;
+        width: 100% !important;
+        display: none;
+        border: 1px solid rgba(198, 164, 92, 0.2);
+        max-height: 0;
+        overflow: hidden;
         transition: max-height 0.4s ease, padding 0.3s ease;
+        list-style: none;
       }
       .nav-item-dropdown.open .dropdown-menu {
-        display: block; max-height: 800px; padding: 0.4rem 0;
+        display: block !important;
+        max-height: 800px !important;
+        padding: 0.5rem 0 !important;
+      }
+      .nav-item-dropdown > a.dropdown-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.9rem 0.5rem;
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: #1a1a1a;
+        border-bottom: 1px solid rgba(198,164,92,0.12);
+        text-decoration: none;
+        width: 100%;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+      .nav-item-dropdown > a.dropdown-toggle.active {
+        color: #C6A45C;
       }
       .nav-item-dropdown > a.dropdown-toggle .fa-chevron-down {
-        font-size: 1rem; margin-left: auto;
+        font-size: 0.95rem;
+        color: #C6A45C;
+        margin-left: auto;
+        transition: transform 0.3s ease;
       }
       .nav-item-dropdown.open > a.dropdown-toggle .fa-chevron-down {
         transform: rotate(180deg);
       }
       .dropdown-menu li a {
-        color: rgba(255, 255, 255, 0.92); font-size: 1rem;
-        font-weight: 500; padding: 0.85rem 1.4rem;
-        border-left: 3px solid transparent; letter-spacing: 0.3px;
+        color: #4B4A47 !important;
+        font-size: 0.95rem !important;
+        font-weight: 500;
+        padding: 0.75rem 1.2rem !important;
+        border-left: 3px solid transparent;
+        border-bottom: none !important;
+        letter-spacing: 0.2px;
+        text-decoration: none;
+        display: block;
       }
       .dropdown-menu li a:hover,
       .dropdown-menu li a:active {
-        background: rgba(198, 164, 92, 0.15); color: #C6A45C;
-        border-left-color: #C6A45C; padding-left: 1.7rem;
+        background: rgba(198, 164, 92, 0.12) !important;
+        color: #C6A45C !important;
+        border-left-color: #C6A45C;
+        padding-left: 1.5rem !important;
       }
-      .dropdown-divider { background: rgba(255, 255, 255, 0.1); margin: 0.4rem 1rem; }
-      .nav-links { z-index: 10001; }
-      .nav-item-dropdown { width: 100%; }
-    }
-    @media (max-width: 480px) {
-      .dropdown-menu li a { font-size: 0.98rem; padding: 0.8rem 1.2rem; }
+      .dropdown-divider {
+        background: rgba(198, 164, 92, 0.2) !important;
+        margin: 0.3rem 1rem !important;
+      }
     }
 
     /* ============================================================
-       MIMIC THE PROVIDED IMAGES - SPECIFIC HOMEPAGE LAYOUT
+       MIMIC THE PROVIDED IMAGES - HOMEPAGE LAYOUT
        ============================================================ */
-    
-    /* --- GLOBAL RESETS FOR THIS SPECIFIC LAYOUT --- */
     .specials-section, .category-section, .bed-sizes-section {
       padding: 3rem 0;
       background: #fff;
     }
 
-    /* --- 1. SPECIALS & PROMOTIONS (Image 1) --- */
+    /* --- 1. SPECIALS & PROMOTIONS --- */
     .specials-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -193,7 +276,7 @@
     .special-item-split .special-old-price { margin-bottom: 0; }
     .special-item-split .special-new-price { margin-left: auto; }
 
-    /* --- 2. SHOP BY CATEGORY (Image 2) --- */
+    /* --- 2. SHOP BY CATEGORY --- */
     .category-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -243,7 +326,7 @@
       color: #1a1a1a;
     }
 
-    /* --- 3. BED SIZES (Images 3 & 4) --- */
+    /* --- 3. BED SIZES --- */
     .bed-sizes-section {
       background: #fff;
       padding: 2rem 0 4rem;
@@ -432,39 +515,31 @@
       .bed-size-visual { border-width: 1px; }
     }
 
-    /* Hide old section styles to prevent conflicts */
+    /* Hide old section styles */
     .showcase-promo-grid, .category-tiles, .showroom-grid, .craft-grid {
       display: none !important;
     }
 
     /* ============================================================
-       FIX: MOBILE HERO BANNER SPACING & OVERLAP
-       This overrides the master CSS specifically for the homepage.
+       FIX: MOBILE HERO BANNER SPACING
        ============================================================ */
     @media (max-width: 768px) {
-      /* 1. Remove the height cap so the full image shows */
       .hero-banner-home .hero-banner-img {
         max-height: none !important;
         height: auto !important;
         object-fit: contain;
         object-position: center center;
       }
-      
-      /* 2. Add a clear gap between the banner and the stats strip */
       .hero-banner-home {
         padding-bottom: 1.5rem;
         margin-bottom: 0;
       }
-      
-      /* 3. Ensure the stats strip sits cleanly below the banner */
       .home-stats-strip {
         position: relative;
         z-index: 1;
         margin-top: 0;
       }
     }
-
-    /* Even smaller screens */
     @media (max-width: 520px) {
       .hero-banner-home .hero-banner-img {
         max-height: none !important;
@@ -499,7 +574,7 @@
         <ul class="nav-links" id="navLinks">
           <li><a href="index.html" class="active">home</a></li>
 
-          <!-- ===== SHOP NOW DROPDOWN — CORRECT URLs ===== -->
+          <!-- ===== SHOP NOW DROPDOWN ===== -->
           <li class="nav-item-dropdown" id="shopDropdown">
             <a href="products.html" class="dropdown-toggle">
               shop now
@@ -548,7 +623,7 @@
 
   <main>
 
-    <!-- HERO BANNER (Added unique class "hero-banner-home") -->
+    <!-- HERO BANNER -->
     <section class="hero-banner hero-banner-home" id="heroBanner">
       <div class="hb-particles" id="hbParticles"></div>
       <a href="products.html" class="hero-banner-link" aria-label="Summer sale — shop premium bed & base sets">
@@ -562,7 +637,7 @@
       </a>
     </section>
 
-    <!-- STATS STRIP (Kept as is) -->
+    <!-- STATS STRIP -->
     <section class="home-stats-strip">
       <div class="container">
         <div class="hs-inner">
@@ -589,123 +664,71 @@
       </div>
     </section>
 
-    <!-- ============================================================
-         3. BED SIZES - STANDARD LENGTH (Mimics Image 3)
-         ============================================================ -->
+    <!-- BED SIZES - STANDARD LENGTH -->
     <section class="bed-sizes-section">
       <div class="container">
         <div class="bed-sizes-header">
           <h2>BED SIZES - STANDARD LENGTH</h2>
         </div>
         <div class="bed-sizes-container">
-          
           <div class="bed-size-item">
-            <div class="bed-size-visual">
-              <div class="pillow"></div>
-              <div class="blanket"></div>
-            </div>
+            <div class="bed-size-visual"><div class="pillow"></div><div class="blanket"></div></div>
             <div class="measure-width"><div class="line"></div><span>91 cm</span><div class="line"></div></div>
             <div class="measure-height"><span>188 cm</span><div class="line"></div></div>
           </div>
-
           <div class="bed-size-item">
-            <div class="bed-size-visual">
-              <div class="pillow"></div>
-              <div class="blanket"></div>
-            </div>
+            <div class="bed-size-visual"><div class="pillow"></div><div class="blanket"></div></div>
             <div class="measure-width"><div class="line"></div><span>107 cm</span><div class="line"></div></div>
           </div>
-
           <div class="bed-size-item">
-            <div class="bed-size-visual">
-              <div class="pillow-split"></div>
-              <div class="pillow-split right"></div>
-              <div class="blanket"></div>
-            </div>
+            <div class="bed-size-visual"><div class="pillow-split"></div><div class="pillow-split right"></div><div class="blanket"></div></div>
             <div class="measure-width"><div class="line"></div><span>137 cm</span><div class="line"></div></div>
           </div>
-
           <div class="bed-size-item">
-            <div class="bed-size-visual">
-              <div class="pillow-split"></div>
-              <div class="pillow-split right"></div>
-              <div class="blanket"></div>
-            </div>
+            <div class="bed-size-visual"><div class="pillow-split"></div><div class="pillow-split right"></div><div class="blanket"></div></div>
             <div class="measure-width"><div class="line"></div><span>152 cm</span><div class="line"></div></div>
           </div>
-
           <div class="bed-size-item">
-            <div class="bed-size-visual">
-              <div class="pillow-split"></div>
-              <div class="pillow-split right"></div>
-              <div class="blanket"></div>
-            </div>
+            <div class="bed-size-visual"><div class="pillow-split"></div><div class="pillow-split right"></div><div class="blanket"></div></div>
             <div class="measure-width"><div class="line"></div><span>183 cm</span><div class="line"></div></div>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         4. BED SIZES - EXTRA LENGTH (Mimics Image 4)
-         ============================================================ -->
+    <!-- BED SIZES - EXTRA LENGTH -->
     <section class="bed-sizes-section" style="padding-top: 1rem;">
       <div class="container">
         <div class="bed-sizes-header">
           <h2>BED SIZES - EXTRA LENGTH</h2>
         </div>
         <div class="bed-sizes-container extra-length">
-          
           <div class="bed-size-item">
-            <div class="bed-size-visual">
-              <div class="pillow"></div>
-              <div class="blanket"></div>
-            </div>
+            <div class="bed-size-visual"><div class="pillow"></div><div class="blanket"></div></div>
             <div class="measure-width"><div class="line"></div><span>91 cm</span><div class="line"></div></div>
             <div class="measure-height"><span>200 cm</span><div class="line"></div></div>
           </div>
-
           <div class="bed-size-item">
-            <div class="bed-size-visual">
-              <div class="pillow"></div>
-              <div class="blanket"></div>
-            </div>
+            <div class="bed-size-visual"><div class="pillow"></div><div class="blanket"></div></div>
             <div class="measure-width"><div class="line"></div><span>107 cm</span><div class="line"></div></div>
           </div>
-
           <div class="bed-size-item">
-            <div class="bed-size-visual">
-              <div class="pillow-split"></div>
-              <div class="pillow-split right"></div>
-              <div class="blanket"></div>
-            </div>
+            <div class="bed-size-visual"><div class="pillow-split"></div><div class="pillow-split right"></div><div class="blanket"></div></div>
             <div class="measure-width"><div class="line"></div><span>137 cm</span><div class="line"></div></div>
           </div>
-
           <div class="bed-size-item">
-            <div class="bed-size-visual">
-              <div class="pillow-split"></div>
-              <div class="pillow-split right"></div>
-              <div class="blanket"></div>
-            </div>
+            <div class="bed-size-visual"><div class="pillow-split"></div><div class="pillow-split right"></div><div class="blanket"></div></div>
             <div class="measure-width"><div class="line"></div><span>152 cm</span><div class="line"></div></div>
           </div>
-
           <div class="bed-size-item">
-            <div class="bed-size-visual">
-              <div class="pillow-split"></div>
-              <div class="pillow-split right"></div>
-              <div class="blanket"></div>
-            </div>
+            <div class="bed-size-visual"><div class="pillow-split"></div><div class="pillow-split right"></div><div class="blanket"></div></div>
             <div class="measure-width"><div class="line"></div><span>183 cm</span><div class="line"></div></div>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- KEEPING EXISTING SECTIONS (Showroom, Newsletter, etc.) -->
+    <!-- TESTIMONIALS -->
     <section class="testimonials reveal-section" style="display:block;">
       <div class="container">
         <div class="section-header center">
@@ -720,6 +743,7 @@
       </div>
     </section>
 
+    <!-- SHOWROOM -->
     <section class="showroom reveal-section" id="showroom" style="display:block;">
       <div class="container">
         <div class="showroom-grid">
@@ -757,6 +781,7 @@
       </div>
     </section>
 
+    <!-- NEWSLETTER -->
     <section class="newsletter reveal-section" style="display:block;">
       <div class="container">
         <div class="newsletter-content">
@@ -773,9 +798,7 @@
 
   </main>
 
-  <!-- ============================================================
-       POLICIES & GUARANTEES SECTION
-       ============================================================ -->
+  <!-- POLICIES & GUARANTEES -->
   <section class="policies" id="policies" style="display:block;">
     <div class="container">
       <div class="section-header">
@@ -784,8 +807,6 @@
         <p>Every purchase is protected by our artisan promise — read the fine print that matters</p>
       </div>
       <div class="policy-grid">
-        
-        <!-- 1. Returns & Exchanges -->
         <article class="policy-card">
           <button class="policy-toggle" aria-expanded="false" aria-controls="policy-returns">
             <span class="policy-icon"><i class="fas fa-rotate-left"></i></span>
@@ -797,8 +818,6 @@
             <p>All returns and exchanges are subject to applicable South African consumer protection laws.</p>
           </div></div>
         </article>
-
-        <!-- 2. Lay-By -->
         <article class="policy-card">
           <button class="policy-toggle" aria-expanded="false" aria-controls="policy-layby">
             <span class="policy-icon"><i class="fas fa-hand-holding-dollar"></i></span>
@@ -810,8 +829,6 @@
             <p>Products are released once full payment has been received. Lay-by cancellations are handled in accordance with applicable law.</p>
           </div></div>
         </article>
-
-        <!-- 3. Custom Orders -->
         <article class="policy-card">
           <button class="policy-toggle" aria-expanded="false" aria-controls="policy-custom">
             <span class="policy-icon"><i class="fas fa-pencil-ruler"></i></span>
@@ -823,8 +840,6 @@
             <p>Manufacturing times are communicated when the order is confirmed. Custom orders remain subject to applicable consumer rights.</p>
           </div></div>
         </article>
-
-        <!-- 4. Delivery -->
         <article class="policy-card">
           <button class="policy-toggle" aria-expanded="false" aria-controls="policy-delivery">
             <span class="policy-icon"><i class="fas fa-truck-fast"></i></span>
@@ -836,8 +851,6 @@
             <p>Customers are encouraged to inspect goods upon delivery and report any concerns promptly.</p>
           </div></div>
         </article>
-
-        <!-- 5. Prices & Quotations -->
         <article class="policy-card">
           <button class="policy-toggle" aria-expanded="false" aria-controls="policy-prices">
             <span class="policy-icon"><i class="fas fa-tag"></i></span>
@@ -849,8 +862,6 @@
             <p>Prices and promotions are subject to the terms communicated at the time of purchase.</p>
           </div></div>
         </article>
-
-        <!-- 6. Quality & Warranty -->
         <article class="policy-card">
           <button class="policy-toggle" aria-expanded="false" aria-controls="policy-warranty">
             <span class="policy-icon"><i class="fas fa-shield-halved"></i></span>
@@ -861,8 +872,6 @@
             <p>We are committed to providing quality beds, mattresses and furniture. Products may carry manufacturer warranties, while statutory consumer rights continue to apply where applicable.</p>
           </div></div>
         </article>
-
-        <!-- 7. Customer Complaints -->
         <article class="policy-card">
           <button class="policy-toggle" aria-expanded="false" aria-controls="policy-complaints">
             <span class="policy-icon"><i class="fas fa-comment-dots"></i></span>
@@ -874,8 +883,6 @@
             <p class="policy-note"><strong>Contact us:</strong> <a href="https://wa.me/27822336883">+27 82 233 6883</a> or visit our showroom.</p>
           </div></div>
         </article>
-
-        <!-- 8. Legal Compliance -->
         <article class="policy-card">
           <button class="policy-toggle" aria-expanded="false" aria-controls="policy-legal">
             <span class="policy-icon"><i class="fas fa-gavel"></i></span>
@@ -887,7 +894,6 @@
             <p>Nothing in our policies limits rights provided to consumers by law.</p>
           </div></div>
         </article>
-
       </div>
       <p class="policies-footnote">
         <i class="fas fa-circle-info"></i>
@@ -1086,7 +1092,9 @@
       this.reset();
     });
 
-    // --- MOBILE MENU ---
+    // ============================================================
+    // MOBILE MENU — HAMBURGER TOGGLE (FIXED)
+    // ============================================================
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
 
@@ -1100,7 +1108,9 @@
       }
     });
 
-    // --- DROPDOWN TOGGLE ---
+    // ============================================================
+    // DROPDOWN TOGGLE (mobile)
+    // ============================================================
     (function dropdownToggle() {
       const shopItem = document.getElementById('shopDropdown');
       if (!shopItem) return;
@@ -1148,14 +1158,12 @@
           const body = card.querySelector('.policy-body');
           const isOpen = card.classList.contains('open');
           
-          // Close all other cards
           document.querySelectorAll('.policy-card').forEach(c => {
             c.classList.remove('open');
             c.querySelector('.policy-body').style.maxHeight = null;
             c.querySelector('.policy-toggle').setAttribute('aria-expanded', 'false');
           });
           
-          // Toggle the clicked one
           if (!isOpen) {
             card.classList.add('open');
             body.style.maxHeight = body.scrollHeight + 'px';

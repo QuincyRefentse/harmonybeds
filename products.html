@@ -63,46 +63,69 @@
     }
 
     /* ============================================================
-       MOBILE NAVBAR — FIXED HAMBURGER MENU
+       FIX: MOBILE NAVBAR — HAMBURGER MENU
        ============================================================ */
     @media (max-width: 992px) {
-      /* Mobile menu panel */
+      /* Hamburger button visible */
+      .mobile-menu-btn {
+        display: block !important;
+        background: none;
+        border: none;
+        font-size: 1.6rem;
+        cursor: pointer;
+        color: var(--charcoal);
+        padding: 0.5rem;
+        z-index: 10002;
+        position: relative;
+      }
+
+      /* Hide nav links by default */
+      .nav-links {
+        display: none !important;
+      }
+
+      /* Show the mobile menu panel when .active is applied */
       .nav-links.active {
         display: flex !important;
-        flex-direction: column;
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 78%;
-        max-width: 340px;
-        height: 100vh;
-        background: #ffffff;
-        padding: 6rem 1.8rem 3rem;
-        box-shadow: -8px 0 30px rgba(0,0,0,0.15);
-        z-index: 10001;
-        gap: 0.4rem;
-        overflow-y: auto;
+        flex-direction: column !important;
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        width: 78% !important;
+        max-width: 340px !important;
+        height: 100vh !important;
+        background: #ffffff !important;
+        padding: 6rem 1.8rem 3rem !important;
+        box-shadow: -8px 0 30px rgba(0,0,0,0.15) !important;
+        z-index: 10001 !important;
+        gap: 0.4rem !important;
+        overflow-y: auto !important;
         -webkit-overflow-scrolling: touch;
-        list-style: none;
-        margin: 0;
+        list-style: none !important;
+        margin: 0 !important;
       }
-      .nav-links.active li { width: 100%; margin: 0; }
+
+      .nav-links.active li { width: 100% !important; margin: 0 !important; }
+
       .nav-links.active li > a:not(.dropdown-toggle) {
-        display: block;
-        padding: 0.9rem 0.5rem;
-        font-size: 1.05rem;
-        font-weight: 500;
-        color: #1a1a1a;
-        text-decoration: none;
-        border-bottom: 1px solid rgba(198,164,92,0.12);
+        display: block !important;
+        padding: 0.9rem 0.5rem !important;
+        font-size: 1.05rem !important;
+        font-weight: 500 !important;
+        color: #1a1a1a !important;
+        text-decoration: none !important;
+        border-bottom: 1px solid rgba(198,164,92,0.12) !important;
         letter-spacing: 0.3px;
       }
       .nav-links.active li > a:not(.dropdown-toggle):hover,
       .nav-links.active li > a.active:not(.dropdown-toggle) {
-        color: #C6A45C;
+        color: #C6A45C !important;
+      }
+      .nav-links.active li > a.active:not(.dropdown-toggle)::after {
+        display: none !important;
       }
 
-      /* Mobile dropdown */
+      /* Mobile dropdown inside menu */
       .dropdown-menu {
         position: static !important;
         transform: none !important;
@@ -111,17 +134,17 @@
         pointer-events: auto !important;
         box-shadow: none !important;
         background: #FBF9F6 !important;
-        border-radius: 10px;
-        margin: 0.3rem 0 0.6rem 0;
-        padding: 0;
+        border-radius: 10px !important;
+        margin: 0.3rem 0 0.6rem 0 !important;
+        padding: 0 !important;
         min-width: 0 !important;
         width: 100% !important;
-        display: none;
-        border: 1px solid rgba(198, 164, 92, 0.2);
-        max-height: 0;
-        overflow: hidden;
+        display: none !important;
+        border: 1px solid rgba(198, 164, 92, 0.2) !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
         transition: max-height 0.4s ease, padding 0.3s ease;
-        list-style: none;
+        list-style: none !important;
       }
       .nav-item-dropdown.open .dropdown-menu {
         display: block !important;
@@ -130,46 +153,49 @@
       }
       .nav-item-dropdown > a.dropdown-toggle {
         display: flex !important;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.9rem 0.5rem;
-        font-size: 1.05rem;
-        font-weight: 500;
-        color: #1a1a1a;
-        border-bottom: 1px solid rgba(198,164,92,0.12);
-        text-decoration: none;
-        width: 100%;
-        box-sizing: border-box;
-        cursor: pointer;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 0.9rem 0.5rem !important;
+        font-size: 1.05rem !important;
+        font-weight: 500 !important;
+        color: #1a1a1a !important;
+        border-bottom: 1px solid rgba(198,164,92,0.12) !important;
+        text-decoration: none !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        cursor: pointer !important;
       }
       .nav-item-dropdown > a.dropdown-toggle.active {
-        color: #C6A45C;
+        color: #C6A45C !important;
+      }
+      .nav-item-dropdown > a.dropdown-toggle.active::after {
+        display: none !important;
       }
       .nav-item-dropdown > a.dropdown-toggle .fa-chevron-down {
-        font-size: 0.95rem;
-        color: #C6A45C;
-        margin-left: auto;
-        transition: transform 0.3s ease;
+        font-size: 0.95rem !important;
+        color: #C6A45C !important;
+        margin-left: auto !important;
+        transition: transform 0.3s ease !important;
       }
       .nav-item-dropdown.open > a.dropdown-toggle .fa-chevron-down {
-        transform: rotate(180deg);
+        transform: rotate(180deg) !important;
       }
       .dropdown-menu li a {
         color: #4B4A47 !important;
         font-size: 0.95rem !important;
-        font-weight: 500;
+        font-weight: 500 !important;
         padding: 0.75rem 1.2rem !important;
-        border-left: 3px solid transparent;
+        border-left: 3px solid transparent !important;
         border-bottom: none !important;
-        letter-spacing: 0.2px;
-        text-decoration: none;
-        display: block;
+        letter-spacing: 0.2px !important;
+        text-decoration: none !important;
+        display: block !important;
       }
       .dropdown-menu li a:hover,
       .dropdown-menu li a:active {
         background: rgba(198, 164, 92, 0.12) !important;
         color: #C6A45C !important;
-        border-left-color: #C6A45C;
+        border-left-color: #C6A45C !important;
         padding-left: 1.5rem !important;
       }
       .dropdown-divider {
@@ -193,7 +219,7 @@
       }
     }
 
-    /* ===== EXPANDED FILTER CHIP ROW (wraps nicely) ===== */
+    /* ===== EXPANDED FILTER CHIP ROW ===== */
     .chip-row {
       display: flex;
       flex-wrap: wrap;
@@ -201,10 +227,7 @@
       padding: 0.5rem 0;
     }
     .chip-row-wrap { flex-wrap: wrap; }
-
-    .filter-btn {
-      white-space: nowrap;
-    }
+    .filter-btn { white-space: nowrap; }
 
     .filter-btn.sub-chip {
       font-size: 0.82rem;
@@ -496,12 +519,11 @@
     <i class="fab fa-whatsapp"></i>
   </a>
 
-  <script>
+   <script>
     /* ============================================================
        PRODUCT DATABASE — 42 products with TAGS for sub-filtering
        ============================================================ */
     const products = [
-      /* ==================== BEDS ==================== */
       { id: 1, name: "King Max Weight", category: "bed", price: 6999, size: "King",
         tags: ["set", "mattress", "base", "promo"],
         image: "assets/images/beds/king-weight-master.jpg",
@@ -676,8 +698,6 @@
         desc: "Elegant storage base with integrated drawers beneath. Practical storage meets premium craftsmanship — mattress sold separately.",
         badge: "storage",
         specs: [["Base Length","205 cm"],["Base Width","157 cm"],["Base Height","38 cm"],["Drawer Count","4 spacious drawers"],["Drawer Dimensions","45cm x 60cm x 20cm each"],["Weight Capacity","200 kg per side"],["Fabric","Premium upholstered finish"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
-
-      /* ==================== HEADBOARDS ==================== */
       { id: 30, name: "King Headboard — Vertical / Horizontal / Diamond", category: "headboard", price: 1499, size: "King",
         tags: ["headboard", "promo"],
         image: "assets/images/headboards/king-diamond.jpg",
@@ -714,8 +734,6 @@
         desc: "Charming single headboard for children's rooms or guest spaces.",
         badge: "kids",
         specs: [["Width","98 cm"],["Height","110 cm"],["Depth","8 cm"],["Frame Material","Solid timber"],["Upholstery","Durable easy-clean fabric"],["Styles Available","Vertical · Horizontal"],["Mounting","Wall-mounted"],["Compatibility","Fits single beds 91–98 cm"],["Warranty","8 years"]] },
-
-      /* ==================== COUCHES ==================== */
       { id: 36, name: "L Shape Seater Couch", category: "couch", price: 3499, size: "L-Shape",
         tags: ["promo"],
         image: "assets/images/couches/l-shape.jpg",
@@ -734,8 +752,6 @@
         desc: "The perfect accent chair. Combines ergonomic support with sculptural beauty.",
         badge: "accent",
         specs: [["Overall Length","100 cm"],["Overall Width","90 cm"],["Seat Depth","58 cm"],["Seat Height","45 cm"],["Backrest Height","80 cm"],["Frame Material","Solid timber"],["Cushion Fill","High-density foam"],["Upholstery","Premium fabric"],["Seating Capacity","1 person"],["Warranty","8 years"]] },
-
-      /* ==================== FURNITURE ==================== */
       { id: 39, name: "Blanket Storage", category: "furniture", price: 999, size: "Standard",
         tags: ["furniture"],
         image: "assets/images/furniture/blanket-storage.jpg",
@@ -762,9 +778,6 @@
         specs: [["Length","50 cm"],["Width","45 cm"],["Height","60 cm"],["Drawer Count","3 drawers"],["Drawer Dimensions","40 x 38 x 15 cm"],["Material","Timber + velvet upholstery"],["Hardware","Brushed gold handles"],["Weight","14 kg"],["Warranty","5 years"]] }
     ];
 
-    /* ============================================================
-       BANKING DETAILS
-       ============================================================ */
     const BANK = {
       holder: "Harmony Rest and Comfort (PTY) LTD",
       bank: "Capitec Business Account",
@@ -772,9 +785,6 @@
       branch: "450105"
     };
 
-    /* ============================================================
-       STATE
-       ============================================================ */
     const state = {
       filter: 'all',
       tag: '',
@@ -788,9 +798,6 @@
       favorites: new Set(JSON.parse(localStorage.getItem('harmony_favs') || '[]'))
     };
 
-    /* ============================================================
-       DOM REFS
-       ============================================================ */
     const grid = document.getElementById('productsGrid');
     const emptyState = document.getElementById('emptyState');
     const resultsCount = document.getElementById('resultsCount');
@@ -801,12 +808,8 @@
     const pMin = document.getElementById('priceMin');
     const pMax = document.getElementById('priceMax');
 
-    /* ============================================================
-       FILTERING
-       ============================================================ */
     function filterProducts() {
       let list = [...products];
-
       if (state.filter !== 'all') list = list.filter(p => p.category === state.filter);
       if (state.tag)              list = list.filter(p => Array.isArray(p.tags) && p.tags.includes(state.tag));
       if (state.sizes.size)       list = list.filter(p => state.sizes.has(p.size));
@@ -816,17 +819,12 @@
         list = list.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
       }
       list = list.filter(p => p.price >= state.priceMin && p.price <= state.priceMax);
-
       if (state.sort === 'price-low')  list.sort((a,b) => a.price - b.price);
       if (state.sort === 'price-high') list.sort((a,b) => b.price - a.price);
       if (state.sort === 'name')       list.sort((a,b) => a.name.localeCompare(b.name));
-
       return list;
     }
 
-    /* ============================================================
-       SKELETON + CARD TEMPLATES
-       ============================================================ */
     function skeletonHTML(n = 8) {
       return Array.from({ length: n }).map(() => `
         <div class="product-card skeleton-card">
@@ -939,7 +937,6 @@
             <h3 class="product-title">${product.name}</h3>
             <p class="product-desc">${product.desc}</p>
             <div class="product-price">R${product.price.toLocaleString()} <small>${product.size}</small></div>
-
             <div class="product-actions">
               <button type="button" class="btn-card" data-view-id="${product.id}">view details →</button>
               <a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(product.name)}%20(R${product.price}%20-%20${product.size})."
@@ -955,12 +952,8 @@
       `;
     }
 
-    /* ============================================================
-       ACTIVE FILTER PILLS
-       ============================================================ */
     function renderActiveFilters() {
       const pills = [];
-
       if (state.search.trim()) pills.push({ key: 'search', label: `"${state.search.trim()}"` });
       if (state.filter !== 'all') pills.push({ key: 'filter', label: state.filter });
       if (state.tag) pills.push({ key: 'tag', value: state.tag, label: state.tag });
@@ -969,29 +962,24 @@
       if (state.priceMin > 0 || state.priceMax < 7000) {
         pills.push({ key: 'price', label: `R${state.priceMin.toLocaleString()} – R${state.priceMax.toLocaleString()}` });
       }
-
       activeFiltersEl.innerHTML = pills.map(p => `
         <button type="button" class="active-pill" data-pill-key="${p.key}" data-pill-value="${p.value || ''}">
           ${p.label} <i class="fas fa-times"></i>
         </button>
       `).join('');
-
       const badge = document.getElementById('filtersBadge');
-      if (pills.length > 0) { badge.hidden = false; badge.textContent = pills.length; }
-      else { badge.hidden = true; }
-
-      document.getElementById('searchClear').style.display = state.search ? 'flex' : 'none';
+      if (badge) {
+        if (pills.length > 0) { badge.hidden = false; badge.textContent = pills.length; }
+        else { badge.hidden = true; }
+      }
+      const sc = document.getElementById('searchClear');
+      if (sc) sc.style.display = state.search ? 'flex' : 'none';
     }
 
-    /* ============================================================
-       MAIN RENDER
-       ============================================================ */
     function render() {
       grid.innerHTML = skeletonHTML(8);
-
       setTimeout(() => {
         const list = filterProducts();
-
         if (!list.length) {
           grid.innerHTML = '';
           emptyState.hidden = false;
@@ -1000,84 +988,45 @@
           grid.className = state.view === 'list' ? 'products-grid list-view' : 'products-grid';
           grid.innerHTML = list.map((p, i) => productCardHTML(p, i)).join('');
         }
-
         resultsCount.textContent = list.length === products.length
           ? `Showing all ${products.length} items`
           : `Showing ${list.length} of ${products.length} items`;
-
         renderActiveFilters();
       }, 180);
     }
 
-    /* ============================================================
-       EVENT DELEGATION — grid clicks
-       ============================================================ */
     grid.addEventListener('click', (e) => {
       const favBtn = e.target.closest('.fav-btn');
-      if (favBtn) {
-        e.stopPropagation();
-        toggleFavorite(parseInt(favBtn.dataset.favId, 10), favBtn);
-        return;
-      }
+      if (favBtn) { e.stopPropagation(); toggleFavorite(parseInt(favBtn.dataset.favId, 10), favBtn); return; }
       const qv = e.target.closest('.quick-view-btn');
-      if (qv) {
-        e.stopPropagation();
-        openProductModal(parseInt(qv.dataset.quickId, 10));
-        return;
-      }
+      if (qv) { e.stopPropagation(); openProductModal(parseInt(qv.dataset.quickId, 10)); return; }
       const copyBtn = e.target.closest('.bank-copy-btn');
-      if (copyBtn) {
-        e.stopPropagation();
-        copyToClipboard(copyBtn.dataset.copy, copyBtn);
-        return;
-      }
+      if (copyBtn) { e.stopPropagation(); copyToClipboard(copyBtn.dataset.copy, copyBtn); return; }
       const eftBtn = e.target.closest('.btn-eft');
-      if (eftBtn) {
-        e.stopPropagation();
-        openBankModal(parseInt(eftBtn.dataset.eftToggle, 10));
-        return;
-      }
+      if (eftBtn) { e.stopPropagation(); openBankModal(parseInt(eftBtn.dataset.eftToggle, 10)); return; }
       const vd = e.target.closest('[data-view-id]');
-      if (vd) {
-        e.stopPropagation();
-        openProductModal(parseInt(vd.dataset.viewId, 10));
-        return;
-      }
+      if (vd) { e.stopPropagation(); openProductModal(parseInt(vd.dataset.viewId, 10)); return; }
       if (e.target.closest('.bank-details')) { e.stopPropagation(); return; }
       if (e.target.closest('.product-actions')) { return; }
-
       const card = e.target.closest('.product-card');
-      if (card && !e.target.closest('a')) {
-        openProductModal(parseInt(card.dataset.id, 10));
-      }
+      if (card && !e.target.closest('a')) { openProductModal(parseInt(card.dataset.id, 10)); }
     });
 
-    /* ============================================================
-       COPY / FAVORITES
-       ============================================================ */
     function copyToClipboard(text, btn) {
       const done = () => {
         const original = btn.innerHTML;
         btn.classList.add('copied');
         btn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
-        setTimeout(() => {
-          btn.classList.remove('copied');
-          btn.innerHTML = original;
-        }, 1600);
+        setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = original; }, 1600);
       };
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
-      } else {
-        fallbackCopy(text, done);
-      }
+      } else { fallbackCopy(text, done); }
     }
     function fallbackCopy(text, cb) {
       const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
       try { document.execCommand('copy'); cb && cb(); } catch (err) {}
       document.body.removeChild(ta);
     }
@@ -1088,17 +1037,14 @@
       localStorage.setItem('harmony_favs', JSON.stringify([...state.favorites]));
       btn.classList.toggle('active');
       const icon = btn.querySelector('i');
-      icon.classList.toggle('fas');
-      icon.classList.toggle('far');
+      icon.classList.toggle('fas'); icon.classList.toggle('far');
       updateFavCount();
     }
     function updateFavCount() {
-      document.getElementById('favCount').textContent = state.favorites.size;
+      const el = document.getElementById('favCount');
+      if (el) el.textContent = state.favorites.size;
     }
 
-    /* ============================================================
-       FILTER HANDLERS
-       ============================================================ */
     document.querySelectorAll('#categoryChips .filter-btn').forEach(btn => {
       btn.addEventListener('click', function () {
         document.querySelectorAll('#categoryChips .filter-btn').forEach(b => b.classList.remove('active'));
@@ -1112,8 +1058,7 @@
       btn.addEventListener('click', function () {
         const tag = this.dataset.tag;
         if (state.tag === tag) {
-          state.tag = '';
-          this.classList.remove('active');
+          state.tag = ''; this.classList.remove('active');
         } else {
           state.tag = tag;
           document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => b.classList.remove('active'));
@@ -1127,30 +1072,23 @@
     });
 
     document.getElementById('sortSelect').addEventListener('change', function () {
-      state.sort = this.value;
-      render();
+      state.sort = this.value; render();
     });
 
     let searchTimer;
     searchInput.addEventListener('input', function () {
       clearTimeout(searchTimer);
       const v = this.value;
-      searchTimer = setTimeout(() => {
-        state.search = v;
-        render();
-      }, 220);
+      searchTimer = setTimeout(() => { state.search = v; render(); }, 220);
     });
 
     document.getElementById('searchClear').addEventListener('click', () => {
-      searchInput.value = '';
-      state.search = '';
-      render();
+      searchInput.value = ''; state.search = ''; render();
     });
 
     document.addEventListener('keydown', (e) => {
       if (e.key === '/' && document.activeElement !== searchInput && !e.target.matches('input, textarea')) {
-        e.preventDefault();
-        searchInput.focus();
+        e.preventDefault(); searchInput.focus();
       }
     });
 
@@ -1158,55 +1096,60 @@
       btn.addEventListener('click', function () {
         document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
-        state.view = this.dataset.view;
-        render();
+        state.view = this.dataset.view; render();
       });
     });
 
-    document.getElementById('navSearchBtn').addEventListener('click', (e) => {
-      e.preventDefault();
-      searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      setTimeout(() => searchInput.focus(), 400);
-    });
+    /* ============================================================
+       ★ THE FIX — Guard navFavBtn and navSearchBtn so they don't
+       crash the script when they don't exist on this page.
+       ============================================================ */
+    const navSearchBtn = document.getElementById('navSearchBtn');
+    if (navSearchBtn) {
+      navSearchBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => searchInput.focus(), 400);
+      });
+    }
 
-    document.getElementById('navFavBtn').addEventListener('click', (e) => {
-      e.preventDefault();
-      if (state.favorites.size === 0) {
-        alert('You haven\'t saved any favorites yet. Tap the ♥ on any product to save it.');
-        return;
-      }
-      state.filter = 'all';
-      state.tag = '';
-      state.sizes.clear();
-      state.badges.clear();
-      state.search = '';
-      searchInput.value = '';
-      state.priceMin = 0;
-      state.priceMax = 7000;
-      document.querySelectorAll('#categoryChips .filter-btn').forEach(b => b.classList.remove('active'));
-      document.querySelector('#categoryChips .filter-btn[data-filter="all"]').classList.add('active');
-      document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => b.classList.remove('active'));
-
-      const favs = new Set(state.favorites);
-      grid.innerHTML = skeletonHTML(4);
-      setTimeout(() => {
-        const list = products.filter(p => favs.has(p.id));
-        grid.innerHTML = list.map((p, i) => productCardHTML(p, i)).join('');
-        resultsCount.textContent = `Showing ${list.length} favorite${list.length === 1 ? '' : 's'}`;
-        renderActiveFilters();
-      }, 180);
-    });
+    const navFavBtn = document.getElementById('navFavBtn');
+    if (navFavBtn) {
+      navFavBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (state.favorites.size === 0) {
+          alert('You haven\'t saved any favorites yet. Tap the ♥ on any product to save it.');
+          return;
+        }
+        state.filter = 'all';
+        state.tag = '';
+        state.sizes.clear();
+        state.badges.clear();
+        state.search = '';
+        searchInput.value = '';
+        state.priceMin = 0;
+        state.priceMax = 7000;
+        document.querySelectorAll('#categoryChips .filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('#categoryChips .filter-btn[data-filter="all"]').classList.add('active');
+        document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => b.classList.remove('active'));
+        const favs = new Set(state.favorites);
+        grid.innerHTML = skeletonHTML(4);
+        setTimeout(() => {
+          const list = products.filter(p => favs.has(p.id));
+          grid.innerHTML = list.map((p, i) => productCardHTML(p, i)).join('');
+          resultsCount.textContent = `Showing ${list.length} favorite${list.length === 1 ? '' : 's'}`;
+          renderActiveFilters();
+        }, 180);
+      });
+    }
 
     activeFiltersEl.addEventListener('click', (e) => {
       const pill = e.target.closest('.active-pill');
       if (!pill) return;
       const key = pill.dataset.pillKey;
       const value = pill.dataset.pillValue;
-
-      if (key === 'search') {
-        searchInput.value = '';
-        state.search = '';
-      } else if (key === 'filter') {
+      if (key === 'search') { searchInput.value = ''; state.search = ''; }
+      else if (key === 'filter') {
         state.filter = 'all';
         document.querySelectorAll('#categoryChips .filter-btn').forEach(b => b.classList.remove('active'));
         document.querySelector('#categoryChips .filter-btn[data-filter="all"]').classList.add('active');
@@ -1225,27 +1168,20 @@
           if (c.dataset.badge === value) c.classList.remove('active');
         });
       } else if (key === 'price') {
-        state.priceMin = 0;
-        state.priceMax = 7000;
-        pMin.value = 0;
-        pMax.value = 7000;
+        state.priceMin = 0; state.priceMax = 7000;
+        pMin.value = 0; pMax.value = 7000;
         updatePriceLabels();
       }
       render();
     });
 
-    /* ============================================================
-       MOBILE DRAWER
-       ============================================================ */
     function openDrawer() {
-      drawer.classList.add('open');
-      overlay.classList.add('visible');
+      drawer.classList.add('open'); overlay.classList.add('visible');
       drawer.setAttribute('aria-hidden', 'false');
       document.body.classList.add('modal-open');
     }
     function closeDrawer() {
-      drawer.classList.remove('open');
-      overlay.classList.remove('visible');
+      drawer.classList.remove('open'); overlay.classList.remove('visible');
       drawer.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('modal-open');
     }
@@ -1253,9 +1189,6 @@
     document.getElementById('drawerClose').addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
 
-    /* ============================================================
-       PRICE RANGE
-       ============================================================ */
     function updatePriceLabels() {
       document.getElementById('priceMinLabel').textContent = 'R' + parseInt(pMin.value, 10).toLocaleString();
       document.getElementById('priceMaxLabel').textContent = 'R' + parseInt(pMax.value, 10).toLocaleString();
@@ -1284,34 +1217,26 @@
       document.querySelectorAll('.size-chip[data-size].active').forEach(c => state.sizes.add(c.dataset.size));
       state.badges.clear();
       document.querySelectorAll('.size-chip[data-badge].active').forEach(c => state.badges.add(c.dataset.badge));
-
       const activeTag = document.querySelector('#collectionChips .size-chip[data-tag].active');
       state.tag = activeTag ? activeTag.dataset.tag : '';
       document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.tag === state.tag);
       });
-
       state.priceMin = parseInt(pMin.value, 10);
       state.priceMax = parseInt(pMax.value, 10);
-      closeDrawer();
-      render();
+      closeDrawer(); render();
     });
 
     document.getElementById('drawerReset').addEventListener('click', () => {
       document.querySelectorAll('.size-chip.active').forEach(c => c.classList.remove('active'));
-      pMin.value = 0;
-      pMax.value = 7000;
+      pMin.value = 0; pMax.value = 7000;
       updatePriceLabels();
     });
 
     document.getElementById('resetFiltersBtn').addEventListener('click', () => {
-      state.filter = 'all';
-      state.tag = '';
-      state.search = '';
-      state.sizes.clear();
-      state.badges.clear();
-      state.priceMin = 0;
-      state.priceMax = 7000;
+      state.filter = 'all'; state.tag = ''; state.search = '';
+      state.sizes.clear(); state.badges.clear();
+      state.priceMin = 0; state.priceMax = 7000;
       state.sort = 'default';
       searchInput.value = '';
       document.getElementById('sortSelect').value = 'default';
@@ -1319,30 +1244,22 @@
       document.querySelector('#categoryChips .filter-btn[data-filter="all"]').classList.add('active');
       document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.size-chip.active').forEach(c => c.classList.remove('active'));
-      pMin.value = 0;
-      pMax.value = 7000;
-      updatePriceLabels();
-      render();
+      pMin.value = 0; pMax.value = 7000;
+      updatePriceLabels(); render();
     });
 
-    /* ============================================================
-       PRODUCT MODAL
-       ============================================================ */
     function openProductModal(productId) {
       const product = products.find(p => p.id === productId);
       if (!product) return;
-
       document.getElementById('modalCategory').textContent = product.category;
       document.getElementById('modalTitle').textContent = product.name;
       document.getElementById('modalBadge').textContent = product.badge;
       document.getElementById('modalPrice').innerHTML = `R${product.price.toLocaleString()} <small>${product.size}</small>`;
       document.getElementById('modalDescription').textContent = product.desc;
-
       let specsHTML = '<h4>Specifications</h4><table>';
       product.specs.forEach(spec => { specsHTML += `<tr><td>${spec[0]}</td><td>${spec[1]}</td></tr>`; });
       specsHTML += '</table>';
       document.getElementById('modalSpecs').innerHTML = specsHTML;
-
       const iconMap = { bed: 'bed', headboard: 'grip-lines', couch: 'couch', furniture: 'box' };
       document.getElementById('modalImage').innerHTML = `
         <img src="${product.image}" alt="${product.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -1351,12 +1268,10 @@
           <span style="font-family:'Inter',sans-serif; color:#999;">image coming soon</span>
         </div>
       `;
-
       document.getElementById('modalInquire').onclick = function () {
         alert(`✨ Thank you for your interest in the ${product.name}. A sleep consultant will contact you shortly.`);
       };
       document.getElementById('modalWhatsApp').href = `https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(product.name)}%20(R${product.price}%20-%20${product.size}).`;
-
       document.getElementById('productModal').classList.add('active');
       document.body.classList.add('modal-open');
     }
@@ -1371,40 +1286,29 @@
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
-        closeProductModal();
-        closeBankModal();
+        closeProductModal(); closeBankModal();
         if (drawer.classList.contains('open')) closeDrawer();
       }
     });
 
-    /* ============================================================
-       BANKING MODAL
-       ============================================================ */
     function openBankModal(productId) {
       const product = products.find(p => p.id === productId);
       if (!product) return;
-
       document.getElementById('bankModalSub').textContent =
         `${product.name} · ${product.size} · R${product.price.toLocaleString()}`;
-
       document.getElementById('bankModalBody').innerHTML = bankPanelHTML(product);
-
       document.getElementById('bankModalWhatsApp').href =
         `https://wa.me/27822336883?text=Proof%20of%20payment%20for%20${encodeURIComponent(product.name)}%20(${encodeURIComponent(product.size)})%20-%20R${product.price}`;
-
       const modal = document.getElementById('bankModal');
       modal.classList.add('active');
       document.body.classList.add('modal-open');
-
       document.getElementById('bankModalBody').onclick = (e) => {
         const copyBtn = e.target.closest('.bank-copy-btn');
         if (!copyBtn) return;
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault(); e.stopPropagation();
         copyToClipboard(copyBtn.dataset.copy, copyBtn);
       };
     }
-
     function closeBankModal() {
       const modal = document.getElementById('bankModal');
       modal.classList.remove('active');
@@ -1416,86 +1320,60 @@
       if (e.target === e.currentTarget) closeBankModal();
     });
 
-    /* ============================================================
-       READ URL PARAMS
-       ============================================================ */
     (function readURLParams() {
       const params = new URLSearchParams(window.location.search);
       let cat = params.get('category');
       let filter = params.get('filter');
-
       const legacyMap = {
-        'mattresses':            { cat: 'bed',       filter: 'mattress' },
-        'bed-sets':              { cat: 'bed',       filter: 'set' },
-        'bed-bases':             { cat: 'bed',       filter: 'base' },
-        'standard-bases':        { cat: 'bed',       filter: 'standard-base' },
-        'storage-bases-combos':  { cat: 'bed',       filter: 'storage-base' },
-        'base-with-drawers':     { cat: 'bed',       filter: 'drawers' },
-        'steel-bases':           { cat: 'bed',       filter: 'steel-base' },
-        'mattress-toppers':      { cat: 'bed',       filter: 'topper' },
-        'furniture':             { cat: 'furniture', filter: null },
-        'student-accommodation': { cat: 'bed',       filter: 'student' },
-        'bunk-beds':             { cat: 'bed',       filter: 'bunk' },
-        'promotions':            { cat: 'all',       filter: 'promo' }
+        'mattresses': { cat: 'bed', filter: 'mattress' },
+        'bed-sets': { cat: 'bed', filter: 'set' },
+        'bed-bases': { cat: 'bed', filter: 'base' },
+        'standard-bases': { cat: 'bed', filter: 'standard-base' },
+        'storage-bases-combos': { cat: 'bed', filter: 'storage-base' },
+        'base-with-drawers': { cat: 'bed', filter: 'drawers' },
+        'steel-bases': { cat: 'bed', filter: 'steel-base' },
+        'mattress-toppers': { cat: 'bed', filter: 'topper' },
+        'furniture': { cat: 'furniture', filter: null },
+        'student-accommodation': { cat: 'bed', filter: 'student' },
+        'bunk-beds': { cat: 'bed', filter: 'bunk' },
+        'promotions': { cat: 'all', filter: 'promo' }
       };
-
       if (cat && legacyMap[cat] && !filter) {
         const mapped = legacyMap[cat];
-        cat = mapped.cat;
-        filter = mapped.filter;
+        cat = mapped.cat; filter = mapped.filter;
       }
-
       if (cat && ['all', 'bed', 'headboard', 'couch', 'furniture'].includes(cat)) {
         state.filter = cat;
         document.querySelectorAll('#categoryChips .filter-btn').forEach(b => b.classList.remove('active'));
         const btn = document.querySelector(`#categoryChips .filter-btn[data-filter="${cat}"]`);
         if (btn) btn.classList.add('active');
       }
-
       if (filter) {
         state.tag = filter;
-
         let matchedChip = false;
         document.querySelectorAll('#subCategoryChips .filter-btn').forEach(b => {
-          if (b.dataset.tag === filter) {
-            b.classList.add('active');
-            matchedChip = true;
-          } else {
-            b.classList.remove('active');
-          }
+          if (b.dataset.tag === filter) { b.classList.add('active'); matchedChip = true; }
+          else { b.classList.remove('active'); }
         });
-
         document.querySelectorAll('#collectionChips .size-chip').forEach(c => {
           c.classList.toggle('active', c.dataset.tag === filter);
         });
-
         const tagHasProducts = products.some(p => Array.isArray(p.tags) && p.tags.includes(filter));
-
         if (!matchedChip || !tagHasProducts) {
           state.tag = '';
-
           const keywordMap = {
-            'mattress':       'mattress',
-            'set':            'bed set',
-            'base':           'base',
-            'standard-base':  'base',
-            'storage-base':   'storage base',
-            'drawers':        'drawer',
-            'steel-base':     'base',
-            'topper':         'topper',
-            'student':        'student',
-            'bunk':           'bunk',
-            'promo':          'save'
+            'mattress': 'mattress', 'set': 'bed set', 'base': 'base',
+            'standard-base': 'base', 'storage-base': 'storage base',
+            'drawers': 'drawer', 'steel-base': 'base', 'topper': 'topper',
+            'student': 'student', 'bunk': 'bunk', 'promo': 'save'
           };
           const keyword = keywordMap[filter] || filter;
-
           state.search = keyword;
           if (typeof searchInput !== 'undefined' && searchInput) {
             searchInput.value = keyword;
           }
         }
       }
-
       if (cat || filter) {
         setTimeout(() => {
           const gridEl = document.getElementById('productsGrid');
@@ -1507,27 +1385,29 @@
       }
     })();
 
-    /* ============================================================
-       INIT
-       ============================================================ */
     updateFavCount();
     updatePriceLabels();
     render();
 
     /* ============================================================
-       MOBILE MENU
+       MOBILE MENU — hamburger toggle
        ============================================================ */
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
-    mobileMenuBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-      const icon = mobileMenuBtn.querySelector('i');
-      icon.classList.toggle('fa-bars');
-      icon.classList.toggle('fa-times');
-      if (!navLinks.classList.contains('active')) {
-        document.getElementById('shopDropdown').classList.remove('open');
-      }
-    });
+    if (mobileMenuBtn && navLinks) {
+      mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = mobileMenuBtn.querySelector('i');
+        if (icon) {
+          icon.classList.toggle('fa-bars');
+          icon.classList.toggle('fa-times');
+        }
+        const shopDrop = document.getElementById('shopDropdown');
+        if (!navLinks.classList.contains('active') && shopDrop) {
+          shopDrop.classList.remove('open');
+        }
+      });
+    }
 
     /* ============================================================
        DROPDOWN TOGGLE (mobile)
@@ -1557,8 +1437,10 @@
             shopItem.classList.remove('open');
             navLinks.classList.remove('active');
             const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.add('fa-bars');
-            icon.classList.remove('fa-times');
+            if (icon) {
+              icon.classList.add('fa-bars');
+              icon.classList.remove('fa-times');
+            }
           }
         });
       });
@@ -1571,6 +1453,5 @@
       });
     })();
   </script>
-
 </body>
 </html>
