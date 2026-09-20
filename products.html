@@ -389,14 +389,10 @@
               <li><a href="products.html?category=bed&filter=mattress">Mattresses</a></li>
               <li><a href="products.html?category=bed&filter=set">Bed Sets</a></li>
 
-              
-
               <li class="dropdown-divider"></li>
               <li><a href="products.html?category=bed&filter=standard-base">Standard Bases</a></li>
               <li><a href="products.html?category=bed&filter=storage-base">Storage Bases &amp; Combos</a></li>
           
-              
-              
               <li class="dropdown-divider"></li>
               
               <li><a href="products.html?category=furniture">Furniture</a></li>
@@ -439,6 +435,9 @@
     </section>
   </main>
 
+  <!-- ============================================================ -->
+  <!-- PRODUCT DETAIL MODAL                                          -->
+  <!-- ============================================================ -->
   <div class="modal-overlay" id="productModal">
     <div class="modal-content">
       <button class="modal-close" id="modalClose">&times;</button>
@@ -461,7 +460,27 @@
     </div>
   </div>
 
- 
+  <!-- ============================================================ -->
+  <!-- BANK / EFT MODAL  ✅ NEWLY ADDED — THIS WAS MISSING           -->
+  <!-- ============================================================ -->
+  <div class="bank-modal-overlay" id="bankModal">
+    <div class="bank-modal-content">
+      <button class="bank-modal-close" id="bankModalClose" aria-label="Close">&times;</button>
+      <div class="bank-modal-header">
+        <span class="bank-modal-eyebrow">secure payment</span>
+        <h2 class="bank-modal-title">Bank Transfer Details</h2>
+        <p class="bank-modal-sub" id="bankModalSub"></p>
+      </div>
+      <div class="bank-modal-body" id="bankModalBody"></div>
+      <div class="bank-modal-footer">
+        <a href="#" class="bank-modal-whatsapp" id="bankModalWhatsApp" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i> Send Proof of Payment
+        </a>
+        <button type="button" class="bank-modal-done" id="bankModalDone">Done</button>
+      </div>
+    </div>
+  </div>
+
   <a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20would%20like%20to%20inquire%20about%20your%20products." class="floating-whatsapp" target="_blank" aria-label="Chat on WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
@@ -469,12 +488,6 @@
   <script>
     /* ============================================================
        PRODUCT DATABASE
-       Each product includes `oldPrice` (current price + 15%)
-       and `rating` (out of 5) with `reviewCount`.
-       
-       RATING DISTRIBUTION:
-       - 30% of products have 5 or 4 star ratings (high performers)
-       - Remaining 70% have ratings between 3.5 and 4.5 for realism
        ============================================================ */
     const products = [
       { id: 1, name: "King Max Weight", category: "bed", price: 6999, oldPrice: 8048.85, size: "King",
@@ -693,7 +706,7 @@
         badge: "best seller",
         specs: [["Mattress Length","200 cm"],["Mattress Width","183 cm"],["Mattress Height","30 cm"],["Weight Capacity","250 kg per side"],["Spring Count","3,000 pocket springs"],["Comfort Layer","High-density foam + gel infusion"],["Fabric","Premium damask"],["Base Included","No (mattress only)"],["Warranty","15 years"]] },
 
-      /* ============ BED BASES (Double, Queen, Storage retained) ============ */
+      /* ============ BED BASES ============ */
       { id: 45, name: "Double Base", category: "bed", price: 1019.99 , oldPrice: 1172.99, size: "Double",
         rating: 4.3, reviewCount: 71,
         tags: ["base", "standard-base", "promo"],
@@ -805,10 +818,6 @@
         desc: "The perfect accent chair.",
         badge: "accent",
         specs: [["Overall Length","100 cm"],["Warranty","8 years"]] },
-
-      /* ============ FURNITURE (PLACEHOLDER ENTERPRISE LEVEL) ============ */
-      /* All previous furniture items have been removed as requested.
-         A single professional placeholder is now used for the furniture category. */
     ];
 
     /* ============================================================
@@ -1312,26 +1321,45 @@
       document.getElementById('productModal').classList.remove('active');
       document.body.classList.remove('modal-open');
     }
-    document.getElementById('modalClose').addEventListener('click', closeProductModal);
-    document.getElementById('productModal').addEventListener('click', function (e) {
-      if (e.target === this) closeProductModal();
-    });
+
+    /* ============================================================
+       MODAL EVENT LISTENERS — with defensive guards
+       ============================================================ */
+    const productModalEl = document.getElementById('productModal');
+    const modalCloseEl = document.getElementById('modalClose');
+    if (modalCloseEl) modalCloseEl.addEventListener('click', closeProductModal);
+    if (productModalEl) {
+      productModalEl.addEventListener('click', function (e) {
+        if (e.target === this) closeProductModal();
+      });
+    }
+
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { closeProductModal(); closeBankModal(); }
     });
 
+    /* ============================================================
+       BANK MODAL — open / close / handlers
+       ============================================================ */
     function openBankModal(productId) {
       const product = products.find(p => p.id === productId);
       if (!product) return;
-      document.getElementById('bankModalSub').textContent =
-        `${product.name} · ${product.size} · R${product.price.toLocaleString()}`;
-      document.getElementById('bankModalBody').innerHTML = bankPanelHTML(product);
-      document.getElementById('bankModalWhatsApp').href =
-        `https://wa.me/27822336883?text=Proof%20of%20payment%20for%20${encodeURIComponent(product.name)}%20(${encodeURIComponent(product.size)})%20-%20R${product.price}`;
+      const subEl = document.getElementById('bankModalSub');
+      const bodyEl = document.getElementById('bankModalBody');
+      const waEl = document.getElementById('bankModalWhatsApp');
       const modal = document.getElementById('bankModal');
+      if (!modal || !bodyEl) return;
+
+      if (subEl) subEl.textContent =
+        `${product.name} · ${product.size} · R${product.price.toLocaleString()}`;
+      bodyEl.innerHTML = bankPanelHTML(product);
+      if (waEl) waEl.href =
+        `https://wa.me/27822336883?text=Proof%20of%20payment%20for%20${encodeURIComponent(product.name)}%20(${encodeURIComponent(product.size)})%20-%20R${product.price}`;
+
       modal.classList.add('active');
       document.body.classList.add('modal-open');
-      document.getElementById('bankModalBody').onclick = (e) => {
+
+      bodyEl.onclick = (e) => {
         const copyBtn = e.target.closest('.bank-copy-btn');
         if (!copyBtn) return;
         e.preventDefault(); e.stopPropagation();
@@ -1340,18 +1368,31 @@
     }
     function closeBankModal() {
       const modal = document.getElementById('bankModal');
+      if (!modal) return;
       modal.classList.remove('active');
       document.body.classList.remove('modal-open');
     }
-    document.getElementById('bankModalClose').addEventListener('click', closeBankModal);
-    document.getElementById('bankModalDone').addEventListener('click', closeBankModal);
-    document.getElementById('bankModal').addEventListener('click', (e) => {
-      if (e.target === e.currentTarget) closeBankModal();
-    });
 
+    const bankModalCloseEl = document.getElementById('bankModalClose');
+    const bankModalDoneEl = document.getElementById('bankModalDone');
+    const bankModalEl = document.getElementById('bankModal');
+    if (bankModalCloseEl) bankModalCloseEl.addEventListener('click', closeBankModal);
+    if (bankModalDoneEl) bankModalDoneEl.addEventListener('click', closeBankModal);
+    if (bankModalEl) {
+      bankModalEl.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeBankModal();
+      });
+    }
+
+    /* ============================================================
+       BOOTSTRAP — show skeleton then render
+       ============================================================ */
     grid.innerHTML = skeletonHTML(8);
     setTimeout(render, 180);
 
+    /* ============================================================
+       MOBILE MENU
+       ============================================================ */
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
     if (mobileMenuBtn && navLinks) {
@@ -1373,6 +1414,7 @@
       const shopItem = document.getElementById('shopDropdown');
       if (!shopItem) return;
       const toggleLink = shopItem.querySelector('.dropdown-toggle');
+      if (!toggleLink) return;
       toggleLink.addEventListener('click', function(e) {
         if (window.innerWidth <= 992) {
           e.preventDefault();
@@ -1392,8 +1434,8 @@
         link.addEventListener('click', () => {
           if (window.innerWidth <= 992) {
             shopItem.classList.remove('open');
-            navLinks.classList.remove('active');
-            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks) navLinks.classList.remove('active');
+            const icon = mobileMenuBtn ? mobileMenuBtn.querySelector('i') : null;
             if (icon) {
               icon.classList.add('fa-bars');
               icon.classList.remove('fa-times');
