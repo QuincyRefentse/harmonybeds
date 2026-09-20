@@ -284,6 +284,79 @@
       color: #7A7875;
       white-space: nowrap;
     }
+
+    /* ============================================================
+       PRICE STYLING (with old price strikethrough) — INCREASED FONT
+       ============================================================ */
+    .product-price .old-price {
+      font-size: 1.05rem;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 0.5rem;
+      font-weight: 400;
+      font-family: 'Inter', sans-serif;
+    }
+    .modal-price-large .old-price {
+      font-size: 1.4rem;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 0.8rem;
+      font-weight: 400;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ============================================================
+       STAR RATINGS
+       ============================================================ */
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin: 0.4rem 0 0.3rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .product-rating .stars {
+      display: inline-flex;
+      gap: 0.15rem;
+      font-size: 0.85rem;
+      color: #C6A45C;
+    }
+    .product-rating .stars .far {
+      color: #ddd;
+    }
+    .product-rating .stars .fas.fa-star-half-alt {
+      color: #C6A45C;
+    }
+    .product-rating .rating-text {
+      font-size: 0.75rem;
+      color: #7A7875;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .modal-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.5rem 0 0.8rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .modal-rating .stars {
+      display: inline-flex;
+      gap: 0.2rem;
+      font-size: 1.1rem;
+      color: #C6A45C;
+    }
+    .modal-rating .stars .far {
+      color: #ddd;
+    }
+    .modal-rating .stars .fas.fa-star-half-alt {
+      color: #C6A45C;
+    }
+    .modal-rating .rating-text {
+      font-size: 0.88rem;
+      color: #7A7875;
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
@@ -375,6 +448,7 @@
           <div class="modal-category" id="modalCategory"></div>
           <h2 class="modal-title" id="modalTitle"></h2>
           <span class="modal-badge" id="modalBadge"></span>
+          <div class="modal-rating" id="modalRating"></div>
           <div class="modal-price-large" id="modalPrice"></div>
           <p class="modal-description" id="modalDescription"></p>
           <div class="modal-specs" id="modalSpecs"></div>
@@ -432,159 +506,191 @@
   <script>
     /* ============================================================
        PRODUCT DATABASE
+       Each product includes `oldPrice` (current price + 15%)
+       and `rating` (out of 5) with `reviewCount`.
+       
+       RATING DISTRIBUTION:
+       - 30% of products have 5 or 4 star ratings (high performers)
+       - Remaining 70% have ratings between 3.5 and 4.5 for realism
        ============================================================ */
     const products = [
-      { id: 1, name: "King Max Weight", category: "bed", price: 6999, size: "King",
+      { id: 1, name: "King Max Weight", category: "bed", price: 6999, oldPrice: 8048.85, size: "King",
+        rating: 5.0, reviewCount: 142,
         tags: ["set", "mattress", "base", "promo"],
         image: "assets/images/beds/kingmaxwieght.jpg",
         desc: "Our flagship heavy-duty bed engineered for exceptional weight support. Reinforced lumbar construction and high-density foam layers deliver deep restorative sleep with superior spinal alignment.",
         badge: "best seller",
         specs: [["Mattress Length","200 cm"],["Mattress Width","183 cm"],["Mattress Height","30 cm"],["Base Length","202 cm"],["Base Width","185 cm"],["Base Height","35 cm"],["Total Height","65 cm"],["Weight Capacity","250 kg per side"],["Spring Count","3,000 pocket springs"],["Comfort Layer","High-density foam + gel infusion"],["Fabric","Premium damask"],["Warranty","15 years"]] },
-      { id: 2, name: "Hospitality Queen Bed Set", category: "bed", price: 4999, size: "Queen",
+      { id: 2, name: "Hospitality Queen Bed Set", category: "bed", price: 4999, oldPrice: 5748.85, size: "Queen",
+        rating: 4.5, reviewCount: 98,
         tags: ["set", "mattress", "base"],
         image: "assets/images/beds/hospibedbase.jpg",
         desc: "Hotel-grade queen bed set featuring durable pocket springs and a medium-firm comfort layer.",
         badge: "hotel quality",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Mattress Height","28 cm"],["Warranty","12 years"]] },
-      { id: 3, name: "Hospitality Queen Mattress", category: "bed", price: 3299, size: "Queen",
+      { id: 3, name: "Hospitality Queen Mattress", category: "bed", price: 3299, oldPrice: 3793.85, size: "Queen",
+        rating: 4.2, reviewCount: 67,
         tags: ["mattress"],
         image: "assets/images/beds/queenmatress.jpg",
         desc: "Hospitality-grade queen mattress on its own.",
         badge: "hotel quality",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Warranty","12 years"]] },
-      { id: 4, name: "Hospitality Double Bed Set", category: "bed", price: 4499, size: "Double",
+      { id: 4, name: "Hospitality Double Bed Set", category: "bed", price: 4499, oldPrice: 5173.85, size: "Double",
+        rating: 4.6, reviewCount: 112,
         tags: ["set", "mattress", "base"],
         image: "assets/images/beds/hospibedbase.jpg",
         desc: "Full double hospitality set with durable pocket springs.",
         badge: "hotel quality",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Warranty","12 years"]] },
-      { id: 5, name: "Hospitality Double Mattress", category: "bed", price: 2999, size: "Double",
+      { id: 5, name: "Hospitality Double Mattress", category: "bed", price: 2999, oldPrice: 3448.85, size: "Double",
+        rating: 4.1, reviewCount: 54,
         tags: ["mattress"],
         image: "assets/images/beds/queenmatress.jpg",
         desc: "Double hospitality mattress, sold on its own.",
         badge: "hotel quality",
         specs: [["Mattress Length","188 cm"],["Mattress Width","137 cm"],["Warranty","12 years"]] },
-      { id: 6, name: "Orthopedic Queen Bed Set", category: "bed", price: 5999, size: "Queen",
+      { id: 6, name: "Orthopedic Queen Bed Set", category: "bed", price: 5999, oldPrice: 6898.85, size: "Queen",
+        rating: 4.8, reviewCount: 156,
         tags: ["set", "mattress", "base", "promo"],
         image: "assets/images/beds/setqueen.jpg",
         desc: "Therapeutic queen set with zoned coil system and memory foam infusion.",
         badge: "therapeutic",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Warranty","15 years"]] },
-      { id: 7, name: "Orthopedic Queen Mattress", category: "bed", price: 3999, size: "Queen",
+      { id: 7, name: "Orthopedic Queen Mattress", category: "bed", price: 3999, oldPrice: 4598.85, size: "Queen",
+        rating: 4.4, reviewCount: 88,
         tags: ["mattress"],
         image: "assets/images/beds/orthop.jpg",
         desc: "Therapeutic queen mattress only.",
         badge: "therapeutic",
         specs: [["Mattress Length","200 cm"],["Mattress Width","152 cm"],["Warranty","15 years"]] },
-      { id: 8, name: "Orthopedic Double Bed Set", category: "bed", price: 5499, size: "Double",
+      { id: 8, name: "Orthopedic Double Bed Set", category: "bed", price: 5499, oldPrice: 6323.85, size: "Double",
+        rating: 4.5, reviewCount: 102,
         tags: ["set", "mattress", "base"],
         image: "assets/images/beds/setqueen.jpg",
         desc: "Orthopedic double bed set with zoned coil support.",
         badge: "therapeutic",
         specs: [["Mattress Length","188 cm"],["Warranty","15 years"]] },
-      { id: 9, name: "Orthopedic Double Mattress", category: "bed", price: 3499, size: "Double",
+      { id: 9, name: "Orthopedic Double Mattress", category: "bed", price: 3499, oldPrice: 4023.85, size: "Double",
+        rating: 4.0, reviewCount: 47,
         tags: ["mattress"],
         image: "assets/images/beds/orthop.jpg",
         desc: "Double orthopedic mattress only.",
         badge: "therapeutic",
         specs: [["Mattress Length","188 cm"],["Warranty","15 years"]] },
-      { id: 10, name: "Pocket Spring Queen Bed Set", category: "bed", price: 6499, size: "Queen",
+      { id: 10, name: "Pocket Spring Queen Bed Set", category: "bed", price: 6499, oldPrice: 7473.85, size: "Queen",
+        rating: 4.9, reviewCount: 203,
         tags: ["set", "mattress", "base"],
         image: "assets/images/beds/pocketspringbedset.jpg",
         desc: "Individually wrapped pocket springs move independently for tailored support.",
         badge: "popular",
         specs: [["Mattress Length","200 cm"],["Warranty","12 years"]] },
-      { id: 11, name: "Pocket Spring Queen Mattress", category: "bed", price: 4499, size: "Queen",
+      { id: 11, name: "Pocket Spring Queen Mattress", category: "bed", price: 4499, oldPrice: 5173.85, size: "Queen",
+        rating: 4.3, reviewCount: 76,
         tags: ["mattress"],
         image: "assets/images/beds/pocketspring.jpg",
         desc: "Queen pocket spring mattress only.",
         badge: "popular",
         specs: [["Mattress Length","200 cm"],["Warranty","12 years"]] },
-      { id: 12, name: "Pocket Spring Double Bed Set", category: "bed", price: 5999, size: "Double",
+      { id: 12, name: "Pocket Spring Double Bed Set", category: "bed", price: 5999, oldPrice: 6898.85, size: "Double",
+        rating: 4.6, reviewCount: 134,
         tags: ["set", "mattress", "base"],
         image: "assets/images/beds/pocketspringbedset.jpg",
         desc: "Double pocket spring set with independent coils.",
         badge: "popular",
         specs: [["Mattress Length","188 cm"],["Warranty","12 years"]] },
-      { id: 13, name: "Pocket Spring Double Mattress", category: "bed", price: 3999, size: "Double",
+      { id: 13, name: "Pocket Spring Double Mattress", category: "bed", price: 3999, oldPrice: 4598.85, size: "Double",
+        rating: 3.9, reviewCount: 42,
         tags: ["mattress"],
         image: "assets/images/beds/pocketspring.jpg",
         desc: "Double pocket spring mattress only.",
         badge: "popular",
         specs: [["Mattress Length","188 cm"],["Warranty","12 years"]] },
-      { id: 14, name: "PillowTop Queen Bed Set", category: "bed", price: 3999, size: "Queen",
+      { id: 14, name: "PillowTop Queen Bed Set", category: "bed", price: 3999, oldPrice: 4598.85, size: "Queen",
+        rating: 4.7, reviewCount: 167,
         tags: ["set", "mattress", "base", "promo"],
         image: "assets/images/beds/pillowtopbedset.jpg",
         desc: "Luxurious euro-top queen set with plush cushioning.",
         badge: "plush",
         specs: [["Mattress Length","200 cm"],["Warranty","12 years"]] },
-      { id: 15, name: "PillowTop Queen Mattress", category: "bed", price: 3200, size: "Queen",
+      { id: 15, name: "PillowTop Queen Mattress", category: "bed", price: 3200, oldPrice: 3680.00, size: "Queen",
+        rating: 4.2, reviewCount: 63,
         tags: ["mattress", "topper"],
         image: "assets/images/beds/pillowtop.jpg",
         desc: "Queen pillow-top mattress only.",
         badge: "plush",
         specs: [["Mattress Length","200 cm"],["Warranty","12 years"]] },
-      { id: 16, name: "PillowTop Double Bed Set", category: "bed", price: 3800, size: "Double",
+      { id: 16, name: "PillowTop Double Bed Set", category: "bed", price: 3800, oldPrice: 4370.00, size: "Double",
+        rating: 4.4, reviewCount: 91,
         tags: ["set", "mattress", "base"],
         image: "assets/images/beds/pillowtopbedset.jpg",
         desc: "Double pillow-top set.",
         badge: "plush",
         specs: [["Mattress Length","188 cm"],["Warranty","12 years"]] },
-      { id: 17, name: "PillowTop Double Mattress", category: "bed", price: 3100, size: "Double",
+      { id: 17, name: "PillowTop Double Mattress", category: "bed", price: 3100, oldPrice: 3565.00, size: "Double",
+        rating: 3.8, reviewCount: 38,
         tags: ["mattress", "topper"],
         image: "assets/images/beds/pillowtop.jpg",
         desc: "Double pillow-top mattress only.",
         badge: "plush",
         specs: [["Mattress Length","188 cm"],["Warranty","12 years"]] },
-      { id: 18, name: "Sleepwell Queen Bed Set", category: "bed", price: 3499, size: "Queen",
+      { id: 18, name: "Sleepwell Queen Bed Set", category: "bed", price: 3499, oldPrice: 4023.85, size: "Queen",
+        rating: 5.0, reviewCount: 178,
         tags: ["set", "mattress", "base", "promo"],
         image: "assets/images/beds/queenbedsetrubber.jpg",
         desc: "Sleepwell queen set — balanced medium-firm support.",
         badge: "everyday luxury",
         specs: [["Mattress Length","200 cm"],["Warranty","10 years"]] },
-      { id: 19, name: "Sleepwell Queen Mattress", category: "bed", price: 2999, size: "Queen",
+      { id: 19, name: "Sleepwell Queen Mattress", category: "bed", price: 2999, oldPrice: 3448.85, size: "Queen",
+        rating: 4.1, reviewCount: 55,
         tags: ["mattress"],
         image: "assets/images/beds/sleepwell.jpg",
         desc: "Sleepwell queen mattress only.",
         badge: "everyday luxury",
         specs: [["Mattress Length","200 cm"],["Warranty","10 years"]] },
-      { id: 20, name: "Sleepwell Double Bed Set", category: "bed", price: 2899, size: "Double",
+      { id: 20, name: "Sleepwell Double Bed Set", category: "bed", price: 2899, oldPrice: 3333.85, size: "Double",
+        rating: 4.3, reviewCount: 74,
         tags: ["set", "mattress", "base"],
         image: "assets/images/beds/queenbedsetrubber.jpg",
         desc: "Sleepwell double set.",
         badge: "everyday luxury",
         specs: [["Mattress Length","188 cm"],["Warranty","10 years"]] },
-      { id: 21, name: "Sleepwell Double Mattress", category: "bed", price: 2899, size: "Double",
+      { id: 21, name: "Sleepwell Double Mattress", category: "bed", price: 2899, oldPrice: 3333.85, size: "Double",
+        rating: 3.7, reviewCount: 31,
         tags: ["mattress"],
         image: "assets/images/beds/sleepwell.jpg",
         desc: "Sleepwell double mattress only.",
         badge: "everyday luxury",
         specs: [["Mattress Length","188 cm"],["Warranty","10 years"]] },
-      { id: 22, name: "Budget Queen Bed Set", category: "bed", price: 2499, size: "Queen",
+      { id: 22, name: "Budget Queen Bed Set", category: "bed", price: 2499, oldPrice: 2873.85, size: "Queen",
+        rating: 4.6, reviewCount: 118,
         tags: ["set", "mattress", "base", "promo"],
         image: "assets/images/beds/bedsetsleg.jpg",
         desc: "Affordable queen set with durable foam core.",
         badge: "value",
         specs: [["Mattress Length","200 cm"],["Warranty","5 years"]] },
-      { id: 23, name: "Budget Queen Mattress", category: "bed", price: 1999, size: "Queen",
+      { id: 23, name: "Budget Queen Mattress", category: "bed", price: 1999, oldPrice: 2298.85, size: "Queen",
+        rating: 4.0, reviewCount: 49,
         tags: ["mattress"],
         image: "assets/images/beds/budgetmattress.png",
         desc: "Budget queen mattress only.",
         badge: "value",
         specs: [["Mattress Length","200 cm"],["Warranty","5 years"]] },
-      { id: 24, name: "Budget Double Bed Set", category: "bed", price: 2399, size: "Double",
+      { id: 24, name: "Budget Double Bed Set", category: "bed", price: 2399, oldPrice: 2758.85, size: "Double",
+        rating: 4.4, reviewCount: 85,
         tags: ["set", "mattress", "base"],
         image: "assets/images/beds/bedsetsleg.jpg",
         desc: "Affordable double set.",
         badge: "value",
         specs: [["Mattress Length","188 cm"],["Warranty","5 years"]] },
-      { id: 25, name: "Budget Double Mattress", category: "bed", price: 1899, size: "Double",
+      { id: 25, name: "Budget Double Mattress", category: "bed", price: 1899, oldPrice: 2183.85, size: "Double",
+        rating: 3.6, reviewCount: 27,
         tags: ["mattress"],
         image: "assets/images/beds/budgetmattress.png",
         desc: "Budget double mattress only.",
         badge: "value",
         specs: [["Mattress Length","188 cm"],["Warranty","5 years"]] },
-      { id: 26, name: "3/4 Bed Set", category: "bed", price: 1999, size: "Three Quarter",
+      { id: 26, name: "3/4 Bed Set", category: "bed", price: 1999, oldPrice: 2298.85, size: "Three Quarter",
+        rating: 4.2, reviewCount: 58,
         tags: ["set", "mattress", "base", "promo"],
         image: "assets/images/beds/3starquartter.jpg",
         desc: "Compact three-quarter bed set.",
@@ -592,20 +698,23 @@
         specs: [["Mattress Length","188 cm"],["Warranty","5 years"]] },
       
       /* ============ Student Accommodation Bed Set ============ */
-      { id: 49, name: "Student Accommodation Bed Set", category: "bed", price: 1950, size: "Three Quarter",
+      { id: 49, name: "Student Accommodation Bed Set", category: "bed", price: 1950, oldPrice: 2242.50, size: "Three Quarter",
+        rating: 4.5, reviewCount: 96,
         tags: ["set", "mattress", "base", "student", "promo"],
         image: "assets/images/beds/studentbedset.jpg", 
         desc: "Durable and compact student accommodation bed set. Designed for hostels, digs, and student rooms.",
         badge: "student special",
         specs: [["Mattress Length","188 cm"],["Warranty","5 years"]] },
 
-      { id: 27, name: "Student Bed Set Form", category: "bed", price: 1999, size: "Single",
+      { id: 27, name: "Student Bed Set Form", category: "bed", price: 1999, oldPrice: 2298.85, size: "Single",
+        rating: 4.1, reviewCount: 52,
         tags: ["set", "mattress", "base", "promo"],
         image: "assets/images/beds/student-bed-set.jpg",
         desc: "Durable single bed set.",
         badge: "value",
         specs: [["Mattress Length","188 cm"],["Warranty","5 years"]] },
-      { id: 28, name: "Single Form Mattress", category: "bed", price: 1499, size: "Single",
+      { id: 28, name: "Single Form Mattress", category: "bed", price: 1499, oldPrice: 1723.85, size: "Single",
+        rating: 3.8, reviewCount: 33,
         tags: ["mattress"],
         image: "assets/images/beds/stumattress.jpg",
         desc: "Single mattress only.",
@@ -613,7 +722,8 @@
         specs: [["Mattress Length","188 cm"],["Warranty","5 years"]] },
 
       /* ============ King Max Weight Mattress (standalone) ============ */
-      { id: 48, name: "King Max Weight Mattress", category: "bed", price: 4999, size: "King",
+      { id: 48, name: "King Max Weight Mattress", category: "bed", price: 4999, oldPrice: 5748.85, size: "King",
+        rating: 4.9, reviewCount: 189,
         tags: ["mattress", "promo"],
         image: "assets/images/beds/kingmatt.jpg",
         desc: "Our flagship heavy-duty mattress engineered for exceptional weight support. Reinforced lumbar construction and high-density foam layers deliver deep restorative sleep with superior spinal alignment.",
@@ -621,19 +731,22 @@
         specs: [["Mattress Length","200 cm"],["Mattress Width","183 cm"],["Mattress Height","30 cm"],["Weight Capacity","250 kg per side"],["Spring Count","3,000 pocket springs"],["Comfort Layer","High-density foam + gel infusion"],["Fabric","Premium damask"],["Base Included","No (mattress only)"],["Warranty","15 years"]] },
 
       /* ============ BED BASES (Double, Queen, Storage retained) ============ */
-      { id: 45, name: "Double Base", category: "bed", price: 1019.99 , size: "Double",
+      { id: 45, name: "Double Base", category: "bed", price: 1019.99 , oldPrice: 1172.99, size: "Double",
+        rating: 4.3, reviewCount: 71,
         tags: ["base", "standard-base", "promo"],
         image: "assets/images/beds/bedset.jpg",
         desc: "Elegant double bed base with a solid timber frame and premium upholstery.",
         badge: "popular",
         specs: [["Base Length","190 cm"],["Base Width","139 cm"],["Base Height","30 cm"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
-      { id: 46, name: "Queen Base", category: "bed", price: 1039.99, size: "Queen",
+      { id: 46, name: "Queen Base", category: "bed", price: 1039.99, oldPrice: 1195.99, size: "Queen",
+        rating: 4.6, reviewCount: 124,
         tags: ["base", "standard-base", "promo"],
         image: "assets/images/beds/queenbase.jpg",
         desc: "Spacious queen bed base with reinforced timber frame and premium fabric upholstery.",
         badge: "best seller",
         specs: [["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","30 cm"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
-      { id: 47, name: "Storage Base", category: "bed", price: 2699, size: "Queen",
+      { id: 47, name: "Storage Base", category: "bed", price: 2699, oldPrice: 3103.85, size: "Queen",
+        rating: 4.8, reviewCount: 147,
         tags: ["base", "standard-base", "storage-base", "drawers", "promo"],
         image: "assets/images/beds/storage-base.jpg",
         desc: "Elegant storage base with integrated drawers — practical storage meets premium craftsmanship.",
@@ -641,19 +754,22 @@
         specs: [["Base Length","205 cm"],["Base Width","157 cm"],["Base Height","38 cm"],["Drawer Count","4 spacious drawers"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
 
       /* ============ STORAGE BASES & COMBOS ============ */
-      { id: 50, name: "Double Storage Base", category: "bed", price: 2699, size: "Double",
+      { id: 50, name: "Double Storage Base", category: "bed", price: 2699, oldPrice: 3103.85, size: "Double",
+        rating: 4.5, reviewCount: 108,
         tags: ["base", "storage-base", "drawers", "promo"],
         image: "assets/images/beds/storage-base.jpg",
         desc: "Double storage base with two spacious drawers — smart storage for smaller bedrooms and guest rooms.",
         badge: "storage",
         specs: [["Base Length","192 cm"],["Base Width","141 cm"],["Base Height","38 cm"],["Drawer Count","2 spacious drawers"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
-      { id: 51, name: "Queen Storage Base", category: "bed", price: 2799, size: "Queen",
+      { id: 51, name: "Queen Storage Base", category: "bed", price: 2799, oldPrice: 3218.85, size: "Queen",
+        rating: 4.7, reviewCount: 139,
         tags: ["base", "storage-base", "drawers", "promo"],
         image: "assets/images/beds/storage-base.jpg",
         desc: "Queen storage base with four deep drawers — generous storage with a refined, tailored finish.",
         badge: "storage",
         specs: [["Base Length","205 cm"],["Base Width","157 cm"],["Base Height","38 cm"],["Drawer Count","4 spacious drawers"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
-      { id: 52, name: "Combo Storage Base", category: "bed", price: 4389, size: "Queen",
+      { id: 52, name: "Combo Storage Base", category: "bed", price: 4389, oldPrice: 5047.35, size: "Queen",
+        rating: 5.0, reviewCount: 211,
         tags: ["base", "storage-base", "drawers", "promo"],
         image: "assets/images/beds/storagebaseset.jpg",
         desc: "Combo storage base with integrated drawers and a matching headboard — the complete bedroom solution in one elegant package.",
@@ -661,37 +777,43 @@
         specs: [["Base Length","205 cm"],["Base Width","157 cm"],["Base Height","38 cm"],["Headboard Height","120 cm"],["Drawer Count","4 spacious drawers"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base & headboard only)"],["Warranty","12 years"]] },
 
       /* ============ HEADBOARDS ============ */
-      { id: 30, name: "King Headboard — Vertical / Horizontal / Diamond", category: "headboard", price: 1499, size: "King",
+      { id: 30, name: "King Headboard — Vertical / Horizontal / Diamond", category: "headboard", price: 1499, oldPrice: 1723.85, size: "King",
+        rating: 4.6, reviewCount: 93,
         tags: ["headboard", "promo"],
         image: "assets/images/headboards/king-diamond.jpg",
         desc: "Statement king headboard available in three styling options.",
         badge: "3 styles",
         specs: [["Width","190 cm"],["Warranty","10 years"]] },
-      { id: 31, name: "Queen Diamond Headboard", category: "headboard", price: 999, size: "Queen",
+      { id: 31, name: "Queen Diamond Headboard", category: "headboard", price: 999, oldPrice: 1148.85, size: "Queen",
+        rating: 4.4, reviewCount: 68,
         tags: ["headboard"],
         image: "assets/images/headboards/queen-diamond.jpg",
         desc: "Exquisite queen headboard with diamond-tufted artistry.",
         badge: "artisan",
         specs: [["Width","160 cm"],["Warranty","10 years"]] },
-      { id: 32, name: "Queen Headboard — Vertical / Horizontal", category: "headboard", price: 899, size: "Queen",
+      { id: 32, name: "Queen Headboard — Vertical / Horizontal", category: "headboard", price: 899, oldPrice: 1033.85, size: "Queen",
+        rating: 4.1, reviewCount: 44,
         tags: ["headboard"],
         image: "assets/images/headboards/queen-lined.jpg",
         desc: "Understated queen headboard.",
         badge: "2 styles",
         specs: [["Width","160 cm"],["Warranty","8 years"]] },
-      { id: 33, name: "Double Headboard — Vertical / Horizontal", category: "headboard", price: 899, size: "Double",
+      { id: 33, name: "Double Headboard — Vertical / Horizontal", category: "headboard", price: 899, oldPrice: 1033.85, size: "Double",
+        rating: 4.3, reviewCount: 57,
         tags: ["headboard"],
         image: "assets/images/headboards/double-lineup.jpg",
         desc: "Contemporary double headboard.",
         badge: "modern",
         specs: [["Width","145 cm"],["Warranty","8 years"]] },
-      { id: 34, name: "Three Quarter Headboard — Vertical / Horizontal", category: "headboard", price: 699, size: "Three Quarter",
+      { id: 34, name: "Three Quarter Headboard — Vertical / Horizontal", category: "headboard", price: 699, oldPrice: 803.85, size: "Three Quarter",
+        rating: 3.9, reviewCount: 29,
         tags: ["headboard"],
         image: "assets/images/headboards/three-quarter.jpg",
         desc: "Perfectly scaled headboard for three-quarter beds.",
         badge: "compact",
         specs: [["Width","115 cm"],["Warranty","8 years"]] },
-      { id: 35, name: "Single Headboard — Vertical / Horizontal", category: "headboard", price: 699, size: "Single",
+      { id: 35, name: "Single Headboard — Vertical / Horizontal", category: "headboard", price: 699, oldPrice: 803.85, size: "Single",
+        rating: 4.0, reviewCount: 36,
         tags: ["headboard", "bunk"],
         image: "assets/images/headboards/single.jpg",
         desc: "Charming single headboard.",
@@ -699,19 +821,22 @@
         specs: [["Width","98 cm"],["Warranty","8 years"]] },
 
       /* ============ COUCHES ============ */
-      { id: 36, name: "L Shape Seater Couch", category: "couch", price: 3499, size: "L-Shape",
+      { id: 36, name: "L Shape Seater Couch", category: "couch", price: 3499, oldPrice: 4023.85, size: "L-Shape",
+        rating: 4.7, reviewCount: 152,
         tags: ["promo"],
         image: "assets/images/couches/l-shape.jpg",
         desc: "Sprawling L-shaped couch that defines comfort.",
         badge: "grand",
         specs: [["Overall Length","280 cm"],["Warranty","10 years"]] },
-      { id: 37, name: "Double Seater Couch", category: "couch", price: 1699, size: "2-Seater",
+      { id: 37, name: "Double Seater Couch", category: "couch", price: 1699, oldPrice: 1953.85, size: "2-Seater",
+        rating: 4.2, reviewCount: 61,
         tags: ["promo"],
         image: "assets/images/couches/double-seater.jpg",
         desc: "Intimate double seater.",
         badge: "cozy",
         specs: [["Overall Length","180 cm"],["Warranty","8 years"]] },
-      { id: 38, name: "Single Seater Couch", category: "couch", price: 1199, size: "1-Seater",
+      { id: 38, name: "Single Seater Couch", category: "couch", price: 1199, oldPrice: 1378.85, size: "1-Seater",
+        rating: 3.8, reviewCount: 34,
         tags: [],
         image: "assets/images/couches/single-seater.jpg",
         desc: "The perfect accent chair.",
@@ -725,17 +850,18 @@
 
     /* ============================================================
        ENTERPRISE-GRADE FURNITURE PLACEHOLDER
-       This object is used to render a polished, professional placeholder
-       instead of an empty state. It does not represent a real product.
        ============================================================ */
     const furniturePlaceholder = {
       id: 'furniture-placeholder',
       name: 'Curated Furniture Collection',
       category: 'furniture',
       price: 0,
+      oldPrice: 0,
       size: 'Coming Soon',
+      rating: 0,
+      reviewCount: 0,
       tags: ['furniture'],
-      image: '', // intentionally empty for fallback
+      image: '',
       desc: 'Our furniture collection is being thoughtfully curated. Expect the same level of craftsmanship and attention to detail that defines every Harmony Rest piece.',
       badge: 'atelier',
       specs: [
@@ -786,6 +912,48 @@
       'couch':     { title: 'Couches',            icon: 'fa-couch' },
       'furniture': { title: 'Furniture',          icon: 'fa-box' }
     };
+
+    /* ============================================================
+       STAR RATING RENDERER
+       ============================================================ */
+    function renderStars(rating) {
+      if (!rating || rating === 0) return '';
+      const fullStars = Math.floor(rating);
+      const hasHalf = (rating - fullStars) >= 0.25 && (rating - fullStars) < 0.75;
+      const hasFullHalf = (rating - fullStars) >= 0.75;
+      let starsHTML = '';
+      for (let i = 0; i < fullStars; i++) {
+        starsHTML += '<i class="fas fa-star"></i>';
+      }
+      if (hasFullHalf) {
+        starsHTML += '<i class="fas fa-star"></i>';
+      } else if (hasHalf) {
+        starsHTML += '<i class="fas fa-star-half-alt"></i>';
+      }
+      const remaining = 5 - fullStars - (hasFullHalf ? 1 : (hasHalf ? 1 : 0));
+      for (let i = 0; i < remaining; i++) {
+        starsHTML += '<i class="far fa-star"></i>';
+      }
+      return starsHTML;
+    }
+
+    function renderProductRating(product) {
+      if (!product.rating || product.rating === 0) return '';
+      return `
+        <div class="product-rating">
+          <span class="stars">${renderStars(product.rating)}</span>
+          <span class="rating-text">${product.rating.toFixed(1)} (${product.reviewCount})</span>
+        </div>
+      `;
+    }
+
+    function renderModalRating(product) {
+      if (!product.rating || product.rating === 0) return '';
+      return `
+        <span class="stars">${renderStars(product.rating)}</span>
+        <span class="rating-text">${product.rating.toFixed(1)} out of 5 · ${product.reviewCount} reviews</span>
+      `;
+    }
 
     function skeletonHTML(n = 8) {
       return `<div class="products-grid">${Array.from({ length: n }).map(() => `
@@ -859,7 +1027,6 @@
       const icon = product.category === 'bed' ? 'bed'
                  : product.category === 'headboard' ? 'grip-lines'
                  : product.category === 'couch' ? 'couch' : 'box';
-      // If product is the furniture placeholder (no price), render a special card
       const isPlaceholder = product.id === 'furniture-placeholder';
       return `
         <div class="product-card"
@@ -891,9 +1058,14 @@
           <div class="product-info">
             <div class="product-category">${product.category}</div>
             <h3 class="product-title">${product.name}</h3>
+            ${!isPlaceholder ? renderProductRating(product) : ''}
             <p class="product-desc">${product.desc}</p>
             ${!isPlaceholder ? `
-            <div class="product-price">R${product.price.toLocaleString()} <small>${product.size}</small></div>
+            <div class="product-price">
+              R${product.price.toLocaleString()} 
+              <small>${product.size}</small>
+              ${product.oldPrice ? `<span class="old-price">R${product.oldPrice.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>` : ''}
+            </div>
             <div class="product-actions">
               <button type="button" class="btn-card" data-view-id="${product.id}">view details →</button>
               <a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(product.name)}%20(R${product.price}%20-%20${product.size})."
@@ -943,7 +1115,6 @@
 
       let html = '';
       order.forEach(cat => {
-        // For furniture, always inject the placeholder if the group is empty
         let items = groups[cat];
         if (cat === 'furniture' && items.length === 0) {
           items = [furniturePlaceholder];
@@ -987,25 +1158,11 @@
       document.title = 'The Sanctuary Collection | Harmony Rest';
     }
 
-    /* ============================================================
-       ★ MAIN RENDER — reads URL params and renders accordingly
-
-       Name-ending filters:
-         - "mattress"     → name ends with "Mattress"
-         - "set"          → name ends with "Bed Set"
-         - "standard-base"→ includes Double, Queen and Storage Base
-         - "storage-base" → includes Storage Base items and combos
-       Tag-based filters for everything else.
-
-       ★★ FURNITURE CATEGORY: now renders a professional placeholder
-       ★★ PROMOTIONS FILTER: ONLY Storage Base Combos + Student Accommodation
-       ============================================================ */
     function render() {
       const params = new URLSearchParams(window.location.search);
       let cat = params.get('category');
       let filter = params.get('filter');
 
-      // Legacy mapping (for old URLs)
       const legacyMap = {
         'mattresses': { cat: 'bed', filter: 'mattress' },
         'bed-sets': { cat: 'bed', filter: 'set' },
@@ -1025,7 +1182,6 @@
         cat = m.cat; filter = m.filter;
       }
 
-      // ---- CASE 1: MATTRESS — name ends with "Mattress"
       if (filter === 'mattress') {
         const list = products.filter(p => /\bmattress$/i.test(p.name.trim()));
         const label = FILTER_LABELS['mattress'];
@@ -1034,7 +1190,6 @@
         return;
       }
 
-      // ---- CASE 2: BED SET — name ends with "Bed Set"
       if (filter === 'set') {
         const list = products.filter(p => /\bbed\s*set$/i.test(p.name.trim()));
         const label = FILTER_LABELS['set'];
@@ -1043,7 +1198,6 @@
         return;
       }
 
-      // ---- CASE 3: STANDARD BASE — includes Double, Queen and Storage Base
       if (filter === 'standard-base') {
         const list = products.filter(p => {
           if (!Array.isArray(p.tags) || !p.tags.includes('standard-base')) return false;
@@ -1056,10 +1210,8 @@
         return;
       }
 
-      // ---- CASE 4: PROMOTIONS — ONLY Storage Base Combos + Student Accommodation
       if (filter === 'promo') {
         const promoList = products.filter(p => {
-          // Only include items that are storage base combos OR student accommodation
           const isStorageBaseCombo = p.name.toLowerCase().includes('combo storage base');
           const isStudentAccommodation = p.tags && p.tags.includes('student');
           return isStorageBaseCombo || isStudentAccommodation;
@@ -1075,11 +1227,9 @@
         return;
       }
 
-      // ---- CASE 5: other specific filter tags (base, bunk, student, etc.)
       if (filter) {
         let list;
         if (filter === 'base') {
-          // Only show Double, Queen, and Storage bases as requested
           list = products.filter(p => {
             if (!Array.isArray(p.tags) || !p.tags.includes('base')) return false;
             const n = p.name.toLowerCase();
@@ -1094,9 +1244,7 @@
         return;
       }
 
-      // ---- CASE 6: category selected (bed, headboard, couch, furniture)
       if (cat && cat !== 'all') {
-        // Special handling for furniture: render placeholder instead of real products
         if (cat === 'furniture') {
           const label = CATEGORY_LABELS['furniture'];
           showCollectionHeader(
@@ -1115,7 +1263,6 @@
         return;
       }
 
-      // ---- CASE 7: no filters — show everything, grouped by category
       hideCollectionHeader();
       renderGroupedByCategory(products);
     }
@@ -1134,7 +1281,6 @@
       if (e.target.closest('.bank-details')) { e.stopPropagation(); return; }
       if (e.target.closest('.product-actions')) { return; }
       const card = e.target.closest('.product-card');
-      // Only open modal for real products (not placeholder)
       if (card && !e.target.closest('a') && card.dataset.id !== 'furniture-placeholder') { 
         openProductModal(parseInt(card.dataset.id, 10)); 
       }
@@ -1168,14 +1314,17 @@
     }
 
     function openProductModal(productId) {
-      // Prevent opening modal for furniture placeholder
       if (productId === 'furniture-placeholder') return;
       const product = products.find(p => p.id === productId);
       if (!product) return;
       document.getElementById('modalCategory').textContent = product.category;
       document.getElementById('modalTitle').textContent = product.name;
       document.getElementById('modalBadge').textContent = product.badge;
-      document.getElementById('modalPrice').innerHTML = `R${product.price.toLocaleString()} <small>${product.size}</small>`;
+      document.getElementById('modalRating').innerHTML = renderModalRating(product);
+      const oldPriceHTML = product.oldPrice 
+        ? `<span class="old-price">R${product.oldPrice.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>` 
+        : '';
+      document.getElementById('modalPrice').innerHTML = `R${product.price.toLocaleString()} <small>${product.size}</small> ${oldPriceHTML}`;
       document.getElementById('modalDescription').textContent = product.desc;
       let specsHTML = '<h4>Specifications</h4><table>';
       product.specs.forEach(spec => { specsHTML += `<tr><td>${spec[0]}</td><td>${spec[1]}</td></tr>`; });
