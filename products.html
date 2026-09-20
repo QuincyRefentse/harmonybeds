@@ -621,19 +621,19 @@
         specs: [["Mattress Length","200 cm"],["Mattress Width","183 cm"],["Mattress Height","30 cm"],["Weight Capacity","250 kg per side"],["Spring Count","3,000 pocket springs"],["Comfort Layer","High-density foam + gel infusion"],["Fabric","Premium damask"],["Base Included","No (mattress only)"],["Warranty","15 years"]] },
 
       /* ============ BED BASES (Double, Queen, Storage retained) ============ */
-      { id: 45, name: "Double Base", category: "bed", price: 2199, size: "Double",
+      { id: 45, name: "Double Base", category: "bed", price: 1019.99 , size: "Double",
         tags: ["base", "standard-base", "promo"],
         image: "assets/images/beds/doublebase.png",
         desc: "Elegant double bed base with a solid timber frame and premium upholstery.",
         badge: "popular",
         specs: [["Base Length","190 cm"],["Base Width","139 cm"],["Base Height","30 cm"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
-      { id: 46, name: "Queen Base", category: "bed", price: 2499, size: "Queen",
+      { id: 46, name: "Queen Base", category: "bed", price: 1039.99, size: "Queen",
         tags: ["base", "standard-base", "promo"],
         image: "assets/images/beds/queenbase.jpg",
         desc: "Spacious queen bed base with reinforced timber frame and premium fabric upholstery.",
         badge: "best seller",
         specs: [["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","30 cm"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
-      { id: 47, name: "Storage Base", category: "bed", price: 2999, size: "Queen",
+      { id: 47, name: "Storage Base", category: "bed", price: 2699, size: "Queen",
         tags: ["base", "standard-base", "storage-base", "drawers", "promo"],
         image: "assets/images/beds/storage-base.jpg",
         desc: "Elegant storage base with integrated drawers — practical storage meets premium craftsmanship.",
@@ -975,6 +975,8 @@
          - "standard-base"→ includes Double, Queen and Storage Base
          - "storage-base" → includes Storage Base items and combos
        Tag-based filters for everything else.
+
+       ★★ PROMOTIONS FILTER: ONLY Storage Base Combos + Student Accommodation
        ============================================================ */
     function render() {
       const params = new URLSearchParams(window.location.search);
@@ -1032,7 +1034,26 @@
         return;
       }
 
-      // ---- CASE 4: other specific filter tags (base, bunk, promo, etc.)
+      // ---- CASE 4: PROMOTIONS — ONLY Storage Base Combos + Student Accommodation
+      if (filter === 'promo') {
+        const promoList = products.filter(p => {
+          // Only include items that are storage base combos OR student accommodation
+          const isStorageBaseCombo = p.name.toLowerCase().includes('combo storage base');
+          const isStudentAccommodation = p.tags && p.tags.includes('student');
+          return isStorageBaseCombo || isStudentAccommodation;
+        });
+        const label = FILTER_LABELS['promo'] || { title: 'Promotions', desc: '' };
+        showCollectionHeader(
+          label.title,
+          'limited offer',
+          'Special pricing on select storage combos and student accommodation pieces.',
+          promoList.length
+        );
+        renderProductsGrid(promoList);
+        return;
+      }
+
+      // ---- CASE 5: other specific filter tags (base, bunk, student, etc.)
       if (filter) {
         let list;
         if (filter === 'base') {
@@ -1051,7 +1072,7 @@
         return;
       }
 
-      // ---- CASE 5: category selected (bed, headboard, couch, furniture)
+      // ---- CASE 6: category selected (bed, headboard, couch, furniture)
       if (cat && cat !== 'all') {
         const list = products.filter(p => p.category === cat);
         const label = CATEGORY_LABELS[cat] || { title: cat, desc: '' };
@@ -1060,7 +1081,7 @@
         return;
       }
 
-      // ---- CASE 6: no filters — show everything, grouped by category
+      // ---- CASE 7: no filters — show everything, grouped by category
       hideCollectionHeader();
       renderGroupedByCategory(products);
     }
