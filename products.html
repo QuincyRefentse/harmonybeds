@@ -315,7 +315,9 @@
             <ul class="dropdown-menu">
               <li><a href="products.html?category=bed&filter=mattress">Mattresses</a></li>
               <li><a href="products.html?category=bed&filter=set">Bed Sets</a></li>
-              <li><a href="products.html?category=bed&filter=base">Bed Bases</a></li>
+
+              
+
               <li class="dropdown-divider"></li>
               <li><a href="products.html?category=bed&filter=standard-base">Standard Bases</a></li>
               <li><a href="products.html?category=bed&filter=storage-base">Storage Bases &amp; Combos</a></li>
@@ -618,7 +620,7 @@
         badge: "best seller",
         specs: [["Mattress Length","200 cm"],["Mattress Width","183 cm"],["Mattress Height","30 cm"],["Weight Capacity","250 kg per side"],["Spring Count","3,000 pocket springs"],["Comfort Layer","High-density foam + gel infusion"],["Fabric","Premium damask"],["Base Included","No (mattress only)"],["Warranty","15 years"]] },
 
-      /* ============ BED BASES (only Double, Queen, Storage retained) ============ */
+      /* ============ BED BASES (Double, Queen, Storage retained) ============ */
       { id: 45, name: "Double Base", category: "bed", price: 2199, size: "Double",
         tags: ["base", "standard-base", "promo"],
         image: "assets/images/beds/doublebase.png",
@@ -632,7 +634,7 @@
         badge: "best seller",
         specs: [["Base Length","202 cm"],["Base Width","154 cm"],["Base Height","30 cm"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
       { id: 47, name: "Storage Base", category: "bed", price: 2999, size: "Queen",
-        tags: ["base", "storage-base", "drawers", "promo"],
+        tags: ["base", "standard-base", "storage-base", "drawers", "promo"],
         image: "assets/images/beds/storage-base.jpg",
         desc: "Elegant storage base with integrated drawers — practical storage meets premium craftsmanship.",
         badge: "storage",
@@ -745,7 +747,7 @@
       'mattress':       { title: 'Mattresses',              desc: 'Explore our full range of handcrafted mattresses — from budget-friendly foam to therapeutic pocket spring.' },
       'set':            { title: 'Bed Sets',                desc: 'Complete bed sets with matching base and mattress, crafted for a lifetime of comfort.' },
       'base':           { title: 'Bed Bases',               desc: 'Solid, upholstered bed bases designed to support your mattress and elevate your bedroom.' },
-      'standard-base':  { title: 'Standard Bases',          desc: 'Classic bed bases available in all standard sizes — single, 3/4, double and queen.' },
+      'standard-base':  { title: 'Standard Bases',          desc: 'Classic bed bases available in all standard sizes — double, queen and storage.' },
       'storage-base':   { title: 'Storage Bases & Combos',  desc: 'Practical storage bases with integrated drawers — maximise space without sacrificing style.' },
       'drawers':        { title: 'Base with Drawers',       desc: 'Bed bases with built-in drawers for smart, elegant bedroom storage.' },
       'steel-base':     { title: 'Steel Bases',             desc: 'Durable steel bed bases — strong, functional, and long-lasting.' },
@@ -950,8 +952,7 @@
        Name-ending filters:
          - "mattress"     → name ends with "Mattress"
          - "set"          → name ends with "Bed Set"
-         - "standard-base"→ name ends with "Base" AND does not
-                            contain "Storage"
+         - "standard-base"→ includes Double, Queen and Storage Base
        Tag-based filters for everything else.
        ============================================================ */
     function render() {
@@ -997,11 +998,12 @@
         return;
       }
 
-      // ---- CASE 3: STANDARD BASE — name ends with "Base" and NOT storage
+      // ---- CASE 3: STANDARD BASE — includes Double, Queen and Storage Base
       if (filter === 'standard-base') {
         const list = products.filter(p => {
-          const n = p.name.trim();
-          return /\bbase$/i.test(n) && !/storage/i.test(n);
+          if (!Array.isArray(p.tags) || !p.tags.includes('standard-base')) return false;
+          const n = p.name.toLowerCase();
+          return n.includes('double') || n.includes('queen') || n.includes('storage');
         });
         const label = FILTER_LABELS['standard-base'];
         showCollectionHeader(label.title, 'collection', label.desc, list.length);
@@ -1211,7 +1213,7 @@
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
           if (window.innerWidth > 992) shopItem.classList.remove('open');
-        }, 200);
+        }, 600);
       });
     })();
   </script>
