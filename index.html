@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="assets/favicon_io/site.webmanifest">
+  <meta name="theme-color" content="#C6A45C">
+
+  <meta name="google-site-verification" content="8mqSP0ypPEWGCpImANigYRcEa9i1e_xzQrG6p4oRkgg" />
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Harmony Rest & Comfort Beds — South Africa's premier artisan bed factory. Handcrafted beds, mattresses, headboards & couches. Summer sale now on.">
+  <title>Harmony Rest & Comfort Beds | Artisan Beds, Mattresses & Couches | SA</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <style>
+    /* ============================================================
+       NAVBAR STYLING
+       ============================================================ */
+    header { position: relative; z-index: 9999; }
+    .navbar { position: relative; overflow: visible; }
+    .nav-item-dropdown { position: relative; }
+    .nav-item-dropdown > a.dropdown-toggle {
+      display: flex; align-items: center; gap: 0.5rem; cursor: pointer;
+    }
+    .nav-item-dropdown > a.dropdown-toggle .fa-chevron-down {
+      font-size: 0.85rem; transition: transform 0.3s ease;
+    }
+    .nav-item-dropdown:hover > a.dropdown-toggle .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+    .dropdown-menu {
+      position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      min-width: 320px; background: #ffffff; border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(198, 164, 92, 0.12);
+      padding: 0.8rem 0; opacity: 0; visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 10000; list-style: none; margin: 0; pointer-events: none;
+    }
+    .nav-item-dropdown:hover .dropdown-menu,
+    .nav-item-dropdown.open .dropdown-menu {
+      opacity: 1; visibility: visible;
+      transform: translateX(-50%) translateY(0); pointer-events: auto;
+    }
+    .dropdown-menu li { margin: 0; padding: 0; }
+    .dropdown-menu li a {
+      display: block; padding: 0.85rem 1.8rem;
+      font-family: 'Inter', sans-serif; font-size: 1.05rem;
+      font-weight: 500; color: #1a1a2e; text-decoration: none;
+      transition: all 0.22s ease; letter-spacing: 0.3px;
+      border-left: 3px solid transparent; line-height: 1.4;
+    }
+    .dropdown-menu li a:hover {
+      background: #faf7f0; color: #C6A45C;
+      border-left-color: #C6A45C; padding-left: 2.1rem;
+    }
+    .dropdown-divider {
+      height: 1px; background: rgba(198, 164, 92, 0.18);
+      margin: 0.5rem 1.4rem; list-style: none;
+    }
+
+    /* ============================================================
+       FIX: MOBILE NAVBAR — HAMBURGER MENU
+       ============================================================ */
+    @media (max-width: 992px) {
+      .mobile-menu-btn { display: block; }
+
+      /* Mobile menu panel — hidden by default */
+      .nav-links {
+        display: none;
+      }
+
+      /* When .active is added via JS, show the panel */
+      .nav-links.active {
+        display: flex !important;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 78%;
+        max-width: 340px;
+        height: 100vh;
+        background: #ffffff;
+        padding: 6rem 1.8rem 3rem;
+        box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+        z-index: 10001;
+        gap: 0.4rem;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        list-style: none;
+        margin: 0;
+      }
+      .nav-links.active li { width: 100%; margin: 0; }
+      .nav-links.active li > a:not(.dropdown-toggle) {
+        display: block;
+        padding: 0.9rem 0.5rem;
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: #1a1a1a;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(198,164,92,0.12);
+        letter-spacing: 0.3px;
+      }
+      .nav-links.active li > a:not(.dropdown-toggle):hover,
+      .nav-links.active li > a.active:not(.dropdown-toggle) {
+        color: #C6A45C;
+      }
+
+      /* Mobile dropdown inside menu */
+      .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        box-shadow: none !important;
+        background: #FBF9F6 !important;
+        border-radius: 10px;
+        margin: 0.3rem 0 0.6rem 0;
+        padding: 0;
+        min-width: 0 !important;
+        width: 100% !important;
+        display: none;
+        border: 1px solid rgba(198, 164, 92, 0.2);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.3s ease;
+        list-style: none;
+      }
+      .nav-item-dropdown.open .dropdown-menu {
+        display: block !important;
+        max-height: 800px !important;
+        padding: 0.5rem 0 !important;
+      }
+      .nav-item-dropdown > a.dropdown-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.9rem 0.5rem;
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: #1a1a1a;
+        border-bottom: 1px solid rgba(198,164,92,0.12);
+        text-decoration: none;
+        width: 100%;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+      .nav-item-dropdown > a.dropdown-toggle.active {
+        color: #C6A45C;
+      }
+      .nav-item-dropdown > a.dropdown-toggle .fa-chevron-down {
+        font-size: 0.95rem;
+        color: #C6A45C;
+        margin-left: auto;
+        transition: transform 0.3s ease;
+      }
+      .nav-item-dropdown.open > a.dropdown-toggle .fa-chevron-down {
+        transform: rotate(180deg);
+      }
+      .dropdown-menu li a {
+        color: #4B4A47 !important;
+        font-size: 0.95rem !important;
+        font-weight: 500;
+        padding: 0.75rem 1.2rem !important;
+        border-left: 3px solid transparent;
+        border-bottom: none !important;
+        letter-spacing: 0.2px;
+        text-decoration: none;
+        display: block;
+      }
+      .dropdown-menu li a:hover,
+      .dropdown-menu li a:active {
+        background: rgba(198, 164, 92, 0.12) !important;
+        color: #C6A45C !important;
+        border-left-color: #C6A45C;
+        padding-left: 1.5rem !important;
+      }
+      .dropdown-divider {
+        background: rgba(198, 164, 92, 0.2) !important;
+        margin: 0.3rem 1rem !important;
+      }
+    }
+
+    /* ============================================================
+       MIMIC THE PROVIDED IMAGES - HOMEPAGE LAYOUT
+       ============================================================ */
+    .specials-section, .category-section, .bed-sizes-section {
+      padding: 3rem 0;
+      background: #fff;
+    }
+
+    /* --- 1. SPECIALS & PROMOTIONS --- */
+    .specials-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      align-items: start;
+    }
+    .special-item {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      position: relative;
+    }
+    .special-image-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #f4f4f4;
+      margin-bottom: 0.75rem;
+    }
+    .special-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .sale-badge {
+      display: inline-block;
+      background: #fff;
+      color: #333;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      padding: 0.2rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      align-self: flex-start;
+    }
+    .discount-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #dc2626;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      z-index: 2;
+    }
+    .special-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
+    }
+    .special-old-price {
+      font-size: 0.9rem;
+      color: #888;
+      text-decoration: line-through;
+      margin-bottom: 0.1rem;
+    }
+    .special-new-price {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    .special-item-split {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.25rem;
+    }
+    .special-item-split .special-old-price { margin-bottom: 0; }
+    .special-item-split .special-new-price { margin-left: auto; }
+
+    /* --- 2. SHOP BY CATEGORY --- */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .category-tile-rect {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: #1a1a1a;
+      transition: transform 0.3s ease;
+      text-align: left;
+    }
+    .category-tile-rect:hover {
+      transform: translateY(-4px);
+    }
+    .category-tile-rect .tile-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: #f0f4f8;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+      border: 1px solid #e5e7eb;
+    }
+    .category-tile-rect .tile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 0.5rem;
+    }
+    .category-tile-rect span {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .category-tile-rect span i {
+      font-size: 0.8rem;
+      color: #1a1a1a;
+    }
+
+    /* --- 3. BED SIZES --- */
+    .bed-sizes-section {
+      background: #fff;
+      padding: 2rem 0 4rem;
+    }
+    .bed-sizes-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .bed-sizes-header h2 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 2.2rem;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0;
+    }
+    .bed-sizes-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      position: relative;
+    }
+    .bed-size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      min-width: 120px;
+      max-width: 200px;
+    }
+    .bed-size-visual {
+      width: 100%;
+      aspect-ratio: 1 / 1.6;
+      background: #0ea5e9;
+      border-radius: 4px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0.5rem;
+      border: 2px solid #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .bed-size-visual .pillow {
+      position: absolute;
+      top: 4%;
+      left: 10%;
+      width: 80%;
+      height: 18%;
+      background: #7dd3fc;
+      border-radius: 4px;
+      border: 1px solid #fff;
+    }
+    .bed-size-visual .pillow-split {
+      position: absolute;
+      top: 4%;
+      left: 10%;
+      width: 38%;
+      height: 18%;
+      background: #7dd3fc;
+      border-radius: 4px;
+      border: 1px solid #fff;
+    }
+    .bed-size-visual .pillow-split.right {
+      left: 52%;
+    }
+    .bed-size-visual .blanket {
+      position: absolute;
+      bottom: 4%;
+      left: 10%;
+      width: 80%;
+      height: 70%;
+      background: #0284c7;
+      border-radius: 4px;
+      border: 1px solid #fff;
+    }
+    .measure-height {
+      position: absolute;
+      left: -30px;
+      top: 10%;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #0f172a;
+      gap: 4px;
+    }
+    .measure-height::before, .measure-height::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 10px;
+      background: #0f172a;
+    }
+    .measure-height .line {
+      width: 1px;
+      flex: 1;
+      background: #0f172a;
+      position: relative;
+    }
+    .measure-height .line::before, .measure-height .line::after {
+      content: '';
+      position: absolute;
+      left: -4px;
+      width: 8px;
+      height: 1px;
+      background: #0f172a;
+    }
+    .measure-height .line::before { top: 0; }
+    .measure-height .line::after { bottom: 0; }
+
+    .measure-width {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #0f172a;
+      margin-top: 0.25rem;
+      position: relative;
+    }
+    .measure-width .line {
+      width: 80%;
+      height: 1px;
+      background: #0f172a;
+      position: relative;
+    }
+    .measure-width .line::before, .measure-width .line::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      width: 1px;
+      height: 8px;
+      background: #0f172a;
+    }
+    .measure-width .line::before { left: 0; }
+    .measure-width .line::after { right: 0; }
+    .measure-width span {
+      margin: 0 0.5rem;
+    }
+
+    .bed-sizes-container.extra-length .bed-size-visual {
+      background: #1e3a8a;
+    }
+    .bed-sizes-container.extra-length .bed-size-visual .pillow,
+    .bed-sizes-container.extra-length .bed-size-visual .pillow-split {
+      background: #3b82f6;
+    }
+    .bed-sizes-container.extra-length .bed-size-visual .blanket {
+      background: #1e40af;
+    }
+
+    /* --- RESPONSIVE ADJUSTMENTS --- */
+    @media (max-width: 1024px) {
+      .specials-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      .category-grid { grid-template-columns: repeat(4, 1fr); }
+      .bed-sizes-container { gap: 0.5rem; }
+    }
+    @media (max-width: 768px) {
+      .specials-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .category-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+      .category-tile-rect span { font-size: 0.85rem; }
+      .bed-sizes-header h2 { font-size: 1.6rem; }
+      .bed-size-item { min-width: 80px; }
+      .measure-height { left: -20px; font-size: 0.7rem; }
+      .measure-width { font-size: 0.7rem; }
+      .measure-width .line { width: 70%; }
+    }
+    @media (max-width: 520px) {
+      .category-grid { grid-template-columns: repeat(2, 1fr); }
+      .bed-sizes-container { gap: 0.25rem; }
+      .bed-size-item { min-width: 60px; }
+      .measure-height { left: -15px; font-size: 0.6rem; }
+      .measure-width { font-size: 0.6rem; }
+      .measure-width .line { width: 60%; }
+      .bed-size-visual { border-width: 1px; }
+    }
+
+    /* Hide old section styles */
+    .showcase-promo-grid, .category-tiles, .showroom-grid, .craft-grid {
+      display: none !important;
+    }
+
+    /* ============================================================
+       FIX: MOBILE HERO BANNER SPACING
+       ============================================================ */
+    @media (max-width: 768px) {
+      .hero-banner-home .hero-banner-img {
+        max-height: none !important;
+        height: auto !important;
+        object-fit: contain;
+        object-position: center center;
+      }
+      .hero-banner-home {
+        padding-bottom: 1.5rem;
+        margin-bottom: 0;
+      }
+      .home-stats-strip {
+        position: relative;
+        z-index: 1;
+        margin-top: 0;
+      }
+    }
+    @media (max-width: 520px) {
+      .hero-banner-home .hero-banner-img {
+        max-height: none !important;
+        height: auto !important;
+      }
+      .hero-banner-home {
+        padding-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="announcement-bar">
+    <div class="container announcement-inner">
+      <span><i class="fas fa-map-marker-alt"></i> Visit our showroom · Pretoria Central</span>
+      <a href="tel:+27822336883" class="announcement-phone">
+        <i class="fas fa-phone-alt"></i> +27 82 233 6883
+      </a>
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <img src="assets/image-logo.png" alt="Harmony Rest Logo" class="logo-img">
+        </a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html" class="active">home</a></li>
+
+          <!-- ===== SHOP NOW DROPDOWN ===== -->
+          <li class="nav-item-dropdown" id="shopDropdown">
+            <a href="products.html" class="dropdown-toggle">
+              shop now
+              <i class="fas fa-chevron-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="products.html?category=bed&filter=mattress">Mattresses</a></li>
+              <li><a href="products.html?category=bed&filter=set">Bed Sets</a></li>
+              <li><a href="products.html?category=bed&filter=base">Bed Bases</a></li>
+              <li class="dropdown-divider"></li>
+              <li><a href="products.html?category=bed&filter=standard-base">Standard Bases</a></li>
+              <li><a href="products.html?category=bed&filter=storage-base">Storage Bases &amp; Combos</a></li>
+              <li><a href="products.html?category=bed&filter=drawers">Base with Drawers</a></li>
+              <li><a href="products.html?category=bed&filter=steel-base">Steel Bases</a></li>
+              <li class="dropdown-divider"></li>
+              
+              <li><a href="products.html?category=furniture">Furniture</a></li>
+              <li><a href="products.html?category=bed&filter=student">Student Accommodation</a></li>
+             
+              <li><a href="products.html?category=all&filter=promo">Promotions</a></li>
+            </ul>
+          </li>
+
+          <li><a href="about.html">about us</a></li>
+          <li><a href="contact.html">contact us</a></li>
+          
+        </ul>
+        <div class="nav-icons">
+          <a href="products.html" aria-label="Search"><i class="fas fa-search"></i></a>
+          <a href="https://wa.me/27822336883" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://wa.me/27822336883?text=Hi%20Harmony%20Rest%2C%20I%27d%20like%20to%20place%20an%20order" target="_blank" aria-label="Order" class="nav-cart">
+            <i class="fas fa-shopping-bag"></i>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="sub-bar">
+    <div class="container">
+      <span><i class="fas fa-truck-fast"></i> Complimentary white glove delivery</span>
+      <span><i class="fas fa-moon"></i> 100-night sleep trial</span>
+      <span><i class="fas fa-shield-halved"></i> Up to 15-year warranty</span>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- HERO BANNER -->
+    <section class="hero-banner hero-banner-home" id="heroBanner">
+      <div class="hb-particles" id="hbParticles"></div>
+      <a href="products.html" class="hero-banner-link" aria-label="Summer sale — shop premium bed & base sets">
+        <picture>
+          <source media="(max-width: 768px)" srcset="assets/images/harmobes.jpg">
+          <source media="(max-width: 1200px)" srcset="assets/images/harmobes.jpg">
+          <img src="assets/images/harmobe.jpg" alt="Summer Sale 30% off — Premium Bed & Base Sets featuring King Max Weight"
+            class="hero-banner-img" loading="eager" fetchpriority="high">
+        </picture>
+        <span class="hero-banner-cta">shop the sale →</span>
+      </a>
+    </section>
+
+    <!-- STATS STRIP -->
+    <section class="home-stats-strip">
+      <div class="container">
+        <div class="hs-inner">
+          <div class="hs-countdown" id="hsCountdown">
+            <span class="hs-cd-label"><i class="fas fa-hourglass-half"></i> Sale ends in</span>
+            <div class="hs-cd-cells">
+              <div class="hs-cd-cell"><span id="hsDays">00</span><small>days</small></div>
+              <div class="hs-cd-sep">:</div>
+              <div class="hs-cd-cell"><span id="hsHours">00</span><small>hrs</small></div>
+              <div class="hs-cd-sep">:</div>
+              <div class="hs-cd-cell"><span id="hsMins">00</span><small>min</small></div>
+              <div class="hs-cd-sep">:</div>
+              <div class="hs-cd-cell"><span id="hsSecs">00</span><small>sec</small></div>
+            </div>
+          </div>
+          <div class="hs-divider"></div>
+          <div class="hs-stats">
+            <div class="hs-stat"><span class="hs-stat-num" data-count="42">0</span><span class="hs-stat-label">handcrafted pieces</span></div>
+            <div class="hs-stat"><span class="hs-stat-num" data-count="15" data-suffix="+">0</span><span class="hs-stat-label">year warranty</span></div>
+            <div class="hs-stat"><span class="hs-stat-num" data-count="100">0</span><span class="hs-stat-label">night trial</span></div>
+            <div class="hs-stat"><span class="hs-stat-num" data-count="5" data-suffix="★">0</span><span class="hs-stat-label">sleep rating</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BED SIZES - STANDARD LENGTH -->
+    <section class="bed-sizes-section">
+      <div class="container">
+        <div class="bed-sizes-header">
+          <h2>BED SIZES - STANDARD LENGTH</h2>
+        </div>
+        <div class="bed-sizes-container">
+          <div class="bed-size-item">
+            <div class="bed-size-visual"><div class="pillow"></div><div class="blanket"></div></div>
+            <div class="measure-width"><div class="line"></div><span>91 cm</span><div class="line"></div></div>
+            <div class="measure-height"><span>188 cm</span><div class="line"></div></div>
+          </div>
+          <div class="bed-size-item">
+            <div class="bed-size-visual"><div class="pillow"></div><div class="blanket"></div></div>
+            <div class="measure-width"><div class="line"></div><span>107 cm</span><div class="line"></div></div>
+          </div>
+          <div class="bed-size-item">
+            <div class="bed-size-visual"><div class="pillow-split"></div><div class="pillow-split right"></div><div class="blanket"></div></div>
+            <div class="measure-width"><div class="line"></div><span>137 cm</span><div class="line"></div></div>
+          </div>
+          <div class="bed-size-item">
+            <div class="bed-size-visual"><div class="pillow-split"></div><div class="pillow-split right"></div><div class="blanket"></div></div>
+            <div class="measure-width"><div class="line"></div><span>152 cm</span><div class="line"></div></div>
+          </div>
+          <div class="bed-size-item">
+            <div class="bed-size-visual"><div class="pillow-split"></div><div class="pillow-split right"></div><div class="blanket"></div></div>
+            <div class="measure-width"><div class="line"></div><span>183 cm</span><div class="line"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BED SIZES - EXTRA LENGTH -->
+    <section class="bed-sizes-section" style="padding-top: 1rem;">
+      <div class="container">
+        <div class="bed-sizes-header">
+          <h2>BED SIZES - EXTRA LENGTH</h2>
+        </div>
+        <div class="bed-sizes-container extra-length">
+          <div class="bed-size-item">
+            <div class="bed-size-visual"><div class="pillow"></div><div class="blanket"></div></div>
+            <div class="measure-width"><div class="line"></div><span>91 cm</span><div class="line"></div></div>
+            <div class="measure-height"><span>200 cm</span><div class="line"></div></div>
+          </div>
+          <div class="bed-size-item">
+            <div class="bed-size-visual"><div class="pillow"></div><div class="blanket"></div></div>
+            <div class="measure-width"><div class="line"></div><span>107 cm</span><div class="line"></div></div>
+          </div>
+          <div class="bed-size-item">
+            <div class="bed-size-visual"><div class="pillow-split"></div><div class="pillow-split right"></div><div class="blanket"></div></div>
+            <div class="measure-width"><div class="line"></div><span>137 cm</span><div class="line"></div></div>
+          </div>
+          <div class="bed-size-item">
+            <div class="bed-size-visual"><div class="pillow-split"></div><div class="pillow-split right"></div><div class="blanket"></div></div>
+            <div class="measure-width"><div class="line"></div><span>152 cm</span><div class="line"></div></div>
+          </div>
+          <div class="bed-size-item">
+            <div class="bed-size-visual"><div class="pillow-split"></div><div class="pillow-split right"></div><div class="blanket"></div></div>
+            <div class="measure-width"><div class="line"></div><span>183 cm</span><div class="line"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials reveal-section" style="display:block;">
+      <div class="container">
+        <div class="section-header center">
+          <span class="section-subtitle">gold standard</span>
+          <h2>what our patrons say</h2>
+        </div>
+        <div class="testimonial-grid">
+          <div class="testimonial-card"><i class="fas fa-quote-left"></i><p>"The King Weight Master transformed my sleep completely. No more back pain, just pure restoration."</p><div class="testimonial-author"><strong>Sarah J.</strong><span>Cape Town</span><div class="stars">★★★★★</div></div></div>
+          <div class="testimonial-card"><i class="fas fa-quote-left"></i><p>"Finally, a bed that understands luxury. The craftsmanship is visible in every detail."</p><div class="testimonial-author"><strong>David M.</strong><span>Johannesburg</span><div class="stars">★★★★★</div></div></div>
+          <div class="testimonial-card"><i class="fas fa-quote-left"></i><p>"Worth every cent. The white glove delivery and attention to detail is unmatched."</p><div class="testimonial-author"><strong>Elena V.</strong><span>Durban</span><div class="stars">★★★★★</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOWROOM -->
+    <section class="showroom reveal-section" id="showroom" style="display:block;">
+      <div class="container">
+        <div class="showroom-grid">
+          <div class="showroom-info">
+            <span class="section-subtitle">visit our flagship atelier</span>
+            <h2>come feel the craft</h2>
+            <p>Step into our Pretoria showroom and experience every mattress, headboard, and finish in person. Our sleep consultants will help you find your perfect sanctuary.</p>
+            <div class="showroom-details">
+              <div class="showroom-detail">
+                <i class="fas fa-map-marker-alt"></i>
+                <div><strong>Showroom Address</strong><p>Paul Kruger · Maryana Building<br>Pretoria Central · Shop No 1</p></div>
+              </div>
+              <div class="showroom-detail">
+                <i class="fas fa-phone-alt"></i>
+                <div><strong>Call us</strong><p><a href="tel:+27822336883">+27 82 233 6883</a></p></div>
+              </div>
+              <div class="showroom-detail">
+                <i class="fab fa-whatsapp"></i>
+                <div><strong>WhatsApp</strong><p><a href="https://wa.me/27822336883" target="_blank">+27 82 233 6883</a></p></div>
+              </div>
+              <div class="showroom-detail">
+                <i class="fas fa-clock"></i>
+                <div><strong>Opening hours</strong><p>Mon–Fri: 9:00 – 17:30<br>Sat: 9:00 – 14:00 · Sun: closed</p></div>
+              </div>
+            </div>
+            <div class="showroom-actions">
+              <a href="https://wa.me/27822336883?text=Hi%20Harmony%20Rest%2C%20I%27d%20like%20to%20book%20a%20showroom%20visit" target="_blank" class="btn-primary"><i class="fab fa-whatsapp"></i> book a visit</a>
+              <a href="https://maps.google.com/?q=Paul+Kruger+Maryana+Building+Pretoria+Central" target="_blank" class="btn-outline-dark"><i class="fas fa-directions"></i> get directions</a>
+            </div>
+          </div>
+          <div class="showroom-map">
+            <iframe src="https://www.google.com/maps?q=Paul%20Kruger%20Street%2C%20Pretoria%20Central&output=embed" loading="lazy" title="Harmony Rest showroom location"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter reveal-section" style="display:block;">
+      <div class="container">
+        <div class="newsletter-content">
+          <h2>join the golden circle</h2>
+          <p>Get early access to new specials, private events, and sleep insights</p>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" placeholder="your email address" required>
+            <button type="submit">subscribe →</button>
+          </form>
+          <p class="newsletter-small">We respect your inbox. Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- POLICIES & GUARANTEES -->
+  <section class="policies" id="policies" style="display:block;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">peace of mind</span>
+        <h2>Policies &amp; Guarantees</h2>
+        <p>Every purchase is protected by our artisan promise — read the fine print that matters</p>
+      </div>
+      <div class="policy-grid">
+        <article class="policy-card">
+          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-returns">
+            <span class="policy-icon"><i class="fas fa-rotate-left"></i></span>
+            <span class="policy-head"><span class="policy-tag">returns</span><span class="policy-title">Returns &amp; Exchanges</span><span class="policy-sub">7-day exchange on eligible items</span></span>
+            <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="policy-body" id="policy-returns" role="region"><div class="policy-body-inner">
+            <p>We offer exchanges on eligible unused products within <strong>7 days</strong> of delivery or collection. Products must be in their original condition, with proof of purchase.</p>
+            <p>All returns and exchanges are subject to applicable South African consumer protection laws.</p>
+          </div></div>
+        </article>
+        <article class="policy-card">
+          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-layby">
+            <span class="policy-icon"><i class="fas fa-hand-holding-dollar"></i></span>
+            <span class="policy-head"><span class="policy-tag">lay-by</span><span class="policy-title">Lay-By</span><span class="policy-sub">Secure your purchase with a deposit</span></span>
+            <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="policy-body" id="policy-layby" role="region"><div class="policy-body-inner">
+            <p>Secure your purchase through our convenient lay-by option. A minimum deposit of <strong>R500</strong> applies, with payments completed within the agreed period.</p>
+            <p>Products are released once full payment has been received. Lay-by cancellations are handled in accordance with applicable law.</p>
+          </div></div>
+        </article>
+        <article class="policy-card">
+          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-custom">
+            <span class="policy-icon"><i class="fas fa-pencil-ruler"></i></span>
+            <span class="policy-head"><span class="policy-tag">custom</span><span class="policy-title">Custom Orders</span><span class="policy-sub">Made to your specifications</span></span>
+            <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="policy-body" id="policy-custom" role="region"><div class="policy-body-inner">
+            <p>Custom-made beds, headboards and other furniture are produced according to your specifications. A deposit may be required before production.</p>
+            <p>Manufacturing times are communicated when the order is confirmed. Custom orders remain subject to applicable consumer rights.</p>
+          </div></div>
+        </article>
+        <article class="policy-card">
+          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-delivery">
+            <span class="policy-icon"><i class="fas fa-truck-fast"></i></span>
+            <span class="policy-head"><span class="policy-tag">delivery</span><span class="policy-title">Delivery</span><span class="policy-sub">Across South Africa</span></span>
+            <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="policy-body" id="policy-delivery" role="region"><div class="policy-body-inner">
+            <p>We deliver to customers across South Africa. Delivery fees and estimated delivery times depend on the destination and products ordered.</p>
+            <p>Customers are encouraged to inspect goods upon delivery and report any concerns promptly.</p>
+          </div></div>
+        </article>
+        <article class="policy-card">
+          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-prices">
+            <span class="policy-icon"><i class="fas fa-tag"></i></span>
+            <span class="policy-head"><span class="policy-tag">pricing</span><span class="policy-title">Prices &amp; Quotations</span><span class="policy-sub">Valid for 14 days</span></span>
+            <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="policy-body" id="policy-prices" role="region"><div class="policy-body-inner">
+            <p>Our prices are clearly communicated before purchase. Quotations are normally valid for <strong>14 days</strong> unless otherwise stated.</p>
+            <p>Prices and promotions are subject to the terms communicated at the time of purchase.</p>
+          </div></div>
+        </article>
+        <article class="policy-card">
+          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-warranty">
+            <span class="policy-icon"><i class="fas fa-shield-halved"></i></span>
+            <span class="policy-head"><span class="policy-tag">warranty</span><span class="policy-title">Quality &amp; Warranty</span><span class="policy-sub">Manufacturer warranties apply</span></span>
+            <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="policy-body" id="policy-warranty" role="region"><div class="policy-body-inner">
+            <p>We are committed to providing quality beds, mattresses and furniture. Products may carry manufacturer warranties, while statutory consumer rights continue to apply where applicable.</p>
+          </div></div>
+        </article>
+        <article class="policy-card">
+          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-complaints">
+            <span class="policy-icon"><i class="fas fa-comment-dots"></i></span>
+            <span class="policy-head"><span class="policy-tag">support</span><span class="policy-title">Customer Complaints</span><span class="policy-sub">We resolve concerns quickly</span></span>
+            <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="policy-body" id="policy-complaints" role="region"><div class="policy-body-inner">
+            <p>We value our customers and aim to resolve concerns quickly and fairly. Please contact us with your proof of purchase and details of the issue so that we can assist you.</p>
+            <p class="policy-note"><strong>Contact us:</strong> <a href="https://wa.me/27822336883">+27 82 233 6883</a> or visit our showroom.</p>
+          </div></div>
+        </article>
+        <article class="policy-card">
+          <button class="policy-toggle" aria-expanded="false" aria-controls="policy-legal">
+            <span class="policy-icon"><i class="fas fa-gavel"></i></span>
+            <span class="policy-head"><span class="policy-tag">legal</span><span class="policy-title">Legal Compliance</span><span class="policy-sub">CPA 68 of 2008</span></span>
+            <span class="policy-chevron"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="policy-body" id="policy-legal" role="region"><div class="policy-body-inner">
+            <p>Harmony Rest and Comfort conducts its business in accordance with applicable South African laws and regulations, including the <strong>Consumer Protection Act 68 of 2008</strong>.</p>
+            <p>Nothing in our policies limits rights provided to consumers by law.</p>
+          </div></div>
+        </article>
+      </div>
+      <p class="policies-footnote">
+        <i class="fas fa-circle-info"></i>
+        All policies apply to purchases made directly from Harmony Rest &amp; Comfort Beds. Terms subject to South African Consumer Protection Act (CPA 68 of 2008).
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo"><span>harmony<span>rest</span></span></div>
+          <p>Artisan luxury beds handcrafted in South Africa. Restored sleep, redefined elegance.</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/share/18oNGWFW1V/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.tiktok.com/@harmony.restcomfo?_r=1&_t=ZS-96tmphqoLB4" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/harmonyrestandcomfort?igsh=MW1oOHIyMjh3bnExdQ==" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-col"><h4>shop</h4><ul><li><a href="products.html?category=bed&filter=set">bed sets</a></li><li><a href="products.html?category=bed&filter=mattress">mattresses</a></li><li><a href="products.html?category=headboard">headboards</a></li><li><a href="products.html?category=couch">couches</a></li><li><a href="products.html?category=furniture">furniture</a></li></ul></div>
+        <div class="footer-col"><h4>help</h4><ul><li><a href="https://wa.me/27822336883">contact us</a></li><li><a href="https://wa.me/27822336883">delivery info</a></li><li><a href="https://wa.me/27822336883">returns policy</a></li><li><a href="https://wa.me/27822336883">warranty</a></li></ul></div>
+        <div class="footer-col">
+          <h4>showroom</h4>
+          <p>Paul Kruger · Maryana Building<br>Pretoria Central · Shop No 1<br><a href="tel:+27822336883">+27 82 233 6883</a></p>
+          <div class="payment-icons">
+            <i class="fab fa-cc-visa" title="Visa"></i>
+            <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+            <i class="fas fa-money-bill-wave" title="Cash on delivery"></i>
+            <i class="fas fa-mobile-alt" title="EFT / Instant EFT"></i>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Harmony Rest &amp; Comfort Beds. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#policies">privacy</a>
+          <a href="#policies">terms</a>
+          <a href="#policies">shipping</a>
+          <a href="#policies">refunds</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20would%20like%20to%20inquire%20about%20your%20luxury%20beds." class="floating-whatsapp" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <a href="products.html" class="floating-promo" id="floatingPromo" aria-label="Summer sale — shop now">
+    <span class="fp-pulse"></span>
+    <span class="fp-text">
+      <strong>Summer Sale</strong>
+      <small>up to 30% off · shop now</small>
+    </span>
+    <i class="fas fa-arrow-right fp-arrow"></i>
+  </a>
+
+  <script>
+    // --- HERO BANNER ANIMATIONS ---
+    (function heroParticles() {
+      const wrap = document.getElementById('hbParticles');
+      if (!wrap) return;
+      const count = window.innerWidth < 640 ? 6 : 14;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('span');
+        p.className = 'hb-particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.top = (Math.random() * 70 + 10) + '%';
+        p.style.animationDuration = (6 + Math.random() * 6).toFixed(1) + 's';
+        p.style.animationDelay = (Math.random() * 6).toFixed(1) + 's';
+        const size = (3 + Math.random() * 5).toFixed(1);
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        wrap.appendChild(p);
+      }
+    })();
+
+    (function heroParallax() {
+      const img = document.querySelector('.hero-banner-img');
+      if (!img) return;
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const y = window.scrollY;
+            const h = img.offsetHeight;
+            if (y < h) {
+              const p = y / h;
+              img.style.transform = `scale(${1 + p * 0.06}) translateY(${p * 18}px)`;
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
+
+    // --- COUNTDOWN ---
+    (function countdown() {
+      let end = sessionStorage.getItem('harmony_sale_end');
+      if (!end) {
+        end = Date.now() + 7 * 24 * 60 * 60 * 1000;
+        sessionStorage.setItem('harmony_sale_end', String(end));
+      }
+      end = parseInt(end, 10);
+      const pad = (n) => String(n).padStart(2, '0');
+      const $ = (id) => document.getElementById(id);
+      function tick() {
+        const diff = Math.max(0, end - Date.now());
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+        const daysEl = $('hsDays');
+        if (daysEl) daysEl.textContent = pad(d);
+        if ($('hsHours')) $('hsHours').textContent = pad(h);
+        if ($('hsMins')) $('hsMins').textContent = pad(m);
+        if ($('hsSecs')) $('hsSecs').textContent = pad(s);
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
+
+    // --- STATS COUNT UP ---
+    (function countUp() {
+      const els = document.querySelectorAll('.hs-stat-num[data-count]');
+      if (!els.length) return;
+      const animate = (el) => {
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || '';
+        const dur = 1600;
+        const t0 = performance.now();
+        const step = (now) => {
+          const t = Math.min((now - t0) / dur, 1);
+          const eased = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.round(target * eased) + suffix;
+          if (t < 1) requestAnimationFrame(step);
+          else el.textContent = target + suffix;
+        };
+        requestAnimationFrame(step);
+      };
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.5 });
+      els.forEach(el => io.observe(el));
+    })();
+
+    // --- SCROLL PROGRESS ---
+    (function scrollProgress() {
+      const bar = document.getElementById('scrollProgress');
+      if (!bar) return;
+      let ticking = false;
+      const update = () => {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (h > 0 ? Math.min((window.scrollY / h) * 100, 100) : 0) + '%';
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
+    })();
+
+    // --- REVEAL ON SCROLL ---
+    (function revealOnScroll() {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.reveal-section').forEach(sec => io.observe(sec));
+    })();
+
+    // --- FLOATING PROMO ---
+    (function floatingPromo() {
+      const pill = document.getElementById('floatingPromo');
+      if (!pill) return;
+      if (sessionStorage.getItem('harmony_promo_dismissed')) return;
+      setTimeout(() => pill.classList.add('visible'), 3000);
+      const showroom = document.getElementById('showroom');
+      if (showroom) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) pill.classList.remove('visible'); });
+        }, { threshold: 0.4 });
+        io.observe(showroom);
+      }
+    })();
+
+    // --- NEWSLETTER ---
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('✨ Welcome to the Golden Circle! A sleep guide awaits.');
+      this.reset();
+    });
+
+    // ============================================================
+    // MOBILE MENU — HAMBURGER TOGGLE (FIXED)
+    // ============================================================
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      const icon = mobileMenuBtn.querySelector('i');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+      if (!navLinks.classList.contains('active')) {
+        document.getElementById('shopDropdown').classList.remove('open');
+      }
+    });
+
+    // ============================================================
+    // DROPDOWN TOGGLE (mobile)
+    // ============================================================
+    (function dropdownToggle() {
+      const shopItem = document.getElementById('shopDropdown');
+      if (!shopItem) return;
+      const toggleLink = shopItem.querySelector('.dropdown-toggle');
+      toggleLink.addEventListener('click', function(e) {
+        if (window.innerWidth <= 992) {
+          e.preventDefault();
+          e.stopPropagation();
+          document.querySelectorAll('.nav-item-dropdown.open').forEach(item => {
+            if (item !== shopItem) item.classList.remove('open');
+          });
+          shopItem.classList.toggle('open');
+        }
+      });
+      document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 992) {
+          if (!shopItem.contains(e.target)) shopItem.classList.remove('open');
+        }
+      });
+      shopItem.querySelectorAll('.dropdown-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 992) {
+            shopItem.classList.remove('open');
+            navLinks.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+          }
+        });
+      });
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (window.innerWidth > 992) shopItem.classList.remove('open');
+        }, 200);
+      });
+    })();
+
+    // --- POLICY TOGGLES ---
+    (function policyToggles() {
+      document.querySelectorAll('.policy-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('.policy-card');
+          const body = card.querySelector('.policy-body');
+          const isOpen = card.classList.contains('open');
+          
+          document.querySelectorAll('.policy-card').forEach(c => {
+            c.classList.remove('open');
+            c.querySelector('.policy-body').style.maxHeight = null;
+            c.querySelector('.policy-toggle').setAttribute('aria-expanded', 'false');
+          });
+          
+          if (!isOpen) {
+            card.classList.add('open');
+            body.style.maxHeight = body.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
