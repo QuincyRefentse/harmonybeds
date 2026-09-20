@@ -718,32 +718,34 @@
         badge: "accent",
         specs: [["Overall Length","100 cm"],["Warranty","8 years"]] },
 
-      /* ============ FURNITURE ============ */
-      { id: 39, name: "Blanket Storage", category: "furniture", price: 999, size: "Standard",
-        tags: ["furniture"],
-        image: "assets/images/beds/blanket-store.jpg",
-        desc: "Beautifully crafted blanket storage chest with cedar lining.",
-        badge: "cedar lined",
-        specs: [["Length","100 cm"],["Warranty","5 years"]] },
-      { id: 40, name: "Chest of Drawers", category: "furniture", price: 1499, size: "6-Drawer",
-        tags: ["furniture"],
-        image: "assets/images/beds/drawers.jpg",
-        desc: "Spacious multi-drawer chest.",
-        badge: "premium",
-        specs: [["Length","120 cm"],["Warranty","5 years"]] },
-      { id: 41, name: "Pedestal (Wooden)", category: "furniture", price: 750, size: "3-Drawer",
-        tags: ["furniture"],
-        image: "assets/images/beds/chest.jpg",
-        desc: "Compact three-drawer wooden pedestal.",
-        badge: "matching",
-        specs: [["Length","50 cm"],["Warranty","5 years"]] },
-      { id: 42, name: "Pedestal (Velvet)", category: "furniture", price: 500, size: "3-Drawer",
-        tags: ["furniture"],
-        image: "assets/images/furniture/pedestal.jpg",
-        desc: "Velvet-upholstered pedestal.",
-        badge: "velvet",
-        specs: [["Length","50 cm"],["Warranty","5 years"]] }
+      /* ============ FURNITURE (PLACEHOLDER ENTERPRISE LEVEL) ============ */
+      /* All previous furniture items have been removed as requested.
+         A single professional placeholder is now used for the furniture category. */
     ];
+
+    /* ============================================================
+       ENTERPRISE-GRADE FURNITURE PLACEHOLDER
+       This object is used to render a polished, professional placeholder
+       instead of an empty state. It does not represent a real product.
+       ============================================================ */
+    const furniturePlaceholder = {
+      id: 'furniture-placeholder',
+      name: 'Curated Furniture Collection',
+      category: 'furniture',
+      price: 0,
+      size: 'Coming Soon',
+      tags: ['furniture'],
+      image: '', // intentionally empty for fallback
+      desc: 'Our furniture collection is being thoughtfully curated. Expect the same level of craftsmanship and attention to detail that defines every Harmony Rest piece.',
+      badge: 'atelier',
+      specs: [
+        ['Status', 'Coming Soon'],
+        ['Curation', 'In Progress'],
+        ['Design Language', 'Artisan · Contemporary'],
+        ['Materials', 'Solid Timber · Premium Upholstery'],
+        ['Warranty', 'To Be Announced']
+      ]
+    };
 
     const BANK = {
       holder: "Harmony Rest and Comfort (PTY) LTD",
@@ -857,6 +859,8 @@
       const icon = product.category === 'bed' ? 'bed'
                  : product.category === 'headboard' ? 'grip-lines'
                  : product.category === 'couch' ? 'couch' : 'box';
+      // If product is the furniture placeholder (no price), render a special card
+      const isPlaceholder = product.id === 'furniture-placeholder';
       return `
         <div class="product-card"
              data-id="${product.id}"
@@ -870,20 +874,25 @@
               <span>image coming soon</span>
             </div>
             <div class="product-badge">${product.badge}</div>
+            ${!isPlaceholder ? `
             <button class="fav-btn ${isFav ? 'active' : ''}"
                     data-fav-id="${product.id}">
               <i class="${isFav ? 'fas' : 'far'} fa-heart"></i>
             </button>
+            ` : ''}
+            ${!isPlaceholder ? `
             <div class="quick-view-overlay">
               <button class="quick-view-btn" data-quick-id="${product.id}">
                 <i class="fas fa-eye"></i> quick view
               </button>
             </div>
+            ` : ''}
           </div>
           <div class="product-info">
             <div class="product-category">${product.category}</div>
             <h3 class="product-title">${product.name}</h3>
             <p class="product-desc">${product.desc}</p>
+            ${!isPlaceholder ? `
             <div class="product-price">R${product.price.toLocaleString()} <small>${product.size}</small></div>
             <div class="product-actions">
               <button type="button" class="btn-card" data-view-id="${product.id}">view details →</button>
@@ -895,6 +904,14 @@
                 <i class="fas fa-university"></i> Pay EFT
               </button>
             </div>
+            ` : `
+            <div class="product-actions" style="justify-content:center; padding-top:0.5rem;">
+              <a href="https://wa.me/27822336883?text=Hello%20Harmony%20Rest%2C%20I%20would%20like%20to%20know%20more%20about%20your%20upcoming%20furniture%20collection."
+                 target="_blank" rel="noopener" class="btn-whatsapp" style="padding:0.7rem 1.5rem; border-radius:8px;">
+                <i class="fab fa-whatsapp"></i> Notify Me
+              </a>
+            </div>
+            `}
           </div>
         </div>
       `;
@@ -926,7 +943,11 @@
 
       let html = '';
       order.forEach(cat => {
-        const items = groups[cat];
+        // For furniture, always inject the placeholder if the group is empty
+        let items = groups[cat];
+        if (cat === 'furniture' && items.length === 0) {
+          items = [furniturePlaceholder];
+        }
         if (!items.length) return;
         const label = CATEGORY_LABELS[cat] || { title: cat, icon: 'fa-box' };
         html += `
@@ -976,6 +997,7 @@
          - "storage-base" → includes Storage Base items and combos
        Tag-based filters for everything else.
 
+       ★★ FURNITURE CATEGORY: now renders a professional placeholder
        ★★ PROMOTIONS FILTER: ONLY Storage Base Combos + Student Accommodation
        ============================================================ */
     function render() {
@@ -1074,6 +1096,18 @@
 
       // ---- CASE 6: category selected (bed, headboard, couch, furniture)
       if (cat && cat !== 'all') {
+        // Special handling for furniture: render placeholder instead of real products
+        if (cat === 'furniture') {
+          const label = CATEGORY_LABELS['furniture'];
+          showCollectionHeader(
+            label.title,
+            'collection',
+            'Our furniture collection is being thoughtfully curated. Expect the same level of craftsmanship and attention to detail that defines every Harmony Rest piece.',
+            1
+          );
+          renderProductsGrid([furniturePlaceholder]);
+          return;
+        }
         const list = products.filter(p => p.category === cat);
         const label = CATEGORY_LABELS[cat] || { title: cat, desc: '' };
         showCollectionHeader(label.title, 'collection', `Handcrafted ${label.title.toLowerCase()} made in South Africa.`, list.length);
@@ -1100,7 +1134,10 @@
       if (e.target.closest('.bank-details')) { e.stopPropagation(); return; }
       if (e.target.closest('.product-actions')) { return; }
       const card = e.target.closest('.product-card');
-      if (card && !e.target.closest('a')) { openProductModal(parseInt(card.dataset.id, 10)); }
+      // Only open modal for real products (not placeholder)
+      if (card && !e.target.closest('a') && card.dataset.id !== 'furniture-placeholder') { 
+        openProductModal(parseInt(card.dataset.id, 10)); 
+      }
     });
 
     function copyToClipboard(text, btn) {
@@ -1131,6 +1168,8 @@
     }
 
     function openProductModal(productId) {
+      // Prevent opening modal for furniture placeholder
+      if (productId === 'furniture-placeholder') return;
       const product = products.find(p => p.id === productId);
       if (!product) return;
       document.getElementById('modalCategory').textContent = product.category;
