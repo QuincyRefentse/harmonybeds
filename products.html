@@ -640,6 +640,26 @@
         badge: "storage",
         specs: [["Base Length","205 cm"],["Base Width","157 cm"],["Base Height","38 cm"],["Drawer Count","4 spacious drawers"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
 
+      /* ============ STORAGE BASES & COMBOS ============ */
+      { id: 50, name: "Double Storage Base", category: "bed", price: 2699, size: "Double",
+        tags: ["base", "storage-base", "drawers", "promo"],
+        image: "assets/images/beds/double-storage-base.jpg",
+        desc: "Double storage base with two spacious drawers — smart storage for smaller bedrooms and guest rooms.",
+        badge: "storage",
+        specs: [["Base Length","192 cm"],["Base Width","141 cm"],["Base Height","38 cm"],["Drawer Count","2 spacious drawers"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
+      { id: 51, name: "Queen Storage Base", category: "bed", price: 3299, size: "Queen",
+        tags: ["base", "storage-base", "drawers", "promo"],
+        image: "assets/images/beds/queen-storage-base.jpg",
+        desc: "Queen storage base with four deep drawers — generous storage with a refined, tailored finish.",
+        badge: "storage",
+        specs: [["Base Length","205 cm"],["Base Width","157 cm"],["Base Height","38 cm"],["Drawer Count","4 spacious drawers"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base only)"],["Warranty","12 years"]] },
+      { id: 52, name: "Combo Storage Base", category: "bed", price: 3799, size: "Queen",
+        tags: ["base", "storage-base", "drawers", "promo"],
+        image: "assets/images/beds/storagebaseset.jpg",
+        desc: "Combo storage base with integrated drawers and a matching headboard — the complete bedroom solution in one elegant package.",
+        badge: "combo",
+        specs: [["Base Length","205 cm"],["Base Width","157 cm"],["Base Height","38 cm"],["Headboard Height","120 cm"],["Drawer Count","4 spacious drawers"],["Frame Material","Solid timber"],["Upholstery","Premium fabric"],["Mattress Included","No (base & headboard only)"],["Warranty","12 years"]] },
+
       /* ============ HEADBOARDS ============ */
       { id: 30, name: "King Headboard — Vertical / Horizontal / Diamond", category: "headboard", price: 1499, size: "King",
         tags: ["headboard", "promo"],
@@ -953,6 +973,7 @@
          - "mattress"     → name ends with "Mattress"
          - "set"          → name ends with "Bed Set"
          - "standard-base"→ includes Double, Queen and Storage Base
+         - "storage-base" → includes Storage Base items and combos
        Tag-based filters for everything else.
        ============================================================ */
     function render() {
