@@ -461,7 +461,7 @@
   </div>
 
   <!-- ============================================================ -->
-  <!-- BANK / EFT MODAL  ✅ NEWLY ADDED — THIS WAS MISSING           -->
+  <!-- BANK / EFT MODAL                                              -->
   <!-- ============================================================ -->
   <div class="bank-modal-overlay" id="bankModal">
     <div class="bank-modal-content">
@@ -818,10 +818,28 @@
         desc: "The perfect accent chair.",
         badge: "accent",
         specs: [["Overall Length","100 cm"],["Warranty","8 years"]] },
+
+      /* ============ FURNITURE ============ */
+      { id: 53, name: "Blanket Storage", category: "furniture", price: 1299, oldPrice: 1493.85, size: "Standard",
+        rating: 4.6, reviewCount: 84,
+        tags: ["furniture", "storage", "promo"],
+        image: "assets/images/furniture/blanket-storage.jpg",
+        desc: "Handcrafted blanket storage chest — elegant, spacious, and built from solid timber with a premium upholstered finish. The perfect companion to any Harmony Rest bedroom.",
+        badge: "artisan",
+        specs: [
+          ["Length","120 cm"],
+          ["Width","45 cm"],
+          ["Height","50 cm"],
+          ["Material","Solid timber frame"],
+          ["Upholstery","Premium fabric"],
+          ["Capacity","Full queen duvet + 2 pillows"],
+          ["Warranty","10 years"]
+        ] },
     ];
 
     /* ============================================================
        ENTERPRISE-GRADE FURNITURE PLACEHOLDER
+       (kept for future "coming soon" items)
        ============================================================ */
     const furniturePlaceholder = {
       id: 'furniture-placeholder',
@@ -1088,9 +1106,6 @@
       let html = '';
       order.forEach(cat => {
         let items = groups[cat];
-        if (cat === 'furniture' && items.length === 0) {
-          items = [furniturePlaceholder];
-        }
         if (!items.length) return;
         const label = CATEGORY_LABELS[cat] || { title: cat, icon: 'fa-box' };
         html += `
@@ -1186,13 +1201,14 @@
         const promoList = products.filter(p => {
           const isStorageBaseCombo = p.name.toLowerCase().includes('combo storage base');
           const isStudentAccommodation = p.tags && p.tags.includes('student');
-          return isStorageBaseCombo || isStudentAccommodation;
+          const isBlanketStorage = p.name.toLowerCase().includes('blanket storage');
+          return isStorageBaseCombo || isStudentAccommodation || isBlanketStorage;
         });
         const label = FILTER_LABELS['promo'] || { title: 'Promotions', desc: '' };
         showCollectionHeader(
           label.title,
           'limited offer',
-          'Special pricing on select storage combos and student accommodation pieces.',
+          'Special pricing on select storage combos, student accommodation pieces, and our blanket storage chests.',
           promoList.length
         );
         renderProductsGrid(promoList);
@@ -1217,20 +1233,15 @@
       }
 
       if (cat && cat !== 'all') {
-        if (cat === 'furniture') {
-          const label = CATEGORY_LABELS['furniture'];
-          showCollectionHeader(
-            label.title,
-            'collection',
-            'Our furniture collection is being thoughtfully curated. Expect the same level of craftsmanship and attention to detail that defines every Harmony Rest piece.',
-            1
-          );
-          renderProductsGrid([furniturePlaceholder]);
-          return;
-        }
         const list = products.filter(p => p.category === cat);
         const label = CATEGORY_LABELS[cat] || { title: cat, desc: '' };
-        showCollectionHeader(label.title, 'collection', `Handcrafted ${label.title.toLowerCase()} made in South Africa.`, list.length);
+        let desc;
+        if (cat === 'furniture') {
+          desc = 'Handcrafted furniture to complete your bedroom retreat — including our signature blanket storage chests.';
+        } else {
+          desc = `Handcrafted ${label.title.toLowerCase()} made in South Africa.`;
+        }
+        showCollectionHeader(label.title, 'collection', desc, list.length);
         renderProductsGrid(list);
         return;
       }
