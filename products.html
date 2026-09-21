@@ -835,6 +835,61 @@
           ["Capacity","Full queen duvet + 2 pillows"],
           ["Warranty","10 years"]
         ] },
+
+      /* ============ NEW FURNITURE ITEMS ============ */
+      { id: 54, name: "Wooden Pedestal", category: "furniture", price: 899, oldPrice: 1033.85, size: "Standard",
+        rating: 4.7, reviewCount: 62,
+        tags: ["furniture", "storage", "promo"],
+        image: "assets/images/beds/pedaestal3.jpg",
+        desc: "Handcrafted wooden pedestal, ideal for bedside or living area. Solid timber construction with a rich natural finish.",
+        badge: "artisan",
+        specs: [
+          ["Height","60 cm"],
+          ["Top Diameter","35 cm"],
+          ["Material","Solid oak / pine"],
+          ["Finish","Natural wood sealant"],
+          ["Warranty","10 years"]
+        ] },
+      { id: 55, name: "Golden One-Seater Sofa", category: "furniture", price: 2499, oldPrice: 2873.85, size: "1-Seater",
+        rating: 4.9, reviewCount: 78,
+        tags: ["furniture", "promo"],
+        image: "assets/images/beds/goldensofa.jpg",
+        desc: "Opulent golden one-seater sofa. Velvet upholstery with gold-tone frame — a statement of luxury and comfort.",
+        badge: "luxury",
+        specs: [
+          ["Width","85 cm"],
+          ["Depth","80 cm"],
+          ["Height","90 cm"],
+          ["Material","Velvet upholstery + gold-tone frame"],
+          ["Warranty","8 years"]
+        ] },
+      { id: 56, name: "Bed Pedestal Blanket Storage", category: "furniture", price: 1899, oldPrice: 2183.85, size: "Standard",
+        rating: 4.8, reviewCount: 71,
+        tags: ["furniture", "storage", "promo"],
+        image: "assets/images/beds/box.jpg",
+        desc: "A versatile bed pedestal that doubles as blanket storage. Solid timber with a clean, modern finish — perfect for storing extra bedding while adding elegance to your space.",
+        badge: "storage",
+        specs: [
+          ["Length","90 cm"],
+          ["Width","40 cm"],
+          ["Height","55 cm"],
+          ["Material","Solid timber frame"],
+          ["Storage","Internal blanket compartment"],
+          ["Warranty","10 years"]
+        ] },
+      { id: 57, name: "White Wood Pedestal", category: "furniture", price: 799, oldPrice: 918.85, size: "Standard",
+        rating: 4.5, reviewCount: 54,
+        tags: ["furniture", "storage", "promo"],
+        image: "assets/images/beds/pedaestal2.jpg",
+        desc: "Clean and contemporary white wood pedestal. Ideal for bedside or as an accent piece — crafted from solid timber with a smooth white finish.",
+        badge: "modern",
+        specs: [
+          ["Height","55 cm"],
+          ["Top Diameter","32 cm"],
+          ["Material","Solid timber with white lacquer"],
+          ["Finish","Matte white"],
+          ["Warranty","10 years"]
+        ] },
     ];
 
     /* ============================================================
@@ -1237,7 +1292,7 @@
         const label = CATEGORY_LABELS[cat] || { title: cat, desc: '' };
         let desc;
         if (cat === 'furniture') {
-          desc = 'Handcrafted furniture to complete your bedroom retreat — including our signature blanket storage chests.';
+          desc = 'Handcrafted furniture to complete your bedroom retreat — including our signature blanket storage chests, wooden pedestals, bed pedestal blanket storage, white wood pedestals, and golden one-seater sofas.';
         } else {
           desc = `Handcrafted ${label.title.toLowerCase()} made in South Africa.`;
         }
