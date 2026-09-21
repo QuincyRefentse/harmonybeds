@@ -823,7 +823,7 @@
       { id: 53, name: "Blanket Storage", category: "furniture", price: 1299, oldPrice: 1493.85, size: "Standard",
         rating: 4.6, reviewCount: 84,
         tags: ["furniture", "storage", "promo"],
-        image: "assets/images/furniture/blanket-storage.jpg",
+        image: "assets/images/beds/blanket-store.jpg",
         desc: "Handcrafted blanket storage chest — elegant, spacious, and built from solid timber with a premium upholstered finish. The perfect companion to any Harmony Rest bedroom.",
         badge: "artisan",
         specs: [
@@ -888,6 +888,82 @@
           ["Top Diameter","32 cm"],
           ["Material","Solid timber with white lacquer"],
           ["Finish","Matte white"],
+          ["Warranty","10 years"]
+        ] },
+
+      /* ============ NEW FURNITURE: COUCH ============ */
+      { id: 59, name: "Compact 2-Seater Couch", category: "furniture", price: 2899, oldPrice: 3333.85, size: "2-Seater",
+        rating: 4.5, reviewCount: 72,
+        tags: ["furniture", "promo"],
+        image: "assets/images/beds/2seater.jpg",
+        desc: "Stylish and space-conscious 2-seater couch, perfect for apartments and smaller living areas.",
+        badge: "compact",
+        specs: [
+          ["Overall Length","165 cm"],
+          ["Depth","85 cm"],
+          ["Height","80 cm"],
+          ["Material","Premium fabric upholstery"],
+          ["Frame","Solid timber"],
+          ["Warranty","8 years"]
+        ] },
+
+      /* ============ NEW FURNITURE: HEADBOARD ============ */
+      { id: 60, name: "Upholstered Headboard — Furniture Edition", category: "furniture", price: 1599, oldPrice: 1838.85, size: "Queen",
+        rating: 4.7, reviewCount: 63,
+        tags: ["furniture", "promo"],
+        image: "assets/images/beds/headboard.jpg",
+        desc: "Elegant upholstered headboard with vertical channel tufting — a refined statement piece for any bedroom.",
+        badge: "artisan",
+        specs: [
+          ["Width","165 cm"],
+          ["Height","120 cm"],
+          ["Depth","12 cm"],
+          ["Material","Premium fabric over solid timber"],
+          ["Mounting","Wall-mounted or bed-attached"],
+          ["Warranty","10 years"]
+        ] },
+
+      /* ============ NEW FURNITURE: DRAWERS ============ */
+      { id: 62, name: "Bedside Drawers — 3 Drawer", category: "furniture", price: 1199, oldPrice: 1378.85, size: "Standard",
+        rating: 4.6, reviewCount: 79,
+        tags: ["furniture", "storage", "promo"],
+        image: "assets/images/furniture/bedside-drawers.jpg",
+        desc: "Practical and stylish 3-drawer bedside unit — solid timber construction with smooth-glide runners.",
+        badge: "storage",
+        specs: [
+          ["Width","50 cm"],
+          ["Depth","40 cm"],
+          ["Height","65 cm"],
+          ["Drawers","3 spacious drawers"],
+          ["Material","Solid timber with premium finish"],
+          ["Warranty","10 years"]
+        ] },
+      { id: 63, name: "Tallboy Drawers — 5 Drawer", category: "furniture", price: 2299, oldPrice: 2643.85, size: "Standard",
+        rating: 4.8, reviewCount: 104,
+        tags: ["furniture", "storage", "promo"],
+        image: "assets/images/furniture/tallboy-drawers.jpg",
+        desc: "Generous 5-drawer tallboy for ample bedroom storage. Crafted from solid timber with a refined finish.",
+        badge: "storage",
+        specs: [
+          ["Width","85 cm"],
+          ["Depth","45 cm"],
+          ["Height","120 cm"],
+          ["Drawers","5 spacious drawers"],
+          ["Material","Solid timber with premium finish"],
+          ["Warranty","10 years"]
+        ] },
+      { id: 64, name: "Under-Bed Drawer Set", category: "furniture", price: 899, oldPrice: 1033.85, size: "Queen",
+        rating: 4.5, reviewCount: 67,
+        tags: ["furniture", "storage", "promo"],
+        image: "assets/images/furniture/underbed-drawers.jpg",
+        desc: "Set of two under-bed drawers with wheels — maximise storage without compromising on style.",
+        badge: "storage",
+        specs: [
+          ["Length","90 cm"],
+          ["Width","60 cm"],
+          ["Height","20 cm"],
+          ["Quantity","Set of 2 drawers"],
+          ["Material","Solid timber with premium finish"],
           ["Warranty","10 years"]
         ] },
     ];
@@ -1292,7 +1368,7 @@
         const label = CATEGORY_LABELS[cat] || { title: cat, desc: '' };
         let desc;
         if (cat === 'furniture') {
-          desc = 'Handcrafted furniture to complete your bedroom retreat — including our signature blanket storage chests, wooden pedestals, bed pedestal blanket storage, white wood pedestals, and golden one-seater sofas.';
+          desc = 'Handcrafted furniture to complete your bedroom retreat — including our signature blanket storage chests, wooden pedestals, bed pedestal blanket storage, white wood pedestals, golden one-seater sofas, compact 2-seater couches, upholstered headboards, and drawer units.';
         } else {
           desc = `Handcrafted ${label.title.toLowerCase()} made in South Africa.`;
         }
