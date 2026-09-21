@@ -574,9 +574,9 @@
         <ul class="nav-links" id="navLinks">
           <li><a href="index.html" class="active">home</a></li>
 
-          <!-- ===== SHOP NOW DROPDOWN ===== -->
+          <!-- ===== SHOP NOW DROPDOWN — CLICK DISABLED ON DESKTOP ===== -->
           <li class="nav-item-dropdown" id="shopDropdown">
-            <a href="products.html" class="dropdown-toggle">
+            <a href="javascript:void(0)" class="dropdown-toggle" data-no-click="true">
               shop now
               <i class="fas fa-chevron-down"></i>
             </a>
@@ -1066,13 +1066,25 @@
     });
 
     // ============================================================
-    // DROPDOWN TOGGLE (mobile)
+    // DROPDOWN TOGGLE — MODIFIED
+    // - Desktop (>992px): hover only, click does nothing
+    // - Mobile (<=992px): click to toggle
     // ============================================================
     (function dropdownToggle() {
       const shopItem = document.getElementById('shopDropdown');
       if (!shopItem) return;
       const toggleLink = shopItem.querySelector('.dropdown-toggle');
+      if (!toggleLink) return;
+
       toggleLink.addEventListener('click', function(e) {
+        // On desktop: prevent click navigation — hover handles it
+        if (window.innerWidth > 992) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+
+        // On mobile: toggle dropdown
         if (window.innerWidth <= 992) {
           e.preventDefault();
           e.stopPropagation();
@@ -1082,11 +1094,13 @@
           shopItem.classList.toggle('open');
         }
       });
+
       document.addEventListener('click', function(e) {
         if (window.innerWidth <= 992) {
           if (!shopItem.contains(e.target)) shopItem.classList.remove('open');
         }
       });
+
       shopItem.querySelectorAll('.dropdown-menu a').forEach(link => {
         link.addEventListener('click', () => {
           if (window.innerWidth <= 992) {
@@ -1098,6 +1112,7 @@
           }
         });
       });
+
       let resizeTimer;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
