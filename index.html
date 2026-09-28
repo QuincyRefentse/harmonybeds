@@ -67,125 +67,149 @@
     }
 
     /* ============================================================
-       FIX: MOBILE NAVBAR — HAMBURGER MENU
+       MOBILE NAVBAR — OPTION A
+       No hamburger · nav items always visible · horizontal scroll
+       "Shop now" dropdown opens full-width below the strip
+       FIXED: dropdown uses position:fixed so it isn't clipped
        ============================================================ */
     @media (max-width: 992px) {
-      .mobile-menu-btn { display: block; }
+      /* Hide hamburger — not needed */
+      .mobile-menu-btn { display: none !important; }
 
-      /* Mobile menu panel — hidden by default */
+      /* Navbar becomes a column: logo row on top, nav strip below */
+      .navbar {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 0.5rem !important;
+        padding: 0.5rem 0 !important;
+      }
+      .logo { flex: 0 0 auto; }
+
+      /* Nav links become a horizontal scrollable strip */
       .nav-links {
-        display: none;
-      }
-
-      /* When .active is added via JS, show the panel */
-      .nav-links.active {
         display: flex !important;
-        flex-direction: column;
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 78%;
-        max-width: 340px;
-        height: 100vh;
-        background: #ffffff;
-        padding: 6rem 1.8rem 3rem;
-        box-shadow: -8px 0 30px rgba(0,0,0,0.15);
-        z-index: 10001;
-        gap: 0.4rem;
-        overflow-y: auto;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 0 !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
         -webkit-overflow-scrolling: touch;
-        list-style: none;
-        margin: 0;
+        scrollbar-width: none;
+        padding: 0.35rem 0.5rem !important;
+        border-top: 1px solid rgba(198,164,92,0.18);
+        border-bottom: 1px solid rgba(198,164,92,0.18);
+        margin: 0 !important;
+        list-style: none !important;
+        position: static !important;
+        background: #fff !important;
       }
-      .nav-links.active li { width: 100%; margin: 0; }
-      .nav-links.active li > a:not(.dropdown-toggle) {
-        display: block;
-        padding: 0.9rem 0.5rem;
-        font-size: 1.05rem;
-        font-weight: 500;
-        color: #1a1a1a;
-        text-decoration: none;
-        border-bottom: 1px solid rgba(198,164,92,0.12);
-        letter-spacing: 0.3px;
-      }
-      .nav-links.active li > a:not(.dropdown-toggle):hover,
-      .nav-links.active li > a.active:not(.dropdown-toggle) {
-        color: #C6A45C;
+      .nav-links::-webkit-scrollbar { display: none; }
+
+      .nav-links > li {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        margin: 0 !important;
       }
 
-      /* Mobile dropdown inside menu */
+      .nav-links li > a:not(.dropdown-toggle),
+      .nav-item-dropdown > a.dropdown-toggle {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.35rem !important;
+        padding: 0.6rem 0.95rem !important;
+        font-family: 'Cormorant Garamond', serif !important;
+        font-size: 1.1rem !important;
+        font-weight: 500 !important;
+        color: #1a1a1a !important;
+        text-decoration: none !important;
+        border: none !important;
+        white-space: nowrap !important;
+        letter-spacing: 0.3px;
+        text-transform: capitalize;
+        transition: color 0.22s ease !important;
+        background: transparent !important;
+      }
+      .nav-links li > a:not(.dropdown-toggle):hover,
+      .nav-links li > a:not(.dropdown-toggle):active,
+      .nav-item-dropdown > a.dropdown-toggle:hover,
+      .nav-item-dropdown.open > a.dropdown-toggle,
+      .nav-item-dropdown > a.dropdown-toggle.active {
+        color: #C6A45C !important;
+      }
+      .nav-item-dropdown > a.dropdown-toggle .fa-chevron-down {
+        font-size: 0.8rem !important;
+        color: #C6A45C !important;
+        transition: transform 0.3s ease !important;
+      }
+      .nav-item-dropdown.open > a.dropdown-toggle .fa-chevron-down {
+        transform: rotate(180deg) !important;
+      }
+
+      /* Dropdown opens BELOW the strip, full width — FIXED
+         Using position: fixed so it's not clipped by the
+         nav strip's overflow-x: auto container. */
       .dropdown-menu {
-        position: static !important;
+        position: fixed !important;
+        top: auto !important;
+        left: 0 !important;
+        right: 0 !important;
         transform: none !important;
+        min-width: 0 !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        border-radius: 0 !important;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.12) !important;
+        background: #FBF9F6 !important;
+        padding: 0 !important;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, opacity 0.3s ease, visibility 0.3s ease !important;
+        list-style: none !important;
+        z-index: 10000 !important;
+      }
+      .nav-item-dropdown.open .dropdown-menu {
         opacity: 1 !important;
         visibility: visible !important;
         pointer-events: auto !important;
-        box-shadow: none !important;
-        background: #FBF9F6 !important;
-        border-radius: 10px;
-        margin: 0.3rem 0 0.6rem 0;
-        padding: 0;
-        min-width: 0 !important;
-        width: 100% !important;
-        display: none;
-        border: 1px solid rgba(198, 164, 92, 0.2);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease, padding 0.3s ease;
-        list-style: none;
-      }
-      .nav-item-dropdown.open .dropdown-menu {
-        display: block !important;
-        max-height: 800px !important;
+        max-height: 80vh !important;
+        overflow-y: auto !important;
         padding: 0.5rem 0 !important;
       }
-      .nav-item-dropdown > a.dropdown-toggle {
-        display: flex !important;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.9rem 0.5rem;
-        font-size: 1.05rem;
-        font-weight: 500;
-        color: #1a1a1a;
-        border-bottom: 1px solid rgba(198,164,92,0.12);
-        text-decoration: none;
-        width: 100%;
-        box-sizing: border-box;
-        cursor: pointer;
-      }
-      .nav-item-dropdown > a.dropdown-toggle.active {
-        color: #C6A45C;
-      }
-      .nav-item-dropdown > a.dropdown-toggle .fa-chevron-down {
-        font-size: 0.95rem;
-        color: #C6A45C;
-        margin-left: auto;
-        transition: transform 0.3s ease;
-      }
-      .nav-item-dropdown.open > a.dropdown-toggle .fa-chevron-down {
-        transform: rotate(180deg);
-      }
       .dropdown-menu li a {
+        display: block !important;
+        padding: 0.85rem 1.4rem !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 1rem !important;
+        font-weight: 500 !important;
         color: #4B4A47 !important;
-        font-size: 0.95rem !important;
-        font-weight: 500;
-        padding: 0.75rem 1.2rem !important;
-        border-left: 3px solid transparent;
-        border-bottom: none !important;
-        letter-spacing: 0.2px;
-        text-decoration: none;
-        display: block;
+        border-left: 3px solid transparent !important;
+        text-decoration: none !important;
+        transition: all 0.22s ease !important;
       }
       .dropdown-menu li a:hover,
       .dropdown-menu li a:active {
         background: rgba(198, 164, 92, 0.12) !important;
         color: #C6A45C !important;
-        border-left-color: #C6A45C;
-        padding-left: 1.5rem !important;
+        border-left-color: #C6A45C !important;
+        padding-left: 1.8rem !important;
       }
       .dropdown-divider {
-        background: rgba(198, 164, 92, 0.2) !important;
-        margin: 0.3rem 1rem !important;
+        background: rgba(198, 164, 92, 0.22) !important;
+        margin: 0.35rem 1.2rem !important;
+        height: 1px !important;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .nav-links li > a:not(.dropdown-toggle),
+      .nav-item-dropdown > a.dropdown-toggle {
+        font-size: 1rem !important;
+        padding: 0.55rem 0.8rem !important;
       }
     }
 
@@ -574,7 +598,7 @@
         <ul class="nav-links" id="navLinks">
           <li><a href="index.html" class="active">home</a></li>
 
-          <!-- ===== SHOP NOW DROPDOWN — CLICK DISABLED ON DESKTOP ===== -->
+          <!-- ===== SHOP NOW DROPDOWN ===== -->
           <li class="nav-item-dropdown" id="shopDropdown">
             <a href="javascript:void(0)" class="dropdown-toggle" data-no-click="true">
               shop now
@@ -1050,75 +1074,112 @@
     });
 
     // ============================================================
-    // MOBILE MENU — HAMBURGER TOGGLE (FIXED)
+    // MOBILE MENU — hamburger toggle (kept for safety; hidden on mobile via CSS)
     // ============================================================
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
 
-    mobileMenuBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-      const icon = mobileMenuBtn.querySelector('i');
-      icon.classList.toggle('fa-bars');
-      icon.classList.toggle('fa-times');
-      if (!navLinks.classList.contains('active')) {
-        document.getElementById('shopDropdown').classList.remove('open');
-      }
-    });
+    if (mobileMenuBtn && navLinks) {
+      mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = mobileMenuBtn.querySelector('i');
+        if (icon) {
+          icon.classList.toggle('fa-bars');
+          icon.classList.toggle('fa-times');
+        }
+        const shopDrop = document.getElementById('shopDropdown');
+        if (!navLinks.classList.contains('active') && shopDrop) {
+          shopDrop.classList.remove('open');
+        }
+      });
+    }
 
     // ============================================================
-    // DROPDOWN TOGGLE — MODIFIED
-    // - Desktop (>992px): hover only, click does nothing
-    // - Mobile (<=992px): click to toggle
+    // DROPDOWN TOGGLE — updated for Option A (fixed-position dropdown)
+    // - Desktop (>992px): hover only, no click action
+    // - Mobile (<=992px): click toggles .open on the <li>
+    //   Also positions the dropdown just below the nav strip
     // ============================================================
     (function dropdownToggle() {
       const shopItem = document.getElementById('shopDropdown');
       if (!shopItem) return;
       const toggleLink = shopItem.querySelector('.dropdown-toggle');
-      if (!toggleLink) return;
+      const menu = shopItem.querySelector('.dropdown-menu');
+      const navStrip = document.getElementById('navLinks');
+      if (!toggleLink || !menu) return;
+
+      // Helper: position the fixed dropdown just below the nav strip
+      function positionDropdown() {
+        if (!navStrip) return;
+        const rect = navStrip.getBoundingClientRect();
+        menu.style.top = (rect.bottom) + 'px';
+      }
 
       toggleLink.addEventListener('click', function(e) {
-        // On desktop: prevent click navigation — hover handles it
+        // On desktop: do nothing (hover handles it)
         if (window.innerWidth > 992) {
           e.preventDefault();
           e.stopPropagation();
           return;
         }
 
-        // On mobile: toggle dropdown
-        if (window.innerWidth <= 992) {
-          e.preventDefault();
-          e.stopPropagation();
-          document.querySelectorAll('.nav-item-dropdown.open').forEach(item => {
-            if (item !== shopItem) item.classList.remove('open');
-          });
-          shopItem.classList.toggle('open');
+        // On mobile: toggle dropdown open/close
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Close any other open dropdowns first
+        document.querySelectorAll('.nav-item-dropdown.open').forEach(item => {
+          if (item !== shopItem) item.classList.remove('open');
+        });
+
+        // Toggle this one
+        const willOpen = !shopItem.classList.contains('open');
+        shopItem.classList.toggle('open');
+
+        // Position it right below the nav strip
+        if (willOpen) {
+          positionDropdown();
         }
       });
 
+      // Reposition on scroll / resize while open
+      window.addEventListener('scroll', () => {
+        if (shopItem.classList.contains('open') && window.innerWidth <= 992) {
+          positionDropdown();
+        }
+      }, { passive: true });
+
+      window.addEventListener('resize', () => {
+        if (shopItem.classList.contains('open') && window.innerWidth <= 992) {
+          positionDropdown();
+        }
+      });
+
+      // Close dropdown when clicking outside on mobile
       document.addEventListener('click', function(e) {
         if (window.innerWidth <= 992) {
-          if (!shopItem.contains(e.target)) shopItem.classList.remove('open');
+          if (!shopItem.contains(e.target)) {
+            shopItem.classList.remove('open');
+          }
         }
       });
 
+      // Close dropdown when a submenu link is tapped (mobile)
       shopItem.querySelectorAll('.dropdown-menu a').forEach(link => {
         link.addEventListener('click', () => {
           if (window.innerWidth <= 992) {
             shopItem.classList.remove('open');
-            navLinks.classList.remove('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.add('fa-bars');
-            icon.classList.remove('fa-times');
           }
         });
       });
 
+      // Reset on resize to desktop
       let resizeTimer;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
           if (window.innerWidth > 992) shopItem.classList.remove('open');
-        }, 200);
+        }, 600);
       });
     })();
 
