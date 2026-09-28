@@ -63,7 +63,8 @@
     }
 
     /* ============================================================
-       FIX: MOBILE NAVBAR — HAMBURGER MENU
+       MOBILE NAVBAR — HAMBURGER MENU + SHOP DROPDOWN
+       FIXED: dropdown now reliably toggles via .open class
        ============================================================ */
     @media (max-width: 992px) {
       .mobile-menu-btn {
@@ -122,6 +123,7 @@
         display: none !important;
       }
 
+      /* ---------- MOBILE DROPDOWN MENU ---------- */
       .dropdown-menu {
         position: static !important;
         transform: none !important;
@@ -135,18 +137,18 @@
         padding: 0 !important;
         min-width: 0 !important;
         width: 100% !important;
-        display: none !important;
         border: 1px solid rgba(198, 164, 92, 0.2) !important;
         max-height: 0 !important;
         overflow: hidden !important;
-        transition: max-height 0.4s ease, padding 0.3s ease;
+        transition: max-height 0.4s ease, padding 0.3s ease !important;
         list-style: none !important;
+        display: block !important;
       }
       .nav-item-dropdown.open .dropdown-menu {
-        display: block !important;
         max-height: 800px !important;
         padding: 0.5rem 0 !important;
       }
+
       .nav-item-dropdown > a.dropdown-toggle {
         display: flex !important;
         align-items: center !important;
@@ -197,6 +199,7 @@
       .dropdown-divider {
         background: rgba(198, 164, 92, 0.2) !important;
         margin: 0.3rem 1rem !important;
+        height: 1px !important;
       }
     }
 
@@ -423,7 +426,6 @@
           <li><a href="index.html">home</a></li>
 
           <li class="nav-item-dropdown" id="shopDropdown">
-            <!-- CHANGED: href="javascript:void(0)" and added data-no-click -->
             <a href="javascript:void(0)" class="dropdown-toggle active" data-no-click="true">
               shop now
               <i class="fas fa-chevron-down"></i>
@@ -991,7 +993,7 @@
           ["Mounting","Wall-mounted or bed-attached"],
           ["Warranty","10 years"]
         ] },
-        { id: 72, name: "Green Headboard", category: "furniture", price: 899, oldPrice: 1299.85, size: "Queen",
+        { id: 73, name: "Green Headboard", category: "furniture", price: 899, oldPrice: 1299.85, size: "Queen",
         rating: 4.6, reviewCount: 38,
         tags: ["furniture", "promo"],
         image: "assets/images/beds/greenhb.jpg",
@@ -1676,7 +1678,7 @@
     setTimeout(render, 180);
 
     /* ============================================================
-       MOBILE MENU
+       MOBILE MENU — hamburger toggle
        ============================================================ */
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
@@ -1696,10 +1698,9 @@
     }
 
     /* ============================================================
-       DROPDOWN TOGGLE — MODIFIED
+       DROPDOWN TOGGLE — FIXED
        - Desktop (>992px): hover only, no click action
-       - Mobile (<=992px): click to toggle (unchanged, since mobile
-         users can't hover)
+       - Mobile (<=992px): click toggles .open on the <li>
        ============================================================ */
     (function dropdownToggle() {
       const shopItem = document.getElementById('shopDropdown');
@@ -1707,7 +1708,6 @@
       const toggleLink = shopItem.querySelector('.dropdown-toggle');
       if (!toggleLink) return;
 
-      // Prevent click navigation on desktop — but allow on mobile
       toggleLink.addEventListener('click', function(e) {
         // On desktop: do nothing (prevent default navigation)
         if (window.innerWidth > 992) {
@@ -1717,22 +1717,28 @@
         }
 
         // On mobile: toggle dropdown open/close
-        if (window.innerWidth <= 992) {
-          e.preventDefault();
-          e.stopPropagation();
-          document.querySelectorAll('.nav-item-dropdown.open').forEach(item => {
-            if (item !== shopItem) item.classList.remove('open');
-          });
-          shopItem.classList.toggle('open');
-        }
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Close any other open dropdowns first
+        document.querySelectorAll('.nav-item-dropdown.open').forEach(item => {
+          if (item !== shopItem) item.classList.remove('open');
+        });
+
+        // Toggle this one
+        shopItem.classList.toggle('open');
       });
 
+      // Close dropdown when clicking outside on mobile
       document.addEventListener('click', function(e) {
         if (window.innerWidth <= 992) {
-          if (!shopItem.contains(e.target)) shopItem.classList.remove('open');
+          if (!shopItem.contains(e.target)) {
+            shopItem.classList.remove('open');
+          }
         }
       });
 
+      // Close mobile menu + dropdown when a submenu link is tapped
       shopItem.querySelectorAll('.dropdown-menu a').forEach(link => {
         link.addEventListener('click', () => {
           if (window.innerWidth <= 992) {
@@ -1747,6 +1753,7 @@
         });
       });
 
+      // Reset on resize to desktop
       let resizeTimer;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
