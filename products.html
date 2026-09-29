@@ -401,7 +401,7 @@
     }
 
     /* ============================================================
-       NEW — SHARE BUTTONS IN MODAL
+       SHARE BUTTONS IN MODAL
        ============================================================ */
     .modal-share-row {
       display: flex;
@@ -436,12 +436,12 @@
     .modal-share-btn i { font-size: 0.95rem; }
 
     /* ============================================================
-       NEW — SMALL SHARE ICON ON PRODUCT CARDS
+       SMALL SHARE ICON ON PRODUCT CARDS
        ============================================================ */
     .card-share-btn {
       position: absolute;
       top: 0.9rem;
-      right: 3.7rem; /* sits left of the favourite heart */
+      right: 3.7rem;
       width: 38px;
       height: 38px;
       border-radius: 50%;
@@ -464,6 +464,61 @@
     }
     @media (max-width: 480px) {
       .card-share-btn { right: 3.4rem; width: 34px; height: 34px; font-size: 0.8rem; }
+    }
+
+    /* ============================================================
+       SHARE POPOVER (desktop fallback for share icon)
+       ============================================================ */
+    .share-popover {
+      position: fixed;
+      z-index: 10001;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.18), 0 0 0 1px rgba(198,164,92,0.18);
+      padding: 0.45rem;
+      min-width: 200px;
+      display: none;
+      animation: sharePop 0.18s ease;
+    }
+    .share-popover.open { display: block; }
+    @keyframes sharePop {
+      from { opacity: 0; transform: translateY(-4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .share-popover-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.7rem 0.9rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #1a1a2e;
+      text-decoration: none;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      width: 100%;
+      text-align: left;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .share-popover-item:hover {
+      background: #faf7f0;
+      color: #C6A45C;
+    }
+    .share-popover-item i {
+      width: 18px;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    .share-popover-item.wa i { color: #25D366; }
+    .share-popover-item.fb i { color: #1877F2; }
+    .share-popover-item.mail i { color: #C6A45C; }
+    .share-popover-divider {
+      height: 1px;
+      background: rgba(198,164,92,0.15);
+      margin: 0.3rem 0.6rem;
     }
   </style>
 </head>
@@ -1628,66 +1683,93 @@
     }
 
     /* ============================================================
-       SHARE HELPERS
+       SHARE — native on mobile, popover menu on desktop
        ============================================================ */
-    function shareProduct(product) {
-      const url = productShareUrl(product);
-      const shareText = `Check out the ${product.name} — R${product.price.toLocaleString()} at Harmony Rest.`;
-      if (navigator.share) {
-        navigator.share({ title: `${product.name} | Harmony Rest`, text: shareText, url })
-          .catch(() => {});
-      } else {
-        // Desktop fallback: Facebook share dialog
-        window.open(
-          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-          '_blank',
-          'width=600,height=500'
-        );
-      }
+    const sharePopover = document.createElement('div');
+    sharePopover.className = 'share-popover';
+    sharePopover.id = 'sharePopover';
+    document.body.appendChild(sharePopover);
+
+    function closeSharePopover() {
+      sharePopover.classList.remove('open');
+      sharePopover.innerHTML = '';
     }
 
-    /* ============================================================
-       MODAL SHARE ROW INJECTION
-       ============================================================ */
-    function injectModalShareRow(product) {
-      const actions = document.querySelector('#productModal .modal-actions');
-      if (!actions) return;
+    // Close popover on outside click / escape
+    document.addEventListener('click', (e) => {
+      if (!sharePopover.classList.contains('open')) return;
+      if (e.target.closest('#sharePopover') || e.target.closest('.card-share-btn')) return;
+      closeSharePopover();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSharePopover();
+    });
+    window.addEventListener('scroll', closeSharePopover, { passive: true });
+
+    function shareProduct(product, anchorEl) {
       const url = productShareUrl(product);
+      const shareText = `Check out the ${product.name} — R${product.price.toLocaleString()} at Harmony Rest.`;
 
-      // Remove any existing share row
-      const oldRow = document.getElementById('modalShareRow');
-      if (oldRow) oldRow.remove();
+      // 1) Native share sheet (mobile) — best UX
+      if (navigator.share && window.innerWidth <= 992) {
+        navigator.share({ title: `${product.name} | Harmony Rest`, text: shareText, url })
+          .catch(() => {});
+        return;
+      }
 
-      const shareRow = document.createElement('div');
-      shareRow.id = 'modalShareRow';
-      shareRow.className = 'modal-share-row';
-      shareRow.innerHTML = `
-        <button type="button" class="modal-share-btn" id="modalCopyLink" title="Copy link">
-          <i class="fas fa-link"></i> Copy Link
+      // 2) Desktop fallback: popover menu anchored to the button
+      const rect = anchorEl
+        ? anchorEl.getBoundingClientRect()
+        : { bottom: 100, left: 100, right: 140, top: 60 };
+
+      sharePopover.innerHTML = `
+        <button type="button" class="share-popover-item" data-share-action="copy">
+          <i class="fas fa-link"></i> Copy link
         </button>
-        <button type="button" class="modal-share-btn" id="modalShareNative" title="Share">
-          <i class="fas fa-share-alt"></i> Share
-        </button>
-        <button type="button" class="modal-share-btn" id="modalShareFacebook" title="Share on Facebook">
+        <div class="share-popover-divider"></div>
+        <a class="share-popover-item wa" data-share-action="wa" target="_blank" rel="noopener"
+           href="https://wa.me/?text=${encodeURIComponent(shareText + ' ' + url)}">
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+        <a class="share-popover-item fb" data-share-action="fb" target="_blank" rel="noopener"
+           href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}">
           <i class="fab fa-facebook-f"></i> Facebook
-        </button>
+        </a>
+        <a class="share-popover-item mail" data-share-action="mail"
+           href="mailto:?subject=${encodeURIComponent(product.name + ' — Harmony Rest')}&body=${encodeURIComponent(shareText + '\n\n' + url)}">
+          <i class="fas fa-envelope"></i> Email
+        </a>
       `;
-      actions.parentNode.insertBefore(shareRow, actions.nextSibling);
 
-      shareRow.querySelector('#modalCopyLink').addEventListener('click', function () {
-        copyToClipboard(url, this);
+      sharePopover.classList.add('open');
+
+      // Position it just below the share button (right-aligned)
+      const popW = sharePopover.offsetWidth;
+      const popH = sharePopover.offsetHeight;
+      let left = rect.right - popW;
+      let top  = rect.bottom + 8;
+
+      if (left < 10) left = 10;
+      if (left + popW > window.innerWidth - 10) {
+        left = window.innerWidth - popW - 10;
+      }
+      if (top + popH > window.innerHeight - 10) {
+        top = rect.top - popH - 8;
+      }
+
+      sharePopover.style.left = left + 'px';
+      sharePopover.style.top  = top + 'px';
+
+      // Wire up "Copy link"
+      const copyBtn = sharePopover.querySelector('[data-share-action="copy"]');
+      copyBtn.addEventListener('click', () => {
+        copyToClipboard(url, copyBtn);
+        setTimeout(closeSharePopover, 900);
       });
 
-      shareRow.querySelector('#modalShareNative').addEventListener('click', () => {
-        shareProduct(product);
-      });
-
-      shareRow.querySelector('#modalShareFacebook').addEventListener('click', () => {
-        window.open(
-          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-          '_blank',
-          'width=600,height=500'
-        );
+      // Close popover when clicking any of the external links
+      sharePopover.querySelectorAll('a.share-popover-item').forEach(a => {
+        a.addEventListener('click', () => setTimeout(closeSharePopover, 200));
       });
     }
 
@@ -1700,7 +1782,7 @@
         e.stopPropagation();
         const id = parseInt(shareBtn.dataset.shareId, 10);
         const product = products.find(p => p.id === id);
-        if (product) shareProduct(product);
+        if (product) shareProduct(product, shareBtn);
         return;
       }
       const favBtn = e.target.closest('.fav-btn');
@@ -1749,6 +1831,50 @@
     }
 
     /* ============================================================
+       MODAL SHARE ROW INJECTION
+       ============================================================ */
+    function injectModalShareRow(product) {
+      const actions = document.querySelector('#productModal .modal-actions');
+      if (!actions) return;
+      const url = productShareUrl(product);
+
+      const oldRow = document.getElementById('modalShareRow');
+      if (oldRow) oldRow.remove();
+
+      const shareRow = document.createElement('div');
+      shareRow.id = 'modalShareRow';
+      shareRow.className = 'modal-share-row';
+      shareRow.innerHTML = `
+        <button type="button" class="modal-share-btn" id="modalCopyLink" title="Copy link">
+          <i class="fas fa-link"></i> Copy Link
+        </button>
+        <button type="button" class="modal-share-btn" id="modalShareNative" title="Share">
+          <i class="fas fa-share-alt"></i> Share
+        </button>
+        <button type="button" class="modal-share-btn" id="modalShareFacebook" title="Share on Facebook">
+          <i class="fab fa-facebook-f"></i> Facebook
+        </button>
+      `;
+      actions.parentNode.insertBefore(shareRow, actions.nextSibling);
+
+      shareRow.querySelector('#modalCopyLink').addEventListener('click', function () {
+        copyToClipboard(url, this);
+      });
+
+      shareRow.querySelector('#modalShareNative').addEventListener('click', function () {
+        shareProduct(product, this);
+      });
+
+      shareRow.querySelector('#modalShareFacebook').addEventListener('click', () => {
+        window.open(
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+          '_blank',
+          'width=600,height=500'
+        );
+      });
+    }
+
+    /* ============================================================
        PRODUCT MODAL — open / close / deep-link aware
        ============================================================ */
     function openProductModal(productId, options = {}) {
@@ -1792,14 +1918,11 @@
           `Hello Harmony Rest, I am interested in the ${product.name} (R${product.price} - ${product.size}). ${shareUrl}`
         )}`;
 
-      // Inject the share row (Copy Link / Share / Facebook)
       injectModalShareRow(product);
 
-      // Update the URL for shareability
       if (!options.skipUrlUpdate) {
         const url = new URL(window.location.href);
         url.searchParams.set('product', product.slug);
-        // Drop listing params so shared links are clean
         url.searchParams.delete('category');
         url.searchParams.delete('filter');
         history.pushState({ productSlug: product.slug }, '', url);
@@ -1813,7 +1936,6 @@
       document.getElementById('productModal').classList.remove('active');
       document.body.classList.remove('modal-open');
 
-      // Clean the URL when closing so back-button feels natural
       const url = new URL(window.location.href);
       if (url.searchParams.has('product')) {
         url.searchParams.delete('product');
@@ -1890,7 +2012,6 @@
     setTimeout(() => {
       render();
 
-      // Deep-link support: /products.html?product=king-max-weight
       const params = new URLSearchParams(window.location.search);
       const productParam = params.get('product');
       const deepLinkProduct = findProductByParam(productParam);
@@ -1911,7 +2032,6 @@
       if (product) {
         openProductModal(product.id, { skipUrlUpdate: true });
       } else {
-        // Close modal without re-pushing URL
         document.getElementById('productModal').classList.remove('active');
         document.body.classList.remove('modal-open');
       }
