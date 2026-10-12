@@ -1162,13 +1162,6 @@
         specs: [["Overall Length","175 cm"],["Depth","88 cm"],["Height","82 cm"],["Material","Premium fabric upholstery"],["Frame","Solid timber"],["Warranty","8 years"]] },
 
       /* --- FURNITURE → PEDESTALS --- */
-      { id: 53, name: "Blanket Storage", category: "furniture", subcategory: "pedestal", price: 999, oldPrice: 1293.85, size: "Standard",
-        rating: 4.6, reviewCount: 84,
-        tags: ["furniture", "storage", "promo"],
-        image: "assets/images/beds/blanket-store.jpg",
-        desc: "Handcrafted blanket storage chest — elegant, spacious, and built from solid timber with a premium upholstered finish. The perfect companion to any Harmony Rest bedroom.",
-        badge: "artisan",
-        specs: [["Length","120 cm"],["Width","45 cm"],["Height","50 cm"],["Material","Solid timber frame"],["Upholstery","Premium fabric"],["Capacity","Full queen duvet + 2 pillows"],["Warranty","10 years"]] },
       { id: 56, name: "Bed Pedestal Blanket Storage", category: "furniture", subcategory: "pedestal", price: 599, oldPrice: 983.85, size: "Standard",
         rating: 4.8, reviewCount: 71,
         tags: ["furniture", "storage", "promo"],
@@ -1201,10 +1194,17 @@
         specs: [["Width","85 cm"],["Depth","45 cm"],["Height","115 cm"],["Drawers","5 spacious drawers"],["Material","Solid timber with premium finish"],["Warranty","10 years"]] },
 
       /* --- FURNITURE → OTTOMAN --- */
+      { id: 53, name: "Kirst", category: "furniture", subcategory: "ottoman", price: 999, oldPrice: 1293.85, size: "Standard",
+        rating: 4.6, reviewCount: 84,
+        tags: ["furniture", "storage", "promo"],
+        image: "assets/images/beds/blanket-store.jpg",
+        desc: "Handcrafted Kirst storage ottoman — elegant, spacious, and built from solid timber with a premium upholstered finish. The perfect companion to any Harmony Rest bedroom.",
+        badge: "artisan",
+        specs: [["Length","120 cm"],["Width","45 cm"],["Height","50 cm"],["Material","Solid timber frame"],["Upholstery","Premium fabric"],["Capacity","Full queen duvet + 2 pillows"],["Warranty","10 years"]] },
       { id: 80, name: "Classic Ottoman", category: "furniture", subcategory: "ottoman", price: 899, oldPrice: 1299.85, size: "Standard",
         rating: 4.5, reviewCount: 41,
         tags: ["furniture", "storage", "promo"],
-        image: "assets/images/beds/ottoman.jpg",
+        image: "assets/images/beds/ottoman-1.jpg",
         desc: "A versatile classic ottoman — perfect as a footrest, extra seating, or a stylish storage solution. Upholstered in premium fabric over a solid timber frame.",
         badge: "versatile",
         specs: [["Length","80 cm"],["Width","60 cm"],["Height","40 cm"],["Material","Premium fabric over solid timber"],["Use","Footrest · Seating · Storage"],["Warranty","8 years"]] },
@@ -1218,7 +1218,7 @@
       { id: 82, name: "Velvet Round Ottoman", category: "furniture", subcategory: "ottoman", price: 799, oldPrice: 1099.85, size: "Round",
         rating: 4.6, reviewCount: 38,
         tags: ["furniture", "promo"],
-        image: "assets/images/beds/ottoman-round.jpg",
+        image: "assets/images/beds/ottoman-2.jpg",
         desc: "A round velvet ottoman that adds a touch of luxury to any room. Soft velvet upholstery with a sturdy base — perfect as a footrest or accent piece.",
         badge: "luxury",
         specs: [["Diameter","60 cm"],["Height","42 cm"],["Material","Velvet upholstery + solid base"],["Shape","Round"],["Warranty","8 years"]] },
@@ -1373,34 +1373,23 @@
     /* ============================================================
        COLOUR AVAILABILITY CHECK
        ============================================================ */
-    function hasColourOptions(product) {
-      // Couches (standalone category) — all colours
-      if (product.category === 'couch') return true;
-
-      // Furniture items — most are available in all colours
-      if (product.category === 'furniture') {
-        // Only upholstered furniture gets the colour disclaimer
-        // Headboards, couches, ottomans — all upholstered
-        return ['couch', 'headboard', 'ottoman'].includes(product.subcategory);
-      }
-
-      return false;
+    function isCouchProduct(product) {
+      return product.category === 'couch' ||
+             (product.category === 'furniture' &&
+              (product.subcategory === 'couch' ||
+               product.name.toLowerCase().includes('couch') ||
+               product.name.toLowerCase().includes('sofa') ||
+               product.name.toLowerCase().includes('seater')));
     }
 
     function renderColourNotice(product) {
-      if (!hasColourOptions(product)) return '';
-      const isFurniture = product.category === 'furniture';
-      const text = isFurniture ? 'Available in all fabric colours' : 'Available in all colours';
-      return `<div class="colour-availability"><i class="fas fa-palette"></i> ${text}</div>`;
+      if (!isCouchProduct(product)) return '';
+      return `<div class="colour-availability"><i class="fas fa-palette"></i> Available in all colours</div>`;
     }
 
     function renderModalColourNotice(product) {
-      if (!hasColourOptions(product)) return '';
-      const isFurniture = product.category === 'furniture';
-      const text = isFurniture
-        ? 'Available in all fabric colours — contact us for options'
-        : 'Available in all colours — contact us for options';
-      return `<div class="modal-colour-availability"><i class="fas fa-palette"></i> ${text}</div>`;
+      if (!isCouchProduct(product)) return '';
+      return `<div class="modal-colour-availability"><i class="fas fa-palette"></i> Available in all colours — contact us for options</div>`;
     }
 
     /* ============================================================
@@ -1694,7 +1683,7 @@
       }
 
       if (filter === 'mattress') {
-        const list = products.filter(p => Array.isArray(p.tags) && p.tags.includes('mattress'));
+        const list = products.filter(p => /\bmattress$/i.test(p.name.trim()));
         const label = FILTER_LABELS['mattress'];
         showCollectionHeader(label.title, 'collection', label.desc, list.length);
         renderProductsGrid(list);
@@ -1702,7 +1691,7 @@
       }
 
       if (filter === 'set') {
-        const list = products.filter(p => Array.isArray(p.tags) && p.tags.includes('set'));
+        const list = products.filter(p => /\bbed\s*set$/i.test(p.name.trim()));
         const label = FILTER_LABELS['set'];
         showCollectionHeader(label.title, 'collection', label.desc, list.length);
         renderProductsGrid(list);
@@ -1725,14 +1714,14 @@
         const promoList = products.filter(p => {
           const isStorageBaseCombo = p.name.toLowerCase().includes('combo storage base');
           const isStudentAccommodation = p.tags && p.tags.includes('student');
-          const isBlanketStorage = p.name.toLowerCase().includes('blanket storage');
-          return isStorageBaseCombo || isStudentAccommodation || isBlanketStorage;
+          const isKirst = p.name.toLowerCase() === 'kirst';
+          return isStorageBaseCombo || isStudentAccommodation || isKirst;
         });
         const label = FILTER_LABELS['promo'] || { title: 'Promotions', desc: '' };
         showCollectionHeader(
           label.title,
           'limited offer',
-          'Special pricing on select storage combos, student accommodation pieces, and our blanket storage chests.',
+          'Special pricing on select storage combos, student accommodation pieces, and our Kirst ottoman.',
           promoList.length
         );
         renderProductsGrid(promoList);
