@@ -1373,23 +1373,34 @@
     /* ============================================================
        COLOUR AVAILABILITY CHECK
        ============================================================ */
-    function isCouchProduct(product) {
-      return product.category === 'couch' ||
-             (product.category === 'furniture' &&
-              (product.subcategory === 'couch' ||
-               product.name.toLowerCase().includes('couch') ||
-               product.name.toLowerCase().includes('sofa') ||
-               product.name.toLowerCase().includes('seater')));
+    function hasColourOptions(product) {
+      // Couches (standalone category) — all colours
+      if (product.category === 'couch') return true;
+
+      // Furniture items — most are available in all colours
+      if (product.category === 'furniture') {
+        // Only upholstered furniture gets the colour disclaimer
+        // Headboards, couches, ottomans — all upholstered
+        return ['couch', 'headboard', 'ottoman'].includes(product.subcategory);
+      }
+
+      return false;
     }
 
     function renderColourNotice(product) {
-      if (!isCouchProduct(product)) return '';
-      return `<div class="colour-availability"><i class="fas fa-palette"></i> Available in all colours</div>`;
+      if (!hasColourOptions(product)) return '';
+      const isFurniture = product.category === 'furniture';
+      const text = isFurniture ? 'Available in all fabric colours' : 'Available in all colours';
+      return `<div class="colour-availability"><i class="fas fa-palette"></i> ${text}</div>`;
     }
 
     function renderModalColourNotice(product) {
-      if (!isCouchProduct(product)) return '';
-      return `<div class="modal-colour-availability"><i class="fas fa-palette"></i> Available in all colours — contact us for options</div>`;
+      if (!hasColourOptions(product)) return '';
+      const isFurniture = product.category === 'furniture';
+      const text = isFurniture
+        ? 'Available in all fabric colours — contact us for options'
+        : 'Available in all colours — contact us for options';
+      return `<div class="modal-colour-availability"><i class="fas fa-palette"></i> ${text}</div>`;
     }
 
     /* ============================================================
@@ -1683,7 +1694,7 @@
       }
 
       if (filter === 'mattress') {
-        const list = products.filter(p => /\bmattress$/i.test(p.name.trim()));
+        const list = products.filter(p => Array.isArray(p.tags) && p.tags.includes('mattress'));
         const label = FILTER_LABELS['mattress'];
         showCollectionHeader(label.title, 'collection', label.desc, list.length);
         renderProductsGrid(list);
@@ -1691,7 +1702,7 @@
       }
 
       if (filter === 'set') {
-        const list = products.filter(p => /\bbed\s*set$/i.test(p.name.trim()));
+        const list = products.filter(p => Array.isArray(p.tags) && p.tags.includes('set'));
         const label = FILTER_LABELS['set'];
         showCollectionHeader(label.title, 'collection', label.desc, list.length);
         renderProductsGrid(list);
