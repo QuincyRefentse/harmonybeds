@@ -359,6 +359,52 @@
     }
 
     /* ============================================================
+       FABRIC DISCLAIMER — bed sets & mattresses
+       ============================================================ */
+    .fabric-disclaimer {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      line-height: 1.35;
+      letter-spacing: 0.03em;
+      color: #8A8783;
+      background: #FAF8F4;
+      border: 1px solid rgba(198, 164, 92, 0.22);
+      border-radius: 6px;
+      padding: 0.45rem 0.65rem;
+      margin: 0.55rem 0 0.6rem;
+    }
+    .fabric-disclaimer i {
+      color: #C6A45C;
+      font-size: 0.7rem;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+    .modal-fabric-disclaimer {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      line-height: 1.45;
+      letter-spacing: 0.02em;
+      color: #8A8783;
+      background: #FAF8F4;
+      border: 1px solid rgba(198, 164, 92, 0.22);
+      border-radius: 8px;
+      padding: 0.7rem 1rem;
+      margin: 0.7rem 0 0.9rem;
+    }
+    .modal-fabric-disclaimer i {
+      color: #C6A45C;
+      font-size: 0.85rem;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
        STAR RATINGS
        ============================================================ */
     .product-rating {
@@ -631,6 +677,7 @@
           <div class="modal-rating" id="modalRating"></div>
           <div class="modal-price-large" id="modalPrice"></div>
           <div id="modalColourNotice"></div>
+          <div id="modalFabricNotice"></div>
           <p class="modal-description" id="modalDescription"></p>
           <div class="modal-specs" id="modalSpecs"></div>
           <div class="modal-actions">
@@ -1386,6 +1433,31 @@
       return `<div class="modal-colour-availability"><i class="fas fa-palette"></i> Available in all colours — contact us for options</div>`;
     }
 
+    /* ============================================================
+       FABRIC DISCLAIMER — bed sets & mattresses
+       ============================================================ */
+    function isBedSetOrMattress(product) {
+      if (product.category !== 'bed') return false;
+      return /\bbed\s*set$/i.test(product.name.trim()) ||
+             /\bmattress$/i.test(product.name.trim());
+    }
+
+    function renderFabricDisclaimer(product) {
+      if (!isBedSetOrMattress(product)) return '';
+      return `<div class="fabric-disclaimer">
+                <i class="fas fa-info-circle"></i>
+                <span>Fabric may change due to availability of stock.</span>
+              </div>`;
+    }
+
+    function renderModalFabricDisclaimer(product) {
+      if (!isBedSetOrMattress(product)) return '';
+      return `<div class="modal-fabric-disclaimer">
+                <i class="fas fa-info-circle"></i>
+                <span>Please note: fabric may change due to availability of stock.</span>
+              </div>`;
+    }
+
     function skeletonHTML(n = 8) {
       return `<div class="products-grid">${Array.from({ length: n }).map(() => `
         <div class="product-card skeleton-card">
@@ -1493,6 +1565,7 @@
             ${!isPlaceholder ? renderProductRating(product) : ''}
             ${!isPlaceholder ? renderColourNotice(product) : ''}
             <p class="product-desc">${product.desc}</p>
+            ${!isPlaceholder ? renderFabricDisclaimer(product) : ''}
             ${!isPlaceholder ? `
             <div class="product-price">
               R${product.price.toLocaleString()} 
@@ -1903,6 +1976,7 @@
         : '';
       document.getElementById('modalPrice').innerHTML = `R${product.price.toLocaleString()} <small>${product.size}</small> ${oldPriceHTML}`;
       document.getElementById('modalColourNotice').innerHTML = renderModalColourNotice(product);
+      document.getElementById('modalFabricNotice').innerHTML = renderModalFabricDisclaimer(product);
       document.getElementById('modalDescription').textContent = product.desc;
 
       let specsHTML = '<h4>Specifications</h4><table>';
