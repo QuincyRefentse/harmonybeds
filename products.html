@@ -1473,12 +1473,7 @@
             </div>
             <div class="product-badge">${product.badge}</div>
             ${!isPlaceholder ? `
-            <button class="card-share-btn"
-                    data-share-id="${product.id}"
-                    title="Share this product"
-                    aria-label="Share ${product.name}">
-              <i class="fas fa-share-alt"></i>
-            </button>
+            
             <button class="fav-btn ${isFav ? 'active' : ''}"
                     data-fav-id="${product.id}">
               <i class="${isFav ? 'fas' : 'far'} fa-heart"></i>
